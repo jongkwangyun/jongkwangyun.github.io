@@ -27,7 +27,7 @@
 ```
 
 문법이 있는 언어를 코드블럭에 넣으려면 ''' 뒤에 언어를 표시하면 됩니다.
-``` java
+``` Java
 System.out.print("Hello World!");
 ```
 
