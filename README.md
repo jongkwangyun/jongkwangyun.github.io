@@ -88,4 +88,4 @@ __underline2개 굵게__
 
 9) 이미지
 이미지 삽입은 다음과 같다. MarkDown으로 사이즈 조절은 불가합니다.
-![Alt text](/images/rubberduck.png "optional title")
+![Alt text](/images/rubberduck.png "optional title2")
