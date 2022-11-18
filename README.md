@@ -71,14 +71,16 @@ tab을 써서 소속을 만듭니다.
 
 7) 링크
 아래와 같이 링크 표현 가능합니다.
-Link: [Google][googlelink]
-[googlelink]: https://google.com "구글 열기"
+[Google](https://google.com)
+[Naver](https://www.naver.com "네이버 열기")
+다음으로 이동하려면 [다음 이동]을 클릭하세요.
+[다음 이동]: https://www.daum.net
 
 
 8) 강조
-이탤릭체는 *,_로 감싸면 됩니다.
-굵게는 **,__로 감싸면 됩니다.
-취소선은 ~~로 감싸면 됩니다.
+이탤릭체는 *,_로 감싸면 됩니다. 
+굵게는 **,__로 감싸면 됩니다. 
+취소선은 ~~로 감싸면 됩니다. 
 *asterisk 이탤릭체*
 _underline 이탤릭체_
 **asterisk2개 굵게**
@@ -87,5 +89,14 @@ __underline2개 굵게__
 
 
 9) 이미지
-이미지 삽입은 다음과 같다. MarkDown으로 사이즈 조절은 불가합니다.
-![Alt text](/images/rubberduck.png "optional title2")
+이미지 삽입은 다음과 같습니다. MarkDown으로 사이즈 조절은 불가합니다.
+![이미지 안나올시 대체 텍스트](images/rubberduck.png "잠실 석촌호수의 거대한 러버덕")
+
+
+10) 표
+표는 아래와 같이 작성 가능합니다.
+| 번호 | 동물명 | 이모지 |
+| --- | :---: | ---: |
+| `1` | 개 | 🦮 |
+| `2` | 양 | 🐏 |
+| `3` | 토끼 | 🐇 |
