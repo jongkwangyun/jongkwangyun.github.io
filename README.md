@@ -64,8 +64,8 @@ if (열정==100%) and (끈기==100%):
    
 Git pages는 MarkDown만으로 작성하는 것을 목표로 합니다.
 
-⛵저의 개발 여정은 티스토리에도 담겨 있습니다.
-https://breakthedays.tistory.com/
+⛵저의 개발 여정은 티스토리에도 담겨 있습니다.   
+[https://breakthedays.tistory.com/](https://breakthedays.tistory.com/)
 
 ---------------------
 
