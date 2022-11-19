@@ -34,6 +34,6 @@ RAM 용량 초과/동적 할당을 **지원하지 않아서** 가상 머신 리�
 
 ### [홈으로](README.md)
 
-### [Hyperviser란?](HYPERVISOR.md)
+### Hyperviser란?
 
-### MarkDown이란?
+### [MarkDown이란?](MARKDOWN.md)
