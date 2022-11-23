@@ -1,3 +1,9 @@
+### [Index](README.md)
+
+### [Posts](../POSTS.md)
+
+----------------------
+
 # 리눅스 기본 명령어
 
 리눅스 기본 명령어를 알아보겠습니다.
@@ -259,16 +265,3 @@ alias gg='cd /home/vagrant/git/bitcamp-study'
 # alias 해제
 [vagrant@host3 bitcamp-study]$ unalias gg
 ```
-
-
----------------------
-
-### [홈으로](README.md)
-
-### [Hyperviser란?](HYPERVISOR.md)
-
-### [MarkDown이란?](MARKDOWN.md)
-
-### 리눅스 기본 명령어
-
-### [웹기술의 등장 과정](WEB_TECH.md)

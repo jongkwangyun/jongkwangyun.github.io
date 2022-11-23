@@ -1,3 +1,9 @@
+### [Index](README.md)
+
+### [Posts](../POSTS.md)
+
+----------------------
+
 # MarkDown이란?
    
 
@@ -177,7 +183,7 @@ __underline2개 굵게__
 ![이미지 안나올시 대체 텍스트](images/rubberduck.png "잠실 석촌호수의 거대한 러버덕")
 ```
 
-![이미지 안나올시 대체 텍스트](images/rubberduck.png "잠실 석촌호수의 거대한 러버덕")
+![이미지 안나올시 대체 텍스트](../images/rubberduck.png "잠실 석촌호수의 거대한 러버덕")
    
 
 #### (10) 표
@@ -198,15 +204,3 @@ __underline2개 굵게__
 |`1`|개|🦮|
 |`2`|양|🐏|
 |`3`|토끼|🐇|
-
--------------------
-
-### [홈으로](README.md)
-
-### [Hyperviser란?](HYPERVISOR.md)
-
-### MarkDown이란?
-
-### [리눅스 기본 명령어](LINUX_COMMAND.md)
-
-### [웹기술의 등장 과정](WEB_TECH.md)
