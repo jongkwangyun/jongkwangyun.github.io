@@ -218,7 +218,7 @@ NAME
 ```
 
 **apropos** - 
-    검색어와 관련된 명령어를 whatis DB에서 검색하여 간단한 설명과 함께 출려한다.
+    검색어와 관련된 명령어를 whatis DB에서 검색하여 간단한 설명과 함께 출력한다.
 ```
 [vagrant@host3 bitcamp-study]$ apropos mv
 git-mv (1)           - Move or rename a file, a directory, or a symlink
@@ -270,3 +270,5 @@ alias gg='cd /home/vagrant/git/bitcamp-study'
 ### [MarkDown이란?](MARKDOWN.md)
 
 ### 리눅스 기본 명령어
+
+### [웹기술의 등장 과정](WEB_TECH.md)

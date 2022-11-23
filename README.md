@@ -76,3 +76,5 @@ Git pages는 MarkDown만으로 작성하는 것을 목표로 합니다.
 ### [MarkDown이란?](MARKDOWN.md)
 
 ### [리눅스 기본 명령어](LINUX_COMMAND.md)
+
+### [웹기술의 등장 과정](WEB_TECH.md)
