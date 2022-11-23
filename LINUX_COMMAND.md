@@ -4,14 +4,14 @@
 
 #### 1. 파일 시스템 탐색 기본 명령어
 
-**pwd**
+**pwd** - 
     Print Working Directory, 현재 디렉토리의 절대 경로를 표시한다
 ```
 $ pwd
 /home/vagrant
 ```
 
-**cd**
+**cd** - 
     Change Directory, 작업 디렉토리 위치를 바꾼다.
 
 ```
@@ -36,7 +36,7 @@ $ cd /
 [vagrant@host3 ~]$
 ```
 
-**ls**
+**ls** - 
     현재 디렉토리의 내용을 출력한다.
 ```
 # 기본 명령어
@@ -58,14 +58,14 @@ drwxrwxr-x. 3 vagrant vagrant 27 Nov 21 12:18 git
 ```
 
 
-**file**
+**file** - 
     파일의 종류 및 속성을 확인할때 사용한다.
 ```
 [vagrant@host3 bitcamp-study]$ file README.md
 README.md: UTF-8 Unicode text
 ```
 
-**less**
+**less** - 
     파일의 내용을 페이지 단위로 나누어서 보여준다.
 ```
 [vagrant@host3 bitcamp-study]$ less README.md
@@ -80,8 +80,8 @@ README.md: UTF-8 Unicode text
 
 #### 2. 파일과 디렉토리 조작 명령어
 
-**cp**
-
+**cp** - 
+    파일, 디렉토리를 복사할때 사용한다.
 ```
 # 복사할 파일, 복사 후 파일 명
 [vagrant@host3 bitcamp-study]$ cp a.txt b.txt
@@ -106,7 +106,7 @@ a.txt  b.txt  docs  README.md
 a.txt  b.txt  docs  docs2  README.md
 ```
 
-**mv**
+**mv** - 
     파일이나 디렉토리를 이동시킬때 사용한다.
 ```
 # 파일 이동
@@ -121,7 +121,7 @@ a.txt  b.txt  docs  docs2  README.md
 1.프로그래밍_준비.pdf  2.리눅스.pdf  hello.txt  상세커리큘럼.xlsx
 ```
 
-**mkdir**
+**mkdir** - 
     Make Directory, 디렉토리 생성시 사용한다.
 
 ```
@@ -143,7 +143,7 @@ git  new_folder
     └── new2
 ```
 
-**rm**
+**rm** - 
     파일이나 디렉토리를 삭제한다.
 ```
 # 기본 명령어
@@ -169,7 +169,7 @@ docs  docs2  README.md
 docs  README.md
 ```
 
-**ln**
+**ln** - 
     Link, 파일을 가리키는 링크 파일을 만든다.
     두 가지 종류가 존재하는데 심볼릭 링크, 하드 링크가 있다.
     - 하드 링크 (Hard Link)
@@ -190,7 +190,7 @@ total 8
 
 #### 3. 명령어를 다루는 명령어
 
-**type**
+**type** - 
     명령 유형에 대한 정보를 표시합니다.
 ```
 # 기본 명령
@@ -198,14 +198,14 @@ total 8
 pwd is a shell builtin
 ```
 
-**which**
+**which** - 
     명령어의 실행파일 위치, 소스위치, Man 페이지 파일의 위치를 찾아준다.
 ```
 [vagrant@host3 bitcamp-study]$ which mkdir
 /usr/bin/mkdir
 ```
 
-**man**
+**man** - 
     각종 명령어, 프로그램의 사용법을 확인한다.
 ```
 [vagrant@host3 bitcamp-study]$ man cp
@@ -217,7 +217,7 @@ NAME
        cp - copy files and directories
 ```
 
-**apropos**
+**apropos** - 
     검색어와 관련된 명령어를 whatis DB에서 검색하여 간단한 설명과 함께 출려한다.
 ```
 [vagrant@host3 bitcamp-study]$ apropos mv
@@ -226,7 +226,7 @@ mv (1)               - move (rename) files
 mv (1p)              - move files
 ```
 
-**info**
+**info** - 
     명령어의 사용 방법, 옵션 등을 나타낸다.
 ```
 [vagrant@host3 bitcamp-study]$ info rmdir
@@ -238,7 +238,7 @@ ile: coreutils.info,  Node: rmdir invocation,  Next: unlink invocation,  Prev: r
 ======================================
 ```
 
-**whatis**
+**whatis** - 
     명령어에 대한 기능을 간략하게 나타낸다. whatis DB에서 문자열만 검색한다.
 ```
 [vagrant@host3 bitcamp-study]$ whatis type
@@ -246,7 +246,7 @@ type (1)             - bash built-in commands, see bash(1)
 type (1p)            - write a description of command type
 ```
 
-**alias**
+**alias** - 
     사용자가 명령어를 다른 이름으로 바꿔서 사용할 수 있다.
 ```
 # alias 등록
