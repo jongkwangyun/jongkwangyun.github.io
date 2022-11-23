@@ -1,0 +1,1735 @@
+Microsoft Windows [Version 10.0.19044.2251]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp 디렉터리
+
+2022-11-21  오후 04:37    <DIR>          .
+2022-11-21  오후 04:37    <DIR>          ..
+2022-11-17  오후 06:30                55 .gitconfig
+2022-11-18  오후 02:10    <DIR>          .mume
+2022-11-18  오후 03:56    <DIR>          .ssh
+2022-11-21  오후 12:03    <DIR>          .vagrant.d
+2022-11-22  오전 09:00    <DIR>          .VirtualBox
+2022-11-17  오후 03:22    <DIR>          .vscode
+2022-10-08  오전 09:34    <DIR>          3D Objects
+2022-11-21  오후 04:32        12,146,784 apache-tomcat-9.0.69.zip
+2022-10-08  오전 09:34    <DIR>          Contacts
+2022-11-22  오전 08:58    <DIR>          Desktop
+2022-11-17  오후 04:21    <DIR>          Documents
+2022-11-21  오후 04:37    <DIR>          Downloads
+2022-10-08  오전 09:34    <DIR>          Favorites
+2022-11-21  오후 04:37    <DIR>          git
+2022-10-08  오전 09:34    <DIR>          Links
+2022-10-08  오전 09:34    <DIR>          Music
+2022-10-08  오전 09:36    <DIR>          OneDrive
+2022-11-16  오전 09:09    <DIR>          Pictures
+2022-10-08  오전 09:34    <DIR>          Saved Games
+2022-10-08  오전 09:35    <DIR>          Searches
+2022-11-07  오전 09:33    <DIR>          Videos
+2022-11-21  오후 12:02    <DIR>          VirtualBox VMs
+2022-11-21  오후 12:03    <DIR>          vm-projects
+               2개 파일          12,146,839 바이트
+              23개 디렉터리  59,758,489,600 바이트 남음
+
+C:\Users\bitcamp>cd vm-projects
+
+C:\Users\bitcamp\vm-projects>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp\vm-projects 디렉터리
+
+2022-11-21  오후 12:03    <DIR>          .
+2022-11-21  오후 12:03    <DIR>          ..
+2022-11-21  오전 10:43    <DIR>          host1-vm
+2022-11-21  오전 10:44    <DIR>          host2-vm
+2022-11-21  오전 10:47    <DIR>          host3-vm
+               0개 파일                   0 바이트
+               5개 디렉터리  59,758,489,600 바이트 남음
+
+C:\Users\bitcamp\vm-projects>cd ..
+
+C:\Users\bitcamp>cd git
+
+C:\Users\bitcamp\git>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp\git 디렉터리
+
+2022-11-21  오후 04:37    <DIR>          .
+2022-11-21  오후 04:37    <DIR>          ..
+2022-11-17  오후 05:12    <DIR>          bitcamp-20220704
+2022-11-21  오후 06:38    <DIR>          bitcamp-study
+2022-11-18  오후 04:19    <DIR>          eomcs-docs
+2022-11-18  오후 04:21    <DIR>          eomcs-java
+2022-11-17  오후 04:46    <DIR>          eomcs.github.io
+2022-11-21  오전 09:09    <DIR>          jongkwangyun.github.io
+               0개 파일                   0 바이트
+               8개 디렉터리  59,758,489,600 바이트 남음
+
+C:\Users\bitcamp\git>cd bitcamp-study
+
+C:\Users\bitcamp\git\bitcamp-study>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp\git\bitcamp-study 디렉터리
+
+2022-11-21  오후 06:38    <DIR>          .
+2022-11-21  오후 06:38    <DIR>          ..
+2022-11-14  오전 11:28             3,477 .gitignore
+2022-11-21  오후 06:38    <DIR>          docs
+2022-11-21  오후 06:38             2,363 README.md
+               2개 파일               5,840 바이트
+               3개 디렉터리  59,758,489,600 바이트 남음
+
+C:\Users\bitcamp\git\bitcamp-study>cd ..
+
+C:\Users\bitcamp\git>cd ..
+
+C:\Users\bitcamp>cd vm-projects
+
+C:\Users\bitcamp\vm-projects>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp\vm-projects 디렉터리
+
+2022-11-21  오후 12:03    <DIR>          .
+2022-11-21  오후 12:03    <DIR>          ..
+2022-11-21  오전 10:43    <DIR>          host1-vm
+2022-11-21  오전 10:44    <DIR>          host2-vm
+2022-11-21  오전 10:47    <DIR>          host3-vm
+               0개 파일                   0 바이트
+               5개 디렉터리  59,758,292,992 바이트 남음
+
+C:\Users\bitcamp\vm-projects>cd host2-vm
+
+C:\Users\bitcamp\vm-projects\host2-vm>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp\vm-projects\host2-vm 디렉터리
+
+2022-11-21  오전 10:44    <DIR>          .
+2022-11-21  오전 10:44    <DIR>          ..
+2022-11-21  오전 10:44    <DIR>          .vagrant
+2022-11-21  오전 10:44             3,122 Vagrantfile
+               1개 파일               3,122 바이트
+               3개 디렉터리  59,758,292,992 바이트 남음
+
+C:\Users\bitcamp\vm-projects\host2-vm>vagrant ssh
+VM must be running to open SSH connection. Run `vagrant up`
+to start the virtual machine.
+
+C:\Users\bitcamp\vm-projects\host2-vm>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'centos/7' version '2004.01' is up to date...
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2201
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\bitcamp\vm-projects\host2-vm>vagrant ssh
+Last login: Mon Nov 21 01:46:24 2022 from 10.0.2.2
+Last login: Mon Nov 21 01:46:24 2022 from 10.0.2.2
+[vagrant@host2 ~]$ pwd
+/home/vagrant
+[vagrant@host2 ~]$ mkdir git
+mkdir: cannot create directory ‘git’: File exists
+[vagrant@host2 ~]$ ls
+git
+[vagrant@host2 ~]$ cd git
+[vagrant@host2 git]$ ls
+bitcamp-study
+[vagrant@host2 git]$ mkdir bitcamp-ncp
+[vagrant@host2 git]$ cd bitcamp-ncp
+[vagrant@host2 bitcamp-ncp]$ git init
+Initialized empty Git repository in /home/vagrant/git/bitcamp-ncp/.git/
+[vagrant@host2 bitcamp-ncp]$ ls
+[vagrant@host2 bitcamp-ncp]$ ls -al
+total 0
+drwxrwxr-x. 3 vagrant vagrant  18 Nov 21 12:03 .
+drwxrwxr-x. 4 vagrant vagrant  46 Nov 21 12:03 ..
+drwxrwxr-x. 7 vagrant vagrant 119 Nov 21 12:03 .git
+[vagrant@host2 bitcamp-ncp]$ nano .gitignore
+-bash: nano: command not found
+[vagrant@host2 bitcamp-ncp]$ sudo yum install nano -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.kakao.com
+ * extras: mirror.kakao.com
+ * updates: mirror.kakao.com
+base                                                                                             | 3.6 kB  00:00:00
+extras                                                                                           | 2.9 kB  00:00:00
+updates                                                                                          | 2.9 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package nano.x86_64 0:2.3.1-10.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+======================================================================================================================== Package                  Arch                       Version                             Repository                Size
+========================================================================================================================Installing:
+ nano                     x86_64                     2.3.1-10.el7                        base                     440 k
+
+Transaction Summary
+========================================================================================================================Install  1 Package
+
+Total download size: 440 k
+Installed size: 1.6 M
+Downloading packages:
+nano-2.3.1-10.el7.x86_64.rpm                                                                     | 440 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : nano-2.3.1-10.el7.x86_64                                                                             1/1
+  Verifying  : nano-2.3.1-10.el7.x86_64                                                                             1/1
+
+Installed:
+  nano.x86_64 0:2.3.1-10.el7
+
+Complete!
+[vagrant@host2 bitcamp-ncp]$ nano .gitignore
+[vagrant@host2 bitcamp-ncp]$ cd ..
+[vagrant@host2 git]$ mv bitcamp-ncp bitcamp-ncp3
+[vagrant@host2 git]$ ls
+bitcamp-ncp3  bitcamp-study
+[vagrant@host2 git]$ cd bitcamp-ncp3
+[vagrant@host2 bitcamp-ncp3]$ git branch
+[vagrant@host2 bitcamp-ncp3]$ git remote add origin https://github.com/jongkwangyun/bitcamp-ncp3
+[vagrant@host2 bitcamp-ncp3]$ git branch
+[vagrant@host2 bitcamp-ncp3]$ git remote
+origin
+[vagrant@host2 bitcamp-ncp3]$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/jongkwangyun/bitcamp-ncp3
+  Push  URL: https://github.com/jongkwangyun/bitcamp-ncp3
+  HEAD branch: main
+  Remote branch:
+    main new (next fetch will store in remotes/origin)
+[vagrant@host2 bitcamp-ncp3]$ git pull origin main
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/jongkwangyun/bitcamp-ncp3
+ * branch            main       -> FETCH_HEAD
+[vagrant@host2 bitcamp-ncp3]$ git branch
+* master
+[vagrant@host2 bitcamp-ncp3]$ ls
+README.md
+[vagrant@host2 bitcamp-ncp3]$ git branch -m main
+[vagrant@host2 bitcamp-ncp3]$ git branch
+* main
+[vagrant@host2 bitcamp-ncp3]$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': git config --global push.default simple
+Password for 'https://git config --global push.default simple@github.com':
+[vagrant@host2 bitcamp-ncp3]$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Everything up-to-date
+[vagrant@host2 bitcamp-ncp3]$ nano a.txt
+[vagrant@host2 bitcamp-ncp3]$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Everything up-to-date
+[vagrant@host2 bitcamp-ncp3]$ ls
+a.txt  README.md
+[vagrant@host2 bitcamp-ncp3]$ git add .
+[vagrant@host2 bitcamp-ncp3]$ git commit -m "1"
+[main 19a9dc0] 1
+ Committer: vagrant <vagrant@host2.bitcamp>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 217 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 a.txt
+[vagrant@host2 bitcamp-ncp3]$ git config --global user.name jongwkangyun
+[vagrant@host2 bitcamp-ncp3]$ git config --global user.email yjk0319@gmail.com
+[vagrant@host2 bitcamp-ncp3]$ git commi -m "1"
+git: 'commi' is not a git command. See 'git --help'.
+
+Did you mean one of these?
+        commit
+        column
+        config
+[vagrant@host2 bitcamp-ncp3]$ git commit -m "1"
+# On branch main
+nothing to commit, working directory clean
+[vagrant@host2 bitcamp-ncp3]$ git status --short
+[vagrant@host2 bitcamp-ncp3]$ git status
+# On branch main
+nothing to commit, working directory clean
+[vagrant@host2 bitcamp-ncp3]$ ls
+a.txt  README.md
+[vagrant@host2 bitcamp-ncp3]$ git add .
+[vagrant@host2 bitcamp-ncp3]$ git status
+# On branch main
+nothing to commit, working directory clean
+[vagrant@host2 bitcamp-ncp3]$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Counting objects: 5, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 1.90 KiB | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To https://github.com/jongkwangyun/bitcamp-ncp3
+   1c1fd6e..19a9dc0  main -> main
+[vagrant@host2 bitcamp-ncp3]$ git config --global push.default simple
+[vagrant@host2 bitcamp-ncp3]$ git push --set-upstream origin main
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+fatal: Authentication failed for 'https://github.com/jongkwangyun/bitcamp-ncp3/'
+[vagrant@host2 bitcamp-ncp3]$ git push --set-upstream origin main
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Branch main set up to track remote branch main from origin.
+Everything up-to-date
+[vagrant@host2 bitcamp-ncp3]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Everything up-to-date
+[vagrant@host2 bitcamp-ncp3]$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+C:\Users\bitcamp\vm-projects\host2-vm>cd ..
+
+C:\Users\bitcamp\vm-projects>cd host1-vm
+
+C:\Users\bitcamp\vm-projects\host1-vm>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'centos/7' version '2004.01' is up to date...
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2200
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\bitcamp\vm-projects\host1-vm>vagrant ssh
+Last login: Mon Nov 21 01:43:56 2022 from 10.0.2.2
+[vagrant@host1 ~]$ git log --oneline
+fatal: Not a git repository (or any of the parent directories): .git
+[vagrant@host1 ~]$ cd git
+[vagrant@host1 git]$ cd bitcamp-ncp
+[vagrant@host1 bitcamp-ncp]$ clear
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ file .gitignore
+.gitignore: ASCII text
+[vagrant@host1 bitcamp-ncp]$ .gitignore
+-bash: .gitignore: command not found
+[vagrant@host1 bitcamp-ncp]$ less .gitignore
+[vagrant@host1 bitcamp-ncp]$ mkdir tmp
+[vagrant@host1 bitcamp-ncp]$ pwd
+/home/vagrant/git/bitcamp-ncp
+[vagrant@host1 bitcamp-ncp]$ cd tmp
+[vagrant@host1 tmp]$ pwd
+/home/vagrant/git/bitcamp-ncp/tmp
+[vagrant@host1 tmp]$ touch hello.txt
+[vagrant@host1 tmp]$ ls
+hello.txt
+[vagrant@host1 tmp]$ ls -al
+total 0
+drwxrwxr-x. 2 vagrant vagrant 23 Nov 21 12:08 .
+drwxrwxr-x. 4 vagrant vagrant 90 Nov 21 12:07 ..
+-rw-rw-r--. 1 vagrant vagrant  0 Nov 21 12:08 hello.txt
+[vagrant@host1 tmp]$ cd ..
+[vagrant@host1 bitcamp-ncp]$ touch hello2.txt
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+├── README.md
+└── tmp
+    └── hello.txt
+
+1 directory, 5 files
+[vagrant@host1 bitcamp-ncp]$ git status --short
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ mkdir tmp2
+[vagrant@host1 bitcamp-ncp]$ cd temp2
+-bash: cd: temp2: No such file or directory
+[vagrant@host1 bitcamp-ncp]$ cd tmp2
+[vagrant@host1 tmp2]$ touch hello3.txt
+[vagrant@host1 tmp2]$ cd ..
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+├── README.md
+├── tmp
+│   └── hello.txt
+└── tmp2
+    └── hello3.txt
+
+2 directories, 6 files
+[vagrant@host1 bitcamp-ncp]$ git status
+a.txt       b.txt       .git/       .gitignore  hello2.txt  README.md   tmp/        tmp2/
+[vagrant@host1 bitcamp-ncp]$ git status --short
+?? hello2.txt
+?? tmp2/
+[vagrant@host1 bitcamp-ncp]$ touch test.bak
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+├── README.md
+├── test.bak
+├── tmp
+│   └── hello.txt
+└── tmp2
+    └── hello3.txt
+
+2 directories, 7 files
+[vagrant@host1 bitcamp-ncp]$ git status --short
+?? hello2.txt
+?? tmp2/
+[vagrant@host1 bitcamp-ncp]$ rm tmp
+rm: cannot remove ‘tmp’: Is a directory
+[vagrant@host1 bitcamp-ncp]$ rm -rf tmp
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+├── README.md
+├── test.bak
+└── tmp2
+    └── hello3.txt
+
+1 directory, 6 files
+[vagrant@host1 bitcamp-ncp]$ rm -rf tmp2
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+├── README.md
+└── test.bak
+
+0 directories, 5 files
+[vagrant@host1 bitcamp-ncp]$ rm *bak
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+└── README.md
+
+0 directories, 4 files
+[vagrant@host1 bitcamp-ncp]$ git diff b.txt
+[vagrant@host1 bitcamp-ncp]$ git diff a.txt
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ M a.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ git diff a.txt
+diff --git a/a.txt b/a.txt
+index a139ece..e6cb605 100644
+--- a/a.txt
++++ b/a.txt
+@@ -1,3 +1,4 @@
+ 1111
+ 2222
++3333
+
+[vagrant@host1 bitcamp-ncp]$ nano b.txt
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ M a.txt
+ M b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ git checkout b.txt
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ M a.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ nano b.txt
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ M a.txt
+ M b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ cat a.txt
+1111
+2222
+3333
+
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ git add b.txt
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ M a.txt
+M  b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ git checkout a.txt
+[vagrant@host1 bitcamp-ncp]$ cat a.txt
+1111
+2222
+
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ git checkout b.txt
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ nano b.txt
+[vagrant@host1 bitcamp-ncp]$ git status --short
+MM b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+5555
+
+[vagrant@host1 bitcamp-ncp]$ git checkout b.txt
+[vagrant@host1 bitcamp-ncp]$ cat checkout b.txt
+cat: checkout: No such file or directory
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ git status --short
+M  b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ git rm b.txt
+error: 'b.txt' has changes staged in the index
+(use --cached to keep the file, or -f to force removal)
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git --version
+git version 1.8.3.1
+[vagrant@host1 bitcamp-ncp]$ yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-1.noarch.rpm[A
+Loaded plugins: fastestmirror
+You need to be root to perform this command.
+[vagrant@host1 bitcamp-ncp]$ sudo yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-1.noarch.rpm
+Loaded plugins: fastestmirror
+wandisco-git-release-7-1.noarch.rpm                                            | 4.5 kB  00:00:00
+Examining /var/tmp/yum-root-EndB6l/wandisco-git-release-7-1.noarch.rpm: wandisco-git-release-7-1.noarch
+Marking /var/tmp/yum-root-EndB6l/wandisco-git-release-7-1.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package wandisco-git-release.noarch 0:7-1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                     Arch          Version      Repository                               Size
+======================================================================================================Installing:
+ wandisco-git-release        noarch        7-1          /wandisco-git-release-7-1.noarch        1.9 k
+
+Transaction Summary
+======================================================================================================Install  1 Package
+
+Total size: 1.9 k
+Installed size: 1.9 k
+Is this ok [y/d/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : wandisco-git-release-7-1.noarch                                                    1/1
+  Verifying  : wandisco-git-release-7-1.noarch                                                    1/1
+
+Installed:
+  wandisco-git-release.noarch 0:7-1
+
+Complete!
+[vagrant@host1 bitcamp-ncp]$ yum remove git
+Loaded plugins: fastestmirror
+You need to be root to perform this command.
+[vagrant@host1 bitcamp-ncp]$ sudo yum remove git
+Loaded plugins: fastestmirror
+Resolving Dependencies
+--> Running transaction check
+---> Package git.x86_64 0:1.8.3.1-23.el7_8 will be erased
+--> Processing Dependency: git = 1.8.3.1-23.el7_8 for package: perl-Git-1.8.3.1-23.el7_8.noarch
+--> Running transaction check
+---> Package perl-Git.noarch 0:1.8.3.1-23.el7_8 will be erased
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                Arch                 Version                        Repository           Size
+======================================================================================================Removing:
+ git                    x86_64               1.8.3.1-23.el7_8               @base                22 M
+Removing for dependencies:
+ perl-Git               noarch               1.8.3.1-23.el7_8               @base                57 k
+
+Transaction Summary
+======================================================================================================Remove  1 Package (+1 Dependent package)
+
+Installed size: 22 M
+Is this ok [y/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Erasing    : perl-Git-1.8.3.1-23.el7_8.noarch                                                   1/2
+  Erasing    : git-1.8.3.1-23.el7_8.x86_64                                                        2/2
+  Verifying  : git-1.8.3.1-23.el7_8.x86_64                                                        1/2
+  Verifying  : perl-Git-1.8.3.1-23.el7_8.noarch                                                   2/2
+
+Removed:
+  git.x86_64 0:1.8.3.1-23.el7_8
+
+Dependency Removed:
+  perl-Git.noarch 0:1.8.3.1-23.el7_8
+
+Complete!
+[vagrant@host1 bitcamp-ncp]$ git
+-bash: /usr/bin/git: No such file or directory
+[vagrant@host1 bitcamp-ncp]$ sudo yum install git -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.kakao.com
+ * extras: mirror.kakao.com
+ * updates: mirror.kakao.com
+WANdisco-git                                                                   | 2.9 kB  00:00:00
+base                                                                           | 3.6 kB  00:00:00
+extras                                                                         | 2.9 kB  00:00:00
+updates                                                                        | 2.9 kB  00:00:00
+WANdisco-git/7/x86_64/primary_db                                               | 153 kB  00:00:01
+Resolving Dependencies
+--> Running transaction check
+---> Package git.x86_64 0:2.31.1-1.WANdisco.1657096008 will be installed
+--> Processing Dependency: perl-Git = 2.31.1-1.WANdisco.1657096008 for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Processing Dependency: perl(Git) for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Processing Dependency: perl(Digest::SHA) for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Processing Dependency: perl(Git::I18N) for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Running transaction check
+---> Package perl-Digest-SHA.x86_64 1:5.85-4.el7 will be installed
+--> Processing Dependency: perl(Digest::base) for package: 1:perl-Digest-SHA-5.85-4.el7.x86_64
+---> Package perl-Git.noarch 0:2.31.1-1.WANdisco.1657096008 will be installed
+--> Running transaction check
+---> Package perl-Digest.noarch 0:1.17-245.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                Arch          Version                               Repository           Size
+======================================================================================================Installing:
+ git                    x86_64        2.31.1-1.WANdisco.1657096008          WANdisco-git        8.7 M
+Installing for dependencies:
+ perl-Digest            noarch        1.17-245.el7                          base                 23 k
+ perl-Digest-SHA        x86_64        1:5.85-4.el7                          base                 58 k
+ perl-Git               noarch        2.31.1-1.WANdisco.1657096008          WANdisco-git         23 k
+
+Transaction Summary
+======================================================================================================Install  1 Package (+3 Dependent packages)
+
+Total download size: 8.8 M
+Installed size: 41 M
+Downloading packages:
+(1/4): perl-Digest-1.17-245.el7.noarch.rpm                                     |  23 kB  00:00:00
+(2/4): perl-Digest-SHA-5.85-4.el7.x86_64.rpm                                   |  58 kB  00:00:00
+warning: /var/cache/yum/x86_64/7/WANdisco-git/packages/perl-Git-2.31.1-1.WANdisco.1657096008.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 3bbf077a: NOKEY
+Public key for perl-Git-2.31.1-1.WANdisco.1657096008.noarch.rpm is not installed
+(3/4): perl-Git-2.31.1-1.WANdisco.1657096008.noarch.rpm                        |  23 kB  00:00:00
+(4/4): git-2.31.1-1.WANdisco.1657096008.x86_64.rpm                             | 8.7 MB  00:00:03
+------------------------------------------------------------------------------------------------------Total                                                                 2.8 MB/s | 8.8 MB  00:00:03
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-WANdisco
+Importing GPG key 0x3BBF077A:
+ Userid     : "WANdisco (http://WANdisco.com - We Make Software Happen...) <software-key@wandisco.com>"
+ Fingerprint: 69c1 be83 da54 cbed 6889 72f8 e9f0 e922 3bbf 077a
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-WANdisco
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : perl-Digest-1.17-245.el7.noarch                                                    1/4
+  Installing : 1:perl-Digest-SHA-5.85-4.el7.x86_64                                                2/4
+  Installing : perl-Git-2.31.1-1.WANdisco.1657096008.noarch                                       3/4
+  Installing : git-2.31.1-1.WANdisco.1657096008.x86_64                                            4/4
+  Verifying  : git-2.31.1-1.WANdisco.1657096008.x86_64                                            1/4
+  Verifying  : 1:perl-Digest-SHA-5.85-4.el7.x86_64                                                2/4
+  Verifying  : perl-Git-2.31.1-1.WANdisco.1657096008.noarch                                       3/4
+  Verifying  : perl-Digest-1.17-245.el7.noarch                                                    4/4
+
+Installed:
+  git.x86_64 0:2.31.1-1.WANdisco.1657096008
+
+Dependency Installed:
+  perl-Digest.noarch 0:1.17-245.el7                       perl-Digest-SHA.x86_64 1:5.85-4.el7
+  perl-Git.noarch 0:2.31.1-1.WANdisco.1657096008
+
+Complete!
+[vagrant@host1 bitcamp-ncp]$ git --version
+git version 2.31.1
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+*   08b3bda (HEAD -> main, origin/main) Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git status --short
+M  b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ git reset HEAD b.txt
+Unstaged changes after reset:
+M       b.txt
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ M b.txt
+?? hello2.txt
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+[vagrant@host1 bitcamp-ncp]$ git checkout b.txt
+Updated 1 path from the index
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+[vagrant@host1 bitcamp-ncp]$ git remote
+origin
+[vagrant@host1 bitcamp-ncp]$ git remote -v
+origin  https://github.com/jongkwangyun/bitcamp-ncp (fetch)
+origin  https://github.com/jongkwangyun/bitcamp-ncp (push)
+[vagrant@host1 bitcamp-ncp]$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/jongkwangyun/bitcamp-ncp
+  Push  URL: https://github.com/jongkwangyun/bitcamp-ncp
+  HEAD branch: main
+  Remote branch:
+    main tracked
+  Local branch configured for 'git pull':
+    main merges with remote main
+  Local ref configured for 'git push':
+    main pushes to main (up to date)
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "11"
+[main be9028c] 11
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 hello2.txt
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* be9028c (HEAD -> main) 11
+*   08b3bda (origin/main) Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 263 bytes | 263.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   08b3bda..be9028c  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* be9028c (HEAD -> main, origin/main) 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ pwd
+/home/vagrant/git/bitcamp-ncp
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* be9028c (HEAD -> main, origin/main) 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "12"
+[main 4c879d2] 12
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 4c879d2 (HEAD -> main) 12
+* be9028c (origin/main) 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 220 bytes | 220.00 KiB/s, done.
+Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   be9028c..4c879d2  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 4c879d2 (HEAD -> main, origin/main) 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git remote -v
+origin  https://github.com/jongkwangyun/bitcamp-ncp (fetch)
+origin  https://github.com/jongkwangyun/bitcamp-ncp (push)
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "13"
+[main 19271a2] 13
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 267 bytes | 267.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   4c879d2..19271a2  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 19271a2 (HEAD -> main, origin/main) 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "14"
+[main 6551e69] 14
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 272 bytes | 272.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   19271a2..6551e69  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 6551e69 (HEAD -> main, origin/main) 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "15"
+[main 26668a6] 15
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 272 bytes | 272.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   6551e69..26668a6  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 26668a6 (HEAD -> main, origin/main) 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "16"
+[main 6657d22] 16
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 275 bytes | 275.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   26668a6..6657d22  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 6657d22 (HEAD -> main, origin/main) 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ nano b.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "17"
+[main ca6c123] 17
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': ^C
+[vagrant@host1 bitcamp-ncp]$ nano b.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "18"
+[main d383a70] 18
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* d383a70 (HEAD -> main) 18
+* ca6c123 17
+* 6657d22 (origin/main) 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 507 bytes | 507.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   6657d22..d383a70  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* d383a70 (HEAD -> main, origin/main) 18
+* ca6c123 17
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git pull
+
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 8 (delta 3), reused 8 (delta 3), pack-reused 0
+Unpacking objects: 100% (8/8), 703 bytes | 87.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   d383a70..bb3c142  main       -> origin/main
+Updating d383a70..bb3c142
+Fast-forward
+ a.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+*   bb3c142 (HEAD -> main, origin/main) 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ nano a.txt
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongwkangyun
+Password for 'https://jongwkangyun@github.com':
+Everything up-to-date
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+└── README.md
+
+0 directories, 4 files
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "22"
+[main 2f572f5] 22
+ 1 file changed, 1 insertion(+)
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 293 bytes | 293.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   bb3c142..2f572f5  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 2f572f5 (HEAD -> main, origin/main) 22
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git pull
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 3), reused 6 (delta 3), pack-reused 0
+Unpacking objects: 100% (6/6), 539 bytes | 107.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   2f572f5..9bb31ad  main       -> origin/main
+Updating 2f572f5..9bb31ad
+Fast-forward
+ a.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+[vagrant@host1 bitcamp-ncp]$ git log --short --graph --all
+fatal: unrecognized argument: --short
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+*   9bb31ad (HEAD -> main, origin/main) 24
+|\
+| * 2f572f5 22
+* | de9090e 23
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git pull
+Already up to date.
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+*   9bb31ad (HEAD -> main, origin/main) 24
+|\
+| * 2f572f5 22
+* | de9090e 23
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph
+*   9bb31ad (HEAD -> main, origin/main) 24
+|\
+| * 2f572f5 22
+* | de9090e 23
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git branch
+* main
+[vagrant@host1 bitcamp-ncp]$ git branch b1
+[vagrant@host1 bitcamp-ncp]$ git branch
+  b1
+* main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+9bb31ad (HEAD -> main, origin/main, b1) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git branch -d b1
+Deleted branch b1 (was 9bb31ad).
+[vagrant@host1 bitcamp-ncp]$ git branch
+* main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+9bb31ad (HEAD -> main, origin/main) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ tree
+.
+├── a.txt
+├── b.txt
+├── hello2.txt
+└── README.md
+
+0 directories, 4 files
+[vagrant@host1 bitcamp-ncp]$ git branch b1
+[vagrant@host1 bitcamp-ncp]$ git branch
+  b1
+* main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+9bb31ad (HEAD -> main, origin/main, b1) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git checkout b1
+Switched to branch 'b1'
+[vagrant@host1 bitcamp-ncp]$ git branch
+* b1
+  main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+9bb31ad (HEAD -> b1, origin/main, main) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ ls
+a.txt  b.txt  hello2.txt  README.md
+[vagrant@host1 bitcamp-ncp]$ nano c.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "25"
+[b1 66b84d3] 25
+ 1 file changed, 1 insertion(+)
+ create mode 100644 c.txt
+[vagrant@host1 bitcamp-ncp]$ git log --oneline --graph --all
+* 66b84d3 (HEAD -> b1) 25
+*   9bb31ad (origin/main, main) 24
+|\
+| * 2f572f5 22
+* | de9090e 23
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host1 bitcamp-ncp]$ ls
+a.txt  b.txt  c.txt  hello2.txt  README.md
+[vagrant@host1 bitcamp-ncp]$ nano b.txt
+[vagrant@host1 bitcamp-ncp]$ rm a.txt
+[vagrant@host1 bitcamp-ncp]$ ls
+b.txt  c.txt  hello2.txt  README.md
+[vagrant@host1 bitcamp-ncp]$ git status --short
+ D a.txt
+ M b.txt
+[vagrant@host1 bitcamp-ncp]$ git add .
+[vagrant@host1 bitcamp-ncp]$ git commit -m "26"
+[b1 08d8732] 26
+ 2 files changed, 1 insertion(+), 12 deletions(-)
+ delete mode 100644 a.txt
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08d8732 (HEAD -> b1) 26
+66b84d3 25
+9bb31ad (origin/main, main) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git branch
+* b1
+  main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08d8732 (HEAD -> b1) 26
+66b84d3 25
+9bb31ad (origin/main, main) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+[vagrant@host1 bitcamp-ncp]$ ls
+a.txt  b.txt  hello2.txt  README.md
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+5555
+[vagrant@host1 bitcamp-ncp]$ git checkout b1
+Switched to branch 'b1'
+[vagrant@host1 bitcamp-ncp]$ ls
+b.txt  c.txt  hello2.txt  README.md
+[vagrant@host1 bitcamp-ncp]$ cat b.txt
+1111
+2222
+3333
+4444
+5555
+6666
+[vagrant@host1 bitcamp-ncp]$ cat c.txt
+1111
+[vagrant@host1 bitcamp-ncp]$ git branch
+* b1
+  main
+[vagrant@host1 bitcamp-ncp]$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+[vagrant@host1 bitcamp-ncp]$ git branch
+  b1
+* main
+[vagrant@host1 bitcamp-ncp]$ git merge b1
+Updating 9bb31ad..08d8732
+Fast-forward
+ a.txt | 12 ------------
+ b.txt |  1 +
+ c.txt |  1 +
+ 3 files changed, 2 insertions(+), 12 deletions(-)
+ delete mode 100644 a.txt
+ create mode 100644 c.txt
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08d8732 (HEAD -> main, b1) 26
+66b84d3 25
+9bb31ad (origin/main) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git branch -d b1
+Deleted branch b1 (was 08d8732).
+[vagrant@host1 bitcamp-ncp]$ git branch
+* main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08d8732 (HEAD -> main) 26
+66b84d3 25
+9bb31ad (origin/main) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 488 bytes | 488.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   9bb31ad..08d8732  main -> main
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08d8732 (HEAD -> main, origin/main) 26
+66b84d3 25
+9bb31ad 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+08d8732 (HEAD -> main, origin/main) 26
+66b84d3 25
+9bb31ad 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git pull
+remote: Enumerating objects: 13, done.
+remote: Counting objects: 100% (13/13), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 11 (delta 5), reused 11 (delta 5), pack-reused 0
+Unpacking objects: 100% (11/11), 1.01 KiB | 1.01 MiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   08d8732..15449ea  main       -> origin/main
+Updating 08d8732..15449ea
+Fast-forward
+ d.txt | 2 ++
+ x.txt | 2 ++
+ 2 files changed, 4 insertions(+)
+ create mode 100644 d.txt
+ create mode 100644 x.txt
+[vagrant@host1 bitcamp-ncp]$ git log --oneline
+15449ea (HEAD -> main, origin/main) merge
+c02c728 42
+1056f21 41
+d65e3a4 32
+e638a9c 31
+08d8732 26
+66b84d3 25
+9bb31ad 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host1 bitcamp-ncp]$ git ls-remote
+From https://github.com/jongkwangyun/bitcamp-ncp
+15449eadbad44aaaa539ecd34eb9681d9e038f4f        HEAD
+15449eadbad44aaaa539ecd34eb9681d9e038f4f        refs/heads/main
+[vagrant@host1 bitcamp-ncp]$ git branch -vv
+* main 15449ea [origin/main] merge
+[vagrant@host1 bitcamp-ncp]$

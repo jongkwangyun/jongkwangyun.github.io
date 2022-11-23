@@ -40,3 +40,5 @@ RAM 용량 초과/동적 할당을 **지원하지 않아서** 가상 머신 리�
 ### Hyperviser란?
 
 ### [MarkDown이란?](MARKDOWN.md)
+
+### [리눅스 기본 명령어](LINUX_COMMAND.md)

@@ -1,0 +1,1466 @@
+C:\Users\bitcamp\vm-projects\host3-vm>cd ..
+
+C:\Users\bitcamp\vm-projects>cd host2-vm
+
+C:\Users\bitcamp\vm-projects\host2-vm>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'centos/7' version '2004.01' is up to date...
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\bitcamp\vm-projects\host2-vm>vagrant ssh
+Last login: Mon Nov 21 12:02:43 2022 from 10.0.2.2
+[vagrant@host2 ~]$ ls -al
+total 20
+drwx------. 5 vagrant vagrant 136 Nov 21 12:16 .
+drwxr-xr-x. 3 root    root     21 Apr 30  2020 ..
+-rw-------. 1 vagrant vagrant 865 Nov 21 12:47 .bash_history
+-rw-r--r--. 1 vagrant vagrant  18 Apr  1  2020 .bash_logout
+-rw-r--r--. 1 vagrant vagrant 193 Apr  1  2020 .bash_profile
+-rw-r--r--. 1 vagrant vagrant 231 Apr  1  2020 .bashrc
+drwxrwxr-x. 4 vagrant vagrant  47 Nov 21 12:08 git
+-rw-rw-r--. 1 vagrant vagrant  80 Nov 21 12:16 .gitconfig
+drwxrw----. 3 vagrant vagrant  19 Nov 21 01:48 .pki
+drwx------. 2 vagrant vagrant  29 Nov 21 01:44 .ssh
+[vagrant@host2 ~]$ cd git
+[vagrant@host2 git]$ cd git
+-bash: cd: git: No such file or directory
+[vagrant@host2 git]$ ls
+bitcamp-ncp3  bitcamp-study
+[vagrant@host2 git]$ git --version
+git version 1.8.3.1
+[vagrant@host2 git]$ sudo yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-1.noarch.rpm
+Loaded plugins: fastestmirror
+wandisco-git-release-7-1.noarch.rpm                                            | 4.5 kB  00:00:00
+Examining /var/tmp/yum-root-4tuTBr/wandisco-git-release-7-1.noarch.rpm: wandisco-git-release-7-1.noarch
+Marking /var/tmp/yum-root-4tuTBr/wandisco-git-release-7-1.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package wandisco-git-release.noarch 0:7-1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                     Arch          Version      Repository                               Size
+======================================================================================================Installing:
+ wandisco-git-release        noarch        7-1          /wandisco-git-release-7-1.noarch        1.9 k
+
+Transaction Summary
+======================================================================================================Install  1 Package
+
+Total size: 1.9 k
+Installed size: 1.9 k
+Is this ok [y/d/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : wandisco-git-release-7-1.noarch                                                    1/1
+  Verifying  : wandisco-git-release-7-1.noarch                                                    1/1
+
+Installed:
+  wandisco-git-release.noarch 0:7-1
+
+Complete!
+[vagrant@host2 git]$ yum remove git
+Loaded plugins: fastestmirror
+You need to be root to perform this command.
+[vagrant@host2 git]$ sudo yum remove git
+Loaded plugins: fastestmirror
+Resolving Dependencies
+--> Running transaction check
+---> Package git.x86_64 0:1.8.3.1-23.el7_8 will be erased
+--> Processing Dependency: git = 1.8.3.1-23.el7_8 for package: perl-Git-1.8.3.1-23.el7_8.noarch
+--> Running transaction check
+---> Package perl-Git.noarch 0:1.8.3.1-23.el7_8 will be erased
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                Arch                 Version                        Repository           Size
+======================================================================================================Removing:
+ git                    x86_64               1.8.3.1-23.el7_8               @base                22 M
+Removing for dependencies:
+ perl-Git               noarch               1.8.3.1-23.el7_8               @base                57 k
+
+Transaction Summary
+======================================================================================================Remove  1 Package (+1 Dependent package)
+
+Installed size: 22 M
+Is this ok [y/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Erasing    : perl-Git-1.8.3.1-23.el7_8.noarch                                                   1/2
+  Erasing    : git-1.8.3.1-23.el7_8.x86_64                                                        2/2
+  Verifying  : git-1.8.3.1-23.el7_8.x86_64                                                        1/2
+  Verifying  : perl-Git-1.8.3.1-23.el7_8.noarch                                                   2/2
+
+Removed:
+  git.x86_64 0:1.8.3.1-23.el7_8
+
+Dependency Removed:
+  perl-Git.noarch 0:1.8.3.1-23.el7_8
+
+Complete!
+[vagrant@host2 git]$ sudo yum install git -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.kakao.com
+ * extras: mirror.kakao.com
+ * updates: mirror.kakao.com
+WANdisco-git                                                                   | 2.9 kB  00:00:00
+WANdisco-git/7/x86_64/primary_db                                               | 153 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package git.x86_64 0:2.31.1-1.WANdisco.1657096008 will be installed
+--> Processing Dependency: perl-Git = 2.31.1-1.WANdisco.1657096008 for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Processing Dependency: perl(Git) for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Processing Dependency: perl(Digest::SHA) for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Processing Dependency: perl(Git::I18N) for package: git-2.31.1-1.WANdisco.1657096008.x86_64
+--> Running transaction check
+---> Package perl-Digest-SHA.x86_64 1:5.85-4.el7 will be installed
+--> Processing Dependency: perl(Digest::base) for package: 1:perl-Digest-SHA-5.85-4.el7.x86_64
+---> Package perl-Git.noarch 0:2.31.1-1.WANdisco.1657096008 will be installed
+--> Running transaction check
+---> Package perl-Digest.noarch 0:1.17-245.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                Arch          Version                               Repository           Size
+======================================================================================================Installing:
+ git                    x86_64        2.31.1-1.WANdisco.1657096008          WANdisco-git        8.7 M
+Installing for dependencies:
+ perl-Digest            noarch        1.17-245.el7                          base                 23 k
+ perl-Digest-SHA        x86_64        1:5.85-4.el7                          base                 58 k
+ perl-Git               noarch        2.31.1-1.WANdisco.1657096008          WANdisco-git         23 k
+
+Transaction Summary
+======================================================================================================Install  1 Package (+3 Dependent packages)
+
+Total download size: 8.8 M
+Installed size: 41 M
+Downloading packages:
+(1/4): perl-Digest-SHA-5.85-4.el7.x86_64.rpm                                   |  58 kB  00:00:00
+(2/4): perl-Digest-1.17-245.el7.noarch.rpm                                     |  23 kB  00:00:00
+warning: /var/cache/yum/x86_64/7/WANdisco-git/packages/perl-Git-2.31.1-1.WANdisco.1657096008.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 3bbf077a: NOKEY
+Public key for perl-Git-2.31.1-1.WANdisco.1657096008.noarch.rpm is not installed
+(3/4): perl-Git-2.31.1-1.WANdisco.1657096008.noarch.rpm                        |  23 kB  00:00:00
+(4/4): git-2.31.1-1.WANdisco.1657096008.x86_64.rpm                             | 8.7 MB  00:00:04
+------------------------------------------------------------------------------------------------------Total                                                                 2.0 MB/s | 8.8 MB  00:00:04
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-WANdisco
+Importing GPG key 0x3BBF077A:
+ Userid     : "WANdisco (http://WANdisco.com - We Make Software Happen...) <software-key@wandisco.com>"
+ Fingerprint: 69c1 be83 da54 cbed 6889 72f8 e9f0 e922 3bbf 077a
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-WANdisco
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : perl-Digest-1.17-245.el7.noarch                                                    1/4
+  Installing : 1:perl-Digest-SHA-5.85-4.el7.x86_64                                                2/4
+  Installing : perl-Git-2.31.1-1.WANdisco.1657096008.noarch                                       3/4
+  Installing : git-2.31.1-1.WANdisco.1657096008.x86_64                                            4/4
+  Verifying  : git-2.31.1-1.WANdisco.1657096008.x86_64                                            1/4
+  Verifying  : 1:perl-Digest-SHA-5.85-4.el7.x86_64                                                2/4
+  Verifying  : perl-Git-2.31.1-1.WANdisco.1657096008.noarch                                       3/4
+  Verifying  : perl-Digest-1.17-245.el7.noarch                                                    4/4
+
+Installed:
+  git.x86_64 0:2.31.1-1.WANdisco.1657096008
+
+Dependency Installed:
+  perl-Digest.noarch 0:1.17-245.el7                       perl-Digest-SHA.x86_64 1:5.85-4.el7
+  perl-Git.noarch 0:2.31.1-1.WANdisco.1657096008
+
+Complete!
+[vagrant@host2 git]$ git --version
+git version 2.31.1
+[vagrant@host2 git]$ git clone https://github.com/jongkwangyun/bitcamp-ncp
+Cloning into 'bitcamp-ncp'...
+remote: Enumerating objects: 26, done.
+remote: Counting objects: 100% (26/26), done.
+remote: Compressing objects: 100% (12/12), done.
+remote: Total 26 (delta 5), reused 23 (delta 5), pack-reused 0
+Receiving objects: 100% (26/26), done.
+Resolving deltas: 100% (5/5), done.
+[vagrant@host2 git]$ pwd
+/home/vagrant/git
+[vagrant@host2 git]$ cd bitcamp-ncp
+[vagrant@host2 bitcamp-ncp]$ pwd
+/home/vagrant/git/bitcamp-ncp
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* be9028c (HEAD -> main, origin/main, origin/HEAD) 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ cat a.txt
+1111
+2222
+
+[vagrant@host2 bitcamp-ncp]$ git pull
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
+Unpacking objects: 100% (2/2), 200 bytes | 200.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   be9028c..4c879d2  main       -> origin/main
+Updating be9028c..4c879d2
+Fast-forward
+ a.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 4c879d2 (HEAD -> main, origin/main, origin/HEAD) 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git remote
+origin
+[vagrant@host2 bitcamp-ncp]$ git remote -v
+origin  https://github.com/jongkwangyun/bitcamp-ncp (fetch)
+origin  https://github.com/jongkwangyun/bitcamp-ncp (push)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 4c879d2 (HEAD -> main, origin/main, origin/HEAD) 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git fetch
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), 247 bytes | 247.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   4c879d2..19271a2  main       -> origin/main
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 19271a2 (origin/main, origin/HEAD) 13
+* 4c879d2 (HEAD -> main) 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git merge
+Updating 4c879d2..19271a2
+Fast-forward
+ a.txt | 1 +
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 19271a2 (HEAD -> main, origin/main, origin/HEAD) 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git fetch
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 9 (delta 3), reused 7 (delta 1), pack-reused 0
+Unpacking objects: 100% (9/9), 716 bytes | 716.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   19271a2..6657d22  main       -> origin/main
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 6657d22 (origin/main, origin/HEAD) 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 (HEAD -> main) 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git merge
+Updating 19271a2..6657d22
+Fast-forward
+ a.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 6657d22 (HEAD -> main, origin/main, origin/HEAD) 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ nano a.txt
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "19"
+[main 175afdc] 19
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-ncp]$ nano a.txt
+[vagrant@host2 bitcamp-ncp]$ cat a.txt
+1111
+2222
+3333
+4444
+5555
+6666
+7777
+8888
+9999
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "20"
+[main 6173432] 20
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-ncp]$ git push
+Username for 'https://github.com': ^C
+[vagrant@host2 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+To https://github.com/jongkwangyun/bitcamp-ncp
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/jongkwangyun/bitcamp-ncp'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 6173432 (HEAD -> main) 20
+* 175afdc 19
+* 6657d22 (origin/main, origin/HEAD) 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git fetch
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 2), reused 6 (delta 2), pack-reused 0
+Unpacking objects: 100% (6/6), 487 bytes | 487.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   6657d22..d383a70  main       -> origin/main
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 6173432 (HEAD -> main) 20
+* 175afdc 19
+| * d383a70 (origin/main, origin/HEAD) 18
+| * ca6c123 17
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git merge
+Merge made by the 'recursive' strategy.
+ b.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+*   bb3c142 (HEAD -> main) 21
+|\
+| * d383a70 (origin/main, origin/HEAD) 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 12, done.
+Counting objects: 100% (11/11), done.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (8/8), 723 bytes | 723.00 KiB/s, done.
+Total 8 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   d383a70..bb3c142  main -> main
+[vagrant@host2 bitcamp-ncp]$ git pull
+Already up to date.
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+*   bb3c142 (HEAD -> main, origin/main, origin/HEAD) 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ nano a.txt
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+*   bb3c142 (HEAD -> main, origin/main, origin/HEAD) 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), 273 bytes | 273.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   bb3c142..2f572f5  main       -> origin/main
+Updating bb3c142..2f572f5
+error: Your local changes to the following files would be overwritten by merge:
+        a.txt
+Please commit your changes or stash them before you merge.
+Aborting
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* 2f572f5 (origin/main, origin/HEAD) 22
+*   bb3c142 (HEAD -> main) 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ cat a.txt
+1111
+2222
+3333
+4444
+5555
+6666
+7777
+8888
+9999
+host2=>yyy
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "23"
+[main de9090e] 23
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* de9090e (HEAD -> main) 23
+| * 2f572f5 (origin/main, origin/HEAD) 22
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git merge
+Auto-merging a.txt
+CONFLICT (content): Merge conflict in a.txt
+Automatic merge failed; fix conflicts and then commit the result.
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* de9090e (HEAD -> main) 23
+| * 2f572f5 (origin/main, origin/HEAD) 22
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ cat a.txt
+1111
+2222
+3333
+4444
+5555
+6666
+7777
+8888
+9999
+<<<<<<< HEAD
+host2=>yyy
+=======
+host1=>xxx
+>>>>>>> refs/remotes/origin/main
+[vagrant@host2 bitcamp-ncp]$ nano a.txt
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+* de9090e (HEAD -> main) 23
+| * 2f572f5 (origin/main, origin/HEAD) 22
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "24"
+[main 9bb31ad] 24
+[vagrant@host2 bitcamp-ncp]$ git log --oneline --graph --all
+*   9bb31ad (HEAD -> main) 24
+|\
+| * 2f572f5 (origin/main, origin/HEAD) 22
+* | de9090e 23
+|/
+*   bb3c142 21
+|\
+| * d383a70 18
+| * ca6c123 17
+* | 6173432 20
+* | 175afdc 19
+|/
+* 6657d22 16
+* 26668a6 15
+* 6551e69 14
+* 19271a2 13
+* 4c879d2 12
+* be9028c 11
+*   08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+|\
+| * 4ad13d8 Initial commit
+* 0dfb218 6
+* afce3ff 5
+* 82582e7 4
+* 238344b 3
+* 5117279 2
+* 2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 559 bytes | 559.00 KiB/s, done.
+Total 6 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 1 local object.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   2f572f5..9bb31ad  main -> main
+[vagrant@host2 bitcamp-ncp]$ git log --oneline
+9bb31ad (HEAD -> main, origin/main, origin/HEAD) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host2 bitcamp-ncp]$ nano d.txt
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "31"
+[main e638a9c] 31
+ 1 file changed, 1 insertion(+)
+ create mode 100644 d.txt
+[vagrant@host2 bitcamp-ncp]$ nano d.txt
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "32"
+[main d65e3a4] 32
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-ncp]$ git log --oneline
+d65e3a4 (HEAD -> main) 32
+e638a9c 31
+9bb31ad (origin/main, origin/HEAD) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git branch x1
+[vagrant@host2 bitcamp-ncp]$ git checkout x1
+Switched to branch 'x1'
+[vagrant@host2 bitcamp-ncp]$ git branch
+  main
+* x1
+[vagrant@host2 bitcamp-ncp]$ nano x.txt
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "41"
+[x1 1056f21] 41
+ 1 file changed, 1 insertion(+)
+ create mode 100644 x.txt
+[vagrant@host2 bitcamp-ncp]$ nano x.txt
+[vagrant@host2 bitcamp-ncp]$ git add .
+[vagrant@host2 bitcamp-ncp]$ git commit -m "42"
+[x1 c02c728] 42
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-ncp]$ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+[vagrant@host2 bitcamp-ncp]$ ls
+a.txt  b.txt  d.txt  hello2.txt  README.md
+[vagrant@host2 bitcamp-ncp]$ git merge x1
+Updating d65e3a4..c02c728
+Fast-forward
+ x.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 x.txt
+[vagrant@host2 bitcamp-ncp]$ git log --oneline
+c02c728 (HEAD -> main, x1) 42
+1056f21 41
+d65e3a4 32
+e638a9c 31
+9bb31ad (origin/main, origin/HEAD) 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git pull
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 2), reused 6 (delta 2), pack-reused 0
+Unpacking objects: 100% (6/6), 468 bytes | 468.00 KiB/s, done.
+From https://github.com/jongkwangyun/bitcamp-ncp
+   9bb31ad..08d8732  main       -> origin/main
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Removing a.txt
+Merge made by the 'recursive' strategy.
+ a.txt | 12 ------------
+ b.txt |  1 +
+ c.txt |  1 +
+ 3 files changed, 2 insertions(+), 12 deletions(-)
+ delete mode 100644 a.txt
+ create mode 100644 c.txt
+[vagrant@host2 bitcamp-ncp]$ git log --oneline
+15449ea (HEAD -> main) merge
+c02c728 (x1) 42
+1056f21 41
+d65e3a4 32
+e638a9c 31
+08d8732 (origin/main, origin/HEAD) 26
+66b84d3 25
+9bb31ad 24
+de9090e 23
+2f572f5 22
+bb3c142 21
+6173432 20
+175afdc 19
+d383a70 18
+ca6c123 17
+6657d22 16
+26668a6 15
+6551e69 14
+19271a2 13
+4c879d2 12
+be9028c 11
+08b3bda Merge branch 'main' of https://github.com/jongkwangyun/bitcamp-ncp
+4ad13d8 Initial commit
+0dfb218 6
+afce3ff 5
+82582e7 4
+238344b 3
+5117279 2
+2b432db 1
+[vagrant@host2 bitcamp-ncp]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (11/11), 1.03 KiB | 1.03 MiB/s, done.
+Total 11 (delta 5), reused 1 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (5/5), completed with 2 local objects.
+To https://github.com/jongkwangyun/bitcamp-ncp
+   08d8732..15449ea  main -> main
+[vagrant@host2 bitcamp-ncp]$ git branch
+* main
+  x1
+[vagrant@host2 bitcamp-ncp]$ git branch -d x1
+Deleted branch x1 (was c02c728).
+[vagrant@host2 bitcamp-ncp]$ cd ..
+[vagrant@host2 git]$ ls
+bitcamp-ncp  bitcamp-ncp3  bitcamp-study
+[vagrant@host2 git]$ git clone https://github.com/bitcamp-test1/bitcamp-test
+Cloning into 'bitcamp-test'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), done.
+[vagrant@host2 git]$ pwd
+/home/vagrant/git
+[vagrant@host2 git]$ ls
+bitcamp-ncp  bitcamp-ncp3  bitcamp-study  bitcamp-test
+[vagrant@host2 git]$ cd bitcamp-test
+[vagrant@host2 bitcamp-test]$ git branch j1
+[vagrant@host2 bitcamp-test]$ branch
+-bash: branch: command not found
+[vagrant@host2 bitcamp-test]$ ls
+README.md
+[vagrant@host2 bitcamp-test]$ pwd
+/home/vagrant/git/bitcamp-test
+[vagrant@host2 bitcamp-test]$ bit branch
+-bash: bit: command not found
+[vagrant@host2 bitcamp-test]$ git branch
+  j1
+* main
+[vagrant@host2 bitcamp-test]$ git checkout j1
+Switched to branch 'j1'
+[vagrant@host2 bitcamp-test]$ git branch
+* j1
+  main
+[vagrant@host2 bitcamp-test]$ touch jongkwangyun.txt
+[vagrant@host2 bitcamp-test]$ git add .
+[vagrant@host2 bitcamp-test]$ git commit -m "1:file create"
+[j1 6464168] 1:file create
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 jongkwangyun.txt
+[vagrant@host2 bitcamp-test]$ nano jongkwangyun.txt
+[vagrant@host2 bitcamp-test]$ git status --short
+ M jongkwangyun.txt
+[vagrant@host2 bitcamp-test]$ git add .
+[vagrant@host2 bitcamp-test]$ git commit -m "2:file modify"
+[j1 dd39e16] 2:file modify
+ 1 file changed, 1 insertion(+)
+[vagrant@host2 bitcamp-test]$ rm jongkwangyun.txt
+[vagrant@host2 bitcamp-test]$ ls
+README.md
+[vagrant@host2 bitcamp-test]$ git add .
+[vagrant@host2 bitcamp-test]$ git commit -m "3:file deletion"
+[j1 fd1a1d4] 3:file deletion
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 jongkwangyun.txt
+[vagrant@host2 bitcamp-test]$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+[vagrant@host2 bitcamp-test]$ git merge j1
+Updating b0be094..fd1a1d4
+Fast-forward
+[vagrant@host2 bitcamp-test]$ git branch
+  j1
+* main
+[vagrant@host2 bitcamp-test]$ git log --oneline
+fd1a1d4 (HEAD -> main, j1) 3:file deletion
+dd39e16 2:file modify
+6464168 1:file create
+b0be094 (origin/main, origin/HEAD) Initial commit
+[vagrant@host2 bitcamp-test]$ git log --oneline --graph --all
+* fd1a1d4 (HEAD -> main, j1) 3:file deletion
+* dd39e16 2:file modify
+* 6464168 1:file create
+* b0be094 (origin/main, origin/HEAD) Initial commit
+[vagrant@host2 bitcamp-test]$ git pull
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Already up to date.
+[vagrant@host2 bitcamp-test]$ git log --oneline
+fd1a1d4 (HEAD -> main, j1) 3:file deletion
+dd39e16 2:file modify
+6464168 1:file create
+b0be094 (origin/main, origin/HEAD) Initial commit
+[vagrant@host2 bitcamp-test]$ git ls-remote
+From https://github.com/bitcamp-test1/bitcamp-test
+b0be09461924d96cf2576b74c8031282c3b37116        HEAD
+b0be09461924d96cf2576b74c8031282c3b37116        refs/heads/main
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Permission to bitcamp-test1/bitcamp-test.git denied to jongkwangyun.
+fatal: unable to access 'https://github.com/bitcamp-test1/bitcamp-test/': The requested URL returned error: 403
+[vagrant@host2 bitcamp-test]$ git status --short
+[vagrant@host2 bitcamp-test]$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+fatal: Authentication failed for 'https://github.com/bitcamp-test1/bitcamp-test/'
+[vagrant@host2 bitcamp-test]$ git pull
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Already up to date.
+[vagrant@host2 bitcamp-test]$ git push origin main
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Permission to bitcamp-test1/bitcamp-test.git denied to jongkwangyun.
+fatal: unable to access 'https://github.com/bitcamp-test1/bitcamp-test/': The requested URL returned error: 403
+[vagrant@host2 bitcamp-test]$ git remote set-url https://github.com/bitcamp-test1/bitcamp-test
+usage: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    --push                manipulate push URLs
+    --add                 add URL
+    --delete              delete URLs
+
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+fatal: Authentication failed for 'https://github.com/bitcamp-test1/bitcamp-test/'
+[vagrant@host2 bitcamp-test]$ git pull
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 10 (delta 2), reused 10 (delta 2), pack-reused 0
+Unpacking objects: 100% (10/10), 953 bytes | 953.00 KiB/s, done.
+From https://github.com/bitcamp-test1/bitcamp-test
+   b0be094..310ff4b  main       -> origin/main
+ * [new branch]      jaeseop    -> origin/jaeseop
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+Merge made by the 'recursive' strategy.
+ wish.txt.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 wish.txt.txt
+[vagrant@host2 bitcamp-test]$ git log --oneline
+4b9aa4e (HEAD -> main) 4:pull
+310ff4b (origin/main, origin/jaeseop, origin/HEAD) wish 내용 변경
+173446e study.txt 삭제
+6bfe557 study.txt추가 내용추가
+a6c4ba1 wish.txt 생성 내용추가
+b0be094 Initial commit
+fd1a1d4 (j1) 3:file deletion
+dd39e16 2:file modify
+6464168 1:file create
+[vagrant@host2 bitcamp-test]$ git checkout j1
+Switched to branch 'j1'
+[vagrant@host2 bitcamp-test]$ git branch
+* j1
+  main
+[vagrant@host2 bitcamp-test]$ git log --oneline
+fd1a1d4 (HEAD -> j1) 3:file deletion
+dd39e16 2:file modify
+6464168 1:file create
+b0be094 Initial commit
+[vagrant@host2 bitcamp-test]$ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 4 commits.
+  (use "git push" to publish your local commits)
+[vagrant@host2 bitcamp-test]$ git merge j1
+Already up to date.
+[vagrant@host2 bitcamp-test]$ git branch
+  j1
+* main
+[vagrant@host2 bitcamp-test]$ git log --oneline
+4b9aa4e (HEAD -> main) 4:pull
+310ff4b (origin/main, origin/jaeseop, origin/HEAD) wish 내용 변경
+173446e study.txt 삭제
+6bfe557 study.txt추가 내용추가
+a6c4ba1 wish.txt 생성 내용추가
+b0be094 Initial commit
+fd1a1d4 (j1) 3:file deletion
+dd39e16 2:file modify
+6464168 1:file create
+[vagrant@host2 bitcamp-test]$ git add .
+[vagrant@host2 bitcamp-test]$ git commit -m "5:commit"
+On branch main
+Your branch is ahead of 'origin/main' by 4 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+fatal: Authentication failed for 'https://github.com/bitcamp-test1/bitcamp-test/'
+[vagrant@host2 bitcamp-test]$ git config
+usage: git config [<options>]
+
+Config file location
+    --global              use global config file
+    --system              use system config file
+    --local               use repository config file
+    --worktree            use per-worktree config file
+    -f, --file <file>     use given config file
+    --blob <blob-id>      read config from given blob object
+
+Action
+    --get                 get value: name [value-pattern]
+    --get-all             get all values: key [value-pattern]
+    --get-regexp          get values for regexp: name-regex [value-pattern]
+    --get-urlmatch        get value specific for the URL: section[.var] URL
+    --replace-all         replace all matching variables: name value [value-pattern]
+    --add                 add a new variable: name value
+    --unset               remove a variable: name [value-pattern]
+    --unset-all           remove all matches: name [value-pattern]
+    --rename-section      rename section: old-name new-name
+    --remove-section      remove a section: name
+    -l, --list            list all
+    --fixed-value         use string equality when comparing values to 'value-pattern'
+    -e, --edit            open an editor
+    --get-color           find the color configured: slot [default]
+    --get-colorbool       find the color setting: slot [stdout-is-tty]
+
+Type
+    -t, --type <>         value is given this type
+    --bool                value is "true" or "false"
+    --int                 value is decimal number
+    --bool-or-int         value is --bool or --int
+    --bool-or-str         value is --bool or string
+    --path                value is a path (file or directory name)
+    --expiry-date         value is an expiry date
+
+Other
+    -z, --null            terminate values with NUL byte
+    --name-only           show variable names only
+    --includes            respect include directives on lookup
+    --show-origin         show origin of config (file, standard input, blob, command line)
+    --show-scope          show scope of config (worktree, local, global, system, command)
+    --default <value>     with --get, use default value when missing entry
+
+[vagrant@host2 bitcamp-test]$ git config --global
+usage: git config [<options>]
+
+Config file location
+    --global              use global config file
+    --system              use system config file
+    --local               use repository config file
+    --worktree            use per-worktree config file
+    -f, --file <file>     use given config file
+    --blob <blob-id>      read config from given blob object
+
+Action
+    --get                 get value: name [value-pattern]
+    --get-all             get all values: key [value-pattern]
+    --get-regexp          get values for regexp: name-regex [value-pattern]
+    --get-urlmatch        get value specific for the URL: section[.var] URL
+    --replace-all         replace all matching variables: name value [value-pattern]
+    --add                 add a new variable: name value
+    --unset               remove a variable: name [value-pattern]
+    --unset-all           remove all matches: name [value-pattern]
+    --rename-section      rename section: old-name new-name
+    --remove-section      remove a section: name
+    -l, --list            list all
+    --fixed-value         use string equality when comparing values to 'value-pattern'
+    -e, --edit            open an editor
+    --get-color           find the color configured: slot [default]
+    --get-colorbool       find the color setting: slot [stdout-is-tty]
+
+Type
+    -t, --type <>         value is given this type
+    --bool                value is "true" or "false"
+    --int                 value is decimal number
+    --bool-or-int         value is --bool or --int
+    --bool-or-str         value is --bool or string
+    --path                value is a path (file or directory name)
+    --expiry-date         value is an expiry date
+
+Other
+    -z, --null            terminate values with NUL byte
+    --name-only           show variable names only
+    --includes            respect include directives on lookup
+    --show-origin         show origin of config (file, standard input, blob, command line)
+    --show-scope          show scope of config (worktree, local, global, system, command)
+    --default <value>     with --get, use default value when missing entry
+
+[vagrant@host2 bitcamp-test]$ git remote -v
+origin  https://github.com/bitcamp-test1/bitcamp-test (fetch)
+origin  https://github.com/bitcamp-test1/bitcamp-test (push)
+[vagrant@host2 bitcamp-test]$ git branch
+  j1
+* main
+[vagrant@host2 bitcamp-test]$ git log --graph --all
+*   commit 4b9aa4ecdbbc17d346b6c57c53744d278d93cb02 (HEAD -> main)
+|\  Merge: fd1a1d4 310ff4b
+| | Author: jongwkangyun <yjk0319@gmail.com>
+| | Date:   Mon Nov 21 21:30:24 2022 +0000
+| |
+| |     4:pull
+| |
+| * commit 310ff4b56c7154c8411de0445cc182dde6b9968a (origin/main, origin/jaeseop, origin/HEAD)
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:50:53 2022 +0900
+| |
+| |     wish 내용 변경
+| |
+| * commit 173446eeb54a5811287ca3600f5f80c35e3362c7
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:50:28 2022 +0900
+| |
+| |     study.txt 삭제
+| |
+| * commit 6bfe55734a3216750d4735f8162b0b581b020ff8
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:50:06 2022 +0900
+| |
+| |     study.txt추가 내용추가
+| |
+| * commit a6c4ba1b8556456ec89fb1c86b4c8d600bd3195a
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:49:40 2022 +0900
+| |
+| |     wish.txt 생성 내용추가
+| |
+* | commit fd1a1d416bfe8eb3509b2b7269ea63a5649d4786 (j1)
+| | Author: jongwkangyun <yjk0319@gmail.com>
+| | Date:   Mon Nov 21 21:19:20 2022 +0000
+| |
+| |     3:file deletion
+| |
+* | commit dd39e1600902576c86e58a270fee77fdc4f113e6
+| | Author: jongwkangyun <yjk0319@gmail.com>
+| | Date:   Mon Nov 21 21:18:54 2022 +0000
+| |
+| |     2:file modify
+| |
+* | commit 6464168ea3d9732b274f40ef8112b33d13274ff2
+|/  Author: jongwkangyun <yjk0319@gmail.com>
+|   Date:   Mon Nov 21 21:18:17 2022 +0000
+|
+|       1:file create
+|
+* commit b0be09461924d96cf2576b74c8031282c3b37116
+  Author: congsoony <44600941+congsoony@users.noreply.github.com>
+  Date:   Tue Nov 22 17:27:12 2022 +0900
+
+      Initial commit
+[vagrant@host2 bitcamp-test]$ git branch j1
+fatal: A branch named 'j1' already exists.
+[vagrant@host2 bitcamp-test]$ git checkout j1
+Switched to branch 'j1'
+[vagrant@host2 bitcamp-test]$ git push
+fatal: The current branch j1 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin j1
+
+[vagrant@host2 bitcamp-test]$ git push orgin
+fatal: 'orgin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+[vagrant@host2 bitcamp-test]$ git push origin
+fatal: The current branch j1 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin j1
+
+[vagrant@host2 bitcamp-test]$ git branch
+* j1
+  main
+[vagrant@host2 bitcamp-test]$ git merge main
+Updating fd1a1d4..4b9aa4e
+Fast-forward
+ wish.txt.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 wish.txt.txt
+[vagrant@host2 bitcamp-test]$ git log --graph --all
+*   commit 4b9aa4ecdbbc17d346b6c57c53744d278d93cb02 (HEAD -> j1, main)
+|\  Merge: fd1a1d4 310ff4b
+| | Author: jongwkangyun <yjk0319@gmail.com>
+| | Date:   Mon Nov 21 21:30:24 2022 +0000
+| |
+| |     4:pull
+| |
+| * commit 310ff4b56c7154c8411de0445cc182dde6b9968a (origin/main, origin/jaeseop, origin/HEAD)
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:50:53 2022 +0900
+| |
+| |     wish 내용 변경
+| |
+| * commit 173446eeb54a5811287ca3600f5f80c35e3362c7
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:50:28 2022 +0900
+| |
+| |     study.txt 삭제
+| |
+| * commit 6bfe55734a3216750d4735f8162b0b581b020ff8
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:50:06 2022 +0900
+| |
+| |     study.txt추가 내용추가
+| |
+| * commit a6c4ba1b8556456ec89fb1c86b4c8d600bd3195a
+| | Author: congsoony <vavonae@gmail.com>
+| | Date:   Tue Nov 22 17:49:40 2022 +0900
+| |
+| |     wish.txt 생성 내용추가
+| |
+* | commit fd1a1d416bfe8eb3509b2b7269ea63a5649d4786
+| | Author: jongwkangyun <yjk0319@gmail.com>
+| | Date:   Mon Nov 21 21:19:20 2022 +0000
+| |
+| |     3:file deletion
+| |
+* | commit dd39e1600902576c86e58a270fee77fdc4f113e6
+| | Author: jongwkangyun <yjk0319@gmail.com>
+| | Date:   Mon Nov 21 21:18:54 2022 +0000
+| |
+| |     2:file modify
+| |
+* | commit 6464168ea3d9732b274f40ef8112b33d13274ff2
+|/  Author: jongwkangyun <yjk0319@gmail.com>
+|   Date:   Mon Nov 21 21:18:17 2022 +0000
+|
+|       1:file create
+|
+* commit b0be09461924d96cf2576b74c8031282c3b37116
+  Author: congsoony <44600941+congsoony@users.noreply.github.com>
+  Date:   Tue Nov 22 17:27:12 2022 +0900
+
+      Initial commit
+[vagrant@host2 bitcamp-test]$ git pull
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> j1
+
+[vagrant@host2 bitcamp-test]$ ls
+README.md  wish.txt.txt
+[vagrant@host2 bitcamp-test]$ git checkout j1
+Already on 'j1'
+[vagrant@host2 bitcamp-test]$ git push origin
+fatal: The current branch j1 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin j1
+
+[vagrant@host2 bitcamp-test]$ git push
+fatal: The current branch j1 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin j1
+
+[vagrant@host2 bitcamp-test]$ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 4 commits.
+  (use "git push" to publish your local commits)
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': ^C
+[vagrant@host2 bitcamp-test]$ git push --set-upstream origin j1
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/bitcamp-test1/bitcamp-test/'
+[vagrant@host2 bitcamp-test]$ git push --set-upstream origin j1
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+remote: Permission to bitcamp-test1/bitcamp-test.git denied to jongkwangyun.
+fatal: unable to access 'https://github.com/bitcamp-test1/bitcamp-test/': The requested URL returned error: 403
+[vagrant@host2 bitcamp-test]$ git remote set-url origin https://github.com/bitcamp-test1/bitcamp-test
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (8/8), 878 bytes | 878.00 KiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/bitcamp-test1/bitcamp-test
+   310ff4b..4b9aa4e  main -> main
+[vagrant@host2 bitcamp-test]$ touch jkyun.txt
+[vagrant@host2 bitcamp-test]$ git add .
+[vagrant@host2 bitcamp-test]$ git commit -m "5:create txt"
+[main 37d7700] 5:create txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 jkyun.txt
+[vagrant@host2 bitcamp-test]$ git push
+Username for 'https://github.com': jongkwangyun
+Password for 'https://jongkwangyun@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 308 bytes | 308.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/bitcamp-test1/bitcamp-test
+   4b9aa4e..37d7700  main -> main
+[vagrant@host2 bitcamp-test]$ git branch -d j1
+Deleted branch j1 (was 4b9aa4e).
+[vagrant@host2 bitcamp-test]$ git pull
+remote: Enumerating objects: 62, done.
+remote: Counting objects: 100% (62/62), done.
+remote: Compressing objects: 100% (32/32), done.
+remote: Total 59 (delta 12), reused 59 (delta 12), pack-reused 0
+Unpacking objects: 100% (59/59), 5.09 KiB | 208.00 KiB/s, done.
+From https://github.com/bitcamp-test1/bitcamp-test
+   37d7700..43926eb  main       -> origin/main
+ * [new branch]      5000dosa   -> origin/5000dosa
+ * [new branch]      jiyoon     -> origin/jiyoon
+Updating 37d7700..43926eb
+Fast-forward
+ 2.txt          | 1 +
+ jy.txt         | 6 ++++++
+ shimwoojun.txt | 1 +
+ 3 files changed, 8 insertions(+)
+ create mode 100644 2.txt
+ create mode 100644 jy.txt
+ create mode 100644 shimwoojun.txt
+[vagrant@host2 bitcamp-test]$ git log --oneline
+43926eb (HEAD -> main, origin/main, origin/HEAD, origin/5000dosa) 다시 머지머지머
+a8e0e63 우준
+c000773 merge 해야함
+47dc83f cccc
+937b05b merge
+f427ba0 삭제
+7ed197c 삭제
+310ff4b (origin/jaeseop) wish 내용 변경
+173446e study.txt 삭제
+6bfe557 study.txt추가 내용추가
+a6c4ba1 wish.txt 생성 내용추가
+8a27c63 심
+742dd20 변경
+ba87ebd 심
+0d9ea7d 생성
+0ce3012 심우준
+b0be094 Initial commit
+4b9aa4e 4:pull
+fd1a1d4 3:file deletion
+dd39e16 2:file modify
+6464168 1:file create
+244d197 merge jy
+37d7700 5:create txt
+bc78721 Merge branch 'main' of https://github.com/bitcamp-test1/bitcamp-test
+2ff47f9 2
+0be4769 -3
+56cb932 5
+e3047e5 0
+19edc24 -1
+247ff78 1
+[vagrant@host2 bitcamp-test]$
