@@ -44,6 +44,12 @@ $ cd /
 
 **ls** - 
     현재 디렉토리의 내용을 출력한다.
+
+옵션
+- -a : 숨겨진 파일이나 디렉토리도 출력
+- -l : 자세한 내용을 출력
+- -i : 파일별 인덱스 값을 첫 열에 출력
+
 ```
 # 기본 명령어
 [vagrant@host3 ~]$ ls
@@ -88,6 +94,9 @@ README.md: UTF-8 Unicode text
 
 **cp** - 
     파일, 디렉토리를 복사할때 사용한다.
+
+옵션
+- -r : 디렉토리 전체를 복사
 ```
 # 복사할 파일, 복사 후 파일 명
 [vagrant@host3 bitcamp-study]$ cp a.txt b.txt
@@ -144,6 +153,7 @@ git  new_folder
 
 # -p : 디렉토리 안에 디렉토리 생성
 [vagrant@host3 ~]$ mkdir -p new1/new2
+[vagrant@host3 ~]$ tree
 .
 └── new1
     └── new2
@@ -151,6 +161,10 @@ git  new_folder
 
 **rm** - 
     파일이나 디렉토리를 삭제한다.
+
+옵션
+- -r : 디렉토리 삭제
+- -f : 강제 삭제
 ```
 # 기본 명령어
 [vagrant@host3 docs]$ rm hello.txt
@@ -182,6 +196,9 @@ docs  README.md
         원본 파일과 다른 이름으로 존재하는 동일한 파일이다. 원본 파일과 링크 파일은 서로 다른 파일이기 때문에 둘 중 하나를 삭제하더라도 나머지 하나는 그대로 남아있다. 또한 원본 파일이 변경되면 링크 파일의 내용도 변경된다.
     - 심볼릭 링크 (Symbolic Link)
         단순 원본 파일을 가리키도록 한다. WindowsOS의 바로가기와 유사하다. 원본 파일이 삭제되면 링크 파일에서는 원본 파일이 없다는 것을 알려준다.
+
+옵션
+- s : 심볼릭 링크 만들기
 ```
 # 하드 링크, 심볼릭 링크 만들기
 [vagrant@host3 bitcamp-study]$ ln README.md hard_link
