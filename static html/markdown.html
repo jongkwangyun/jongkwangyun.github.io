@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⌨개발자 입니다🙂</title>
+  <!-- <link rel="stylesheet" href="static html/css/style.css"> -->
+</head>
+
+<body>
+  <header>⌨개발자 입니다🙂</header>
+  <main>
+    <nav>
+      <figure>
+        <img src="maldives.jpg" width="20%" alt="maldives" title="maldives">
+        <caption>개발 학습 내용 기록</caption>
+      </figure>
+      <div>
+        <ul>
+          <li><a href="index.html">Index</a></li>
+          <li><a href="posts.html">Posts</a></li>
+        </ul>
+        <h1>
+      </div>
+    </nav>
+    <section>
+      <br>
+      <h1>MarkDown이란?</h1>
+      <br>
+      <p><b>MarkDown</b>은 일반 텍스트 문서의 양식을 편집하는 문법입니다. <br>
+        쉽게 말하면 코드 작성할때 <b>가독성</b>도 좋으면서 <b>HTML</b>로 변환 해야할때 사용하면 좋은 문법입니다.</p>
+      <br>
+      <h3>(1) 제목 태그</h3>
+      <p>h태그는 #의 개수별로 크기가 결정됩니다. <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            # h1태그입니다.<br>
+            ## h2 태그입니다.<br>
+            ### h3 태그입니다. <br>
+            #### h4 태그입니다. <br>
+            ##### h5 태그입니다. <br>
+            ###### h6 태그입니다. <br>
+          </div>
+        </code>
+
+      <h1>h1태그입니다. (#)</h1>
+
+      <h2>h2 태그입니다. (##)</h2>
+
+      <h3>h3 태그입니다. (###)</h3>
+
+      <h4>h4 태그입니다. (####)</h4>
+
+      <h5>h5 태그입니다. (#####)</h5>
+
+      <h6>h6 태그입니다. (######)</h6>
+      </p>
+      <br>
+      <h3>(2) 코드 블럭</h3>
+      <p>코드 블럭을 입력은 tab으로 합니다. <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            tab한코드 블럭입니다.
+          </div>
+        </code>
+        <br>
+        tab한코드 블럭입니다.
+        <br><br>
+
+        또는 ```를 입력하면 코드블럭이 입력됩니다. <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            ```
+            두 줄 이상의 <br>
+            코드블럭입니다.
+            ```
+          </div>
+        </code>
+        <br>
+        ```
+        두 줄 이상의 <br>
+        코드블럭입니다.
+        ```
+        <br><br>
+        문법이 있는 언어를 코드블럭에 넣으려면 ``` 뒤에 언어를 표시하면 됩니다.
+        <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            ``` java <br>
+            System.out.print("Hello World!"); <br>
+            ```
+          </div>
+        </code>
+        <br>
+        ``` java <br>
+        System.out.print("Hello World!"); <br>
+        ```
+      </p>
+      <br>
+      <h3>(3) BlockQuote</h3>
+      <p>단계가 있는 문법은 아래와 같습니다.
+        <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            > 안녕하세요 <br>
+            >> 반갑습니다 <br>
+            >>> 잘지냅시다 <br>
+          </div>
+        </code>
+        <br>
+      <blockquote style="border-left: 1px solid #333; padding-left: 10px"> 안녕하세요
+        <blockquote style="border-left: 1px solid #333; padding-left: 10px"> 반갑습니다
+          <blockquote style="border-left: 1px solid #333; padding-left: 10px"> 잘지냅시다
+          </blockquote>
+        </blockquote>
+      </blockquote>
+      </p>
+      <br>
+      <h3>(4) 숫자 목록</h3>
+      <p>숫자에 점을 찍어 목록을 나타낼 수 있습니다. <br>
+
+        <code>
+          <div style="background-color: #444; color: white">
+            1. Pythton <br>
+            2. Java <br>
+            3. HTML <br>
+          </div>
+        </code>
+
+      <ol>
+        <li>Pythton</li>
+        <li>Java</li>
+        <li>HTML</li>
+      </ol>
+      </p>
+      <br>
+      <h3>(5) 순서 없는 목록</h3>
+      <p>+, *, -를 글머리 기호로 사용합니다. <br>
+        tab을 써서 소속을 만듭니다. <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            + 안녕하세요. <br>
+            + 반갑습니다. <br>
+            + 잘지냅시다. <br>
+            <br>
+            * 안녕하세요. <br>
+            * 반갑습니다. <br>
+            * 잘지냅시다. <br>
+            <br>
+            - 안녕하세요. <br>
+            - 반갑습니다. <br>
+            - 잘지냅시다. <br>
+          </div>
+        </code>
+
+      <ul type="disc">
+        <li>안녕하세요.</li>
+        <ul type="circle">
+          <li>반갑습니다.</li>
+          <ul type="square">
+            <li>잘지냅시다.</li>
+          </ul>
+        </ul>
+      </ul>
+      <ul type="disc">
+        <li>안녕하세요.</li>
+        <ul type="circle">
+          <li>반갑습니다.</li>
+          <ul type="square">
+            <li>잘지냅시다.</li>
+          </ul>
+        </ul>
+      </ul>
+      <ul type="disc">
+        <li>안녕하세요.</li>
+        <ul type="circle">
+          <li>반갑습니다.</li>
+          <ul type="square">
+            <li>잘지냅시다.</li>
+          </ul>
+        </ul>
+      </ul>
+      </p>
+      <br>
+      <h3>(6) 수평선</h3>
+      대시(-)를 이용해 수평선을 만들 수 있습니다. <br>
+      <br>
+      <code>
+        <div style="background-color: #444; color: white">
+      ---------------
+        </div>
+      </code>
+      <br>
+      <hr>
+      <br>
+
+      <h3>(7) 링크</h3>
+      <p>
+        아래와 같이 링크 표현 가능합니다. <br>
+        <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            [Google](https://google.com) <br>
+            [Naver](https://www.naver.com "네이버 열기") <br>
+            Daum으로 이동하려면 [Daum 이동](https://www.daum.net)을 클릭하세요. <br>
+          </div>
+        </code>
+        <br>
+        <a href="https://google.com">Google</a> <br>
+        <a href="https://www.naver.com" title="네이버 열기">Naver</a> <br>
+        Daum으로 이동하려면 <a href="https://www.daum.net">Daum 이동</a>을 클릭하세요.
+      </p>
+      <br>
+      <h3>(8) 강조</h3>
+      <p>
+        이탤릭체는 *,_로 감싸면 됩니다. <br>
+        굵게는 **,__로 감싸면 됩니다. <br>
+        취소선은 ~~로 감싸면 됩니다. <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            *asterisk 이탤릭체* <br>
+            _underline 이탤릭체_ <br>
+            **asterisk2개 굵게** <br>
+            __underline2개 굵게__ <br>
+            ~~tilde 취소선~~ <br>
+          </div>
+        </code>
+        <br>
+        <i>asterisk 이탤릭체</i> <br>
+        <i>underline 이탤릭체</i> <br>
+        <b>asterisk2개 굵게</b> <br>
+        <b>underline2개 굵게</b> <br>
+        <s>tilde 취소선</s>
+      </p>
+      <br>
+      <h3>(9) 이미지</h3>
+      <p>
+        이미지 삽입은 다음과 같습니다. <br>
+        MarkDown으로 사이즈 조절은 불가합니다. <br>
+
+        <code>
+          <div style="background-color: #444; color: white">
+            ![이미지 안나올시 대체 텍스트](images/rubberduck.png "잠실 석촌호수의 거대한 러버덕")
+          </div>
+        </code>
+        <br>
+        <img src="../../images/rubberduck.png">
+      </p>
+      <br>
+      <h3>(10) 표</h3>
+      <p>
+        헤더 셀 구분시 -를 3개 이상 써야합니다. <br>
+        :로 셀 내 내용 정렬합니다. <br>
+        가장 좌측과 우측의 |는 생략 가능합니다. <br>
+        <code>
+          <div style="background-color: #444; color: white">
+            |번호|동물명|이모지| <br>
+            |---|:---:|---:| <br>
+            |`1`|개|🦮| <br>
+            |`2`|양|🐏| <br>
+            |`3`|토끼|🐇| <br>
+          </div>
+        </code>
+        <br>
+      <table border="1" style="border-collapse: collapse">
+        <tr>
+          <th>번호</th>
+          <th align="center">동물명</th>
+          <th align="right">이모지</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td align="center">개</td>
+          <td align="right">🦮</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td align="center">양</td>
+          <td align="right">🐏</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td align="center">토끼</td>
+          <td align="right">🐇</td>
+        </tr>
+      </table>
+      </p>
+
+    </section>
+  </main>
+  <footer>
+    <div>jongkwangyun. All rights reserved</div>
+  </footer>
+</body>
+
+</html>
