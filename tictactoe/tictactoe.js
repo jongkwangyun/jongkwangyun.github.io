@@ -10,6 +10,7 @@ const t9 = document.querySelector('#t9');
 
 let sign = 'X';
 let gameOver = 0;
+let gameCount = 0;
 const tsArray = [t1, t2, t3, t4, t5, t6, t7, t8, t9];
 
 function drawSign(event) {
@@ -17,6 +18,7 @@ function drawSign(event) {
     event.target.innerHTML = sign;
   }
 
+  gameCount++;
   winCheck();
   sign = sign === 'X' ? 'O' : 'X'  // 그린 후 부호 변경
 }
@@ -42,8 +44,16 @@ function winCheck() {
       gameOver = 1;
     }
   }
-  if (gameOver == 1) {
-    document.querySelector('div').innerHTML = sign + ' win!!';
+  if (gameOver != 1 && gameCount == 9) {
+    gameOver = 2;
+  }
+  console.log(gameCount)
+  if (gameOver > 0) {
+    if (gameOver == 1) {
+      document.querySelector('div').innerHTML = sign + ' 승리!!';
+    } else if (gameOver == 2) {
+      document.querySelector('div').innerHTML = '무승부!!';
+    }
     tsArray.forEach(t => t.removeEventListener('click', drawSign));  // 게임 끝난 후 추가로 그리기 해제
   }
 }
