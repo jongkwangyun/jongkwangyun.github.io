@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+}
+
+button {
+  border: 5px solid black;
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  font-size: 100px;
+}
+
+div {
+  width: 450px;
+  height: 150px;
+  font-size: 80px;
+  text-align: center;
+}
