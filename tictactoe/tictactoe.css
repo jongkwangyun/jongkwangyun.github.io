@@ -3,17 +3,47 @@ body {
   user-select: none;
 }
 
-button {
-  border: 5px solid black;
-  width: 150px;
-  height: 150px;
-  min-width: 150px;
+/* O, X 표시판 */
+td {
+  border: 20px solid darkslategrey;
+  width: 200px;
+  height: 200px;
   font-size: 100px;
+  box-sizing: border-box;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
+table {
+  width: 640px;
+  height: 640px;
+}
+
+/* 결과 표시 상자 */
 div {
-  width: 450px;
-  height: 150px;
+  width: 640px;
+  height: 200px;
   font-size: 80px;
   text-align: center;
+  font-weight: bold;
+  line-height: 200px;
+}
+
+.xcursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>❌</text></svg>") 16 16, auto;
+}
+
+.ocursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>⭕</text></svg>") 16 16,
+    auto;
+}
+
+.wincursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😀</text></svg>") 16 16,
+    auto;
+}
+
+.drawcursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😐</text></svg>") 16 16,
+    auto;
 }

@@ -8,11 +8,13 @@ const t6 = document.querySelector('#t6');
 const t7 = document.querySelector('#t7');
 const t8 = document.querySelector('#t8');
 const t9 = document.querySelector('#t9');
+const tds = Array.from(document.getElementsByTagName('td'));  // HTMLCollection을 Array로 변환해야 forEach 사용 가능하다.
 
-let sign = 'X';  // 초기 부호 저장
+let sign = '❌';  // 초기 부호 저장
 let gameOver = 0;  // 게임 끝 관련 변수로 저장
 let gameCount = 0;  // 표시 횟수 변수로 저장
 const tsArray = [t1, t2, t3, t4, t5, t6, t7, t8, t9];  // 이벤트 리스너 처리를 위한 배열 지정
+tds.forEach(td => td.classList.add('xcursor'));
 
 // t1~t9 이벤트 리스너 추가 간결하게 표현
 tsArray.forEach(t => t.addEventListener('click', drawSign));
@@ -37,7 +39,13 @@ function drawSign(event) {  // event : javascript가 주는 기본 정보를 arg
 }
 
 function defineSign() {
-  sign = gameCount % 2 == 0 ? 'X' : 'O';
+  if (gameCount % 2 == 0) {
+    sign = '❌';
+    tds.forEach(td => td.classList.replace('ocursor', 'xcursor'));  // 커서 모양 X 지정
+  } else {
+    sign = '⭕';
+    tds.forEach(td => td.classList.replace('xcursor', 'ocursor'));  // 커서 모양 O 지정
+  }
 }
 
 function checkWin() {
@@ -68,10 +76,12 @@ function checkWin() {
 
 function checkGameOver() {
   if (gameOver > 0) {
-    if (gameOver == 1) {  // 한 쪽이 승리시
-      document.querySelector('div').innerHTML = sign + ' 승리!!';  // 마지막 그린 부호 승리
+    if (gameOver == 1) {
+      document.querySelector('div').innerHTML = `${sign} 승리!!`;  // 마지막 그린 부호 승리
+      tds.forEach(td => td.classList.replace(td.classList.item(0), 'wincursor'));  // 커서 모양 교체
     } else if (gameOver == 2) {  // 무승부시
       document.querySelector('div').innerHTML = '무승부!!';
+      tds.forEach(td => td.classList.replace(td.classList.item(0), 'drawcursor'));  // 커서 모양 교체
     }
     tsArray.forEach(t => t.removeEventListener('click', drawSign));  // 게임 끝난 후 추가로 그리기 해제
   }
