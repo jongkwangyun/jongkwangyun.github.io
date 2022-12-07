@@ -28,14 +28,19 @@ t3.addEventListener('click', drawSign);
 function drawSign(event) {  // event : javascript가 주는 기본 정보를 argument로 받는다.
   if (event.target.innerHTML == "") {  // 클릭 이벤트가 발생한 태그 객체의 HTML 값이 비어있을때
     event.target.innerHTML = sign;  // 현재 저장된 부호를 출력한다.
+    gameCount++;  // 1회 클릭시마다 +1 한다.
   }
 
-  gameCount++;  // 1회 클릭시마다 +1 한다.
-  winCheck();  // 승리 조건이 충족되었는지 검사한다.
-  sign = sign == 'X' ? 'O' : 'X'  // 그린 후 부호 변경
+  checkWin();  // 승리 조건이 충족되었는지 검사한다.
+  checkGameOver();  // 승리 혹은 무승부인지 확인한다.
+  defineSign();  // gameCount를 이용해 현재 부호를 결정한다.
 }
 
-function winCheck() {
+function defineSign() {
+  sign = gameCount % 2 == 0 ? 'X' : 'O';
+}
+
+function checkWin() {
   if (t5.innerHTML.length > 0) {  // t5 위치에 부호가 있을때 가능한 승리 수 확인
     if (((t1.innerHTML == t5.innerHTML) && (t5.innerHTML == t9.innerHTML)) ||
       ((t2.innerHTML == t5.innerHTML) && (t5.innerHTML == t8.innerHTML)) ||
@@ -59,7 +64,9 @@ function winCheck() {
   if (gameOver != 1 && gameCount == 9) {  // 한 쪽이 승리하지 않고 9회 그렸을때
     gameOver = 2;  // 무승부시 2
   }
+}
 
+function checkGameOver() {
   if (gameOver > 0) {
     if (gameOver == 1) {  // 한 쪽이 승리시
       document.querySelector('div').innerHTML = sign + ' 승리!!';  // 마지막 그린 부호 승리
