@@ -3,30 +3,119 @@ body {
   user-select: none;
 }
 
-/* O, X 표시판 */
 td {
-  border: 20px solid darkslategrey;
-  width: 200px;
-  height: 200px;
-  font-size: 100px;
+  border: 15px solid darkslategrey;
+  width: 150px;
+  height: 150px;
+  font-size: 70px;
   box-sizing: border-box;
   text-align: center;
   padding-bottom: 10px;
 }
 
-table {
-  width: 640px;
-  height: 640px;
+div#body {
+  width: 480px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* 결과 표시 상자 */
-div {
-  width: 640px;
-  height: 200px;
-  font-size: 80px;
+table {
+  width: 480px;
+  height: 480px;
+}
+
+div#cursorSel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: sandybrown;
+  width: 300px;
+  height: 420px;
+  z-index: 1000;
+  border-radius: 15px;
+}
+
+div#cursorSelBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: darkslategray;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  opacity: 0.9;
+}
+
+div#cursorSelTitle {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  font-size: 2.3em;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  color: maroon;
+  text-shadow: 0 0 1em khaki, 2px 2px dimgrey;
+}
+
+div#cursorSelContainer {
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+div.cursorSelItem {
+  width: 180px;
+  height: 60px;
+  background-color: ivory;
+  border-radius: 8px;
+  box-shadow: 2px 2px teal;
+  text-align: center;
+  font-size: 1.8em;
+  letter-spacing: 0.1em;
+  padding-top: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+div#title {
+  width: 480px;
+  height: 150px;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: '';
+  text-shadow: 0 0 5px crimson, 2px 2px cyan;
+  text-align: center;
+  line-height: 120px;
+}
+
+div#result {
+  width: 480px;
+  height: 150px;
+  font-size: 60px;
   text-align: center;
   font-weight: bold;
-  line-height: 200px;
+  line-height: 150px;
+}
+
+.wincursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😀</text></svg>") 16 16,
+    auto;
+}
+
+.drawcursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😐</text></svg>") 16 16,
+    auto;
 }
 
 .xcursor {
@@ -38,12 +127,20 @@ div {
     auto;
 }
 
-.wincursor {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😀</text></svg>") 16 16,
+.ccursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🍗</text></svg>") 16 16, auto;
+}
+
+.pcursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🍕</text></svg>") 16 16,
     auto;
 }
 
-.drawcursor {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>😐</text></svg>") 16 16,
+.mcursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🌙</text></svg>") 16 16, auto;
+}
+
+.scursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>⭐</text></svg>") 16 16,
     auto;
 }

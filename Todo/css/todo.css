@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  border-top: 1px solid gray;
+  display: inline-table;
+  min-height: 70px;
+}
+
+input {
+  font-size: 1.8em;
+  width: 463px;
+  height: 70px;
+  padding: 0;
+  padding-left: 5px;
+  border-width: 0;
+}
+
+input::placeholder {
+  font: italic 1em "맑은 고딕";
+  color: #bbbbbb;
+}
+
+.listLeftSpan {
+  width: 70px;
+  min-height: 70px;
+  display: table-cell;
+}
+
+.listCenterSpan {
+  background-color: cadetblue;
+  width: 390px;
+  min-height: 54px;
+  padding: 13px;
+  display: table-cell;
+  align-items: center;
+  font-size: 2em;
+  word-break: break-all;
+  line-height: 1.2em;
+  cursor: default;
+}
+
+.listRightSpan {
+  background-color: bisque;
+  width: 70px;
+  min-height: 70px;
+  display: table-cell;
+}
+
+#body {
+  border: 1px solid gray;
+  width: 542px;
+  margin: 0 auto;
+}
+
+#title {
+  width: 542px;
+  height: 110px;
+  font-size: 80px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0;
+}
+
+#inputDiv {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  width: 542px;
+  height: 70px;
+}
+
+#checkAll {
+  width: 70px;
+  height: 70px;
+  float: left;
+}
+
+#todoList {
+  /* background-color: gainsboro; */
+}
+
+#itemStateDiv {
+  border-top: 1px solid gray;
+  width: 542px;
+  height: 40px;
+}
+
+#copyright {
+  width: 542px;
+  height: 60px;
+  text-align: center;
+  color: gray;
+  padding: 15px;
+  box-sizing: border-box;
+}
