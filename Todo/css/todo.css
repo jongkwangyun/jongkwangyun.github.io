@@ -16,11 +16,15 @@ li {
 
 input {
   font-size: 1.8em;
-  width: 463px;
+  width: 467px;
   height: 70px;
   padding: 0;
   padding-left: 5px;
   border-width: 0;
+}
+
+input:focus {
+  outline: none;
 }
 
 input::placeholder {
@@ -32,10 +36,24 @@ input::placeholder {
   width: 70px;
   min-height: 70px;
   display: table-cell;
+  background-image: url('../image/uncheck.png');
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: center center;
+}
+
+.listLeftSpanCheck {
+  width: 70px;
+  min-height: 70px;
+  display: table-cell;
+  background-image: url('../image/check.png');
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: center center;
 }
 
 .listCenterSpan {
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
   width: 390px;
   min-height: 54px;
   padding: 13px;
@@ -45,13 +63,50 @@ input::placeholder {
   word-break: break-all;
   line-height: 1.2em;
   cursor: default;
+  user-select: none;
+}
+
+.listCenterSpanCheck {
+  text-decoration: line-through;
+  color: lightseagreen;
+  user-select: none;
 }
 
 .listRightSpan {
-  background-color: bisque;
+  /* background-color: bisque; */
   width: 70px;
   min-height: 70px;
   display: table-cell;
+}
+
+.selectItem {
+  border: 1px solid #fff;
+  padding: 1px 5px;
+  cursor: pointer;
+}
+
+.listLeftSpan:hover .listLeftSpan:hover~.listRightSpan,
+.listCenterSpan:hover~.listRightSpan {
+  background-image: url('../image/x1.png');
+  background-repeat: no-repeat;
+  background-size: 17px 17px;
+  background-position: center right 26px;
+}
+
+.listRightSpan:hover {
+  background-image: url('../image/x2.png');
+  background-repeat: no-repeat;
+  background-size: 17px 17px;
+  background-position: center center;
+}
+
+.selectItem:hover,
+.selectItem:hover,
+.selectItem:hover {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 1px 5px;
+  cursor: pointer;
 }
 
 #body {
@@ -67,6 +122,7 @@ input::placeholder {
   font-weight: bold;
   text-align: center;
   padding: 20px 0;
+  user-select: none;
 }
 
 #inputDiv {
@@ -90,6 +146,27 @@ input::placeholder {
   border-top: 1px solid gray;
   width: 542px;
   height: 50px;
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#itemStateDiv>* {
+  height: 22px;
+  font-size: 15px;
+}
+
+#itemLeft {
+  margin-right: 60px;
+  margin-left: 10px;
+  cursor: default;
+  width: 76px;
+}
+
+#itemClear {
+  margin-left: 30px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 #copyright {
@@ -100,4 +177,40 @@ input::placeholder {
   color: gray;
   padding: 25px;
   box-sizing: border-box;
+}
+
+#itemClear:hover {
+  margin-left: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#checkAll.allUncheck {
+  width: 70px;
+  height: 70px;
+  float: left;
+  background-image: url('../image/allUncheck.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 25%;
+}
+
+#checkAll.allCheck {
+  width: 70px;
+  height: 70px;
+  float: left;
+  background-image: url('../image/allCheck.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 25%;
+}
+
+#itemAll.itemSel,
+#itemActive.itemSel,
+#itemCompleted.itemSel {
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 1px 5px;
+  cursor: pointer;
 }
