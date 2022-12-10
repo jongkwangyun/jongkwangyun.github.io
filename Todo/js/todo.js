@@ -1,3 +1,5 @@
+// "use strict";
+
 const todoForm = document.querySelector('#todoForm');
 const todoInput = document.querySelector('#todoInput');
 const listUl = document.querySelector('#listUl');
@@ -18,7 +20,7 @@ let listLeftSpan, listCenterSpan, listRightSpan;
 let date;
 let nowMsec;
 let doThing;
-let checked;
+let checked = false;
 let lsValue;  // localStorage의 Value
 let lsValueArr = {};
 let checkAllFlag;
@@ -62,6 +64,7 @@ function loadTodo() {
 function showCheckAll() {
   if (todoStorage.length - 1 === 0) {  // localStorage에 checked 있는지 확인 후 checkAllFlag에 값 설정
     checkAllFlag = false;
+    checkAll.className = '';
   } else {
     for (let i = 0; i < todoStorage.length; i++) {
       if (todoStorage.key(i) == 'selState') {
@@ -161,8 +164,15 @@ function hasTodoListChild() {    // <ul>이 자식 노드 갖는지 검사 후 �
     itemStateDiv.style.display = 'flex';
   } else {
     itemStateDiv.style.display = 'none';
+    if (checkAll.classList.contains('allCheck')) {
+      checkAll.classList.remove('allCheck');
+    }
+    if (checkAll.classList.contains('allUncheck')) {
+      checkAll.classList.remove('allUncheck');
+    }
   }
   checkAll.classList.add('allUncheck');
+  showCheckAll();
 }
 
 function handleCheckAll() {
@@ -265,20 +275,21 @@ function whichState() {
 }
 
 function doClear() {
-  let i = 0;
-  while (true) {
-    if (listUl.childNodes[i].childNodes[0].classList.contains('listLeftSpanCheck')) {
-      listUl.childNodes[i].remove();
-
-      // nowMsec = listUl.childNodes[i].id;
-      // todoStorage.removeItem(nowMsec);
-      if (i < listUl.childElementCount) {
-        break;
+  const deleteIdArr = [];
+  for (let i = 0; i < todoStorage.length; i++) {
+    if (Object.keys(todoStorage)[i] === 'selState') {
+      continue;
+    }
+    lsValue = JSON.parse(todoStorage.getItem(Object.keys(todoStorage)[i]));
+    if (lsValue.checked) {
+      deleteIdArr.push(Object.keys(todoStorage)[i]);  // 삭제할 id 목록 생성. 이 부분 없으면 안됨
+      for (let j = 0; j < listUl.childElementCount; j++) {
+        if (Object.keys(todoStorage)[i] == listUl.children[j].id) {
+          listUl.children[j].remove();
+        }
       }
-      i++;
     }
   }
-
-  handleItemLeft();
+  deleteIdArr.forEach(id => todoStorage.removeItem(id));
   hasTodoListChild();
 }

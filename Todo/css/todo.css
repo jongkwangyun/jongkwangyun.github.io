@@ -4,6 +4,9 @@ body {
 
 ul {
   list-style: none;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  width: 542px;
   margin: 0;
   padding: 0;
 }
@@ -110,7 +113,6 @@ input::placeholder {
 }
 
 #body {
-  border: 1px solid gray;
   width: 542px;
   margin: 0 auto;
 }
@@ -126,8 +128,7 @@ input::placeholder {
 }
 
 #inputDiv {
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border: 1px solid gray;
   width: 542px;
   height: 70px;
 }
@@ -144,6 +145,8 @@ input::placeholder {
 
 #itemStateDiv {
   border-top: 1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
   width: 542px;
   height: 50px;
   display: none;
