@@ -24,9 +24,10 @@ let nowMsec;
 let doThing;
 let checked = false;
 let lsValue;  // localStorage의 Value
-let lsValueArr = {};
+const lsValueArr = {};
 let checkAllFlag;
 let itemLeftCount = 0;
+const sortStorageArr = [];
 
 todoForm.addEventListener('submit', saveTodo);  // 엔터시 목록 추가
 checkAll.addEventListener('click', handleCheckAll);
@@ -35,20 +36,16 @@ itemActive.addEventListener('click', selStateActive);
 itemCompleted.addEventListener('click', selStateCompleted);
 itemClear.addEventListener('click', doClear);
 
-sortTodoStorage();
 loadTodo();
 showCheckAll();
 
 function loadTodo() {
+  makeTodoStorageSortedArr();
   if (todoStorage.length - 1 > 0) {
-    for (let i = 0; i < todoStorage.length; i++) {
-      if (todoStorage.key(i) == 'selState') {
-        continue;
-      }
-      nowMsec = todoStorage.key(i);
-      lsValue = JSON.parse(todoStorage.getItem(nowMsec));
-      doThing = lsValue.do;
-      checked = lsValue.checked;
+    for (let i = 0; i < sortStorageArr.length; i++) {
+      nowMsec = sortStorageArr[i][0];
+      doThing = sortStorageArr[i][1];
+      checked = sortStorageArr[i][2];
       addTodo();
       if (checked) {  // localStorage checked: true에 따라 체크, 취소선
         listLeftSpan.classList.add('listLeftSpanCheck');
@@ -340,17 +337,15 @@ function handleOutBG() {  // 외부 배경 투명100%로 설정
   html.appendChild(outBG);
 }
 
-function sortTodoStorage() {
-  // let sortStorageArr = [];
-  // for (let i = 0; i < todoStorage.length; i++) {
-  //   sortStorageArr[i] = ([todoStorage.key(i), todoStorage.getItem(todoStorage.key(i))]);
-  // }
-  // sortStorageArr.sort();
-  // sortStorageArr.unshift(sortStorageArr.pop());
-  // console.log(sortStorageArr[0][0]);//////////////////
-
-  // todoStorage.clear();
-  // let j = 0;
-  // sortStorageArr.forEach(i => todoStorage.setItem(i[j++][0], i[j++][1]));
-
-}
+function makeTodoStorageSortedArr() {
+  let tempArr;
+  for (let i = 0; i < todoStorage.length; i++) {
+    if (Object.keys(todoStorage)[i] === 'selState') {
+      continue;
+    }
+    nowMsec = todoStorage.key(i);
+    tempArr = JSON.parse(todoStorage.getItem(todoStorage.key(i)));
+    sortStorageArr.push([nowMsec, tempArr.do, tempArr.checked]);
+  }
+  sortStorageArr.sort();
+};
