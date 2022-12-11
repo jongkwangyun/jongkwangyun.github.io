@@ -1,5 +1,6 @@
 // "use strict";
 
+const html = document.documentElement;
 const todoForm = document.querySelector('#todoForm');
 const todoInput = document.querySelector('#todoInput');
 const listUl = document.querySelector('#listUl');
@@ -16,6 +17,7 @@ const todoStorage = window.localStorage;
 
 let listLi;
 let listLeftSpan, listCenterSpan, listRightSpan;
+let outBG;
 
 let date;
 let nowMsec;
@@ -33,6 +35,7 @@ itemActive.addEventListener('click', selStateActive);
 itemCompleted.addEventListener('click', selStateCompleted);
 itemClear.addEventListener('click', doClear);
 
+sortTodoStorage();
 loadTodo();
 showCheckAll();
 
@@ -52,7 +55,7 @@ function loadTodo() {
         listCenterSpan.classList.add('listCenterSpanCheck');
       }
     }
-  } else {
+  } else {  // 
     while (listUl.lastElementChild) {
       listUl.removeChild(listUl.lastElementChild);
     }
@@ -109,7 +112,8 @@ function addTodo() {  // 태그 추가하기
   listLi.id = nowMsec;
 
   listLeftSpan.addEventListener('click', handleCheckedLeftSpan);  // 왼쪽 checked 확인 이벤트 리스너 추가
-  listCenterSpan.addEventListener('click', handleCheckedCenterSpan);  // 가운데 checked 확인 이벤트 리스너 추가
+  // listCenterSpan.addEventListener('click', handleCheckedCenterSpan);  // 가운데 checked 확인 이벤트 리스너 추가
+  listCenterSpan.addEventListener('dblclick', editDBClick);  // 더블 클릭 수정 이벤트 리스너 추가
   listRightSpan.addEventListener('click', removeTodo);  // 삭제용 x 클릭 이벤트 리스너 추가
 
   showTodo();
@@ -126,7 +130,7 @@ function showTodo() {  // 화면에 할 일 목록 보이기
   handleItemLeft();
 }
 
-function handleCheckedLeftSpan(event) {
+function handleCheckedLeftSpan(event) {  // 아이템 별 체크박스 체크 되었는지 확인하기
   event.target.classList.toggle('listLeftSpanCheck');
   event.target.nextSibling.classList.toggle('listCenterSpanCheck');
 
@@ -139,18 +143,18 @@ function handleCheckedLeftSpan(event) {
   handleItemLeft();
 }
 
-function handleCheckedCenterSpan(event) {
-  event.target.classList.toggle('listCenterSpanCheck')
-  event.target.previousSibling.classList.toggle('listLeftSpanCheck');
+// function handleCheckedCenterSpan(event) {
+//   event.target.classList.toggle('listCenterSpanCheck')
+//   event.target.previousSibling.classList.toggle('listLeftSpanCheck');
 
-  // 체크시 localStorage에 값 반전하여 저장
-  lsValue = JSON.parse(todoStorage.getItem(event.target.parentElement.id));
-  lsValue.checked = !lsValue.checked;
-  checked = lsValue.checked;
-  todoStorage.setItem(event.target.parentElement.id, JSON.stringify(lsValue));
-  showCheckAll();
-  handleItemLeft();
-}
+//   // 체크시 localStorage에 값 반전하여 저장
+//   lsValue = JSON.parse(todoStorage.getItem(event.target.parentElement.id));
+//   lsValue.checked = !lsValue.checked;
+//   checked = lsValue.checked;
+//   todoStorage.setItem(event.target.parentElement.id, JSON.stringify(lsValue));
+//   showCheckAll();
+//   handleItemLeft();
+// }
 
 function removeTodo(event) {
   event.target.parentElement.remove();
@@ -283,7 +287,7 @@ function doClear() {
     lsValue = JSON.parse(todoStorage.getItem(Object.keys(todoStorage)[i]));
     if (lsValue.checked) {
       deleteIdArr.push(Object.keys(todoStorage)[i]);  // 삭제할 id 목록 생성. 이 부분 없으면 안됨
-      for (let j = 0; j < listUl.childElementCount; j++) {
+      for (let j = 0; j < listUl.childElementCount; j++) {  // HTML 태그 있는지 찾기
         if (Object.keys(todoStorage)[i] == listUl.children[j].id) {
           listUl.children[j].remove();
         }
@@ -292,4 +296,61 @@ function doClear() {
   }
   deleteIdArr.forEach(id => todoStorage.removeItem(id));
   hasTodoListChild();
+}
+
+function editDBClick(event) {
+  const editInput = document.createElement('input');
+  const oldLiChild2 = event.target.parentElement.children[1];
+
+  editInput.type = 'text';
+  editInput.textContent = event.target.textContent;
+  editInput.value = event.target.textContent;
+  editInput.className = 'editInput';
+
+  event.target.parentElement.replaceChild(editInput, oldLiChild2);
+  editInput.focus();
+
+  handleOutBG();
+
+  editInput.addEventListener('keydown', editEndbyEnter);
+  document.addEventListener('click', editEndbyOutClick);
+
+  function editEndbyEnter(e) {  // 엔터키 입력시 완료시키기
+    e.target.parentElement.replaceChild(oldLiChild2, e.target.parentElement.children[1]);
+    editInput.removeEventListener('keydown', editEndbyEnter);
+
+    outBG.remove();  // 외부 배경 삭제
+  }
+
+  function editEndbyOutClick(e) {  // input 상자 외부 클릭시 완료시키기
+    if (!(e.target.classList.contains('editInput'))) {  // 클릭한 곳이 수정중인 곳인지
+      editInput.parentElement.replaceChild(oldLiChild2, editInput.parentNode.children[1]);
+      document.removeEventListener('click', editEndbyOutClick);
+    }
+
+    outBG.remove();  // 외부 배경 삭제
+  }
+
+}
+
+function handleOutBG() {  // 외부 배경 투명100%로 설정
+  outBG = document.createElement('div');
+  html.style.position = 'relative';
+  outBG.id = 'outBG';
+  html.appendChild(outBG);
+}
+
+function sortTodoStorage() {
+  // let sortStorageArr = [];
+  // for (let i = 0; i < todoStorage.length; i++) {
+  //   sortStorageArr[i] = ([todoStorage.key(i), todoStorage.getItem(todoStorage.key(i))]);
+  // }
+  // sortStorageArr.sort();
+  // sortStorageArr.unshift(sortStorageArr.pop());
+  // console.log(sortStorageArr[0][0]);//////////////////
+
+  // todoStorage.clear();
+  // let j = 0;
+  // sortStorageArr.forEach(i => todoStorage.setItem(i[j++][0], i[j++][1]));
+
 }
