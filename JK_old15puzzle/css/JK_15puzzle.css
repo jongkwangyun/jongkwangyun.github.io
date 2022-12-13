@@ -1,0 +1,25 @@
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 400px;
+  height: 400px;
+  font-size: 30px;
+}
+
+td {
+  border: 1px solid black;
+}
+
+.activeBox {
+  background-color: darkkhaki;
+  transition: all 1s ease;
+}
+
+.numBox {
+  margin: 0;
+  padding-top: 45px;
+  width: 97px;
+  height: 52px;
+  text-align: center;
+  line-height: 0px;
+}
