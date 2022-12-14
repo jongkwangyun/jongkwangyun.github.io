@@ -1,40 +1,38 @@
-const boxContainer = document.querySelectorAll('#boxContainer');
+const boxContainer = document.getElementById('#boxContainer');
 const boxItems = document.getElementsByClassName('boxItem');
-const activeBox = document.querySelector('.activeBox');
+const activeBox = document.getElementsByClassName('.activeBox')[0];
+const boxItems0 = document.getElementById('15');
 
 // 그래픽 처리
 const HORIZONMOVEPX = 100;
 const VERTICALMOVEPX = 100;
 
 // 배열 처리
-let oldPosiArr = [];
-let newPosiArr = [];
+let currentPosiIndex;
 let tempNewPosiVal;
-const currentTableArr = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
-const answerTableArr = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
+const currentPuzzleArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const answerPuzzleArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 document.addEventListener('keydown', goDirection);
 
 setNewGame();
 
 function setNewGame() {
-  oldPosiArr[0] = 3; oldPosiArr[1] = 3;
-  newPosiArr[0] = 3; newPosiArr[1] = 3;
-  let rowNum;
-  let colNum;
 
-  console.log(boxItems[0].style.left = '100px');
+  // 초기 판 세팅
   for (let i = 0; i < boxItems.length; i++) {
-    // console.log(boxItems[i]);
+    currentPosiIndex = 15;
+    let x = Math.floor(i % 4);
+    let y = Math.floor(i / 4);
+    boxItems[i].style.left = `${HORIZONMOVEPX * x}px`;
+    boxItems[i].style.top = `${VERTICALMOVEPX * y}px`;
   }
-
-
 }
 
 function makeRandom() {
   // for (let i = 0; i < 4, i++) {
   //   for (let j = 0; j < 4, j++) {
-  // currentTableArr[i][j] = 
+  // currentPuzzleArr[i][j] = 
   //   }
   // }
 }
@@ -42,54 +40,112 @@ function makeRandom() {
 function goDirection(e) {
   switch (e.key) {
     case 'ArrowUp':
-      console.log('ArrowUp')
-      goUp();
+      if (Math.floor(currentPosiIndex / 4) != 3) {  // 0 Arr의 index가 12~15 아닐때
+        goUp();
+      }
       break;
     case 'ArrowDown':
-      console.log('ArrowDown')
-      goDown();
+      if (Math.floor(currentPosiIndex / 4) != 0) {  // 0 Arr의 index가 0~3 아닐때
+        goDown();
+      }
       break;
     case 'ArrowLeft':
-      console.log('ArrowLeft')
-      goLeft();
+      if (currentPosiIndex % 4 != 3) {  // 0 Arr의 index가 3~~15 아닐때
+        goLeft();
+      }
       break;
     case 'ArrowRight':
-      console.log('ArrowRight')
-      goRight();
+      if (currentPosiIndex % 4 != 0) {  // 0 Arr의 index가 0~12 아닐때
+        goRight();
+      }
       break;
   }
 }
 
+function goUp() {
+  let otherPosiIndex = currentPosiIndex + 4;  // 11 = 15 - 4
+  // let currentBoxX = currentPosiIndex % 4;
+  let currentBoxY = Math.floor((currentPosiIndex) / 4);
+
+  //// 픽셀 바꾸기
+  // 아래쪽 박스 위쪽으로
+  let moveToOtherPx = currentBoxY * HORIZONMOVEPX;
+  boxItems[currentPuzzleArr[otherPosiIndex]].style.top = `${moveToOtherPx}px`;
+
+  // 0 박스 아래쪽으로
+  let moveToActivePx = (currentBoxY + 1) * HORIZONMOVEPX;
+  boxItems[15].style.top = `${moveToActivePx}px`;
+
+  //// 배열 바꾸기
+  let otherValue = currentPuzzleArr[otherPosiIndex];    // 왼쪽 배열의 값 가져오기
+  tempNewPosiVal = otherValue;
+  currentPuzzleArr[otherPosiIndex] = 15;  // 오른쪽에 왼쪽 값 넣기
+  currentPuzzleArr[currentPosiIndex] = tempNewPosiVal;
+  currentPosiIndex = otherPosiIndex;
+}
+
+function goDown() {
+  let otherPosiIndex = currentPosiIndex - 4;  // 11 = 15 - 4
+  // let currentBoxX = currentPosiIndex % 4;
+  let currentBoxY = Math.floor((currentPosiIndex) / 4);
+
+  //// 픽셀 바꾸기
+  // 위쪽 박스 아래쪽으로
+  let moveToOtherPx = currentBoxY * HORIZONMOVEPX;
+  boxItems[currentPuzzleArr[otherPosiIndex]].style.top = `${moveToOtherPx}px`;
+
+  // 0 박스 위쪽으로
+  let moveToActivePx = (currentBoxY - 1) * HORIZONMOVEPX;
+  boxItems[15].style.top = `${moveToActivePx}px`;
+
+  //// 배열 바꾸기
+  let otherValue = currentPuzzleArr[otherPosiIndex];    // 왼쪽 배열의 값 가져오기
+  tempNewPosiVal = otherValue;
+  currentPuzzleArr[otherPosiIndex] = 15;  // 오른쪽에 왼쪽 값 넣기
+  currentPuzzleArr[currentPosiIndex] = tempNewPosiVal;
+  currentPosiIndex = otherPosiIndex;
+}
+
+function goLeft() {
+  let otherPosiIndex = currentPosiIndex + 1;  // 15 = 14 + 1
+  let currentBoxX = currentPosiIndex % 4;
+  // let currentBoxY = Math.floor((currentPosiIndex) / 4);
+
+  //// 픽셀 바꾸기
+  // 오른쪽 박스 왼쪽으로
+  let moveToOtherPx = currentBoxX * HORIZONMOVEPX;
+  boxItems[currentPuzzleArr[otherPosiIndex]].style.left = `${moveToOtherPx}px`;
+
+  // 0 박스 오른쪽으로
+  let moveToActivePx = (currentBoxX + 1) * HORIZONMOVEPX;
+  boxItems[15].style.left = `${moveToActivePx}px`;
+
+  //// 배열 바꾸기
+  let otherValue = currentPuzzleArr[otherPosiIndex];    // 왼쪽 배열의 값 가져오기
+  tempNewPosiVal = otherValue;
+  currentPuzzleArr[otherPosiIndex] = 15;  // 오른쪽에 왼쪽 값 넣기
+  currentPuzzleArr[currentPosiIndex] = tempNewPosiVal;
+  currentPosiIndex = otherPosiIndex;
+}
+
 function goRight() {
-  if (oldPosiArr[1] > 0) {
-    newPosiArr[1] -= 1;
-    let newPosiStr = newPosiArr.join('');;
+  let otherPosiIndex = currentPosiIndex - 1;  // 14 = 15 - 1
+  let currentBoxX = currentPosiIndex % 4;
+  // let currentBoxY = Math.floor((currentPosiIndex) / 4);
 
-    // tdBox 클래스 돌림
-    for (let tdBox of tdBoxs) {
-      // 태그 바꾸기
-      oldPosiStr = tdBox.id.substring(2, 4);
-      if (newPosiStr == oldPosiStr) {
-        const oldActiveBox = activeBox.parentElement  // old 임시 저장
+  //// 픽셀 바꾸기
+  // 왼쪽 박스 오른쪽으로
+  let moveToOtherPx = currentBoxX * HORIZONMOVEPX;
+  boxItems[currentPuzzleArr[otherPosiIndex]].style.left = `${moveToOtherPx}px`;
 
-        // old 삭제 후 그대로 new 에 붙임
-        const removedActiveBox = activeBox.parentElement.removeChild(activeBox);  // 자식인 activeBox 제거 후 변수 저장
-        tdBox.appendChild(removedActiveBox);  // new에 붙임
+  // 0 박스 왼쪽으로
+  let moveToActivePx = (currentBoxX - 1) * HORIZONMOVEPX;
+  boxItems[15].style.left = `${moveToActivePx}px`;
 
-        // new 쪽 div 삭제 후 old 에 붙임
-        const removedNumBox = tdBox.removeChild(tdBox.children[0]);
-        oldActiveBox.appendChild(removedNumBox);
-
-        // 배열 바꾸기
-        tempNewPosiVal = currentTableArr[newPosiArr[0]][newPosiArr[1]];
-        currentTableArr[newPosiArr[0]][newPosiArr[1]] = 'A';
-        currentTableArr[oldPosiArr[0]][oldPosiArr[1]] = tempNewPosiVal;
-      }
-    }
-  }
-
-  oldPosiArr[0] = newPosiArr[0];
-  oldPosiArr[1] = newPosiArr[1];
-  console.log(currentTableArr);
-  return;
+  //// 배열 바꾸기
+  let otherValue = currentPuzzleArr[otherPosiIndex];    // 왼쪽 배열의 값 가져오기
+  tempNewPosiVal = otherValue;
+  currentPuzzleArr[otherPosiIndex] = 15;  // 왼쪽에 오른쪽 값 넣기
+  currentPuzzleArr[currentPosiIndex] = tempNewPosiVal;
+  currentPosiIndex = otherPosiIndex;
 }
