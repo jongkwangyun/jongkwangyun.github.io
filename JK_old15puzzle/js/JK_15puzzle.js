@@ -64,8 +64,11 @@ function goRight() {
         const oldActiveBox = activeBox.parentElement  // old 임시 저장
 
         // old 삭제 후 그대로 new 에 붙임
-        const removedActiveBox = activeBox.parentElement.removeChild(activeBox);  // 자식인 activeBox 제거 후 변수 저장
-        tdBox.appendChild(removedActiveBox);  // new에 붙임
+        // const removedActiveBox = activeBox.parentElement.removeChild(activeBox);  // 자식인 activeBox 제거 후 변수 저장
+        tdBox.appendChild(activeBox);  // new에 붙임
+        activeBox.classList.remove('activeBox');
+        setTimeout(activeBox.classList.add('activeBox'), 2000);
+
 
         // new 쪽 div 삭제 후 old 에 붙임
         const removedNumBox = tdBox.removeChild(tdBox.children[0]);
