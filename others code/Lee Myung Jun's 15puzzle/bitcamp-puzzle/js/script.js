@@ -15,7 +15,6 @@ let lll = new Array(cnt).fill().forEach((n, i) => {
     j++;
 
     li.innerText = j;
-    console.log(li);
 });
 
 
@@ -26,7 +25,7 @@ puzzle.addEventListener("click", (e) => {
     let targetBox = Array.from(puzzleList).indexOf(e.target);
     let num = emptyBox - targetBox;
 
-    switch(num) {
+    switch (num) {
         case 1: {
             // 빈칸이 오른쪽에 있을 때
             puzzle.insertBefore(emptyList, e.target);
@@ -67,13 +66,13 @@ function checkIndex() {
         let id = li.getAttribute("index");
         let count = Array.from(puzzleList).indexOf(li);
 
-        if(+id === count) {
+        if (+id === count) {
             result.push(true);
         } else {
             result.push(false);
         }
     });
-    
+
     setTimeout(() => {
         result.indexOf(false) === -1 && alert("Complete!");
     }, 0);

@@ -6,7 +6,12 @@ body {
 }
 
 .boxItem {
-  border: 1px solid blue;
+  background: linear-gradient(45deg, #b3cae5 12%,
+      #dbdde4 46%,
+      #e4e3e4 70%,
+      #f7ddbb 94%,
+      #efcab2 100%);
+  box-shadow: inset 1em #943f3f;
   box-sizing: border-box;
   width: 100px;
   height: 100px;
@@ -16,6 +21,32 @@ body {
   position: absolute;
   transition: all 0.2s linear;
   z-index: 1;
+  cursor: default;
+}
+
+.boxItem.boxItemTransitionNone {
+  background: linear-gradient(45deg, #b3cae5 12%,
+      #dbdde4 46%,
+      #e4e3e4 70%,
+      #f7ddbb 94%,
+      #efcab2 100%);
+  box-shadow: inset 1em #943f3f;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transition: none;
+  z-index: 1;
+  cursor: default;
+}
+
+.activeBox {
+  opacity: 0;
+  border: none;
+  transition: all 0s;
 }
 
 #body {
@@ -24,7 +55,7 @@ body {
 }
 
 #boxContainer {
-  border: 1px solid black;
+  border: 10px solid firebrick;
   border-collapse: collapse;
   width: 400px;
   height: 400px;
@@ -56,9 +87,4 @@ body {
   cursor: pointer;
   user-select: none;
   box-shadow: 0 0 5px #494949, 2px 2px 2px #505050;
-}
-
-#i0.activeBox {
-  background-color: white;
-  z-index: 0;
 }
