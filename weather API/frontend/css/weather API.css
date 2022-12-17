@@ -1,16 +1,214 @@
 body {
-  margin: 0;
+  margin: 0 auto;
+  font-family: 'Malgun Gothic', sans-serif;
+  background-color: black;
 }
 
-.gridItem {
-  background: linear-gradient(60deg, olive 33%, tomato 66%, violet 100%);
+.gridItem,
+.gridItem2 {
+  background: linear-gradient(105deg, green 50%, yellow 100%);
+}
+
+.gridItem:nth-child(1),
+.gridItem:nth-child(3) {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.gridItem:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.gridItem:nth-child(2):nth-child(1) {
+  grid-row: 1 / span 2;
+}
+
+.gridItem2-2 {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.yetoSun {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: -43.5vh -19vh;
+}
+
+.yetoRain {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: -44vh -4vh;
+}
+
+.yetoRainsnow {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: -44vh -49vh;
+}
+
+.yetoSnow {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: -29vh -34vh;
+}
+
+.yetoShower {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: -14vh -19vh;
+}
+
+.yetoCloud {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: 1vh -4vh;
+}
+
+.yetoBlur {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 60vh;
+  background-position: 1vh -18vh;
+}
+
+.todaySun {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -69.5vh -28vh;
+}
+
+.todayRain {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -69.5vh -6vh;
+}
+
+.todayRainsnow {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -69.5vh -73vh;
+}
+
+.todaySnow {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -47.5vh -51vh;
+}
+
+.todayShower {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -25.5vh -29vh;
+}
+
+.todayCloud {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -2.8vh -5vh;
+}
+
+.todayBlur {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -2.8vh -29vh;
+}
+
+.yetoCondition {
+  border: 1px solid black;
+  font-size: 2.5vh;
+  margin: 1.3vh;
+  text-align: center
+}
+
+.todayCondition {
+  border: 1px solid black;
+  font-size: 3vh;
+  margin: 1.3vh;
+  text-align: center
+}
+
+.gridItem3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.goOffWord {
+  border: 1px solid black;
+  font-size: 2vh;
+  padding: 1.2vh 0.7vh;
+}
+
+.todayCondition2 {
+  border: 1px solid black;
+  margin: 2vh 1vh;
+  font-size: 2vh;
+  text-align: center
+}
+
+.todayCondition2:nth-child(1) {
+  margin: 6vh 1vh 1vh 1vh;
 }
 
 #gridContainer {
   background-color: #888;
+  width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr 1.8fr 1fr;
   column-gap: 0;
   align-content: stretch;
+}
+
+#body {
+  width: 60vh;
+  /* max-height: 100vw; */
+  margin: 0 auto;
+}
+
+#todayTitle {
+  font-size: 2.5vh;
+  margin: 1.3vh;
+}
+
+#yeIcon,
+#toIcon {
+  margin: 1.5vh auto;
+  width: 75%;
+  height: 13vh;
+  border: 1px solid black;
+}
+
+#todayIcon {
+  margin: 2vh auto;
+  width: 80%;
+  height: 20vh;
+  border: 1px solid black;
+}
+
+#todayGoIcon,
+#todayOffIcon {
+  height: 15vh;
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+#yesterdayTitle,
+#tomorrowTitle {
+  font-size: 2vh;
+  margin: 1.2vh;
 }
