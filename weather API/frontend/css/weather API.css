@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+}
+
+.gridItem {
+  background: linear-gradient(60deg, olive 33%, tomato 66%, violet 100%);
+}
+
+#gridContainer {
+  background-color: #888;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  column-gap: 0;
+  align-content: stretch;
+}
