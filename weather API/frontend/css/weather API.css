@@ -10,7 +10,7 @@ body {
   background-color: #888;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr 1.5fr 1fr;
   column-gap: 0;
   align-content: stretch;
 }

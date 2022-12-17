@@ -1,5 +1,5 @@
-/* base_time
-0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+/*
+base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
 API 제공 시간(~이후) : 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
 */
 
@@ -20,7 +20,6 @@ SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
 */
 
 
-/* 변수 선언 ----------------------------------------------------  */
 
 let danGi;
 
@@ -30,30 +29,26 @@ let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
 
-// 엊그제, 어제, 오늘, 내일
-let yearDbYesterdayStr = dbYesterday.getFullYear().toString();
-let monthDbYesterdayStr = (dbYesterday.getMonth() + 1).toString();
-let dateDbYesterdayStr = dbYesterday.getDate().toString();
-let DbYesterdayY4MMDD = yearDbYesterdayStr + monthDbYesterdayStr + dateDbYesterdayStr;
+// 엊그제, 어제, 오늘, 내일 YYYYMMDD
+let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString() + dbYesterday.getDate().toString();
+let yesterdayY4MMDD = yesterday.getFullYear().toString() + (yesterday.getMonth() + 1).toString() + yesterday.getDate().toString();
+let todayY4MMDD = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
+let tomorrowY4MMDD = tomorrow.getFullYear().toString() + (tomorrow.getMonth() + 1).toString() + tomorrow.getDate().toString();
+let timeToday = parseInt(now.getHours());  // 현재 시간
 
-let yearYesterdayStr = yesterday.getFullYear().toString();
-let monthYesterdayStr = (yesterday.getMonth() + 1).toString();
-let dateYesterdayStr = yesterday.getDate().toString();
-let yesterdayY4MMDD = yearYesterdayStr + monthYesterdayStr + dateYesterdayStr;
+let eoJe = (yesterday.getMonth() + 1).toString() + '/' + yesterday.getDate().toString();
+let oNul = (now.getMonth() + 1).toString() + '/' + now.getDate().toString();
+let naeIl = (tomorrow.getMonth() + 1).toString() + '/' + tomorrow.getDate().toString();
 
-let yearTodayStr = now.getFullYear().toString();
-let monthTodayStr = (now.getMonth() + 1).toString();
-let dateTodayStr = now.getDate().toString();
-let todayY4MMDD = yearTodayStr + monthTodayStr + dateTodayStr;
+// 배열: 온도: TMP, 하늘상태: SKY, 강수형태: PTY, 강수확률: POP, 습도: REH
+let categoryArr = [];
 
-let yearTomorrowStr = tomorrow.getFullYear().toString();
-let monthTomorrowStr = (tomorrow.getMonth() + 1).toString();
-let dateTomorrowStr = tomorrow.getDate().toString();
-let tomorrowY4MMDD = yearTomorrowStr + monthTomorrowStr + dateTomorrowStr;
-
-let eoJe = `${monthYesterdayStr}/${dateYesterdayStr}`;
-let oNul = `${monthTodayStr}/${dateTodayStr}`;
-let naeIl = `${monthTomorrowStr}/${dateTomorrowStr}`;
+// 문자열 선언
+const TMP = 'TMP';
+const SKY = 'SKY';
+const PTY = 'PTY';
+const POP = 'POP';
+const REH = 'REH';
 
 // 기상청 API '단기예보조회' 주소
 let openApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
@@ -65,15 +60,6 @@ let openApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getV
   + '&base_time=2300'
   + '&nx=61'  // 61, 125 : 강남구 역삼 1동(비트캠프)
   + '&ny=125'
-
-// 배열: 온도, 하늘상태, 강수형태, 강수확률, 습도
-let danGiTMPArr = [];
-let danGiSKYArr = [];
-let danGiPTYArr = [];
-let danGiPOPArr = [];
-let danGiREHArr = [];
-
-/* 변수 선언 종료 ---------------------------------------------------- */
 
 
 // 페이지 로딩 되자마자 실행
@@ -93,46 +79,40 @@ document.body.onload = () => {
 }
 
 
-/* 함수 선언 ---------------------------------------------------- */
 
 // 기상청 API 응답 받았을때 실행
 function handleResponse() {
-  const danGiArr = danGi.response.body.items.item;  // item 객체 모음 배열
-  danGiTMPArr = danGiArr.filter(v => v.category == 'TMP');  // 온도 배열을 필터로 생성
-  danGiSKYArr = danGiArr.filter(v => v.category == 'SKY');  // 하늘상태 배열을 필터로 생성
-  danGiPTYArr = danGiArr.filter(v => v.category == 'PTY');  // 강수형태 배열을 필터로 생성
-  danGiPOPArr = danGiArr.filter(v => v.category == 'POP');  // 강수확률 배열을 필터로 생성
-  danGiREHArr = danGiArr.filter(v => v.category == 'REH');  // 습도 배열을 필터로 생성
-
-  console.log(getTemp(yesterdayY4MMDD, 'max'));
-
-  danGiSKYSelDateArr = danGiSKYArr.filter(v => v.fcstDate == '20221217');
-  console.log(danGiSKYSelDateArr);
+  console.log(getTemp(yesterdayY4MMDD, 'now'));
 
 }
 
 // 온도 얻기
-function getTemp(whichDate, minNowMax) {
-  const danGiTMPSelDateValArr = [];  // 어제 온도 값 배열 선언
+function getTemp(whichdate, goOff) {
 
-  danGiTMPSelDateArr = danGiTMPArr.filter(v => v.fcstDate == whichDate);
-  for (let v of danGiTMPSelDateArr) {
-    danGiTMPSelDateValArr.push(parseInt(v.fcstValue));
-  }
+  getCategoryArr('POP');  // 온도: TMP, 하늘상태: SKY, 강수형태: PTY, 강수확률: POP, 습도: REH
+  getWhichdateArr(whichdate);
 
-  switch (minNowMax) {
-    case 'min':
-      return Math.min(...danGiTMPSelDateValArr);
+  switch (goOff) {
+    case 'go':
+      return Math.round((parseInt(categoryArr[7].fcstValue) + parseInt(categoryArr[8].fcstValue)) / 2);  // parseInt(시간항목.값)
       break;
-    case 'max':
-      return Math.max(...danGiTMPSelDateValArr);
+    case 'off':
+      return Math.round((parseInt(categoryArr[17].fcstValue) + parseInt(categoryArr[18].fcstValue)) / 2);
       break;
     case 'now':
-
-      return Math.max(...danGiTMPSelDateValArr);
+      return parseInt(categoryArr[timeToday].fcstValue);
       break;
     default:
       return -999;
   }
 }
 
+function getCategoryArr(category) {
+  const danGiArr = danGi.response.body.items.item;  // item 객체 모음 배열
+  categoryArr = danGiArr.filter(v => v.category == category);  // category 배열을 필터로 생성
+}
+
+function getWhichdateArr(whichdate) {
+  categoryArr = categoryArr.filter(v => v.fcstDate == whichdate)
+  return categoryArr;
+}
