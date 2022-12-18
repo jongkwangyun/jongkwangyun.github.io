@@ -56,7 +56,6 @@ app.get('/proxy2', (req, res) => {
   REH : 습도             %            8
   SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
   */
-  console.log(openApiUrl);
 
   request.get({
     uri: openApiUrl
@@ -64,3 +63,5 @@ app.get('/proxy2', (req, res) => {
     res.send(body);
   });
 });
+
+/* 원래는 프록시 요청을 해야 하지만 공공데이터 단기예보 API 는 직접 요청으로도 데이터 수신 가능하여 구현하지 않았습니다. */

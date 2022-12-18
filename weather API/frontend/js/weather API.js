@@ -1,5 +1,7 @@
+// 태그 객체 변수 선언
 const yesterdayTitle = document.getElementById('yesterdayTitle');
 const todayTitle = document.getElementById('todayTitle');
+const todayTime = document.getElementById('todayTime');
 const tomorrowTitle = document.getElementById('tomorrowTitle');
 
 const yeIcon = document.getElementById('yeIcon');
@@ -20,62 +22,12 @@ const toIcon = document.getElementById('toIcon');
 const tomorrowTemp = document.getElementById('tomorrowTemp');
 const toGoIcon = document.getElementById('toGoIcon');
 const toGoTemp = document.getElementById('toGoTemp');
+const toGoDrop = document.getElementById('toGoDrop');
 const toOffIcon = document.getElementById('toOffIcon');
 const toOffTemp = document.getElementById('toOffTemp');
+const toOffDrop = document.getElementById('toOffDrop');
 
-// 기상청 API 응답 받았을때 실행
-function handleResponse() {
-  // 어제, 오늘, 내일 데이터 채우기
-  yeIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, NOW), MEDIUM);
-  yesterdayTemp.innerText = `온도 ${getValue(TMP, yesterdayY4MMDD, NOW)} ℃`;
-  yeGoIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, GOTOWORK), SMALL);
-  yeGoTemp.innerText = `온도 ${getValue(TMP, yesterdayY4MMDD, GOTOWORK)} ℃`;
-  yeOffIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, OFFWORK), SMALL);
-  yeOffTemp.innerText = `온도 ${getValue(TMP, yesterdayY4MMDD, OFFWORK)} ℃`;
 
-  todayIcon.className = getIconClassName(getValue(SP, todayY4MMDD, NOW), LARGE);
-  todayCondition[0].innerText = `온도 ${getValue(TMP, todayY4MMDD, NOW)} ℃`;
-  todayCondition[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, NOW)} %`;
-  todayCondition[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, NOW)} %`;
-  todayGoIcon.className = getIconClassName(getValue(SP, todayY4MMDD, GOTOWORK), MEDIUM);
-  todayCondition21[0].innerText = `온도 ${getValue(TMP, todayY4MMDD, GOTOWORK)} ℃`;
-  todayCondition21[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, GOTOWORK)} %`;
-  todayCondition21[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, GOTOWORK)} %`;
-  todayOffIcon.className = getIconClassName(getValue(SP, todayY4MMDD, OFFWORK), MEDIUM);
-  todayCondition22[0].innerText = `온도 ${getValue(TMP, todayY4MMDD, OFFWORK)} ℃`;
-  todayCondition22[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, OFFWORK)} %`;
-  todayCondition22[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, OFFWORK)} %`;
-
-  toIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, NOW), MEDIUM);
-  tomorrowTemp.innerText = `온도 ${getValue(TMP, tomorrowY4MMDD, NOW)} ℃`;
-  toGoIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, GOTOWORK), SMALL);
-  toGoTemp.innerText = `온도 ${getValue(TMP, tomorrowY4MMDD, GOTOWORK)} ℃`;
-  toOffIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, OFFWORK), SMALL);
-  toOffTemp.innerText = `온도 ${getValue(TMP, tomorrowY4MMDD, OFFWORK)} ℃`;
-}
-
-/*
-base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
-API 제공 시간(~이후) : 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
-*/
-
-/* category 분류
-      항목명           단위         압축bit수
-TMP : 1시간 기온       ℃            10
-UUU : 풍속(동서성분)   m/s          12
-VVV : 풍속(남북성분)   m/s          12
-VEC : 풍향             deg          10
-WSD : 풍속             m/s          10
-SKY : 하늘상태         코드값       4          맑음(1), 구름많음(3), 흐림(4)
-PTY : 강수형태         코드값       4          없음(0), 비(1), 비/눈(2), 눈(3), 소나기(4) 
-POP : 강수확률         %            8
-WAV : 파고             M            8
-PCP : 1시간 강수량     범주 (1 mm)  8          강수없음
-REH : 습도             %            8
-SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
-*/
-
-let danGi;
 
 // 날짜 관련
 let now = new Date();
@@ -83,6 +35,7 @@ let nowToday = new Date(now);
 let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
+const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)']
 
 // 엊그제, 어제, 오늘, 내일 YYYYMMDD
 let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString() + dbYesterday.getDate().toString();
@@ -95,6 +48,19 @@ let timeToday = parseInt(now.getHours());  // 현재 시간
 let oNul = (nowToday.getMonth() + 1).toString() + '/' + nowToday.getDate().toString();
 let eoJe = (yesterday.getMonth() + 1).toString() + '/' + yesterday.getDate().toString();
 let naeIl = (tomorrow.getMonth() + 1).toString() + '/' + tomorrow.getDate().toString();
+let nowTime = nowToday.getHours().toString() + ':' + nowToday.getMinutes().toString();
+let yeWeekday = WEEKDAY[yesterday.getDay()];
+let todayWeekday = WEEKDAY[nowToday.getDay()];
+let toWeekday = WEEKDAY[tomorrow.getDay()];
+
+// 어제, 오늘, 내일 날짜 HTML 에 입력
+yesterdayTitle.innerText = `🥚 어제 ${eoJe}${yeWeekday}`;
+todayTitle.innerText = `🐣 오늘 ${oNul}${todayWeekday}`;
+tomorrowTitle.innerText = `🦢 내일 ${naeIl}${toWeekday}`;
+todayTime.innerText = `⏰ ${nowTime}`;
+
+// JSON parse 해서 객체 선언
+let danGi = {};
 
 // 배열: 온도: TMP, 하늘상태: SKY, 강수형태: PTY, 강수확률: POP, 습도: REH
 let categoryArr = [];
@@ -128,6 +94,26 @@ let openApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getV
   + '&nx=61'  // 61, 125 : 강남구 역삼 1동(비트캠프)
   + '&ny=125'
 
+/*
+base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+API 제공 시간(~이후) : 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
+*/
+
+/* category 분류
+      항목명           단위         압축bit수
+TMP : 1시간 기온       ℃            10
+UUU : 풍속(동서성분)   m/s          12
+VVV : 풍속(남북성분)   m/s          12
+VEC : 풍향             deg          10
+WSD : 풍속             m/s          10
+SKY : 하늘상태         코드값       4          맑음(1), 구름많음(3), 흐림(4)
+PTY : 강수형태         코드값       4          없음(0), 비(1), 비/눈(2), 눈(3), 소나기(4) 
+POP : 강수확률         %            8
+WAV : 파고             M            8
+PCP : 1시간 강수량     범주 (1 mm)  8          강수없음
+REH : 습도             %            8
+SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
+*/
 
 // 페이지 로딩 되자마자 실행
 document.body.onload = () => {
@@ -146,13 +132,40 @@ document.body.onload = () => {
 }
 
 
-// 어제, 오늘, 내일 날짜 HTML 에 입력
-yesterdayTitle.innerText = `🥚어제 ${eoJe}`;
-todayTitle.innerText = `🐣오늘 ${oNul}`;
-tomorrowTitle.innerText = `🦢내일 ${naeIl}`;
+// 기상청 API 응답 받았을때 실행
+function handleResponse() {
+  // 어제, 오늘, 내일 데이터 채우기
+  yeIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, NOW), MEDIUM);
+  yesterdayTemp.innerText = `🌡온도 ${getValue(TMP, yesterdayY4MMDD, NOW)} ℃`;
+  yeGoIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, GOTOWORK), SMALL);
+  yeGoTemp.innerText = `🌡온도 ${getValue(TMP, yesterdayY4MMDD, GOTOWORK)} ℃`;
+  yeOffIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, OFFWORK), SMALL);
+  yeOffTemp.innerText = `🌡온도 ${getValue(TMP, yesterdayY4MMDD, OFFWORK)} ℃`;
 
+  todayIcon.className = getIconClassName(getValue(SP, todayY4MMDD, NOW), LARGE);
+  todayCondition[0].innerText = `🌡온도 ${getValue(TMP, todayY4MMDD, NOW)} ℃`;
+  todayCondition[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, NOW)} %`;
+  todayCondition[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, NOW)} %`;
+  todayGoIcon.className = getIconClassName(getValue(SP, todayY4MMDD, GOTOWORK), MEDIUM);
+  todayCondition21[0].innerText = `🌡온도 ${getValue(TMP, todayY4MMDD, GOTOWORK)} ℃`;
+  todayCondition21[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, GOTOWORK)} %`;
+  todayCondition21[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, GOTOWORK)} %`;
+  todayOffIcon.className = getIconClassName(getValue(SP, todayY4MMDD, OFFWORK), MEDIUM);
+  todayCondition22[0].innerText = `🌡온도 ${getValue(TMP, todayY4MMDD, OFFWORK)} ℃`;
+  todayCondition22[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, OFFWORK)} %`;
+  todayCondition22[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, OFFWORK)} %`;
 
+  toIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, NOW), MEDIUM);
+  tomorrowTemp.innerText = `🌡온도 ${getValue(TMP, tomorrowY4MMDD, NOW)} ℃`;
+  toGoIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, GOTOWORK), SMALL);
+  toGoTemp.innerText = `🌡온도 ${getValue(TMP, tomorrowY4MMDD, GOTOWORK)} ℃`;
+  toGoDrop.innerText = `☂강수 ${getValue(POP, tomorrowY4MMDD, GOTOWORK)} %`;
+  toOffIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, OFFWORK), SMALL);
+  toOffTemp.innerText = `🌡온도 ${getValue(TMP, tomorrowY4MMDD, OFFWORK)} ℃`;
+  toOffDrop.innerText = `☂강수 ${getValue(POP, tomorrowY4MMDD, OFFWORK)} %`;
+}
 
+// 해, 구름 등 기상상황에 따른 아이콘 얻기
 function getIconClassName(value, iconSize) {
   let iSize = '';
   if (iconSize == LARGE) {
@@ -198,8 +211,6 @@ function getIconClassName(value, iconSize) {
     return -533;
   }
 }
-
-
 
 // 값 얻기
 // category: 온도: TMP, 강수확률: POP, 습도: REH, 하늘 및 강수: SP (하늘상태: SKY, 강수형태: PTY)
