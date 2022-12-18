@@ -5,9 +5,20 @@ body {
 }
 
 .gridItem:nth-child(1) {
+  position: relative;
+}
+
+.gridItem:nth-child(1)::before {
+  content: '';
   background-image: url('../image/yeCity.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.4;
 }
 
 .gridItem:nth-child(2) {
@@ -24,13 +35,24 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .gridItem:nth-child(3) {
+  position: relative;
+}
+
+.gridItem:nth-child(3)::before {
+  content: '';
   background-image: url('../image/toCity.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.4;
 }
 
 .gridItem * {
@@ -209,44 +231,51 @@ body {
 
 /* /////////////////////////////////////////////// */
 .yetoCondition {
-  border: 1px solid black;
   font-size: 2.5vh;
+  /* font-weight: bold; */
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   margin: 1.3vh;
   text-align: center
 }
 
 .yetoCondition2 {
-  border: 1px solid black;
   font-size: 2vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   margin: auto 1.3vh;
   text-align: center
 }
 
 .yetoCondition3 {
-  border: 1px solid black;
   font-size: 2vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   margin: 1.5vh 1.3vh 1vh 1.3vh;
   text-align: center;
 }
 
 .yetoCondition3:nth-child(1) {
-  border: 1px solid black;
   font-size: 2vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   margin: 3vh 1.3vh 1vh 1.3vh;
   text-align: center;
 }
 
 .todayCondition {
-  border: 1px solid black;
   font-size: 3vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   margin: 1.3vh;
   text-align: center
 }
 
 .todayCondition2 {
-  border: 1px solid black;
   margin: 2vh 1vh;
   font-size: 2vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   text-align: center
 }
 
@@ -260,8 +289,9 @@ body {
 }
 
 .goOffWord {
-  border: 1px solid black;
   font-size: 2vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   padding: 1.2vh 0.7vh;
 }
 
@@ -283,6 +313,9 @@ body {
 
 #todayTitle {
   font-size: 2.5vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
+  ;
   margin: 1.3vh;
 }
 
@@ -291,7 +324,6 @@ body {
   margin: 1.5vh auto;
   width: 75%;
   height: 13vh;
-  border: 1px solid black;
 }
 
 #yeGoIcon,
@@ -301,14 +333,12 @@ body {
   margin: 1vh 4vh 1.5vh 6vh;
   width: 14vh;
   height: 11vh;
-  border: 1px solid black;
 }
 
 #todayIcon {
   margin: 2vh auto;
   width: 80%;
   height: 20vh;
-  border: 1px solid black;
 }
 
 #todayGoIcon,
@@ -316,11 +346,12 @@ body {
   height: 15vh;
   width: 70%;
   margin: 0 auto;
-  border: 1px solid black;
 }
 
 #yesterdayTitle,
 #tomorrowTitle {
   font-size: 2vh;
+  text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+  color: #ffffff;
   margin: 1.2vh;
 }
