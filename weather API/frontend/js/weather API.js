@@ -98,6 +98,8 @@ function getValue(category, whichdate, goOff) {  // 온도: TMP, 강수확률: P
   const returnVal = getReturnVal(category, goOff);
 
   return returnVal;
+
+
 }
 
 function getCategoryDateArr(category, whichdate, goOff) {
@@ -170,3 +172,4 @@ function getReturnVal(category, goOff) {
     return -777;
   }
 }
+
