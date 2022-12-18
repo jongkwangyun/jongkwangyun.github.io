@@ -79,7 +79,62 @@ body {
   grid-template-rows: 1fr 1fr;
 }
 
-/* /////////////////////////////////////////////// */
+.gridItem3 {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+}
+
+/* iconSize = SMALL /////////////////////////////////////////////// */
+.yetoGoOffSun {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: -36.5vh -15.5vh;
+}
+
+.yetoGoOffRain {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: -36.5vh -3.5vh;
+}
+
+.yetoGoOffRainsnow {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: -36.5vh -40vh;
+}
+
+.yetoGoOffSnow {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: -24vh -28vh;
+}
+
+.yetoGoOffShower {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: -12vh -16vh;
+}
+
+.yetoGoOffCloud {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: 1vh -3.5vh;
+}
+
+.yetoGoOffBlur {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  background-position: 1vh -16vh;
+}
+
+/* iconSize = MEDIUM /////////////////////////////////////////////// */
 .yetoSun {
   background-image: url('../image/weatherIcon.png');
   background-repeat: no-repeat;
@@ -129,62 +184,27 @@ body {
   background-position: 1vh -18vh;
 }
 
-/* /////////////////////////////////////////////// */
-.yetoGoOffSun {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: -36.5vh -15.5vh;
-}
 
-.yetoGoOfRain {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: -36.5vh -3.5vh;
-}
-
-.yetoGoOfRainsnow {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: -36.5vh -40vh;
-}
-
-.yetoGoOfSnow {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: -24vh -28vh;
-}
-
-.yetoGoOfShower {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: -12vh -16vh;
-}
-
-.yetoGoOffCloud {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: 1vh -3.5vh;
-}
-
-.yetoGoOffBlur {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 50vh;
-  background-position: 1vh -16vh;
-}
-
-/* ////////////////////////////////////////////////////// */
+/* iconSize = LARGE ////////////////////////////////////////////////////// */
 .todaySun {
   background-image: url('../image/weatherIcon.png');
   background-repeat: no-repeat;
   background-size: 90vh;
   background-position: -69.5vh -28vh;
+}
+
+.todayCloud {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -2.8vh -5vh;
+}
+
+.todayBlur {
+  background-image: url('../image/weatherIcon.png');
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  background-position: -2.8vh -29vh;
 }
 
 .todayRain {
@@ -215,19 +235,6 @@ body {
   background-position: -25.5vh -29vh;
 }
 
-.todayCloud {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 90vh;
-  background-position: -2.8vh -5vh;
-}
-
-.todayBlur {
-  background-image: url('../image/weatherIcon.png');
-  background-repeat: no-repeat;
-  background-size: 90vh;
-  background-position: -2.8vh -29vh;
-}
 
 /* /////////////////////////////////////////////// */
 .yetoCondition {
@@ -240,7 +247,7 @@ body {
 }
 
 .yetoCondition2 {
-  font-size: 2vh;
+  font-size: 1.7vh;
   text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
   color: #ffffff;
   margin: auto 1.3vh;
@@ -248,7 +255,7 @@ body {
 }
 
 .yetoCondition3 {
-  font-size: 2vh;
+  font-size: 1.7vh;
   text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
   color: #ffffff;
   margin: 1.5vh 1.3vh 1vh 1.3vh;
@@ -271,21 +278,18 @@ body {
   text-align: center
 }
 
-.todayCondition2 {
-  margin: 2vh 1vh;
+.todayCondition21,
+.todayCondition22 {
+  margin: 2vh 0.3vh;
   font-size: 2vh;
   text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
   color: #ffffff;
   text-align: center
 }
 
-.todayCondition2:nth-child(1) {
-  margin: 6vh 1vh 1vh 1vh;
-}
-
-.gridItem3 {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+.todayCondition21:nth-child(1),
+.todayCondition22:nth-child(1) {
+  margin: 6vh 0.3vh 1vh 0.3vh;
 }
 
 .goOffWord {
