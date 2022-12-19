@@ -36,6 +36,7 @@ let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
 const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)']
+let nowMinute = nowToday.getMinutes().toString().length < 2 ? '0' + nowToday.getMinutes().toString() : nowToday.getMinutes().toString();
 
 // 엊그제, 어제, 오늘, 내일 YYYYMMDD
 let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString() + dbYesterday.getDate().toString();
@@ -48,7 +49,7 @@ let timeToday = parseInt(now.getHours());  // 현재 시간
 let oNul = (nowToday.getMonth() + 1).toString() + '/' + nowToday.getDate().toString();
 let eoJe = (yesterday.getMonth() + 1).toString() + '/' + yesterday.getDate().toString();
 let naeIl = (tomorrow.getMonth() + 1).toString() + '/' + tomorrow.getDate().toString();
-let nowTime = nowToday.getHours().toString() + ':' + nowToday.getMinutes().toString();
+let nowTime = nowToday.getHours().toString() + ':' + nowMinute;
 let yeWeekday = WEEKDAY[yesterday.getDay()];
 let todayWeekday = WEEKDAY[nowToday.getDay()];
 let toWeekday = WEEKDAY[tomorrow.getDay()];
@@ -217,7 +218,6 @@ function getIconClassName(value, iconSize) {
 // whichdate : yesterdayY4MMDD, todayY4MMDD, tomorrowY4MMDD
 // goOff : GOTOWORK, OFFWORK, NOW
 function getValue(category, whichdate, goOff) {
-
   getCategoryDateArr(category, whichdate, goOff);
   const returnVal = getReturnVal(category, goOff);
 
@@ -232,7 +232,6 @@ function getCategoryDateArr(category, whichdate, goOff) {
   // 배열을 카테고리별 가공 후 날짜별 가공
   getCategoryArr(category);
   getWhichdateArr(whichdate);
-
   if (category = SP) {  // SP 일때만 검사
     // 출/퇴근 강수 확인
     if (goOff == GOTOWORK) {  // 출근 시간 강수 확인  
