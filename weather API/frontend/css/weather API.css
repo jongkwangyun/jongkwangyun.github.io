@@ -29,8 +29,8 @@ body {
   content: '';
   background-color: lightgray;
   /* background-image: url('../image/todayCity.jpg');
-  background-repeat: no-repeat;
-  background-size: cover; */
+background-repeat: no-repeat;
+background-size: cover; */
   position: absolute;
   top: 0;
   left: 0;
@@ -284,6 +284,7 @@ body {
 #body {
   width: 60vh;
   height: 100vh;
+  /* aspect-ratio: 3 / 5; */
   margin: 0 auto;
 }
 
@@ -292,7 +293,7 @@ body {
   font-size: 2.5vh;
   text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
   color: #ffffff;
-  margin: 1.3vh;
+  margin: 1.3vh 0.3vh;
 }
 
 #yesterdayTitle,
@@ -345,4 +346,247 @@ body {
 #todayOff {
   border: 2px solid black;
   border-top: none;
+}
+
+@media all and (max-aspect-ratio: 3/5) {
+
+  /* iconSize = SMALL /////////////////////////////////////////////// */
+  .yetoGoOffSun,
+  .yetoGoOffRain,
+  .yetoGoOffRainsnow,
+  .yetoGoOffSnow,
+  .yetoGoOffShower,
+  .yetoGoOffCloud,
+  .yetoGoOffBlur {
+    background-image: url('../image/weatherIcon.png');
+    background-repeat: no-repeat;
+    background-size: 50vh;
+  }
+
+  .yetoGoOffSun {
+    background-position: -36.5vh -15.5vh;
+  }
+
+  .yetoGoOffRain {
+    background-position: -36.5vh -3.5vh;
+  }
+
+  .yetoGoOffRainsnow {
+    background-position: -36.5vh -40vh;
+  }
+
+  .yetoGoOffSnow {
+    background-position: -24vh -28vh;
+  }
+
+  .yetoGoOffShower {
+    background-position: -12vh -16vh;
+  }
+
+  .yetoGoOffCloud {
+    background-position: 1vh -3.5vh;
+  }
+
+  .yetoGoOffBlur {
+    background-position: 1vh -16vh;
+  }
+
+  /* iconSize = MEDIUM /////////////////////////////////////////////// */
+  .yetoSun,
+  .yetoRain,
+  .yetoRainsnow,
+  .yetoSnow,
+  .yetoShower,
+  .yetoCloud,
+  .yetoBlur {
+    background-image: url('../image/weatherIcon.png');
+    background-repeat: no-repeat;
+    background-size: 60vh;
+  }
+
+  .yetoSun {
+    background-position: -43.5vh -19vh;
+  }
+
+  .yetoRain {
+    background-position: -44vh -4vh;
+  }
+
+  .yetoRainsnow {
+    background-position: -44vh -49vh;
+  }
+
+  .yetoSnow {
+    background-position: -29vh -34vh;
+  }
+
+  .yetoShower {
+    background-position: -14vh -19vh;
+  }
+
+  .yetoCloud {
+    background-position: 1vh -4vh;
+  }
+
+  .yetoBlur {
+    background-position: 1vh -18vh;
+  }
+
+
+  /* iconSize = LARGE ////////////////////////////////////////////////////// */
+  .todaySun,
+  .todayCloud,
+  .todayBlur,
+  .todayRain,
+  .todayRainsnow,
+  .todaySnow,
+  .todayShower {
+    background-image: url('../image/weatherIcon.png');
+    background-repeat: no-repeat;
+    background-size: 90vh;
+  }
+
+  .todaySun {
+    background-position: -69.5vh -31vh;
+  }
+
+  .todayCloud {
+    background-position: -2.8vh -8vh;
+  }
+
+  .todayBlur {
+    background-position: -2.8vh -31vh;
+  }
+
+  .todayRain {
+    background-position: -69.5vh -9vh;
+  }
+
+  .todayRainsnow {
+    background-position: -69.5vh -76vh;
+  }
+
+  .todaySnow {
+    background-position: -47.5vh -54vh;
+  }
+
+  .todayShower {
+    background-position: -25.5vh -31vh;
+  }
+
+
+  /* /////////////////////////////////////////////// */
+  .yetoCondition {
+    font-size: 2.5vh;
+    /* font-weight: bold; */
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: 1.3vh;
+    text-align: center
+  }
+
+  .yetoCondition2 {
+    font-size: 1.7vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: auto 0.6vh;
+  }
+
+  .yetoCondition3 {
+    font-size: 1.7vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: 1.5vh 0.3vh 1vh 0.3vh;
+    text-align: center;
+  }
+
+  .yetoCondition3:nth-child(1) {
+    font-size: 1.7vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: 3vh 0.3vh 1vh 0.3vh;
+    /* text-align: center; */
+  }
+
+  .todayCondition {
+    font-size: 3vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: 1.3vh;
+    text-align: center
+  }
+
+  .todayCondition21,
+  .todayCondition22 {
+    margin: 2vh 0.1vh;
+    font-size: 2vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    text-align: center
+  }
+
+  .todayCondition21:nth-child(1),
+  .todayCondition22:nth-child(1) {
+    margin: 6vh 0.1vh 1vh 0.1vh;
+  }
+
+  .goOffWord {
+    font-size: 2vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    padding: 1.2vh 0.7vh;
+  }
+
+  #body {
+    width: 100vw;
+    height: 133.33vw;
+    /* aspect-ratio: 3 / 5; */
+    margin: 0 auto;
+  }
+
+  #todayTitle,
+  #todayTime {
+    font-size: 2.5vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: 1.3vh 0.3vh;
+  }
+
+  #yesterdayTitle,
+  #tomorrowTitle {
+    font-size: 2vh;
+    text-shadow: 0 0 2px #ffffff, 0 0 1px #ffffff;
+    color: #ffffff;
+    margin: 1.2vh;
+  }
+
+  #yeIcon,
+  #toIcon {
+    margin: 1.5vh auto;
+    width: 75%;
+    height: 13vh;
+  }
+
+  #yeGoIcon,
+  #yeOffIcon,
+  #toGoIcon,
+  #toOffIcon {
+    margin: 1vh 4vh 1.5vh 6vh;
+    width: 14vh;
+    height: 11vh;
+  }
+
+  #todayIcon {
+    margin: 0vh auto;
+    padding-top: 0vh;
+    width: 80%;
+    height: 14.6vh;
+  }
+
+  #todayGoIcon,
+  #todayOffIcon {
+    height: 15vh;
+    width: 70%;
+    margin: 0 auto;
+  }
 }

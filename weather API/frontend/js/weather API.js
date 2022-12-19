@@ -36,7 +36,7 @@ let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
 const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)']
-let nowMinute = nowToday.getMinutes().toString().length < 2 ? '0' + nowToday.getMinutes().toString() : nowToday.getMinutes().toString();
+let nowMinute = nowToday.getMinutes().toString().length < 2 ? `0${nowToday.getMinutes().toString()}` : nowToday.getMinutes().toString();
 
 // 엊그제, 어제, 오늘, 내일 YYYYMMDD
 let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString() + dbYesterday.getDate().toString();
@@ -307,3 +307,4 @@ function getReturnVal(category, goOff) {
     return -777;
   }
 }
+
