@@ -1,3 +1,6 @@
+/* 가로:세로 해상도 6:9
+사용 @media all and (max-aspect-ratio: 3 / 5) */
+
 body {
   margin: 0 auto;
   font-family: 'Malgun Gothic', Helvetica, sans-serif;
