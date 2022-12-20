@@ -348,9 +348,10 @@ background-size: cover; */
 
 
 
-/* 모바일에서 인터넷 페이지 주소창, 아래 네비바 제외 스크린 크기 
+/* 가로:세로 해상도 변경 6:10 → 6:9 //////////////////////////// */
+/* 모바일용(세로가 더 긴) 화면 비율 가로:세로 6:9 에서 가로 비율이 6보다 더 작을 경우 
 vw = vh /6 *9 로 계산 */
-@media screen and (max-width: 767px) {
+@media all and (max-aspect-ratio: 3 / 5) {
   body {
     margin: 0 auto;
     font-family: 'Malgun Gothic', Helvetica, sans-serif;
