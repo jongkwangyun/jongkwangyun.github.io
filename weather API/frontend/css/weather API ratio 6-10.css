@@ -347,10 +347,8 @@ background-size: cover; */
 }
 
 
-
-/* 가로:세로 해상도 변경 6:10 → 6:9 //////////////////////////// */
-/* 모바일용(세로가 더 긴) 화면 비율 가로:세로 6:9 에서 가로 비율이 6보다 더 작을 경우 
-vw = vh /6 *9 로 계산 */
+/* 모바일용(세로가 더 긴) 화면 비율 가로:세로 3:5 에서 가로 비율이 3보다 더 작을 경우 
+vw = vh /6 *10 로 계산 */
 @media all and (max-aspect-ratio: 3 / 5) {
   body {
     margin: 0 auto;
@@ -450,35 +448,35 @@ vw = vh /6 *9 로 계산 */
   .yetoGoOffBlur {
     background-image: url('../image/weatherIcon.png');
     background-repeat: no-repeat;
-    background-size: 75vw;
+    background-size: 83.33vw;
   }
 
   .yetoGoOffSun {
-    background-position: -54.75vw -23.25vw;
+    background-position: -60.83vw -25.83vw;
   }
 
   .yetoGoOffRain {
-    background-position: -54.75vw -5.25vw;
+    background-position: -60.83vw -5.83vw;
   }
 
   .yetoGoOffRainsnow {
-    background-position: -54.75vw -60vw;
+    background-position: -60.83vw -66.67vw;
   }
 
   .yetoGoOffSnow {
-    background-position: -36vw -42vw;
+    background-position: -40vw -46.67vw;
   }
 
   .yetoGoOffShower {
-    background-position: -18vw -24vw;
+    background-position: -20vw -26.67vw;
   }
 
   .yetoGoOffCloud {
-    background-position: 1.5vw -5.25vw;
+    background-position: 1.67vw -5.83vw;
   }
 
   .yetoGoOffBlur {
-    background-position: 1.5vw -24vw;
+    background-position: 1.67vw -26.67vw;
   }
 
   /* iconSize = MEDIUM /////////////////////////////////////////////// */
@@ -491,35 +489,35 @@ vw = vh /6 *9 로 계산 */
   .yetoBlur {
     background-image: url('../image/weatherIcon.png');
     background-repeat: no-repeat;
-    background-size: 90vw;
+    background-size: 100vw;
   }
 
   .yetoSun {
-    background-position: -65.25vw -28.5vw;
+    background-position: -72.5vw -31.67vw;
   }
 
   .yetoRain {
-    background-position: -66vw -6vw;
+    background-position: -73.33vw -6.67vw;
   }
 
   .yetoRainsnow {
-    background-position: -66vw -73.5vw;
+    background-position: -73.33vw -81.67vw;
   }
 
   .yetoSnow {
-    background-position: -43.5vw -51vw;
+    background-position: -48.33vw -56.67vw;
   }
 
   .yetoShower {
-    background-position: -21vw -28.5vw;
+    background-position: -23.33vw -31.67vw;
   }
 
   .yetoCloud {
-    background-position: 1.5vw -6vw;
+    background-position: 1.67vw -6.67vw;
   }
 
   .yetoBlur {
-    background-position: 1.5vw -27vw;
+    background-position: 1.67vw -30vw;
   }
 
 
@@ -533,35 +531,35 @@ vw = vh /6 *9 로 계산 */
   .todayShower {
     background-image: url('../image/weatherIcon.png');
     background-repeat: no-repeat;
-    background-size: 135vw;
+    background-size: 150vw;
   }
 
   .todaySun {
-    background-position: -104.25vw -46.5vw;
+    background-position: -115.83vw -51.67vw;
   }
 
   .todayCloud {
-    background-position: -4.2vw -12vw;
+    background-position: -4.67vw -13.33vw;
   }
 
   .todayBlur {
-    background-position: -4.2vw -46.5vw;
+    background-position: -4.67vw -51.67vw;
   }
 
   .todayRain {
-    background-position: -104.25vw -13.5vw;
+    background-position: -115.83vw -15vw;
   }
 
   .todayRainsnow {
-    background-position: -104.25vw -114vw;
+    background-position: -115.83vw -126.67vw;
   }
 
   .todaySnow {
-    background-position: -71.25vw -81vw;
+    background-position: -79.17vw -90vw;
   }
 
   .todayShower {
-    background-position: -38.25vw -46.5vw;
+    background-position: -42.5vw -51.67vw;
   }
 
 
@@ -584,50 +582,50 @@ vw = vh /6 *9 로 계산 */
 
 
   .yetoCondition {
-    font-size: 3.75vw;
+    font-size: 4.17vw;
     /* font-weight: bold; */
-    margin: 1.95vw;
+    margin: 2.17vw;
     text-align: center
   }
 
   .yetoCondition2 {
-    font-size: 2.55vw;
-    margin: auto 0.9vw;
+    font-size: 2.83vw;
+    margin: auto 1vw;
   }
 
   .yetoCondition3 {
-    font-size: 2.55vw;
-    margin: 2.25vw 0.45vw 1.5vw 0.45vw;
+    font-size: 2.83vw;
+    margin: 2.5vw 0.5vw 1.67vw 0.5vw;
     text-align: center;
   }
 
   .yetoCondition3:nth-child(1) {
-    font-size: 2.55vw;
-    margin: 4.5w 0.45vw 1.5vw 0.45vw;
+    font-size: 2.83vw;
+    margin: 5vw 0.5vw 1.67vw 0.5vw;
     /* text-align: center; */
   }
 
   .todayCondition {
-    font-size: 4.5vw;
-    margin: 1.95vw;
+    font-size: 5vw;
+    margin: 2.17vw;
     text-align: center
   }
 
   .todayCondition21,
   .todayCondition22 {
-    margin: 3vw 0.15vw;
-    font-size: 3vw;
+    margin: 3.33vw 0.17vw;
+    font-size: 3.33vw;
     text-align: center
   }
 
   .todayCondition21:nth-child(1),
   .todayCondition22:nth-child(1) {
-    margin: 9vw 0.15vw 1.5vw 0.15vw;
+    margin: 10vw 0.17vw 1.67vw 0.17vw;
   }
 
   .goOffWord {
-    font-size: 3vw;
-    padding: 1.8vw 1.05vw;
+    font-size: 3.33vw;
+    padding: 2vw 1.17vw;
   }
 
   #gridContainer {
@@ -640,8 +638,8 @@ vw = vh /6 *9 로 계산 */
   }
 
   #body {
-    width: 90vw;
-    height: 150vw;
+    width: 100vw;
+    height: 166.66vw;
     min-height:
       /* aspect-ratio: 3 / 5; */
       margin: 0 auto;
@@ -649,42 +647,42 @@ vw = vh /6 *9 로 계산 */
 
   #todayTitle,
   #todayTime {
-    font-size: 3.75vw;
-    margin: 1.95vw 0.45vw;
+    font-size: 4.17vw;
+    margin: 2.17vw 0.5vw;
   }
 
   #yesterdayTitle,
   #tomorrowTitle {
-    font-size: 3vw;
-    margin: 1.8vw;
+    font-size: 3.33vw;
+    margin: 2vw;
   }
 
   #yeIcon,
   #toIcon {
-    margin: 2.25vw auto;
+    margin: 2.5vw auto;
     width: 75%;
-    height: 19.5vw;
+    height: 21.67vw;
   }
 
   #yeGoIcon,
   #yeOffIcon,
   #toGoIcon,
   #toOffIcon {
-    margin: 1.5vw 6vw 2.25vw 9vw;
-    width: 21vw;
-    height: 16.5vw;
+    margin: 1.67vw 6.67vw 2.5vw 10vw;
+    width: 23.33vw;
+    height: 18.33vw;
   }
 
   #todayIcon {
     margin: 0vw auto;
     padding-top: 0vw;
     width: 80%;
-    height: 21.9vw;
+    height: 24.33vw;
   }
 
   #todayGoIcon,
   #todayOffIcon {
-    height: 22.5vw;
+    height: 25vw;
     width: 70%;
     margin: 0 auto;
   }
