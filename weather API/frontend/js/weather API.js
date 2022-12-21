@@ -36,9 +36,12 @@ let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
 const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)']
+let nowHour = nowToday.getHours().toString().padStart(2, '0');
 let nowMinute = nowToday.getMinutes().toString().padStart(2, '0');
 
 // 엊그제, 어제, 오늘, 내일 YYYYMMDD
+let nowY4MMDD;  // 현 시간 기준 조회시 필요한 Y4MMDD
+let nowBaseTime;  // 현 시간 기준 조회시 필요한 BaseTime
 let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString() + dbYesterday.getDate().toString();
 let yesterdayY4MMDD = yesterday.getFullYear().toString() + (yesterday.getMonth() + 1).toString() + yesterday.getDate().toString();
 let todayY4MMDD = nowToday.getFullYear().toString() + (nowToday.getMonth() + 1).toString() + nowToday.getDate().toString();
@@ -49,7 +52,7 @@ let timeToday = parseInt(now.getHours());  // 현재 시간
 let oNul = (nowToday.getMonth() + 1).toString() + '/' + nowToday.getDate().toString();
 let eoJe = (yesterday.getMonth() + 1).toString() + '/' + yesterday.getDate().toString();
 let naeIl = (tomorrow.getMonth() + 1).toString() + '/' + tomorrow.getDate().toString();
-let nowTime = nowToday.getHours().toString() + ':' + nowMinute;
+let nowTime = `${nowHour}:${nowMinute}`;
 let yeWeekday = WEEKDAY[yesterday.getDay()];
 let todayWeekday = WEEKDAY[nowToday.getDay()];
 let toWeekday = WEEKDAY[tomorrow.getDay()];
@@ -84,16 +87,10 @@ const SMALL = 'yetoGoOff';
 
 let SKYorPTY = '';
 
-// 기상청 API '단기예보조회' 주소
-let openApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
-  + 'serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D'
-  + '&pageNo=1'
-  + '&numOfRows=1000'
-  + '&dataType=JSON'
-  + '&base_date=' + DbYesterdayY4MMDD
-  + '&base_time=2300'
-  + '&nx=61'  // 61, 125 : 강남구 역삼 1동(비트캠프)
-  + '&ny=125'
+
+
+
+
 
 /*
 base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
@@ -118,24 +115,93 @@ SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
 
 // 페이지 로딩 되자마자 실행
 document.body.onload = () => {
+
+  // 기상청 API '단기예보조회' 주소 엊그제 데이터 가져옴
+  let openApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
+    + 'serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D'
+    + '&pageNo=1'
+    + '&numOfRows=1000'
+    + '&dataType=JSON'
+    + '&base_date=' + DbYesterdayY4MMDD
+    + '&base_time=2300'
+    + '&nx=61'  // 61, 125 : 강남구 역삼 1동(비트캠프)
+    + '&ny=125';
+
   var xhr = new XMLHttpRequest();
 
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         danGi = JSON.parse(xhr.responseText);
+        getDanGiNow();
+      }
+    }
+  }
 
+  xhr.open("GET", openApiUrl, true);
+  xhr.send();
+}
+
+
+// 현 시간 기준 예보 받아오기
+function getDanGiNow() {
+
+  // 현 시간 기준으로 현재 데이터 가져올 날짜, 시간 변수에 저장
+  if (parseInt(nowHour + nowMinute) < 200) {  // 현 시간 02:00 이전일 경우 어제 23:00 기준 데이터 가져옴
+    nowY4MMDD = yesterdayY4MMDD;
+    nowBaseTime = '2300'
+  } else {
+    nowY4MMDD = todayY4MMDD;
+    if (parseInt(nowHour + nowMinute) < 500) {  // 현 시간 05:00 이전일 경우 오늘 02:00 기준 데이터 가져옴
+      nowBaseTime = '0200';
+    } else if (parseInt(nowHour + nowMinute) < 0800) {
+      nowBaseTime = '0500';
+    } else if (parseInt(nowHour + nowMinute) < 1100) {
+      nowBaseTime = '0800';
+    } else if (parseInt(nowHour + nowMinute) < 1400) {
+      nowBaseTime = '1100';
+    } else if (parseInt(nowHour + nowMinute) < 1700) {
+      nowBaseTime = '1400';
+    } else if (parseInt(nowHour + nowMinute) < 2000) {
+      nowBaseTime = '1700';
+    } else if (parseInt(nowHour + nowMinute) < 2300) {
+      nowBaseTime = '2000';
+    } else {
+      console.log('getDanGiNow() -> nowBaseTime 변수 에러');
+      nowBaseTime = '0000';
+    }
+  }
+
+  // 현 시간 기준 조회시 가져올 데이터 주소
+  let openNowApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
+    + 'serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D'
+    + '&pageNo=1'
+    + '&numOfRows=1000'
+    + '&dataType=JSON'
+    + '&base_date=' + nowY4MMDD
+    + '&base_time=' + nowBaseTime
+    + '&nx=61'  // 61, 125 : 강남구 역삼 1동(비트캠프)
+    + '&ny=125';
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        nowDanGi = JSON.parse(xhr.responseText);
         handleResponse();
       }
     }
   }
-  xhr.open("GET", openApiUrl, true);
+
+  xhr.open("GET", openNowApiUrl, true);
   xhr.send();
 }
 
 
 // 기상청 API 응답 받았을때 실행
 function handleResponse() {
+
   // 어제, 오늘, 내일 데이터 채우기
   yeIcon.className = getIconClassName(getValue(SP, yesterdayY4MMDD, NOW), MEDIUM);
   yesterdayTemp.innerText = `🌡온도 ${getValue(TMP, yesterdayY4MMDD, NOW)} ℃`;
@@ -230,7 +296,7 @@ function getValue(category, whichdate, goOff) {
 // goOff : GOTOWORK, OFFWORK, NOW
 function getCategoryDateArr(category, whichdate, goOff) {
   // 배열을 카테고리별 가공 후 날짜별 가공
-  getCategoryArr(category);
+  getCategoryArr(category, whichdate, goOff);
   getWhichdateArr(whichdate);
   if (category = SP) {  // SP 일때만 검사
     // 출/퇴근 강수 확인
@@ -257,9 +323,41 @@ function getCategoryDateArr(category, whichdate, goOff) {
 }
 
 // category 별 배열 변경
-function getCategoryArr(category) {
-  const danGiArr = danGi.response.body.items.item;  // item 객체 모음 배열
+function getCategoryArr(category, whichdate, goOff) {
 
+  let danGiArr = danGi.response.body.items.item;  // item 객체 모음 배열
+
+  // 오늘 날씨 중 출근 퇴근은 현 시간 기준으로 (엊그제 or 실시간) 쓸지 결정
+  if (whichdate == todayY4MMDD) {
+
+    // NOW 이면 최근 데이터 반영
+    if (goOff == NOW) {
+      danGiArr = nowDanGi.response.body.items.item;
+
+      // 출근일때
+    } else if (goOff == GOTOWORK) {
+
+      // 현 시간이 출근시간 이전이면 오늘 출근에 현재 데이터 사용
+      if (parseInt(nowHour + nowMinute) < 700) {
+        danGiArr = nowDanGi.response.body.items.item;
+      }
+
+      // 퇴근일때
+    } else if (goOff == OFFWORK) {
+
+      // 현 시간이 퇴근시간 이전이면 오늘 퇴근에 현재 데이터 사용
+      if (parseInt(nowHour + nowMinute) < 1700) {
+        danGiArr = nowDanGi.response.body.items.item;
+      }
+    }
+
+    // 내일 날씨는 현시간 받은 데이터 사용
+  } else if (whichdate == tomorrowY4MMDD) {
+    danGiArr = nowDanGi.response.body.items.item;
+  }
+
+
+  // 카테고리가 SP 이면 하늘상황, 강수형태로 분기
   if (category == SP) {
     SKYorPTY = PTY;
     // 강수형태(PTY) 지정 날짜 데이터 배열 만든다.
