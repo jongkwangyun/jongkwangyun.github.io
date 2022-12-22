@@ -1,0 +1,58 @@
+    body {
+      padding: 0;
+      margin: 0 auto;
+      font-family: 'Noto Sans KR', sans-serif;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 490px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: bold;
+      padding: 20px;
+      color: rgb(53, 65, 98);
+      font-family: 'Do Hyeon', sans-serif;
+    }
+
+    #form {
+      margin-top: 20px;
+    }
+
+    input {
+      height: 40px;
+      width: 280px;
+      border-radius: 25px;
+      border: none;
+      font-size: large;
+      text-align: center;
+      color: gray;
+      margin-right: 10px;
+    }
+
+    .card {
+      margin: 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .cardSel {
+      background-color: #c6daf5;
+    }
+
+    #map:nth-child(1):nth-child(1):nth-child(6):nth-child(2) {
+      width: 4px !important;
+    }
+
+
+    #map {
+      width: 490px;
+      height: 300px;
+      margin-top: 15px;
+    }

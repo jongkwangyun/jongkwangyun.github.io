@@ -1,0 +1,14 @@
+{
+  "name": "latenight-pharmacy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lateNight Pharmacy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}
