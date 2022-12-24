@@ -46,7 +46,7 @@ let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getM
 let yesterdayY4MMDD = yesterday.getFullYear().toString() + (yesterday.getMonth() + 1).toString() + yesterday.getDate().toString();
 let todayY4MMDD = nowToday.getFullYear().toString() + (nowToday.getMonth() + 1).toString() + nowToday.getDate().toString();
 let tomorrowY4MMDD = tomorrow.getFullYear().toString() + (tomorrow.getMonth() + 1).toString() + tomorrow.getDate().toString();
-let timeToday = parseInt(now.getHours());  // 현재 시간
+let timeToday;  // 현재 시간
 
 // 어제, 오늘, 내일에 쓸 변수 선언
 let oNul = (nowToday.getMonth() + 1).toString() + '/' + nowToday.getDate().toString();
@@ -79,6 +79,8 @@ const PTY = 'PTY';
 const GOTOWORK = 'goToWork';
 const OFFWORK = 'offWork';
 const NOW = 'now';
+let goToWorkNum;
+let offWorkNum;
 
 // 아이콘 사이즈 관련
 const LARGE = 'today';
@@ -89,16 +91,13 @@ let SKYorPTY = '';
 
 
 
-
-
-
 /*
 base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
 API 제공 시간(~이후) : 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
 */
 
 /* category 분류
-      항목명           단위         압축bit수
+항목명           단위         압축bit수
 TMP : 1시간 기온       ℃            10
 UUU : 풍속(동서성분)   m/s          12
 VVV : 풍속(남북성분)   m/s          12
@@ -113,8 +112,12 @@ REH : 습도             %            8
 SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
 */
 
-// 페이지 로딩 되자마자 실행
-document.body.onload = () => {
+
+// 데이터 요청 실행
+getDanGi();
+getDanGiNow();
+
+function getDanGi() {
 
   // 기상청 API '단기예보조회' 주소 엊그제 데이터 가져옴
   let openApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
@@ -133,7 +136,7 @@ document.body.onload = () => {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         danGi = JSON.parse(xhr.responseText);
-        getDanGiNow();
+        // getDanGiNow();
       }
     }
   }
@@ -145,26 +148,25 @@ document.body.onload = () => {
 
 // 현 시간 기준 예보 받아오기
 function getDanGiNow() {
-
   // 현 시간 기준으로 현재 데이터 가져올 날짜, 시간 변수에 저장
-  if (parseInt(nowHour + nowMinute) < 200) {  // 현 시간 02:00 이전일 경우 어제 23:00 기준 데이터 가져옴
+  if (parseInt(nowHour + nowMinute) < 300) {  // 현 시간 02:00 이전일 경우 어제 23:00 기준 데이터 가져옴
     nowY4MMDD = yesterdayY4MMDD;
     nowBaseTime = '2300'
   } else {
     nowY4MMDD = todayY4MMDD;
-    if (parseInt(nowHour + nowMinute) < 500) {  // 현 시간 05:00 이전일 경우 오늘 02:00 기준 데이터 가져옴
+    if (parseInt(nowHour + nowMinute) < 600) {  // 현 시간 06:00 이전일 경우 오늘 02:00 기준 데이터 가져옴  0200 기준: 0300 0400 0500 0600 ... 현 시간 06:00 일 경우 05:00 기준 데이터: 0600 0700 ...
       nowBaseTime = '0200';
-    } else if (parseInt(nowHour + nowMinute) < 0800) {
+    } else if (parseInt(nowHour + nowMinute) < 0900) {
       nowBaseTime = '0500';
-    } else if (parseInt(nowHour + nowMinute) < 1100) {
+    } else if (parseInt(nowHour + nowMinute) < 1200) {
       nowBaseTime = '0800';
-    } else if (parseInt(nowHour + nowMinute) < 1400) {
+    } else if (parseInt(nowHour + nowMinute) < 1500) {
       nowBaseTime = '1100';
-    } else if (parseInt(nowHour + nowMinute) < 1700) {
+    } else if (parseInt(nowHour + nowMinute) < 1800) {
       nowBaseTime = '1400';
-    } else if (parseInt(nowHour + nowMinute) < 2000) {
+    } else if (parseInt(nowHour + nowMinute) < 2100) {
       nowBaseTime = '1700';
-    } else if (parseInt(nowHour + nowMinute) < 2300) {
+    } else if (parseInt(nowHour + nowMinute) < 2400) {
       nowBaseTime = '2000';
     } else {
       console.log('getDanGiNow() -> nowBaseTime 변수 에러');
@@ -188,7 +190,7 @@ function getDanGiNow() {
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
-        nowDanGi = JSON.parse(xhr.responseText);
+        nowDanGi = JSON.parse(xhr.responseText);  // 데이터 정상 응답
         handleResponse();
       }
     }
@@ -298,21 +300,36 @@ function getCategoryDateArr(category, whichdate, goOff) {
   // 배열을 카테고리별 가공 후 날짜별 가공
   getCategoryArr(category, whichdate, goOff);
   getWhichdateArr(whichdate);
+
+  // 오늘 데이터 배열에서 제거된 값 때문에 인덱스 변경
+  if (whichdate == todayY4MMDD) {
+    goToWorkNum = 7 - parseInt(nowBaseTime.slice(0, 2)) - 1;  // 출근num(7) - nowBaseTime(2) - 1 = 4
+    goToWorkNum = goToWorkNum < 0 ? 7 : goToWorkNum;  // 현 시간 0900 이상일시 어제 데이터 사용하므로 7로 리셋
+    offWorkNum = 17 - parseInt(nowBaseTime.slice(0, 2)) - 1;  // 퇴근num(17) - nowBaseTime(11) - 1 = 5
+    offWorkNum = offWorkNum < 0 ? 17 : offWorkNum;  // 현 시간이 1800 이상일시 어제 데이터 사용하므로 17로 리셋
+    timeToday = parseInt(nowHour) - parseInt(nowBaseTime.slice(0, 2)) - 1;
+  } else {
+    goToWorkNum = 7;
+    offWorkNum = 17;
+    timeToday = parseInt(now.getHours());
+  }
+
   if (category = SP) {  // SP 일때만 검사
     // 출/퇴근 강수 확인
     if (goOff == GOTOWORK) {  // 출근 시간 강수 확인  
-      if (categoryArr[7].fcstValue == '0' && categoryArr[8].fcstValue == '0') {
+      if (categoryArr[goToWorkNum].fcstValue == '0' && categoryArr[goToWorkNum + 1].fcstValue == '0') {
         SKYorPTY = SKY;  // 강수 없음
         getCategoryArr(SKY);
         getWhichdateArr(whichdate);
       }
     } else if (goOff == OFFWORK) {  // 퇴근 시간 강수 확인
-      if (categoryArr[17].fcstValue == '0' && categoryArr[18].fcstValue == '0') {
+      if (categoryArr[offWorkNum].fcstValue == '0' && categoryArr[offWorkNum + 1].fcstValue == '0') {
         SKYorPTY = SKY;
         getCategoryArr(SKY);
         getWhichdateArr(whichdate);
       }
     } else if (goOff == NOW) {  // 현재 시간 강수 확인
+      // console.log(category, whichdate, goOff, timeToday, categoryArr);
       if (categoryArr[timeToday].fcstValue == '0') {
         SKYorPTY = SKY;
         getCategoryArr(SKY);
@@ -337,16 +354,16 @@ function getCategoryArr(category, whichdate, goOff) {
       // 출근일때
     } else if (goOff == GOTOWORK) {
 
-      // 현 시간이 출근시간 이전이면 오늘 출근에 현재 데이터 사용
-      if (parseInt(nowHour + nowMinute) < 700) {
+      // 현 시간이 0900 이전이면 오늘 출근에 오늘 0500 기준 데이터 사용
+      if (parseInt(nowHour + nowMinute) < 900) {
         danGiArr = nowDanGi.response.body.items.item;
       }
 
       // 퇴근일때
     } else if (goOff == OFFWORK) {
 
-      // 현 시간이 퇴근시간 이전이면 오늘 퇴근에 현재 데이터 사용
-      if (parseInt(nowHour + nowMinute) < 1700) {
+      // 현 시간이 1800 이전이면 오늘 퇴근에 오늘 1400 기준 데이터 사용
+      if (parseInt(nowHour + nowMinute) < 1800) {
         danGiArr = nowDanGi.response.body.items.item;
       }
     }
