@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class P001_countingChar {
+public class P001_CountingChar {
 
   public static void main(String[] args) {
     // 문자 개수 세기

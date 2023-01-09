@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class P002_firstNonRepeatedCharacters {
+public class P002_FirstNonRepeatedCharacters {
 
   public static void main(String[] args) {
     // 반복 되지 않는 첫 번째 문자 찾기

@@ -3,7 +3,7 @@ package codingProblem;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class P003_reverseWords {
+public class P003_ReverseWords {
 
   public static void main(String[] args) {
     // 글자와 단어 뒤집기
