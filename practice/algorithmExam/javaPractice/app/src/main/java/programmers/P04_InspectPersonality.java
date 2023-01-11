@@ -1,7 +1,5 @@
 package programmers;
 
-import java.util.Arrays;
-
 public class P04_InspectPersonality {
 
   public static void main(String[] args) {
@@ -20,10 +18,10 @@ public class P04_InspectPersonality {
   public static String solution(String[] survey, int[] choices) {
     String answer = "";
 
-    char[] typeArr = {'R', 'T', 'C', 'F', 'J', 'M', 'A', 'N'};
+    String typeStr = "RTCFJMAN";
 
     // AAA|NNN : 321|123
-    int[] typesScore = {0, 0, 0, 0, 0, 0, 0, 0};
+    int[] typesScore = new int[8];
 
     //
     int[] point = {3, 2, 1, 0, 1, 2, 3};
@@ -33,11 +31,11 @@ public class P04_InspectPersonality {
       if(choices[i] < 4) {
 
         // typeArr에서 앞 글자 index 얻어서 거기에 점수 넣기
-        typesScore[Arrays.asList(typeArr).indexOf(survey[i].charAt(0))] += point[choices[i]];
+        typesScore[typeStr.indexOf(survey[i].charAt(0))] += point[choices[i]-1];
       } else if (choices[i] > 4) {
 
         // typeArr에서 뒤 글자 index 얻어서 거기에 점수 넣기
-        typesScore[Arrays.asList(typeArr).indexOf(survey[i].charAt(1))] += point[choices[i]];
+        typesScore[typeStr.indexOf(survey[i].charAt(1))] += point[choices[i]-1];
       }
     }
 
@@ -47,6 +45,7 @@ public class P04_InspectPersonality {
     answerArr[2] = typesScore[4] >= typesScore[5] ? 'J' : 'M';
     answerArr[3] = typesScore[6] >= typesScore[7] ? 'A' : 'N';
 
+    answer = new String(answerArr);
     return answer;
   }
 
