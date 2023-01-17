@@ -1,40 +1,146 @@
 package programmers;
 
+import java.util.Arrays;
+
 public class P05_ArcheryContest {
 
+  static int n = 5;
+  static int[] RyanShot = new int[11];
+
   public static void main(String[] args) {
-    int n = 5;
     int[] info = {2,1,1,1,0,0,0,0,0,0,0};
 
+    setN(RyanShot, 5, 5);
 
+    //    int[] answer = solution(n, info);
 
-    int[] answer = solution(n, info);
-
-    System.out.println(answer);
-
+    //    System.out.println(answer);
   }
 
-  public static int[] solution(int n, int[] info) {
-    int[] answer = {};
-    int[] nSizeArr = new int[n];
 
+  public static void setN(int[] inputRyanShot, int maxArrowAtATarget, int inputN) {
+    int[] nowRyanShot = Arrays.copyOf(inputRyanShot, 11);
 
-    // i : 최대 화살 개수
-    // j : 최대 화살 index
-    for (int i = n; i > 0; i--) {
-      for (int j = 0; j < n; j++) {
-        nSizeArr[j] = i;
+    // maxArrowAtATarget = 1, inputN = 1
+    for (int restN = inputN; maxArrowAtATarget > 0; maxArrowAtATarget--) {
+
+      // [0,0,0,0,0,0,0,0,0,0,scoreIdx]   // scoreIdx = 0, restN = 1
+      for (int scoreIdx = 10; scoreIdx >= 0; scoreIdx--) {
+
+        // 자리 비었는지?
+        if(nowRyanShot[scoreIdx] == 0) {
+
+          if(restN >= maxArrowAtATarget) {  // 5, 3  &  2, 3
+            nowRyanShot[scoreIdx] = maxArrowAtATarget;  // {1,0,0,0,0,0,0,0,0,0,4}
+            restN -= maxArrowAtATarget;  // restN = 1
+
+            // 남은 화살이 없으면 다음 인덱스로
+            if (restN == 0) {
+
+              // 값 비교
+              System.out.println(Arrays.toString(nowRyanShot));
+
+              restN = inputN;  // restN = 5
+              // 배열 리셋 //////////////
+              Arrays.fill(nowRyanShot, 0);
+              continue;
+
+              // 남은 화살이 있으면 재귀 함수 실행
+            } else {
+              setN(Arrays.copyOf(nowRyanShot, 11), maxArrowAtATarget, restN);  //  {0,0,0,0,0,0,0,0,0,0,3}
+            }
+
+          } else {
+            nowRyanShot[scoreIdx] = restN;  // restN = 1  {1,0,0,0,0,0,0,0,0,0,4}
+
+            // 값 비교
+            System.out.println(Arrays.toString(nowRyanShot));
+
+            // {0,0,0,0,0,0,0,0,0,0,3} 로 보낸다
+            nowRyanShot = Arrays.copyOf(inputRyanShot, 11);
+            continue;
+
+          }
+        } else {
+          continue;
+        }
 
       }
     }
+  }
+
+  /*
+n = 5
 
 
+   */
+
+
+  public static int[] solution(int n, int[] info) {
+    int[] answer = {};
 
 
     return answer;
   }
 
 }
+
+/*
+for (int j = 10, tn2 = n - maxArrowAtATarget ; j > 0; j--) {  // j = 10
+  nSizeArr[j] = maxArrowAtATarget; // i = 2
+  tn2 -= maxArrowAtATarget; // tn = 3
+
+  for (int k = 10; k >= 0; k--) {  // k = 9
+
+    if(restN > 0) {
+      if(restN > maxArrowAtATarget) {
+        if(nSizeArr[k] == 0) {
+          nSizeArr[k] = maxArrowAtATarget;
+
+          for (int l = 10; l >= 0; l--) {  // l = 10
+            restN -= maxArrowAtATarget;  // 1
+
+            if(restN > 0) {
+              if(restN > maxArrowAtATarget) {
+                if(nSizeArr[k] == 0) {
+                  nSizeArr[k] = maxArrowAtATarget;
+                  restN -= maxArrowAtATarget;  // 1
+
+
+
+                } else {
+                  continue;
+                }
+              } else {
+                if(nSizeArr[l] == 0) {
+                  nSizeArr[l] = restN;
+                }
+              }
+
+            }
+
+            restN = n;
+          }
+
+
+        } else {
+          continue;
+        }
+      } else {
+        if(nSizeArr[k] == 0) {
+          nSizeArr[k] = restN;
+        }
+      }
+
+
+    }
+
+    restN = n;
+  }
+
+}
+ */
+
 
 /*
 
