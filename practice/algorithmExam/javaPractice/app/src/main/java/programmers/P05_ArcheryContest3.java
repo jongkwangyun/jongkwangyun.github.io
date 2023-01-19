@@ -4,60 +4,65 @@ import java.util.Arrays;
 
 public class P05_ArcheryContest3 {
 
-  static int n = 5;
-  static int[] RyanShot = new int[11];
+  static int n = 10;
+  static int[] ryanShot = new int[11];
   static int ryanScore;
   static int apeachScore;
+  static int maxScoreDifRyanWin;
+  static int[] ryanShotBest = new int[11];
 
   public static void main(String[] args) {
-    int[] info = {2,1,1,1,0,0,0,0,0,0,0};
+    //    int[] info = {2,1,1,1,0,0,0,0,0,0,0};
+    //    int[] info = {1,0,0,0,0,0,0,0,0,0,0};
+    //    int[] info = {0,0,1,2,0,1,1,1,1,1,1};
+    int[] info = {0,0,0,0,0,0,0,0,3,4,3};
 
-    setN(RyanShot, 5, 5, info);
+    ryanShotBest = solution(n, info);
 
-    //    int[] answer = solution(n, info);
-
-    //    System.out.println(answer);
+    System.out.println(Arrays.toString(ryanShotBest));
   }
 
+  public static int[] solution(int n, int[] info) {
+    int[] answer = {};
+
+    setN(ryanShot, n, n, info);
+
+    if (maxScoreDifRyanWin == 0) {
+      return answer = new int[] {-1};
+    }
+
+    answer = ryanShotBest;
+
+    return answer;
+  }
 
   public static void setN(int[] inputRyanShot, int maxArrowAtATarget, int inputN, int[] info) {
     int[] nowRyanShot = Arrays.copyOf(inputRyanShot, 11);
     maxArrowAtATarget = maxArrowAtATarget > inputN ? inputN : maxArrowAtATarget;
 
+    // maxArrowAtATarget = 1, inputN = 1
     for (int restN = inputN; maxArrowAtATarget > 0; maxArrowAtATarget--) {
-      // maxArrowAtATarget = 1, inputN = 1
 
+      // [0,0,0,0,0,0,0,0,0,0,scoreIdx]   // scoreIdx = 10, restN = 5
       for (int scoreIdx = 10; scoreIdx >= 0; scoreIdx--, nowRyanShot = Arrays.copyOf(inputRyanShot, 11), restN = inputN) {
-        // [0,0,0,0,0,0,0,0,0,0,scoreIdx]   // scoreIdx = 10, restN = 5
 
+        // 자리 비었는지?
         if(nowRyanShot[scoreIdx] == 0) {
-          // 자리 비었는지?
 
           if(restN >= maxArrowAtATarget) {  // 5 >= 4
             nowRyanShot[scoreIdx] = maxArrowAtATarget;  // {1,0,0,0,0,0,0,0,0,0,4}
             restN -= maxArrowAtATarget;  // restN = 1
 
+            // 남은 화살이 없으면 다음 인덱스로
             if (restN == 0) {
-              // 남은 화살이 없으면 다음 인덱스로
 
               // 0~10 인덱스 값 비교
-              for (int i = 0; i <= 10; i++) {
-                if (info[i] == 0 && nowRyanShot[i] == 0) {
-                  continue;
-                }
-                if (info[i] < nowRyanShot[i]) {
-                  ryanScore += 10 - i;
-                } else {
-                  apeachScore += 10 - i;
-                }
-              }
+              scoreCheck(info, nowRyanShot);
 
-              System.out.println(Arrays.toString(nowRyanShot) + " Ryan: " + ryanScore + " | Apeach: " + apeachScore);
-              ryanScore = 0; apeachScore = 0;
               continue;
 
-            } else {
               // 남은 화살이 있으면 재귀 함수 실행
+            } else {
               setN(nowRyanShot, maxArrowAtATarget, restN, info);  //  {1,0,0,0,0,0,0,0,0,0,4} 4 1
             }
 
@@ -65,19 +70,8 @@ public class P05_ArcheryContest3 {
             nowRyanShot[scoreIdx] = restN;  // restN = 1  {1,0,0,0,0,0,0,0,0,0,4}
 
             // 0~10 인덱스 값 비교
-            for (int i = 0; i <= 10; i++) {
-              if (info[i] == 0 && nowRyanShot[i] == 0) {
-                continue;
-              }
-              if (info[i] < nowRyanShot[i]) {
-                ryanScore += 10 - i;
-              } else {
-                apeachScore += 10 - i;
-              }
-            }
+            scoreCheck(info, nowRyanShot);
 
-            System.out.println(Arrays.toString(nowRyanShot) + " Ryan: " + ryanScore + " | Apeach: " + apeachScore);
-            ryanScore = 0; apeachScore = 0;
             continue;
           }
 
@@ -88,15 +82,42 @@ public class P05_ArcheryContest3 {
     }
   }
 
+  static void scoreCheck(int[] info, int[] nowRyanShot) {
+    for (int i = 0; i <= 10; i++) {
+      if (info[i] == 0 && nowRyanShot[i] == 0) {
+        continue;
+      }
+      if (info[i] < nowRyanShot[i]) {
+        ryanScore += 10 - i;
+      } else {
+        apeachScore += 10 - i;
+      }
+    }
 
-  public static int[] solution(int n, int[] info) {
-    int[] answer = {};
+    // Ryan 최대 점수와 비교
+    if (maxScoreDifRyanWin < (ryanScore - apeachScore)) {
 
+      ryanShotBest = nowRyanShot;
+      maxScoreDifRyanWin = ryanScore - apeachScore;  // 49
 
-    setN(RyanShot, n, n, info);
+      // 동점일 때
+    } else if (maxScoreDifRyanWin == (ryanScore - apeachScore)) {
 
+      // 낮은 점수 더 많이 맞힌게 어떤건지 비교
+      for (int i = 10; i >= 0; i--) {
 
-    return answer;
+        if (ryanShotBest[i] < nowRyanShot[i]) {
+          ryanShotBest = nowRyanShot;
+          maxScoreDifRyanWin = ryanScore - apeachScore;
+          break;
+        } else if (ryanShotBest[i] > nowRyanShot[i]) {
+          break;
+        }
+      }
+    }
+
+    //    System.out.println(Arrays.toString(nowRyanShot) + " Ryan: " + ryanScore + " | Apeach: " + apeachScore + " | maxScoreDif " + maxScoreDifRyanWin + " " + Arrays.toString(ryanShotBest));
+    ryanScore = 0; apeachScore = 0;
   }
 
 }
