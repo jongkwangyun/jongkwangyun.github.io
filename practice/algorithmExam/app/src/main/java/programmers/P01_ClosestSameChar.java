@@ -8,7 +8,7 @@ public class P01_ClosestSameChar {
     // 가장 가까운 글자
   }
 
-  public int[] solution(String s) {
+  public int[] solution(String s) { 
     int[] answer = new int[s.length()];
     Arrays.fill(answer, -1);
 

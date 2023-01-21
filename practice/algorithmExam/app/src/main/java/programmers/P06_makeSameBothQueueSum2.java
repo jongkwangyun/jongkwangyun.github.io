@@ -17,9 +17,8 @@ public class P06_makeSameBothQueueSum2 {
   class Solution {
     public int solution(int[] queue1, int[] queue2) {
       int answer;
-      Queue<Integer> q1 = new LinkedList<>();
-      Queue<Integer> q2 = new LinkedList<>();
-
+      int[] queue = new in
+      
       for (int i = 0; i < queue1.length; i++) {
         q1.add(queue1[i]);
         q2.add(queue2[i]);
