@@ -35,17 +35,17 @@ let nowToday = new Date(now);
 let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
-const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)']
+const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
 let nowHour = nowToday.getHours().toString().padStart(2, '0');
 let nowMinute = nowToday.getMinutes().toString().padStart(2, '0');
 
 // 엊그제, 어제, 오늘, 내일 YYYYMMDD
 let nowY4MMDD;  // 현 시간 기준 조회시 필요한 Y4MMDD
 let nowBaseTime;  // 현 시간 기준 조회시 필요한 BaseTime
-let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString() + dbYesterday.getDate().toString();
-let yesterdayY4MMDD = yesterday.getFullYear().toString() + (yesterday.getMonth() + 1).toString() + yesterday.getDate().toString();
-let todayY4MMDD = nowToday.getFullYear().toString() + (nowToday.getMonth() + 1).toString() + nowToday.getDate().toString();
-let tomorrowY4MMDD = tomorrow.getFullYear().toString() + (tomorrow.getMonth() + 1).toString() + tomorrow.getDate().toString();
+let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + ((dbYesterday.getMonth() + 1).toString()).padStart(2, '0') + dbYesterday.getDate().toString();
+let yesterdayY4MMDD = yesterday.getFullYear().toString() + ((yesterday.getMonth() + 1).toString()).padStart(2, '0') + yesterday.getDate().toString();
+let todayY4MMDD = nowToday.getFullYear().toString() + ((nowToday.getMonth() + 1).toString()).padStart(2, '0') + nowToday.getDate().toString();
+let tomorrowY4MMDD = tomorrow.getFullYear().toString() + ((tomorrow.getMonth() + 1).toString()).padStart(2, '0') + tomorrow.getDate().toString();
 let timeToday;  // 현재 시간
 
 // 어제, 오늘, 내일에 쓸 변수 선언
@@ -174,6 +174,8 @@ function getDanGiNow() {
     }
   }
 
+  // https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=20230120&base_time=0500&nx=61&ny=125
+  
   // 현 시간 기준 조회시 가져올 데이터 주소
   let openNowApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
     + 'serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D'
