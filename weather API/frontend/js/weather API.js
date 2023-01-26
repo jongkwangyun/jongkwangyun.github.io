@@ -115,7 +115,7 @@ SNO : 1시간 신적설     범주 (1 cm)  8          적설없음, 1cm미
 
 // 데이터 요청 실행
 getDanGi();
-getDanGiNow();
+// getDanGiNow();
 
 function getDanGi() {
 
@@ -136,7 +136,7 @@ function getDanGi() {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         danGi = JSON.parse(xhr.responseText);
-        // getDanGiNow();
+        getDanGiNow();
       }
     }
   }
@@ -226,7 +226,7 @@ function handleResponse() {
   todayCondition22[0].innerText = `🌡온도 ${getValue(TMP, todayY4MMDD, OFFWORK)} ℃`;
   todayCondition22[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, OFFWORK)} %`;
   todayCondition22[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, OFFWORK)} %`;
-
+  
   toIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, NOW), MEDIUM);
   tomorrowTemp.innerText = `🌡온도 ${getValue(TMP, tomorrowY4MMDD, NOW)} ℃`;
   toGoIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, GOTOWORK), SMALL);
@@ -331,7 +331,6 @@ function getCategoryDateArr(category, whichdate, goOff) {
         getWhichdateArr(whichdate);
       }
     } else if (goOff == NOW) {  // 현재 시간 강수 확인
-      // console.log(category, whichdate, goOff, timeToday, categoryArr);
       if (categoryArr[timeToday].fcstValue == '0') {
         SKYorPTY = SKY;
         getCategoryArr(SKY);
@@ -343,7 +342,7 @@ function getCategoryDateArr(category, whichdate, goOff) {
 
 // category 별 배열 변경
 function getCategoryArr(category, whichdate, goOff) {
-
+    
   let danGiArr = danGi.response.body.items.item;  // item 객체 모음 배열
 
   // 오늘 날씨 중 출근 퇴근은 현 시간 기준으로 (엊그제 or 실시간) 쓸지 결정
@@ -352,7 +351,6 @@ function getCategoryArr(category, whichdate, goOff) {
     // NOW 이면 최근 데이터 반영
     if (goOff == NOW) {
       danGiArr = nowDanGi.response.body.items.item;
-
       // 출근일때
     } else if (goOff == GOTOWORK) {
 
@@ -363,7 +361,7 @@ function getCategoryArr(category, whichdate, goOff) {
 
       // 퇴근일때
     } else if (goOff == OFFWORK) {
-
+    
       // 현 시간이 1800 이전이면 오늘 퇴근에 오늘 1400 기준 데이터 사용
       if (parseInt(nowHour + nowMinute) < 1800) {
         danGiArr = nowDanGi.response.body.items.item;
@@ -399,10 +397,10 @@ function getReturnVal(category, goOff) {
   if (category == TMP || category == POP || category == REH) {  // 온도, 강수확률, 습도 리턴
     switch (goOff) {
       case GOTOWORK:
-        return Math.round((parseInt(categoryArr[7].fcstValue) + parseInt(categoryArr[8].fcstValue)) / 2);  // parseInt(시간항목.값)
+        return Math.round((parseInt(categoryArr[7-(categoryArr.length-24)].fcstValue) + parseInt(categoryArr[8-(categoryArr.length-24)].fcstValue)) / 2);  // parseInt(시간항목.값)
         break;
       case OFFWORK:
-        return Math.round((parseInt(categoryArr[17].fcstValue) + parseInt(categoryArr[18].fcstValue)) / 2);
+        return Math.round((parseInt(categoryArr[17-(categoryArr.length-24)].fcstValue) + parseInt(categoryArr[18-(categoryArr.length-24)].fcstValue)) / 2);
         break;
       case NOW:
         return parseInt(categoryArr[timeToday].fcstValue);
