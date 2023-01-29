@@ -2,38 +2,34 @@
 <html lang="en">
 
 <head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-  </style>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>⌨개발자 입니다🙂</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <header>
-    <div>
-      ⌨개발자 입니다🙂
-    </div>
+    <div id="header2"></div>
+    <div id="header-title2">⌨개발자 입니다🙂</div>
   </header>
   <main>
-    <nav>
+    <div id="main">
+      <nav>
       <figure>
-        <img src="../static html/2014 jk resize.jpg" width="20%" alt="개발자" title="개발자">
+        <img src="../static html/image/2014 jk resize.jpg" width="20%" alt="개발자" title="개발자">
         <caption>HTML, CSS, Javacript, Java 개발자</caption>
       </figure>
       <div>
         <ul>
-          <li><a href="index.html">Index</a></li>
+          <li><a href="../index.html">Index</a></li>
           <li><a href="posts.html">Posts</a></li>
         </ul>
         <h1>
       </div>
     </nav>
     <section>
-      <br>
       <h1>Hypervisor란?</h1>
       <br>
       <h3>✔ Hypervisor의 정의</h3>
@@ -41,7 +37,7 @@
 
         <b>하이퍼바이저</b>는 호스트 컴퓨터에서 다수의 운영 체제를 동시에 실행하기 위한 논리적 플랫폼을 말한다. 가상화 머신 모니터 또는 가상화 머신 매니저라고도 부른다.
         <br>
-        <img src="../images/hypervisor.png" width=400px alt="하이퍼바이저" title="하이퍼바이저">
+        <img src="image/hypervisor.png" width=400px alt="하이퍼바이저" title="하이퍼바이저">
         <br>
         쉽게 말하면 <b>하이퍼바이저는</b> 소프트웨어로, 하나의 컴퓨터에 설치하여 여러개의 컴퓨터처럼 사용할 수 있도록 해줍니다.
         <b>물리적 머신</b>을 다수의 <b>가상 머신</b>으로 분할할 수 있습니다.
@@ -52,7 +48,7 @@
       <h3>✔ 하이퍼바이저의 타입 구분</h3>
       <p>
         하이퍼바이저는 두 가지 타입으로 나뉩니다. <br><br>
-        <img src="../images/hypervisor%20type.png" width=400px alt="하이퍼바이저 타입 구분" title="하이퍼바이저 타입 구분">
+        <img src="image/hypervisor%20type.png" width=400px alt="하이퍼바이저 타입 구분" title="하이퍼바이저 타입 구분">
         <br><br>
         - Type 1 <br>
         : <b>네이티브</b> 또는
@@ -60,7 +56,7 @@
         하드웨어에 직접 설치되어 하드웨어를 게스트 OS를 설치할 수 있는 여러 개의 가상 머신으로 분할해줍니다.
         RAM 용량 초과/동적 할당을 <b>지원</b>합니다.
         <br><br>
-        <img src="../images/hypervisor%20type1.png" width=400px alt="하이퍼바이저 타입 1" title="하이퍼바이저 타입 1">
+        <img src="image/hypervisor%20type1.png" width=400px alt="하이퍼바이저 타입 1" title="하이퍼바이저 타입 1">
         <br><br>
 
         - Type 2 <br>
@@ -68,14 +64,22 @@
         호스트 운영체제 내에 설치되어 하이퍼바이저 관리 콘솔이 필요하지 않다는 장점이 있습니다.
         RAM 용량 초과/동적 할당을 <b>지원하지 않아서</b> 가상 머신 리소스 할당에 주의해야 합니다.
         <br><br>
-        <img src="../images/hypervisor%20type2.png" width=400px alt="하이퍼바이저 타입 2" title="하이퍼바이저 타입 2">
+        <img src="image/hypervisor%20type2.png" width=400px alt="하이퍼바이저 타입 2" title="하이퍼바이저 타입 2">
 
       </p>
       <br>
     </section>
   </main>
   <footer>
-    <div>jongkwangyun. All rights reserved</div>
+    <div>
+      <a href="https://github.com/jongkwangyun" target="_blank" title="github">
+        <img src="image/github icon.png" id="icon-github" class="clickable-icon"></img></a>
+      <a href="https://breakthedays.tistory.com" target="_blank" title="tistory">
+        <img src="image/tistory icon.png" id="icon-tistory" class="clickable-icon"></img></a>
+      <br>
+      Github Pages of jongkwangyun <br>
+      Page design inspired by poiemaweb
+    </div>
   </footer>
 </body>
 

@@ -1,0 +1,230 @@
+/* 모바일 768px 타블렛 1200px 데스크탑  */
+
+@font-face {
+    font-family: 'KorailRoundGothicBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    font-family: 'KorailRoundGothicBold';
+}
+
+body {
+    margin: 0px;
+    background: linear-gradient(90deg, #1ecf62 12%, #0dac91 46%, #348008 70%, #0d7455 94%, #0a664a 100%)
+}
+
+header {
+    
+}
+
+main {
+    margin: 0 auto;
+    padding-top: 30px;
+    display: flex;
+    line-height: 150%;
+    min-height: 700px;
+    position: relative;
+}
+
+nav {
+    width: 23%;
+    background-color: #bb87e6;
+}
+
+section {
+    background-color: white;
+    width: 77%;
+    padding: 30px;
+    line-height: 2em;
+    min-height: calc(100vh - 340px);
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: lightblue;
+    height: 200px;
+}
+
+table {
+    font-size: large;
+    font-weight: bold;
+}
+
+tr {
+    height: 50px;
+}
+
+tr>td:nth-child(1) {
+    width: 50px;
+}
+
+tr>td:nth-child(2) {
+    width: 300px;
+}
+
+td>a {
+    text-decoration: none;
+}
+
+td>a:hover {
+    text-decoration: underline;
+}
+
+li>a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
+    font-weight: 900;
+    line-height: 2.2;
+    padding: 0 20px;
+    margin: 10px;
+}
+
+li>a:hover {
+    color: #ffffff;
+}
+
+ul {
+    list-style: none;
+}
+
+figure img {
+    margin-bottom: 20px;
+    box-shadow: 1px 1px gray;
+}
+
+footer div {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+}
+
+nav img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+nav div {
+    margin: 40px 40px;
+}
+
+.clickable-icon {
+    cursor: pointer;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.clickable-icon:hover {
+    transform: scale(1.3);
+    transition: all 0.2s ease-out;
+}
+
+
+#header {
+    background: url('../image/city.jpg') no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 100vh;
+    /* filter: blur(1px); */
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    color: white;
+    font-size: 4em;
+    font-weight: bold;
+}
+
+#header2 {
+    background: url('../image/city.jpg') no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    height: 50px;
+    /* filter: blur(1px); */
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#header-title2 {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    margin-left: -300px;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#main {
+    width: 1200px;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+}
+
+#logo {
+    margin-top: 10px;
+}
+
+#icon-github {
+    filter: invert(100%);
+}
+
+x* {
+    border: 1px solid gray;
+}
+
+/* @media (max-width: 1200px) {
+    #main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            border-radius: 3px 3px 0 0;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+        width: 100%;
+        background-color: #bb87e6;
+    }
+
+    nav img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 0px;
+    }
+
+    caption {
+        display: none;
+    }
+} */

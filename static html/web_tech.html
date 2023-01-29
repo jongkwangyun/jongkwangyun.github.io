@@ -2,38 +2,34 @@
 <html lang="en">
 
 <head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-  </style>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>⌨개발자 입니다🙂</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <header>
-    <div>
-      ⌨개발자 입니다🙂
-    </div>
+    <div id="header2"></div>
+    <div id="header-title2">⌨개발자 입니다🙂</div>
   </header>
   <main>
-    <nav>
+    <div id="main">
+      <nav>
       <figure>
-        <img src="../static html/2014 jk resize.jpg" width="20%" alt="개발자" title="개발자">
+        <img src="../static html/image/2014 jk resize.jpg" width="20%" alt="개발자" title="개발자">
         <caption>HTML, CSS, Javacript, Java 개발자</caption>
       </figure>
       <div>
         <ul>
-          <li><a href="index.html">Index</a></li>
+          <li><a href="../index.html">Index</a></li>
           <li><a href="posts.html">Posts</a></li>
         </ul>
         <h1>
       </div>
     </nav>
     <section>
-      <br>
       <h1>웹기술의 등장 과정</h1>
       <br>
 
@@ -46,8 +42,8 @@
         리가 개발한 월드 와이드 웹(World Wide Web)이다. 팀 버너스는 1989년 월드 와이드 웹의 하이퍼텍스트 시스템을 고안하여 개발했다. 최초로 그림을 텍스트와 표시해주는 인터넷 브라우저인
         Mosaic가 1993년에 나왔다.
       </p>
-      <img src="../images/mosaic.jpg" alt="인터넷 브라우저 모자이크" title="인터넷 브라우저 모자이크">
-
+      <img src="image/mosaic.jpg" alt="인터넷 브라우저 모자이크" title="인터넷 브라우저 모자이크">
+      <br><br>
       <b>2. 웹 기술의 처음 목적과 지금 활용되는 상황이 어떻게 다른지?</b><br>
       <br>
       <p>
@@ -56,12 +52,20 @@
         현재의 인터넷은 학자간 정보 교환의 의미를 초월하여 문화와 상업에 막대한 영향을 미쳤다. 이는 email, 메신저, VoIP 전화, 화상 통화뿐 아니라, 블로그, 소셜 네트워크, 온라인 쇼핑 사이트,
         게임 등 전세계를 하나로 묶는 기술이 되었다.
       </p>
-      <img src="../images/nowinternet.png" alt="현재의 인터넷" title="현재의 인터넷">
+      <img src="image/nowinternet.png" alt="현재의 인터넷" title="현재의 인터넷">
       <br>
     </section>
   </main>
   <footer>
-    <div>jongkwangyun. All rights reserved</div>
+    <div>
+      <a href="https://github.com/jongkwangyun" target="_blank" title="github">
+        <img src="image/github icon.png" id="icon-github" class="clickable-icon"></img></a>
+      <a href="https://breakthedays.tistory.com" target="_blank" title="tistory">
+        <img src="image/tistory icon.png" id="icon-tistory" class="clickable-icon"></img></a>
+      <br>
+      Github Pages of jongkwangyun <br>
+      Page design inspired by poiemaweb
+    </div>
   </footer>
 </body>
 
