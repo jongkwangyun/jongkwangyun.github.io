@@ -35,17 +35,17 @@ let nowToday = new Date(now);
 let dbYesterday = new Date(now.setDate(now.getDate() - 2));
 let yesterday = new Date(now.setDate(now.getDate() + 1));
 let tomorrow = new Date(now.setDate(now.getDate() + 2));
-const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
+const WEEKDAY = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)']
 let nowHour = nowToday.getHours().toString().padStart(2, '0');
 let nowMinute = nowToday.getMinutes().toString().padStart(2, '0');
 
 // 엊그제, 어제, 오늘, 내일 YYYYMMDD
 let nowY4MMDD;  // 현 시간 기준 조회시 필요한 Y4MMDD
 let nowBaseTime;  // 현 시간 기준 조회시 필요한 BaseTime
-let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + ((dbYesterday.getMonth() + 1).toString()).padStart(2, '0') + dbYesterday.getDate().toString();
-let yesterdayY4MMDD = yesterday.getFullYear().toString() + ((yesterday.getMonth() + 1).toString()).padStart(2, '0') + yesterday.getDate().toString();
-let todayY4MMDD = nowToday.getFullYear().toString() + ((nowToday.getMonth() + 1).toString()).padStart(2, '0') + nowToday.getDate().toString();
-let tomorrowY4MMDD = tomorrow.getFullYear().toString() + ((tomorrow.getMonth() + 1).toString()).padStart(2, '0') + tomorrow.getDate().toString();
+let DbYesterdayY4MMDD = dbYesterday.getFullYear().toString() + (dbYesterday.getMonth() + 1).toString().padStart(2, '0') + dbYesterday.getDate().toString();
+let yesterdayY4MMDD = yesterday.getFullYear().toString() + (yesterday.getMonth() + 1).toString().padStart(2, '0') + yesterday.getDate().toString();
+let todayY4MMDD = nowToday.getFullYear().toString() + (nowToday.getMonth() + 1).toString().padStart(2, '0') + nowToday.getDate().toString();
+let tomorrowY4MMDD = tomorrow.getFullYear().toString() + (tomorrow.getMonth() + 1).toString().padStart(2, '0') + tomorrow.getDate().toString();
 let timeToday;  // 현재 시간
 
 // 어제, 오늘, 내일에 쓸 변수 선언
@@ -174,8 +174,6 @@ function getDanGiNow() {
     }
   }
 
-  // https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=20230120&base_time=0500&nx=61&ny=125
-  
   // 현 시간 기준 조회시 가져올 데이터 주소
   let openNowApiUrl = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
     + 'serviceKey=SIpPDkmlBo0qtyFV%2FAeWpSdkJnYP7eifbqscOfjbMv54A%2FcMn%2FXTobs6G7YY5KBtM6uQO2cqcTkvxpO%2BxEfq6g%3D%3D'
@@ -186,7 +184,7 @@ function getDanGiNow() {
     + '&base_time=' + nowBaseTime
     + '&nx=61'  // 61, 125 : 강남구 역삼 1동(비트캠프)
     + '&ny=125';
-
+  
   var xhr = new XMLHttpRequest();
 
   xhr.onreadystatechange = () => {
@@ -226,7 +224,7 @@ function handleResponse() {
   todayCondition22[0].innerText = `🌡온도 ${getValue(TMP, todayY4MMDD, OFFWORK)} ℃`;
   todayCondition22[1].innerText = `💧습도 ${getValue(REH, todayY4MMDD, OFFWORK)} %`;
   todayCondition22[2].innerText = `☂강수 ${getValue(POP, todayY4MMDD, OFFWORK)} %`;
-  
+
   toIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, NOW), MEDIUM);
   tomorrowTemp.innerText = `🌡온도 ${getValue(TMP, tomorrowY4MMDD, NOW)} ℃`;
   toGoIcon.className = getIconClassName(getValue(SP, tomorrowY4MMDD, GOTOWORK), SMALL);
@@ -331,6 +329,7 @@ function getCategoryDateArr(category, whichdate, goOff) {
         getWhichdateArr(whichdate);
       }
     } else if (goOff == NOW) {  // 현재 시간 강수 확인
+      // console.log(category, whichdate, goOff, timeToday, categoryArr);
       if (categoryArr[timeToday].fcstValue == '0') {
         SKYorPTY = SKY;
         getCategoryArr(SKY);
@@ -342,7 +341,7 @@ function getCategoryDateArr(category, whichdate, goOff) {
 
 // category 별 배열 변경
 function getCategoryArr(category, whichdate, goOff) {
-    
+
   let danGiArr = danGi.response.body.items.item;  // item 객체 모음 배열
 
   // 오늘 날씨 중 출근 퇴근은 현 시간 기준으로 (엊그제 or 실시간) 쓸지 결정
@@ -351,6 +350,7 @@ function getCategoryArr(category, whichdate, goOff) {
     // NOW 이면 최근 데이터 반영
     if (goOff == NOW) {
       danGiArr = nowDanGi.response.body.items.item;
+
       // 출근일때
     } else if (goOff == GOTOWORK) {
 
@@ -361,7 +361,7 @@ function getCategoryArr(category, whichdate, goOff) {
 
       // 퇴근일때
     } else if (goOff == OFFWORK) {
-    
+
       // 현 시간이 1800 이전이면 오늘 퇴근에 오늘 1400 기준 데이터 사용
       if (parseInt(nowHour + nowMinute) < 1800) {
         danGiArr = nowDanGi.response.body.items.item;
@@ -397,10 +397,10 @@ function getReturnVal(category, goOff) {
   if (category == TMP || category == POP || category == REH) {  // 온도, 강수확률, 습도 리턴
     switch (goOff) {
       case GOTOWORK:
-        return Math.round((parseInt(categoryArr[7-(categoryArr.length-24)].fcstValue) + parseInt(categoryArr[8-(categoryArr.length-24)].fcstValue)) / 2);  // parseInt(시간항목.값)
+        return Math.round((parseInt(categoryArr[goToWorkNum].fcstValue) + parseInt(categoryArr[goToWorkNum + 1].fcstValue)) / 2);  // parseInt(시간항목.값)
         break;
       case OFFWORK:
-        return Math.round((parseInt(categoryArr[17-(categoryArr.length-24)].fcstValue) + parseInt(categoryArr[18-(categoryArr.length-24)].fcstValue)) / 2);
+        return Math.round((parseInt(categoryArr[offWorkNum].fcstValue) + parseInt(categoryArr[offWorkNum + 1].fcstValue)) / 2);
         break;
       case NOW:
         return parseInt(categoryArr[timeToday].fcstValue);
@@ -410,9 +410,9 @@ function getReturnVal(category, goOff) {
     }
   } else if (category == SP) {  // 하늘 및 강수 리턴
     if (goOff == GOTOWORK) {
-      return parseInt(categoryArr[7].fcstValue) > parseInt(categoryArr[8].fcstValue) ? parseInt(categoryArr[7].fcstValue) : parseInt(categoryArr[8].fcstValue);
+      return parseInt(categoryArr[goToWorkNum].fcstValue) > parseInt(categoryArr[goToWorkNum + 1].fcstValue) ? parseInt(categoryArr[7].fcstValue) : parseInt(categoryArr[8].fcstValue);
     } else if (goOff == OFFWORK) {
-      return parseInt(categoryArr[17].fcstValue) > parseInt(categoryArr[18].fcstValue) ? parseInt(categoryArr[17].fcstValue) : parseInt(categoryArr[18].fcstValue);
+      return parseInt(categoryArr[offWorkNum].fcstValue) > parseInt(categoryArr[offWorkNum + 1].fcstValue) ? parseInt(categoryArr[17].fcstValue) : parseInt(categoryArr[18].fcstValue);
     } else if (goOff == NOW) {
       return parseInt(categoryArr[timeToday].fcstValue)
     } else {
