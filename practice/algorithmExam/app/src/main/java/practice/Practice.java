@@ -4,12 +4,12 @@ public class Practice {
 
   public static void main(String[] args) {
 
-    enum Direction {
-      EAST, WEST, SOUTH, NORTH
+    int a = 5;
+    boolean b;
+    while(b = a >= 0) {
+      System.out.println(b);
+      System.out.println(a--);
     }
-
-    System.out.println(Direction.EAST);
-
 
   }
 

@@ -18,7 +18,6 @@ public class P03_GetReportResults3 {
     String answerStr = Arrays.toString(answer);
 
     System.out.println(answerStr);
-
   }
 
   // 배열 대신 String 사용
