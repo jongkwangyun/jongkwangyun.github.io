@@ -1,0 +1,3798 @@
+Microsoft Windows [Version 10.0.22621.1105]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>cd git
+
+C:\Users\bitcamp\git>cd jongkwangyun.github.io
+
+C:\Users\bitcamp\git\jongkwangyun.github.io>git pull
+Already up to date.
+
+C:\Users\bitcamp\git\jongkwangyun.github.io>mysql -ustudy -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use studydb;
+ERROR 1049 (42000): Unknown database 'studydb'
+MariaDB [(none)]>   create table test1(
+    ->     no int primary key,
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int,
+    ->     constraint test1_uk unique (name, age),
+    ->     fulltext index test1_name_idx (name)
+    ->   );
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create database studydb;
+Query OK, 1 row affected (0.020 sec)
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]>   create table test1(
+    ->     no int primary key,
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int,
+    ->     constraint test1_uk unique (name, age),
+    ->     fulltext index test1_name_idx (name)
+    ->   );
+Query OK, 0 rows affected (0.051 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(1,'aaa',20,80,80,80);
+Query OK, 1 row affected (0.040 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(2,'bbb',21,90,80,80);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(3,'ccc',20,80,80,80);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(4,'ddd',22,90,80,80);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(5,'eee',20,80,80,80);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+------+------+
+| no | name | age  | kor  | eng  | math |
++----+------+------+------+------+------+
+|  1 | aaa  |   20 |   80 |   80 |   80 |
+|  2 | bbb  |   21 |   90 |   80 |   80 |
+|  3 | ccc  |   20 |   80 |   80 |   80 |
+|  4 | ddd  |   22 |   90 |   80 |   80 |
+|  5 | eee  |   20 |   80 |   80 |   80 |
++----+------+------+------+------+------+
+5 rows in set (0.005 sec)
+
+MariaDB [studydb]> select * from test1 where name='ccc';
++----+------+------+------+------+------+
+| no | name | age  | kor  | eng  | math |
++----+------+------+------+------+------+
+|  3 | ccc  |   20 |   80 |   80 |   80 |
++----+------+------+------+------+------+
+1 row in set (0.007 sec)
+
+MariaDB [studydb]> select * from test1 where name="ccc";
++----+------+------+------+------+------+
+| no | name | age  | kor  | eng  | math |
++----+------+------+------+------+------+
+|  3 | ccc  |   20 |   80 |   80 |   80 |
++----+------+------+------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.027 sec)
+
+MariaDB [studydb]>   create table test1 (
+    ->     name varchar(3),
+    ->     kor int,
+    ->     eng int,
+    ->     math int,
+    ->     sum int,
+    ->     aver int
+    ->   );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> desc test1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| name  | varchar(3) | YES  |     | NULL    |       |
+| kor   | int(11)    | YES  |     | NULL    |       |
+| eng   | int(11)    | YES  |     | NULL    |       |
+| math  | int(11)    | YES  |     | NULL    |       |
+| sum   | int(11)    | YES  |     | NULL    |       |
+| aver  | int(11)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+6 rows in set (0.020 sec)
+
+MariaDB [studydb]> alter table test1
+    -> add column no int;
+Query OK, 0 rows affected (0.010 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| name  | varchar(3) | YES  |     | NULL    |       |
+| kor   | int(11)    | YES  |     | NULL    |       |
+| eng   | int(11)    | YES  |     | NULL    |       |
+| math  | int(11)    | YES  |     | NULL    |       |
+| sum   | int(11)    | YES  |     | NULL    |       |
+| aver  | int(11)    | YES  |     | NULL    |       |
+| no    | int(11)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+7 rows in set (0.010 sec)
+
+MariaDB [studydb]> alter table test1 add column age int;
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| name  | varchar(3) | YES  |     | NULL    |       |
+| kor   | int(11)    | YES  |     | NULL    |       |
+| eng   | int(11)    | YES  |     | NULL    |       |
+| math  | int(11)    | YES  |     | NULL    |       |
+| sum   | int(11)    | YES  |     | NULL    |       |
+| aver  | int(11)    | YES  |     | NULL    |       |
+| no    | int(11)    | YES  |     | NULL    |       |
+| age   | int(11)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+8 rows in set (0.009 sec)
+
+MariaDB [studydb]> alter table test1;
+Query OK, 0 rows affected (0.000 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> alter table test1
+    -> add column no int,
+    -> add column
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [studydb]> alter table test1
+    -> add column no2 int,
+    -> add column age2 int;
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| name  | varchar(3) | YES  |     | NULL    |       |
+| kor   | int(11)    | YES  |     | NULL    |       |
+| eng   | int(11)    | YES  |     | NULL    |       |
+| math  | int(11)    | YES  |     | NULL    |       |
+| sum   | int(11)    | YES  |     | NULL    |       |
+| aver  | int(11)    | YES  |     | NULL    |       |
+| no    | int(11)    | YES  |     | NULL    |       |
+| age   | int(11)    | YES  |     | NULL    |       |
+| no2   | int(11)    | YES  |     | NULL    |       |
+| age2  | int(11)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+10 rows in set (0.015 sec)
+
+MariaDB [studydb]> alter table test1
+    -> add constraint test1_pk primary key (no),
+    -> add constraint test1_uk unique (name, age),
+    -> add fulltext index test1_name_idx (name);
+Query OK, 0 rows affected, 1 warning (0.049 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]> desc test1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| name  | varchar(3) | YES  | MUL | NULL    |       |
+| kor   | int(11)    | YES  |     | NULL    |       |
+| eng   | int(11)    | YES  |     | NULL    |       |
+| math  | int(11)    | YES  |     | NULL    |       |
+| sum   | int(11)    | YES  |     | NULL    |       |
+| aver  | int(11)    | YES  |     | NULL    |       |
+| no    | int(11)    | NO   | PRI | NULL    |       |
+| age   | int(11)    | YES  |     | NULL    |       |
+| no2   | int(11)    | YES  |     | NULL    |       |
+| age2  | int(11)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+10 rows in set (0.015 sec)
+
+MariaDB [studydb]> alter table test1
+    -> modify column name varchar(20) not null,
+    -> modify column age int not null,
+    -> modify column kor int not null,
+    -> modify column eng int not null,
+    -> modify column math int not null,
+    -> modify column sum int not null,
+    -> modify column aver float not null;
+Query OK, 0 rows affected (0.072 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | NO   | MUL | NULL    |       |
+| kor   | int(11)     | NO   |     | NULL    |       |
+| eng   | int(11)     | NO   |     | NULL    |       |
+| math  | int(11)     | NO   |     | NULL    |       |
+| sum   | int(11)     | NO   |     | NULL    |       |
+| aver  | float       | NO   |     | NULL    |       |
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| age   | int(11)     | NO   |     | NULL    |       |
+| no2   | int(11)     | YES  |     | NULL    |       |
+| age2  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+10 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1(no,name,age,kor,eng,math,sum,aver)
+    ->   values(1,'aaa',20,100,100,100,300,100);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test1(no,name,age,kor,eng,math,sum,aver)
+    ->   values(2,'bbb',21,100,100,100,300,100);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 다음은 name과 age의 값이 중복되기 때문에 입력 거절된다.*/
+MariaDB [studydb]> insert into test1(no,name,age,kor,eng,math,sum,aver)
+    ->   values(3,'bbb',21,100,100,100,300,100);
+ERROR 1062 (23000): Duplicate entry 'bbb-21' for key 'test1_uk'
+MariaDB [studydb]> select * from test1;
++------+-----+-----+------+-----+------+----+-----+------+------+
+| name | kor | eng | math | sum | aver | no | age | no2  | age2 |
++------+-----+-----+------+-----+------+----+-----+------+------+
+| aaa  | 100 | 100 |  100 | 300 |  100 |  1 |  20 | NULL | NULL |
+| bbb  | 100 | 100 |  100 | 300 |  100 |  2 |  21 | NULL | NULL |
++------+-----+-----+------+-----+------+----+-----+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.030 sec)
+
+MariaDB [studydb]> create table test1(
+    -> no int not null,
+    -> name varchar(20) not null
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]> alter table test1
+    -> modify column no int not null auto_increment;
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+MariaDB [studydb]> alter table test1
+    -> add constraint primary key (no);
+Query OK, 0 rows affected (0.027 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.013 sec)
+
+MariaDB [studydb]> alter table test1
+    -> modify column no int not null auto_increment;
+Query OK, 0 rows affected (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| no    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.012 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(1, 'xxx');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+
+| no | name |
++----+------+
+|  1 | xxx  |
++----+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(100, 'yyy');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
++-----+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
++-----+------+
+2 rows in set (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name) values('bbb'); /* no는 101이 입력된다.*/
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
++-----+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name) values('ccc'); /* no=102 */
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(name) values('ddd'); /* no=103 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
+| 102 | ccc  |
+| 103 | ddd  |
++-----+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1 where no=103;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
+| 102 | ccc  |
++-----+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name) values('eee');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
+| 102 | ccc  |
+| 104 | eee  |
++-----+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
+| 102 | ccc  |
+| 104 | eee  |
++-----+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name) values('123456789012345678901234');
+ERROR 1406 (22001): Data too long for column 'name' at row 1
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
+| 102 | ccc  |
+| 104 | eee  |
++-----+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name) values('fff');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++-----+------+
+| no  | name |
++-----+------+
+|   1 | xxx  |
+| 100 | yyy  |
+| 101 | bbb  |
+| 102 | ccc  |
+| 104 | eee  |
+| 105 | fff  |
++-----+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.023 sec)
+
+MariaDB [studydb]> create table test1 (
+    ->   no int primary key auto_increment,
+    ->   name varchar(20) not null,
+    ->   class varchar(10) not null,
+    ->   working char(1) not null,
+    ->   tel varchar(20)
+    -> );
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('aaa','java100','Y');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('bbb','java100','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ccc','java100','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ddd','java100','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('eee','java100','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('kkk','java101','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('lll','java101','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('mmm','java101','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('nnn','java101','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ooo','java101','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  1 | aaa  | java100 | Y       | NULL |
+|  2 | bbb  | java100 | N       | NULL |
+|  3 | ccc  | java100 | Y       | NULL |
+|  4 | ddd  | java100 | N       | NULL |
+|  5 | eee  | java100 | Y       | NULL |
+|  6 | kkk  | java101 | N       | NULL |
+|  7 | lll  | java101 | Y       | NULL |
+|  8 | mmm  | java101 | N       | NULL |
+|  9 | nnn  | java101 | Y       | NULL |
+| 10 | ooo  | java101 | N       | NULL |
++----+------+---------+---------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name class from test1;
++----+-------+
+| no | class |
++----+-------+
+|  1 | aaa   |
+|  2 | bbb   |
+|  3 | ccc   |
+|  4 | ddd   |
+|  5 | eee   |
+|  6 | kkk   |
+|  7 | lll   |
+|  8 | mmm   |
+|  9 | nnn   |
+| 10 | ooo   |
++----+-------+
+10 rows in set (0.005 sec)
+
+MariaDB [studydb]> select no, name, class from test1;
++----+------+---------+
+| no | name | class   |
++----+------+---------+
+|  1 | aaa  | java100 |
+|  2 | bbb  | java100 |
+|  3 | ccc  | java100 |
+|  4 | ddd  | java100 |
+|  5 | eee  | java100 |
+|  6 | kkk  | java101 |
+|  7 | lll  | java101 |
+|  8 | mmm  | java101 |
+|  9 | nnn  | java101 |
+| 10 | ooo  | java101 |
++----+------+---------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name, class from test1 where working='N';
++----+------+---------+
+| no | name | class   |
++----+------+---------+
+|  2 | bbb  | java100 |
+|  4 | ddd  | java100 |
+|  6 | kkk  | java101 |
+|  8 | mmm  | java101 |
+| 10 | ooo  | java101 |
++----+------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> create view worker as
+    -> select no, name, class from test1 where working='Y';
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
+| worker            |
++-------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [studydb]> select * from worker;
++----+------+---------+
+| no | name | class   |
++----+------+---------+
+|  1 | aaa  | java100 |
+|  3 | ccc  | java100 |
+|  5 | eee  | java100 |
+|  7 | lll  | java101 |
+|  9 | nnn  | java101 |
++----+------+---------+
+5 rows in set (0.010 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ppp','java101','Y');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from worker;
++----+------+---------+
+| no | name | class   |
++----+------+---------+
+|  1 | aaa  | java100 |
+|  3 | ccc  | java100 |
+|  5 | eee  | java100 |
+|  7 | lll  | java101 |
+|  9 | nnn  | java101 |
+| 11 | ppp  | java101 |
++----+------+---------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop view worker;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select table_name, constraint_name, constraint_type
+    -> from table_constraints;
+ERROR 1146 (42S02): Table 'studydb.table_constraints' doesn't exist
+MariaDB [studydb]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| studydb            |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [studydb]> use information_schema;
+Database changed
+MariaDB [information_schema]> show tables;
++---------------------------------------+
+| Tables_in_information_schema          |
++---------------------------------------+
+| ALL_PLUGINS                           |
+| APPLICABLE_ROLES                      |
+| CHARACTER_SETS                        |
+| CHECK_CONSTRAINTS                     |
+| COLLATIONS                            |
+| COLLATION_CHARACTER_SET_APPLICABILITY |
+| COLUMNS                               |
+| COLUMN_PRIVILEGES                     |
+| ENABLED_ROLES                         |
+| ENGINES                               |
+| EVENTS                                |
+| FILES                                 |
+| GLOBAL_STATUS                         |
+| GLOBAL_VARIABLES                      |
+| KEYWORDS                              |
+| KEY_CACHES                            |
+| KEY_COLUMN_USAGE                      |
+| OPTIMIZER_TRACE                       |
+| PARAMETERS                            |
+| PARTITIONS                            |
+| PLUGINS                               |
+| PROCESSLIST                           |
+| PROFILING                             |
+| REFERENTIAL_CONSTRAINTS               |
+| ROUTINES                              |
+| SCHEMATA                              |
+| SCHEMA_PRIVILEGES                     |
+| SESSION_STATUS                        |
+| SESSION_VARIABLES                     |
+| STATISTICS                            |
+| SQL_FUNCTIONS                         |
+| SYSTEM_VARIABLES                      |
+| TABLES                                |
+| TABLESPACES                           |
+| TABLE_CONSTRAINTS                     |
+| TABLE_PRIVILEGES                      |
+| TRIGGERS                              |
+| USER_PRIVILEGES                       |
+| VIEWS                                 |
+| CLIENT_STATISTICS                     |
+| INDEX_STATISTICS                      |
+| INNODB_FT_CONFIG                      |
+| GEOMETRY_COLUMNS                      |
+| INNODB_SYS_TABLESTATS                 |
+| SPATIAL_REF_SYS                       |
+| USER_STATISTICS                       |
+| INNODB_TRX                            |
+| INNODB_CMP_PER_INDEX                  |
+| INNODB_METRICS                        |
+| INNODB_FT_DELETED                     |
+| INNODB_CMP                            |
+| THREAD_POOL_WAITS                     |
+| INNODB_CMP_RESET                      |
+| THREAD_POOL_QUEUES                    |
+| TABLE_STATISTICS                      |
+| INNODB_SYS_FIELDS                     |
+| INNODB_BUFFER_PAGE_LRU                |
+| INNODB_LOCKS                          |
+| INNODB_FT_INDEX_TABLE                 |
+| INNODB_CMPMEM                         |
+| THREAD_POOL_GROUPS                    |
+| INNODB_CMP_PER_INDEX_RESET            |
+| INNODB_SYS_FOREIGN_COLS               |
+| INNODB_FT_INDEX_CACHE                 |
+| INNODB_BUFFER_POOL_STATS              |
+| INNODB_FT_BEING_DELETED               |
+| INNODB_SYS_FOREIGN                    |
+| INNODB_CMPMEM_RESET                   |
+| INNODB_FT_DEFAULT_STOPWORD            |
+| INNODB_SYS_TABLES                     |
+| INNODB_SYS_COLUMNS                    |
+| INNODB_SYS_TABLESPACES                |
+| INNODB_SYS_INDEXES                    |
+| INNODB_BUFFER_PAGE                    |
+| INNODB_SYS_VIRTUAL                    |
+| user_variables                        |
+| INNODB_TABLESPACES_ENCRYPTION         |
+| INNODB_LOCK_WAITS                     |
+| THREAD_POOL_STATS                     |
++---------------------------------------+
+79 rows in set (0.000 sec)
+
+MariaDB [information_schema]> select table_name, constraint_name, constraint_type
+    -> from table_constraints;
++------------+-----------------+-----------------+
+| table_name | constraint_name | constraint_type |
++------------+-----------------+-----------------+
+| test1      | PRIMARY         | PRIMARY KEY     |
++------------+-----------------+-----------------+
+1 row in set (0.076 sec)
+
+MariaDB [information_schema]> select table_name, column_name, constraint_name
+    -> from key_column_usage;
++------------+-------------+-----------------+
+| table_name | column_name | constraint_name |
++------------+-------------+-----------------+
+| test1      | no          | PRIMARY         |
++------------+-------------+-----------------+
+1 row in set (0.073 sec)
+
+MariaDB [information_schema]> select
+    ->   t2.table_name,
+    ->   t2.column_name,
+    ->   t2.constraint_name,
+    ->   t1.constraint_type
+    -> from table_constraints t1
+    ->   inner join key_column_usage t2 on t2.constraint_name=t1.constraint_name;
++------------+-------------+-----------------+-----------------+
+| table_name | column_name | constraint_name | constraint_type |
++------------+-------------+-----------------+-----------------+
+| test1      | no          | PRIMARY         | PRIMARY KEY     |
++------------+-------------+-----------------+-----------------+
+1 row in set (0.126 sec)
+
+MariaDB [information_schema]> drop table test1;
+ERROR 1044 (42000): Access denied for user 'study'@'localhost' to database 'information_schema'
+MariaDB [information_schema]> use studydb;
+Database changed
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> show tables;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> create table test1 (
+    ->   no int not null,
+    ->   name varchar(20) not null,
+    ->   tel varchar(20) not null,
+    ->   fax varchar(20),
+    ->   pstno varchar(5),
+    ->   addr varchar(200)
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]> desc test1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| no    | int(11)      | NO   |     | NULL    |       |
+| name  | varchar(20)  | NO   |     | NULL    |       |
+| tel   | varchar(20)  | NO   |     | NULL    |       |
+| fax   | varchar(20)  | YES  |     | NULL    |       |
+| pstno | varchar(5)   | YES  |     | NULL    |       |
+| addr  | varchar(200) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+6 rows in set (0.013 sec)
+
+MariaDB [studydb]> alter table test1
+    -> add constraint test1_pk primary key (no);
+Query OK, 0 rows affected, 1 warning (0.019 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]> alter table test1
+    -> modify column no int not null auto_increment;
+Query OK, 0 rows affected (0.041 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| no    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20)  | NO   |     | NULL    |                |
+| tel   | varchar(20)  | NO   |     | NULL    |                |
+| fax   | varchar(20)  | YES  |     | NULL    |                |
+| pstno | varchar(5)   | YES  |     | NULL    |                |
+| addr  | varchar(200) | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+6 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1 values(null,'aaa','111','222','10101','seoul');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+-----+------+-------+-------+
+| no | name | tel | fax  | pstno | addr  |
++----+------+-----+------+-------+-------+
+|  1 | aaa  | 111 | 222  | 10101 | seoul |
++----+------+-----+------+-------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,fax,tel,no,pstno,addr)
+    ->     values('bbb','222','111',null,'10101','seoul');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+-----+------+-------+-------+
+| no | name | tel | fax  | pstno | addr  |
++----+------+-----+------+-------+-------+
+|  1 | aaa  | 111 | 222  | 10101 | seoul |
+|  2 | bbb  | 111 | 222  | 10101 | seoul |
++----+------+-----+------+-------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,tel) values('ccc','333');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+-----+------+-------+-------+
+| no | name | tel | fax  | pstno | addr  |
++----+------+-----+------+-------+-------+
+|  1 | aaa  | 111 | 222  | 10101 | seoul |
+|  2 | bbb  | 111 | 222  | 10101 | seoul |
+|  3 | ccc  | 333 | NULL | NULL  | NULL  |
++----+------+-----+------+-------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,tel) values
+    -> ('aaa', '1111'),
+    -> ('bbb', '2222'),
+    -> ('ccc', '3333');
+Query OK, 3 rows affected (0.001 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 222  | 10101 | seoul |
+|  2 | bbb  | 111  | 222  | 10101 | seoul |
+|  3 | ccc  | 333  | NULL | NULL  | NULL  |
+|  4 | aaa  | 1111 | NULL | NULL  | NULL  |
+|  5 | bbb  | 2222 | NULL | NULL  | NULL  |
+|  6 | ccc  | 3333 | NULL | NULL  | NULL  |
++----+------+------+------+-------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> create table test2 (
+    ->   no int primary key auto_increment,
+    ->   fullname varchar(20) not null,
+    ->   phone varchar(20) not null,
+    ->   kor int,
+    ->   eng int,
+    ->   math int
+    -> );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
+| test2             |
++-------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test2;
+Empty set (0.008 sec)
+
+MariaDB [studydb]> insert into test2(fullname, phone) select name, tel from test1 where addr='seoul';
+Query OK, 2 rows affected (0.013 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> select * from test2;
++----+----------+-------+------+------+------+
+| no | fullname | phone | kor  | eng  | math |
++----+----------+-------+------+------+------+
+|  1 | aaa      | 111   | NULL | NULL | NULL |
+|  2 | bbb      | 111   | NULL | NULL | NULL |
++----+----------+-------+------+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 222  | 10101 | seoul |
+|  2 | bbb  | 111  | 222  | 10101 | seoul |
+|  3 | ccc  | 333  | NULL | NULL  | NULL  |
+|  4 | aaa  | 1111 | NULL | NULL  | NULL  |
+|  5 | bbb  | 2222 | NULL | NULL  | NULL  |
+|  6 | ccc  | 3333 | NULL | NULL  | NULL  |
++----+------+------+------+-------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> update test1 set fax='3333', pstno='11000' where no=3;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 222  | 10101 | seoul |
+|  2 | bbb  | 111  | 222  | 10101 | seoul |
+|  3 | ccc  | 333  | 3333 | 11000 | NULL  |
+|  4 | aaa  | 1111 | NULL | NULL  | NULL  |
+|  5 | bbb  | 2222 | NULL | NULL  | NULL  |
+|  6 | ccc  | 3333 | NULL | NULL  | NULL  |
++----+------+------+------+-------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> update test1 set fax='33';
+Query OK, 6 rows affected (0.005 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  2 | bbb  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  4 | aaa  | 1111 | 33   | NULL  | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
++----+------+------+------+-------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1 where no=2 or no=4;
+Query OK, 2 rows affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
++----+------+------+------+-------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> rollback;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
++----+------+------+------+-------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
++----+------+------+------+-------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> set autocommit = false;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name, tel) values('xxx', 888);
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name, tel) values('yyy', 999);
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
+|  7 | xxx  | 888  | NULL | NULL  | NULL  |
+|  8 | yyy  | 999  | NULL | NULL  | NULL  |
++----+------+------+------+-------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> commit;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> insert into test1(name, tel) values('mmm', '111');
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name, tel) values('kkk', '222');
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
+|  7 | xxx  | 888  | NULL | NULL  | NULL  |
+|  8 | yyy  | 999  | NULL | NULL  | NULL  |
+|  9 | mmm  | 111  | NULL | NULL  | NULL  |
+| 10 | kkk  | 222  | NULL | NULL  | NULL  |
++----+------+------+------+-------+-------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> rollback;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+-------+-------+
+| no | name | tel  | fax  | pstno | addr  |
++----+------+------+------+-------+-------+
+|  1 | aaa  | 111  | 33   | 10101 | seoul |
+|  3 | ccc  | 333  | 33   | 11000 | NULL  |
+|  5 | bbb  | 2222 | 33   | NULL  | NULL  |
+|  6 | ccc  | 3333 | 33   | NULL  | NULL  |
+|  7 | xxx  | 888  | NULL | NULL  | NULL  |
+|  8 | yyy  | 999  | NULL | NULL  | NULL  |
++----+------+------+------+-------+-------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> set autocommit=true;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]> create table test1 (
+    ->   no int primary key auto_increment,
+    ->   name varchar(20) not null,
+    ->   class varchar(10) not null,
+    ->   working char(1) not null,
+    ->   tel varchar(20)
+    -> );
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('aaa','java100','Y');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('bbb','java100','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ccc','java100','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ddd','java100','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('eee','java100','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('kkk','java101','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('lll','java101','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('mmm','java101','N');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('nnn','java101','Y');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('ooo','java101','N');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  1 | aaa  | java100 | Y       | NULL |
+|  2 | bbb  | java100 | N       | NULL |
+|  3 | ccc  | java100 | Y       | NULL |
+|  4 | ddd  | java100 | N       | NULL |
+|  5 | eee  | java100 | Y       | NULL |
+|  6 | kkk  | java101 | N       | NULL |
+|  7 | lll  | java101 | Y       | NULL |
+|  8 | mmm  | java101 | N       | NULL |
+|  9 | nnn  | java101 | Y       | NULL |
+| 10 | ooo  | java101 | N       | NULL |
++----+------+---------+---------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name from test1;
++----+------+
+| no | name |
++----+------+
+|  1 | aaa  |
+|  2 | bbb  |
+|  3 | ccc  |
+|  4 | ddd  |
+|  5 | eee  |
+|  6 | kkk  |
+|  7 | lll  |
+|  8 | mmm  |
+|  9 | nnn  |
+| 10 | ooo  |
++----+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select name, no, tel from test1;
++------+----+------+
+| name | no | tel  |
++------+----+------+
+| aaa  |  1 | NULL |
+| bbb  |  2 | NULL |
+| ccc  |  3 | NULL |
+| ddd  |  4 | NULL |
+| eee  |  5 | NULL |
+| kkk  |  6 | NULL |
+| lll  |  7 | NULL |
+| mmm  |  8 | NULL |
+| nnn  |  9 | NULL |
+| ooo  | 10 | NULL |
++------+----+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name, tel from test1;
++----+------+------+
+| no | name | tel  |
++----+------+------+
+|  1 | aaa  | NULL |
+|  2 | bbb  | NULL |
+|  3 | ccc  | NULL |
+|  4 | ddd  | NULL |
+|  5 | eee  | NULL |
+|  6 | kkk  | NULL |
+|  7 | lll  | NULL |
+|  8 | mmm  | NULL |
+|  9 | nnn  | NULL |
+| 10 | ooo  | NULL |
++----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, concat(name, '(', class, ')') from test1;
++----+-------------------------------+
+| no | concat(name, '(', class, ')') |
++----+-------------------------------+
+|  1 | aaa(java100)                  |
+|  2 | bbb(java100)                  |
+|  3 | ccc(java100)                  |
+|  4 | ddd(java100)                  |
+|  5 | eee(java100)                  |
+|  6 | kkk(java101)                  |
+|  7 | lll(java101)                  |
+|  8 | mmm(java101)                  |
+|  9 | nnn(java101)                  |
+| 10 | ooo(java101)                  |
++----+-------------------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, concat(name, '-', class) from test1;
++----+--------------------------+
+| no | concat(name, '-', class) |
++----+--------------------------+
+|  1 | aaa-java100              |
+|  2 | bbb-java100              |
+|  3 | ccc-java100              |
+|  4 | ddd-java100              |
+|  5 | eee-java100              |
+|  6 | kkk-java101              |
+|  7 | lll-java101              |
+|  8 | mmm-java101              |
+|  9 | nnn-java101              |
+| 10 | ooo-java101              |
++----+--------------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no as num, concat(name, '-', class) as title from test1;
++-----+-------------+
+| num | title       |
++-----+-------------+
+|   1 | aaa-java100 |
+|   2 | bbb-java100 |
+|   3 | ccc-java100 |
+|   4 | ddd-java100 |
+|   5 | eee-java100 |
+|   6 | kkk-java101 |
+|   7 | lll-java101 |
+|   8 | mmm-java101 |
+|   9 | nnn-java101 |
+|  10 | ooo-java101 |
++-----+-------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no num, concat(name, '-', class) title from test1;
++-----+-------------+
+| num | title       |
++-----+-------------+
+|   1 | aaa-java100 |
+|   2 | bbb-java100 |
+|   3 | ccc-java100 |
+|   4 | ddd-java100 |
+|   5 | eee-java100 |
+|   6 | kkk-java101 |
+|   7 | lll-java101 |
+|   8 | mmm-java101 |
+|   9 | nnn-java101 |
+|  10 | ooo-java101 |
++-----+-------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where no > 5;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  6 | kkk  | java101 | N       | NULL |
+|  7 | lll  | java101 | Y       | NULL |
+|  8 | mmm  | java101 | N       | NULL |
+|  9 | nnn  | java101 | Y       | NULL |
+| 10 | ooo  | java101 | N       | NULL |
++----+------+---------+---------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name, class, working from test1 where working='Y' or class='java100';
++----+------+---------+---------+
+| no | name | class   | working |
++----+------+---------+---------+
+|  1 | aaa  | java100 | Y       |
+|  2 | bbb  | java100 | N       |
+|  3 | ccc  | java100 | Y       |
+|  4 | ddd  | java100 | N       |
+|  5 | eee  | java100 | Y       |
+|  7 | lll  | java101 | Y       |
+|  9 | nnn  | java101 | Y       |
++----+------+---------+---------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name, class, working from test1 where working='Y' and class='java100';
++----+------+---------+---------+
+| no | name | class   | working |
++----+------+---------+---------+
+|  1 | aaa  | java100 | Y       |
+|  3 | ccc  | java100 | Y       |
+|  5 | eee  | java100 | Y       |
++----+------+---------+---------+
+3 rows in set (0.005 sec)
+
+MariaDB [studydb]> select no, name from test1 where working='Y' and class='java100';
++----+------+
+| no | name |
++----+------+
+|  1 | aaa  |
+|  3 | ccc  |
+|  5 | eee  |
++----+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name, class, working from test1 where not working='Y';
++----+------+---------+---------+
+| no | name | class   | working |
++----+------+---------+---------+
+|  2 | bbb  | java100 | N       |
+|  4 | ddd  | java100 | N       |
+|  6 | kkk  | java101 | N       |
+|  8 | mmm  | java101 | N       |
+| 10 | ooo  | java101 | N       |
++----+------+---------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, name, class, working from test1 where working<>'Y';
++----+------+---------+---------+
+| no | name | class   | working |
++----+------+---------+---------+
+|  2 | bbb  | java100 | N       |
+|  4 | ddd  | java100 | N       |
+|  6 | kkk  | java101 | N       |
+|  8 | mmm  | java101 | N       |
+| 10 | ooo  | java101 | N       |
++----+------+---------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> update test1 set tel='1111' where (no % 2) = 0;
+Query OK, 5 rows affected (0.013 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+MariaDB [studydb]> select * from test1;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  1 | aaa  | java100 | Y       | NULL |
+|  2 | bbb  | java100 | N       | 1111 |
+|  3 | ccc  | java100 | Y       | NULL |
+|  4 | ddd  | java100 | N       | 1111 |
+|  5 | eee  | java100 | Y       | NULL |
+|  6 | kkk  | java101 | N       | 1111 |
+|  7 | lll  | java101 | Y       | NULL |
+|  8 | mmm  | java101 | N       | 1111 |
+|  9 | nnn  | java101 | Y       | NULL |
+| 10 | ooo  | java101 | N       | 1111 |
++----+------+---------+---------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> update test1 set tel='2222' where (no % 3) = 0;
+Query OK, 3 rows affected (0.013 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+MariaDB [studydb]> select * from test1;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  1 | aaa  | java100 | Y       | NULL |
+|  2 | bbb  | java100 | N       | 1111 |
+|  3 | ccc  | java100 | Y       | 2222 |
+|  4 | ddd  | java100 | N       | 1111 |
+|  5 | eee  | java100 | Y       | NULL |
+|  6 | kkk  | java101 | N       | 2222 |
+|  7 | lll  | java101 | Y       | NULL |
+|  8 | mmm  | java101 | N       | 1111 |
+|  9 | nnn  | java101 | Y       | 2222 |
+| 10 | ooo  | java101 | N       | 1111 |
++----+------+---------+---------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where tel!=null;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where tel is null;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  1 | aaa  | java100 | Y       | NULL |
+|  5 | eee  | java100 | Y       | NULL |
+|  7 | lll  | java101 | Y       | NULL |
++----+------+---------+---------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where tel is not null;
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  2 | bbb  | java100 | N       | 1111 |
+|  3 | ccc  | java100 | Y       | 2222 |
+|  4 | ddd  | java100 | N       | 1111 |
+|  6 | kkk  | java101 | N       | 2222 |
+|  8 | mmm  | java101 | N       | 1111 |
+|  9 | nnn  | java101 | Y       | 2222 |
+| 10 | ooo  | java101 | N       | 1111 |
++----+------+---------+---------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> select (4 + 5), (4 - 5), (4 * 5), (4 / 5), (4 % 5);
++---------+---------+---------+---------+---------+
+| (4 + 5) | (4 - 5) | (4 * 5) | (4 / 5) | (4 % 5) |
++---------+---------+---------+---------+---------+
+|       9 |      -1 |      20 |  0.8000 |       4 |
++---------+---------+---------+---------+---------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select (4=5), (4!=5), (4>5), (4>=5), (4<5), (4<=5), (4<>5);
++-------+--------+-------+--------+-------+--------+--------+
+| (4=5) | (4!=5) | (4>5) | (4>=5) | (4<5) | (4<=5) | (4<>5) |
++-------+--------+-------+--------+-------+--------+--------+
+|     0 |      1 |     0 |      0 |     1 |      1 |      1 |
++-------+--------+-------+--------+-------+--------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select 5 between 3 and 5;
++-------------------+
+| 5 between 3 and 5 |
++-------------------+
+|                 1 |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('xxx','window27','1');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+|  1 | aaa  | java100  | Y       | NULL |
+|  2 | bbb  | java100  | N       | 1111 |
+|  3 | ccc  | java100  | Y       | 2222 |
+|  4 | ddd  | java100  | N       | 1111 |
+|  5 | eee  | java100  | Y       | NULL |
+|  6 | kkk  | java101  | N       | 2222 |
+|  7 | lll  | java101  | Y       | NULL |
+|  8 | mmm  | java101  | N       | 1111 |
+|  9 | nnn  | java101  | Y       | 2222 |
+| 10 | ooo  | java101  | N       | 1111 |
+| 11 | xxx  | window27 | 1       | NULL |
++----+------+----------+---------+------+
+11 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('yyy', 'window27', '0');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('zzz', 'window28', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('qqq', 'window28', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s01', 'javawin1', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s02', 'javawin1', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s03', 'javawin1', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s04', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s05', 'iotjava5', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s06', 'iotjava5', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s011', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s012', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s013', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1 where class like 'java%';
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+|  1 | aaa  | java100  | Y       | NULL |
+|  2 | bbb  | java100  | N       | 1111 |
+|  3 | ccc  | java100  | Y       | 2222 |
+|  4 | ddd  | java100  | N       | 1111 |
+|  5 | eee  | java100  | Y       | NULL |
+|  6 | kkk  | java101  | N       | 2222 |
+|  7 | lll  | java101  | Y       | NULL |
+|  8 | mmm  | java101  | N       | 1111 |
+|  9 | nnn  | java101  | Y       | 2222 |
+| 10 | ooo  | java101  | N       | 1111 |
+| 15 | s01  | javawin1 | 1       | NULL |
+| 16 | s02  | javawin1 | 0       | NULL |
+| 17 | s03  | javawin1 | 0       | NULL |
++----+------+----------+---------+------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1; where class like'%101';
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+|  1 | aaa  | java100  | Y       | NULL |
+|  2 | bbb  | java100  | N       | 1111 |
+|  3 | ccc  | java100  | Y       | 2222 |
+|  4 | ddd  | java100  | N       | 1111 |
+|  5 | eee  | java100  | Y       | NULL |
+|  6 | kkk  | java101  | N       | 2222 |
+|  7 | lll  | java101  | Y       | NULL |
+|  8 | mmm  | java101  | N       | 1111 |
+|  9 | nnn  | java101  | Y       | 2222 |
+| 10 | ooo  | java101  | N       | 1111 |
+| 11 | xxx  | window27 | 1       | NULL |
+| 12 | yyy  | window27 | 0       | NULL |
+| 13 | zzz  | window28 | 1       | NULL |
+| 14 | qqq  | window28 | 0       | NULL |
+| 15 | s01  | javawin1 | 1       | NULL |
+| 16 | s02  | javawin1 | 0       | NULL |
+| 17 | s03  | javawin1 | 0       | NULL |
+| 18 | s04  | iotjava5 | 1       | NULL |
+| 19 | s05  | iotjava5 | 0       | NULL |
+| 20 | s06  | iotjava5 | 0       | NULL |
+| 21 | s011 | iotjava5 | 1       | NULL |
+| 22 | s012 | iotjava5 | 1       | NULL |
+| 23 | s013 | iotjava5 | 1       | NULL |
++----+------+----------+---------+------+
+23 rows in set (0.000 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where class like'%101'' at line 1
+MariaDB [studydb]> select * from test1; where class like '%101';
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+|  1 | aaa  | java100  | Y       | NULL |
+|  2 | bbb  | java100  | N       | 1111 |
+|  3 | ccc  | java100  | Y       | 2222 |
+|  4 | ddd  | java100  | N       | 1111 |
+|  5 | eee  | java100  | Y       | NULL |
+|  6 | kkk  | java101  | N       | 2222 |
+|  7 | lll  | java101  | Y       | NULL |
+|  8 | mmm  | java101  | N       | 1111 |
+|  9 | nnn  | java101  | Y       | 2222 |
+| 10 | ooo  | java101  | N       | 1111 |
+| 11 | xxx  | window27 | 1       | NULL |
+| 12 | yyy  | window27 | 0       | NULL |
+| 13 | zzz  | window28 | 1       | NULL |
+| 14 | qqq  | window28 | 0       | NULL |
+| 15 | s01  | javawin1 | 1       | NULL |
+| 16 | s02  | javawin1 | 0       | NULL |
+| 17 | s03  | javawin1 | 0       | NULL |
+| 18 | s04  | iotjava5 | 1       | NULL |
+| 19 | s05  | iotjava5 | 0       | NULL |
+| 20 | s06  | iotjava5 | 0       | NULL |
+| 21 | s011 | iotjava5 | 1       | NULL |
+| 22 | s012 | iotjava5 | 1       | NULL |
+| 23 | s013 | iotjava5 | 1       | NULL |
++----+------+----------+---------+------+
+23 rows in set (0.000 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where class like '%101'' at line 1
+MariaDB [studydb]> select * from test1 where class like '%101';
++----+------+---------+---------+------+
+| no | name | class   | working | tel  |
++----+------+---------+---------+------+
+|  6 | kkk  | java101 | N       | 2222 |
+|  7 | lll  | java101 | Y       | NULL |
+|  8 | mmm  | java101 | N       | 1111 |
+|  9 | nnn  | java101 | Y       | 2222 |
+| 10 | ooo  | java101 | N       | 1111 |
++----+------+---------+---------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where name like 's0_';
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+| 15 | s01  | javawin1 | 1       | NULL |
+| 16 | s02  | javawin1 | 0       | NULL |
+| 17 | s03  | javawin1 | 0       | NULL |
+| 18 | s04  | iotjava5 | 1       | NULL |
+| 19 | s05  | iotjava5 | 0       | NULL |
+| 20 | s06  | iotjava5 | 0       | NULL |
++----+------+----------+---------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where no like '__';
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+| 10 | ooo  | java101  | N       | 1111 |
+| 11 | xxx  | window27 | 1       | NULL |
+| 12 | yyy  | window27 | 0       | NULL |
+| 13 | zzz  | window28 | 1       | NULL |
+| 14 | qqq  | window28 | 0       | NULL |
+| 15 | s01  | javawin1 | 1       | NULL |
+| 16 | s02  | javawin1 | 0       | NULL |
+| 17 | s03  | javawin1 | 0       | NULL |
+| 18 | s04  | iotjava5 | 1       | NULL |
+| 19 | s05  | iotjava5 | 0       | NULL |
+| 20 | s06  | iotjava5 | 0       | NULL |
+| 21 | s011 | iotjava5 | 1       | NULL |
+| 22 | s012 | iotjava5 | 1       | NULL |
+| 23 | s013 | iotjava5 | 1       | NULL |
++----+------+----------+---------+------+
+14 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table test1 (
+    ->   no int not null,
+    ->   title varchar(200) not null,
+    ->   content text,
+    ->   regdt datetime not null
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
+| test2             |
++-------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test2;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
+Empty set (0.006 sec)
+
+MariaDB [studydb]> alter table test1
+    -> add constraint primary key (no),
+    -> modify column no int not null auto_increment;
+Query OK, 0 rows affected (0.035 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> select * from test1;
+Empty set (0.010 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('aaaa', '2022-01-27');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('bbbb', '2022-2-2');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('cccc', '2022-2-13');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('dddd', '2022-3-2');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('eeee', '2022-4-15');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('ffff', '2022-6-7');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('gggg', '2022-6-17');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('hhhh', '2022-6-27');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('iiii', '2022-9-5');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('jjjj', '2022-10-12');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('kkkk', '2022-11-22');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('llll', '2022-11-24');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('mmmm', '2022-12-31');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1 where regdt = '2022-6-17';
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
++----+-------+---------+---------------------+
+1 row in set (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
++----+-------+---------+---------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where regdt >= '2022-11-1' and regdt <= '2022-12-31';
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
++----+-------+---------+---------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '()' at line 1
+MariaDB [studydb]> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2023-02-07 14:20:56 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2023-02-07 14:20:59 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-02-07 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 14:21:11  |
++-----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select regdt, date(regdt), time(regdt) from test1;
++---------------------+-------------+-------------+
+| regdt               | date(regdt) | time(regdt) |
++---------------------+-------------+-------------+
+| 2022-01-27 00:00:00 | 2022-01-27  | 00:00:00    |
+| 2022-02-02 00:00:00 | 2022-02-02  | 00:00:00    |
+| 2022-02-13 00:00:00 | 2022-02-13  | 00:00:00    |
+| 2022-03-02 00:00:00 | 2022-03-02  | 00:00:00    |
+| 2022-04-15 00:00:00 | 2022-04-15  | 00:00:00    |
+| 2022-06-07 00:00:00 | 2022-06-07  | 00:00:00    |
+| 2022-06-17 00:00:00 | 2022-06-17  | 00:00:00    |
+| 2022-06-27 00:00:00 | 2022-06-27  | 00:00:00    |
+| 2022-09-05 00:00:00 | 2022-09-05  | 00:00:00    |
+| 2022-10-12 00:00:00 | 2022-10-12  | 00:00:00    |
+| 2022-11-22 00:00:00 | 2022-11-22  | 00:00:00    |
+| 2022-11-24 00:00:00 | 2022-11-24  | 00:00:00    |
+| 2022-12-31 00:00:00 | 2022-12-31  | 00:00:00    |
++---------------------+-------------+-------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select date_add(now(), interval 11 day);
++----------------------------------+
+| date_add(now(), interval 11 day) |
++----------------------------------+
+| 2023-02-18 14:21:56              |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select date_sub(now(), interval 11 day);
++----------------------------------+
+| date_sub(now(), interval 11 day) |
++----------------------------------+
+| 2023-01-27 14:22:10              |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select datediff(curdate(), '2022-5-2');
++---------------------------------+
+| datediff(curdate(), '2022-5-2') |
++---------------------------------+
+|                             281 |
++---------------------------------+
+1 row in set (0.005 sec)
+
+MariaDB [studydb]> select regdt, date_format(regdt, '%m/%e/%Y
+    '> ')
+    -> from test1;
++---------------------+---------------------------------+
+| regdt               | date_format(regdt, '%m/%e/%Y
+') |
++---------------------+---------------------------------+
+| 2022-01-27 00:00:00 | 01/27/2022
+                     |
+| 2022-02-02 00:00:00 | 02/2/2022
+                      |
+| 2022-02-13 00:00:00 | 02/13/2022
+                     |
+| 2022-03-02 00:00:00 | 03/2/2022
+                      |
+| 2022-04-15 00:00:00 | 04/15/2022
+                     |
+| 2022-06-07 00:00:00 | 06/7/2022
+                      |
+| 2022-06-17 00:00:00 | 06/17/2022
+                     |
+| 2022-06-27 00:00:00 | 06/27/2022
+                     |
+| 2022-09-05 00:00:00 | 09/5/2022
+                      |
+| 2022-10-12 00:00:00 | 10/12/2022
+                     |
+| 2022-11-22 00:00:00 | 11/22/2022
+                     |
+| 2022-11-24 00:00:00 | 11/24/2022
+                     |
+| 2022-12-31 00:00:00 | 12/31/2022
+                     |
++---------------------+---------------------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select regdt, date_format(regdt, '%m/%e/%Y') from test1;
++---------------------+--------------------------------+
+| regdt               | date_format(regdt, '%m/%e/%Y') |
++---------------------+--------------------------------+
+| 2022-01-27 00:00:00 | 01/27/2022                     |
+| 2022-02-02 00:00:00 | 02/2/2022                      |
+| 2022-02-13 00:00:00 | 02/13/2022                     |
+| 2022-03-02 00:00:00 | 03/2/2022                      |
+| 2022-04-15 00:00:00 | 04/15/2022                     |
+| 2022-06-07 00:00:00 | 06/7/2022                      |
+| 2022-06-17 00:00:00 | 06/17/2022                     |
+| 2022-06-27 00:00:00 | 06/27/2022                     |
+| 2022-09-05 00:00:00 | 09/5/2022                      |
+| 2022-10-12 00:00:00 | 10/12/2022                     |
+| 2022-11-22 00:00:00 | 11/22/2022                     |
+| 2022-11-24 00:00:00 | 11/24/2022                     |
+| 2022-12-31 00:00:00 | 12/31/2022                     |
++---------------------+--------------------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select regdt, date_format(regdt, '%W %w %a') from test1;
++---------------------+--------------------------------+
+| regdt               | date_format(regdt, '%W %w %a') |
++---------------------+--------------------------------+
+| 2022-01-27 00:00:00 | Thursday 4 Thu                 |
+| 2022-02-02 00:00:00 | Wednesday 3 Wed                |
+| 2022-02-13 00:00:00 | Sunday 0 Sun                   |
+| 2022-03-02 00:00:00 | Wednesday 3 Wed                |
+| 2022-04-15 00:00:00 | Friday 5 Fri                   |
+| 2022-06-07 00:00:00 | Tuesday 2 Tue                  |
+| 2022-06-17 00:00:00 | Friday 5 Fri                   |
+| 2022-06-27 00:00:00 | Monday 1 Mon                   |
+| 2022-09-05 00:00:00 | Monday 1 Mon                   |
+| 2022-10-12 00:00:00 | Wednesday 3 Wed                |
+| 2022-11-22 00:00:00 | Tuesday 2 Tue                  |
+| 2022-11-24 00:00:00 | Thursday 4 Thu                 |
+| 2022-12-31 00:00:00 | Saturday 6 Sat                 |
++---------------------+--------------------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select now(), date_format(regdt, '%p %h %h %l');
+ERROR 1054 (42S22): Unknown column 'regdt' in 'field list'
+MariaDB [studydb]> select now(), date_format(regdt, '%p %h %h %l') from test1;
++---------------------+-----------------------------------+
+| now()               | date_format(regdt, '%p %h %h %l') |
++---------------------+-----------------------------------+
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
+| 2023-02-07 14:25:36 | AM 12 12 12                       |
++---------------------+-----------------------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select now(), date_format(regdt, '%p %h %H %l') from test1;
++---------------------+-----------------------------------+
+| now()               | date_format(regdt, '%p %h %H %l') |
++---------------------+-----------------------------------+
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
+| 2023-02-07 14:25:54 | AM 12 00 12                       |
++---------------------+-----------------------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select now(), date_format(now(), '%i %s');
++---------------------+-----------------------------+
+| now()               | date_format(now(), '%i %s') |
++---------------------+-----------------------------+
+| 2023-02-07 14:26:40 | 26 40                       |
++---------------------+-----------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select str_to_date('11/22/2022', '%m/%d/%Y');
++---------------------------------------+
+| str_to_date('11/22/2022', '%m/%d/%Y') |
++---------------------------------------+
+| 2022-11-22                            |
++---------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', '2022-11-22');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
+| 14 | aaaa  | NULL    | 2022-11-22 00:00:00 |
++----+-------+---------+---------------------+
+14 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('bbbb', str_to_date('11/22/2022', '%m/%d/%Y'));
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
+| 14 | aaaa  | NULL    | 2022-11-22 00:00:00 |
+| 15 | bbbb  | NULL    | 2022-11-22 00:00:00 |
++----+-------+---------+---------------------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select concat(no, '(', num, ')') from test1;
+ERROR 1054 (42S22): Unknown column 'num' in 'field list'
+MariaDB [studydb]> select concat(no, '(', as num, ')') from test1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as num, ')') from test1' at line 1
+MariaDB [studydb]> insert into test1(name, class, working) values('s0', 'java103', true);
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('xxx', 'window27', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('yyy', 'window27', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('zzz', 'window28', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('qqq', 'window28', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s01', 'javawin1', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s02', 'javawin1', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s03', 'javawin1', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s04', 'iotjava5', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s05', 'iotjava5', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s06', 'iotjava5', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s011', 'iotjava5', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s012', 'iotjava5', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s013', 'iotjava5', '1');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> insert into test1(name,class,working) values('s0', 'javawin1', '0');
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> select * from test1;
+ERROR 1146 (42S02): Table 'studydb.test1' doesn't exist
+MariaDB [studydb]> create table test1 (
+    ->   no int primary key auto_increment,
+    ->   name varchar(20) not null,
+    ->   class varchar(10) not null,
+    ->   working char(1) not null,
+    ->   tel varchar(20)
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('xxx', 'window27', '1');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('yyy', 'window27', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('zzz', 'window28', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('qqq', 'window28', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s01', 'javawin1', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s02', 'javawin1', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s03', 'javawin1', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s04', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s05', 'iotjava5', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s06', 'iotjava5', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s011', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s012', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s013', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+|  1 | xxx  | window27 | 1       | NULL |
+|  2 | yyy  | window27 | 0       | NULL |
+|  3 | zzz  | window28 | 1       | NULL |
+|  4 | qqq  | window28 | 0       | NULL |
+|  5 | s01  | javawin1 | 1       | NULL |
+|  6 | s02  | javawin1 | 0       | NULL |
+|  7 | s03  | javawin1 | 0       | NULL |
+|  8 | s04  | iotjava5 | 1       | NULL |
+|  9 | s05  | iotjava5 | 0       | NULL |
+| 10 | s06  | iotjava5 | 0       | NULL |
+| 11 | s011 | iotjava5 | 1       | NULL |
+| 12 | s012 | iotjava5 | 1       | NULL |
+| 13 | s013 | iotjava5 | 1       | NULL |
++----+------+----------+---------+------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete * from test1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* from test1' at line 1
+MariaDB [studydb]> delete from test1;
+Query OK, 13 rows affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('xxx', 'window27', '1');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('yyy', 'window27', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('zzz', 'window28', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('qqq', 'window28', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s01', 'javawin1', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s02', 'javawin1', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s03', 'javawin1', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s04', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s05', 'iotjava5', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s06', 'iotjava5', '0');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s011', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s012', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(name,class,working) values('s013', 'iotjava5', '1');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test1(name,class,wroking) values('s0', 'java103', true);
+ERROR 1054 (42S22): Unknown column 'wroking' in 'field list'
+MariaDB [studydb]> insert into test1(name,class,working) values('s0', 'java103', true);
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+| 14 | xxx  | window27 | 1       | NULL |
+| 15 | yyy  | window27 | 0       | NULL |
+| 16 | zzz  | window28 | 1       | NULL |
+| 17 | qqq  | window28 | 0       | NULL |
+| 18 | s01  | javawin1 | 1       | NULL |
+| 19 | s02  | javawin1 | 0       | NULL |
+| 20 | s03  | javawin1 | 0       | NULL |
+| 21 | s04  | iotjava5 | 1       | NULL |
+| 22 | s05  | iotjava5 | 0       | NULL |
+| 23 | s06  | iotjava5 | 0       | NULL |
+| 24 | s011 | iotjava5 | 1       | NULL |
+| 25 | s012 | iotjava5 | 1       | NULL |
+| 26 | s013 | iotjava5 | 1       | NULL |
+| 27 | s0   | java103  | 1       | NULL |
++----+------+----------+---------+------+
+14 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where name like 's0%';
++----+------+----------+---------+------+
+| no | name | class    | working | tel  |
++----+------+----------+---------+------+
+| 18 | s01  | javawin1 | 1       | NULL |
+| 19 | s02  | javawin1 | 0       | NULL |
+| 20 | s03  | javawin1 | 0       | NULL |
+| 21 | s04  | iotjava5 | 1       | NULL |
+| 22 | s05  | iotjava5 | 0       | NULL |
+| 23 | s06  | iotjava5 | 0       | NULL |
+| 24 | s011 | iotjava5 | 1       | NULL |
+| 25 | s012 | iotjava5 | 1       | NULL |
+| 26 | s013 | iotjava5 | 1       | NULL |
+| 27 | s0   | java103  | 1       | NULL |
++----+------+----------+---------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table test1 (
+    ->   no int not null,
+    ->   title varchar(200) not null,
+    ->   content text,
+    ->   regdt datetime not null
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table test1
+    ->   add constraint primary key (no),
+    ->   modify column no int not null auto_increment;
+Query OK, 0 rows affected (0.024 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test1(title, regdt) values('aaaa', '2022-01-27');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('bbbb', '2022-2-2');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('cccc', '2022-2-13');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('dddd', '2022-3-2');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('eeee', '2022-4-15');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('ffff', '2022-6-7');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('gggg', '2022-6-17');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('hhhh', '2022-6-27');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('iiii', '2022-9-5');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('jjjj', '2022-10-12');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('kkkk', '2022-11-22');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('llll', '2022-11-24');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, regdt) values('mmmm', '2022-12-31');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
++----+-------+---------+---------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where regdt = '2022-6-17';
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
++----+-------+---------+---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [studydb]> /* 특정 기간의 게시글 조회 */
+MariaDB [studydb]> select *
+    -> from test1
+    -> where regdt between '2022-11-1' and '2022-12-31';  -- 2022-12-31 00:00:00 이다.
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
++----+-------+---------+---------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select *
+    -> from test1
+    -> where regdt >= '2022-11-1' and regdt <= '2022-12-31';
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
++----+-------+---------+---------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2023-02-07 15:08:45 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-02-07 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 15:09:06  |
++-----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select regdt, date(regdt), time(regdt) from test1;
++---------------------+-------------+-------------+
+| regdt               | date(regdt) | time(regdt) |
++---------------------+-------------+-------------+
+| 2022-01-27 00:00:00 | 2022-01-27  | 00:00:00    |
+| 2022-02-02 00:00:00 | 2022-02-02  | 00:00:00    |
+| 2022-02-13 00:00:00 | 2022-02-13  | 00:00:00    |
+| 2022-03-02 00:00:00 | 2022-03-02  | 00:00:00    |
+| 2022-04-15 00:00:00 | 2022-04-15  | 00:00:00    |
+| 2022-06-07 00:00:00 | 2022-06-07  | 00:00:00    |
+| 2022-06-17 00:00:00 | 2022-06-17  | 00:00:00    |
+| 2022-06-27 00:00:00 | 2022-06-27  | 00:00:00    |
+| 2022-09-05 00:00:00 | 2022-09-05  | 00:00:00    |
+| 2022-10-12 00:00:00 | 2022-10-12  | 00:00:00    |
+| 2022-11-22 00:00:00 | 2022-11-22  | 00:00:00    |
+| 2022-11-24 00:00:00 | 2022-11-24  | 00:00:00    |
+| 2022-12-31 00:00:00 | 2022-12-31  | 00:00:00    |
++---------------------+-------------+-------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select date_add(now(), interval 11 day);
++----------------------------------+
+| date_add(now(), interval 11 day) |
++----------------------------------+
+| 2023-02-18 15:13:49              |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select date_sub(now(), interval 11 day);
++----------------------------------+
+| date_sub(now(), interval 11 day) |
++----------------------------------+
+| 2023-01-27 15:14:08              |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select datediff(curdate(), '2023-2-10');
++----------------------------------+
+| datediff(curdate(), '2023-2-10') |
++----------------------------------+
+|                               -3 |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select datediff(curdate(), '1989-3-19');
++----------------------------------+
+| datediff(curdate(), '1989-3-19') |
++----------------------------------+
+|                            12378 |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select regdt, date_format(regdt, '%m/%e/%Y') from test1; /* 09/7/2022 */
++---------------------+--------------------------------+
+| regdt               | date_format(regdt, '%m/%e/%Y') |
++---------------------+--------------------------------+
+| 2022-01-27 00:00:00 | 01/27/2022                     |
+| 2022-02-02 00:00:00 | 02/2/2022                      |
+| 2022-02-13 00:00:00 | 02/13/2022                     |
+| 2022-03-02 00:00:00 | 03/2/2022                      |
+| 2022-04-15 00:00:00 | 04/15/2022                     |
+| 2022-06-07 00:00:00 | 06/7/2022                      |
+| 2022-06-17 00:00:00 | 06/17/2022                     |
+| 2022-06-27 00:00:00 | 06/27/2022                     |
+| 2022-09-05 00:00:00 | 09/5/2022                      |
+| 2022-10-12 00:00:00 | 10/12/2022                     |
+| 2022-11-22 00:00:00 | 11/22/2022                     |
+| 2022-11-24 00:00:00 | 11/24/2022                     |
+| 2022-12-31 00:00:00 | 12/31/2022                     |
++---------------------+--------------------------------+
+13 rows in set (0.001 sec)
+
+MariaDB [studydb]> select regdt, date_format(regdt, '%M/%d/%y') from test1; /* 09/7/2022 */
++---------------------+--------------------------------+
+| regdt               | date_format(regdt, '%M/%d/%y') |
++---------------------+--------------------------------+
+| 2022-01-27 00:00:00 | January/27/22                  |
+| 2022-02-02 00:00:00 | February/02/22                 |
+| 2022-02-13 00:00:00 | February/13/22                 |
+| 2022-03-02 00:00:00 | March/02/22                    |
+| 2022-04-15 00:00:00 | April/15/22                    |
+| 2022-06-07 00:00:00 | June/07/22                     |
+| 2022-06-17 00:00:00 | June/17/22                     |
+| 2022-06-27 00:00:00 | June/27/22                     |
+| 2022-09-05 00:00:00 | September/05/22                |
+| 2022-10-12 00:00:00 | October/12/22                  |
+| 2022-11-22 00:00:00 | November/22/22                 |
+| 2022-11-24 00:00:00 | November/24/22                 |
+| 2022-12-31 00:00:00 | December/31/22                 |
++---------------------+--------------------------------+
+13 rows in set (0.000 sec)
+
+MariaDB [studydb]> select now(), date_format(now(), '%p %h %H %l'); /* PM 01 13 1 */
++---------------------+-----------------------------------+
+| now()               | date_format(now(), '%p %h %H %l') |
++---------------------+-----------------------------------+
+| 2023-02-07 15:21:40 | PM 03 15 3                        |
++---------------------+-----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select now(), date_format(now(), '%p %h %H %I'); /* PM 01 13 1 */
++---------------------+-----------------------------------+
+| now()               | date_format(now(), '%p %h %H %I') |
++---------------------+-----------------------------------+
+| 2023-02-07 15:22:21 | PM 03 15 03                       |
++---------------------+-----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select str_to_date('11/22/2022', '%m/%d/%Y');
++---------------------------------------+
+| str_to_date('11/22/2022', '%m/%d/%Y') |
++---------------------------------------+
+| 2022-11-22                            |
++---------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select str_to_date('2022.2.12', '%Y.%m.%d');
++--------------------------------------+
+| str_to_date('2022.2.12', '%Y.%m.%d') |
++--------------------------------------+
+| 2022-02-12                           |
++--------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', '2022-11-22');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
+| 14 | aaaa  | NULL    | 2022-11-22 00:00:00 |
++----+-------+---------+---------------------+
+14 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', date(now());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', date(now()));
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
+| 14 | aaaa  | NULL    | 2022-11-22 00:00:00 |
+| 15 | aaaa  | NULL    | 2023-02-07 00:00:00 |
++----+-------+---------+---------------------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', str_to_date('2/7/2023', '%m/%d/%Y);
+    '>
+    '> Bye
+Ctrl-C -- exit!
+
+C:\Users\bitcamp\git\jongkwangyun.github.io>mysql -ustudy -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 5
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', str_to_date('2/7/2023', '%m/%d/%Y));
+    '> ;
+    '> ;
+    '>
+    '>
+    '>
+    '> ;
+    '> ;
+    '> ;
+    '> ;
+    '> ;
+    '> ;
+    '> q
+    '> Bye
+Ctrl-C -- exit!
+
+C:\Users\bitcamp\git\jongkwangyun.github.io>mysql -u study -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]> insert into test1 (title, regdt) values('aaaa', str_to_date('2/7/2023', '%m/%d/%Y'));
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | regdt               |
++----+-------+---------+---------------------+
+|  1 | aaaa  | NULL    | 2022-01-27 00:00:00 |
+|  2 | bbbb  | NULL    | 2022-02-02 00:00:00 |
+|  3 | cccc  | NULL    | 2022-02-13 00:00:00 |
+|  4 | dddd  | NULL    | 2022-03-02 00:00:00 |
+|  5 | eeee  | NULL    | 2022-04-15 00:00:00 |
+|  6 | ffff  | NULL    | 2022-06-07 00:00:00 |
+|  7 | gggg  | NULL    | 2022-06-17 00:00:00 |
+|  8 | hhhh  | NULL    | 2022-06-27 00:00:00 |
+|  9 | iiii  | NULL    | 2022-09-05 00:00:00 |
+| 10 | jjjj  | NULL    | 2022-10-12 00:00:00 |
+| 11 | kkkk  | NULL    | 2022-11-22 00:00:00 |
+| 12 | llll  | NULL    | 2022-11-24 00:00:00 |
+| 13 | mmmm  | NULL    | 2022-12-31 00:00:00 |
+| 14 | aaaa  | NULL    | 2022-11-22 00:00:00 |
+| 15 | aaaa  | NULL    | 2023-02-07 00:00:00 |
+| 16 | aaaa  | NULL    | 2023-02-07 00:00:00 |
++----+-------+---------+---------------------+
+16 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> create table test1(
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text,
+    ->   rdt datetime default now(),
+    ->   filepath1 varchar(255),
+    ->   filepath2 varchar(255),
+    ->   filepath3 varchar(255),
+    ->   filepath4 varchar(255),
+    ->   filepath5 varchar(255)
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> create table test1(
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text,
+    ->   rdt datetime default now(),
+    ->   filepath1 varchar(255),
+    ->   filepath2 varchar(255),
+    ->   filepath3 varchar(255),
+    ->   filepath4 varchar(255),
+    ->   filepath5 varchar(255)
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test1(title, content, filepath1, filepath2, filepath3, filepath4, filepath5)
+    -> values ('제목1', '내용', 'a.gif', null, null, null, null);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+-----------+-----------+-----------+-----------+-----------+
+| no | title | content | rdt                 | filepath1 | filepath2 | filepath3 | filepath4 | filepath5 |
++----+-------+---------+---------------------+-----------+-----------+-----------+-----------+-----------+
+|  1 | 제목1 | 내용    | 2023-02-07 15:46:30 | a.gif     | NULL      | NULL      | NULL      | NULL      |
++----+-------+---------+---------------------+-----------+-----------+-----------+-----------+-----------+
+1 row in set (0.005 sec)
+
+MariaDB [studydb]> insert into test1(title, content, filepath1, filepath2, filepath3, filepath4, filepath5)
+    -> values ('제목2', '내용', 'b1.gif', 'b2.gif', 'b3.gif', null, null);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test1(title, content, filepath1, filepath2, filepath3, filepath4, filepath5)
+    -> values ('제목3', '내용', null, null, null, null, null);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title, content, filepath1, filepath2, filepath3, filepath4, filepath5)
+    -> values ('제목4', '내용', 'd1.gif', 'd2.gif', 'd3.gif', 'd4.gif', 'd5.gif', /*'d6.gif', 'd7.gif'*/);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 2
+MariaDB [studydb]> insert into test1(title, content, filepath1, filepath2, filepath3, filepath4, filepath5)
+    -> values ('제목4', '내용', 'd1.gif', 'd2.gif', 'd3.gif', 'd4.gif', 'd5.gif', /*'d6.gif', 'd7.gif'*/);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 2
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]> create table test1(
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text,
+    ->   rdt datetime default now(),
+    ->   filepath1 varchar(255),
+    ->   filepath2 varchar(255),
+    ->   filepath3 varchar(255),
+    ->   filepath4 varchar(255),
+    ->   filepath5 varchar(255)
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]> insert into test1(title, content, filepath1, filepath2, filepath3, filepath4, filepath5)
+    -> values ('제목4', '내용', 'd1.gif', 'd2.gif', 'd3.gif', 'd4.gif', 'd5.gif'/*, 'd6.gif', 'd7.gif'*/);
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> drop table test1;
+ERROR 1051 (42S02): Unknown table 'studydb.test1'
+MariaDB [studydb]> show tables;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> create table test1(
+    ->   no int not null primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text,
+    ->   rdt datetime not null default now()
+    -> );
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 첨부 파일 테이블 */
+MariaDB [studydb]> create table test2(
+    ->   fno int not null primary key auto_increment, /* 첨부파일 고유번호 */
+    ->   filepath varchar(255) not null, /* 파일시스템에 저장된 첨부파일의 경로 */
+    ->   bno int not null /* 게시글 번호 */
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
+| test2             |
++-------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(title) values('aaa');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]> insert into test1(title) values('bbb');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('ccc');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('ddd');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('eee');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('fff');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('ggg');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('hhh');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('iii');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into test1(title) values('jjj');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  1 | aaa   | NULL    | 2023-02-07 16:15:23 |
+|  2 | bbb   | NULL    | 2023-02-07 16:15:23 |
+|  3 | ccc   | NULL    | 2023-02-07 16:15:23 |
+|  4 | ddd   | NULL    | 2023-02-07 16:15:23 |
+|  5 | eee   | NULL    | 2023-02-07 16:15:23 |
+|  6 | fff   | NULL    | 2023-02-07 16:15:23 |
+|  7 | ggg   | NULL    | 2023-02-07 16:15:23 |
+|  8 | hhh   | NULL    | 2023-02-07 16:15:23 |
+|  9 | iii   | NULL    | 2023-02-07 16:15:23 |
+| 10 | jjj   | NULL    | 2023-02-07 16:15:23 |
++----+-------+---------+---------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1;
+Query OK, 10 rows affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(title) values('aaa');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('bbb');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('ccc');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('ddd');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('eee');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('fff');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('ggg');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('hhh');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('iii');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(title) values('jjj');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+| 11 | aaa   | NULL    | 2023-02-07 16:16:14 |
+| 12 | bbb   | NULL    | 2023-02-07 16:16:14 |
+| 13 | ccc   | NULL    | 2023-02-07 16:16:14 |
+| 14 | ddd   | NULL    | 2023-02-07 16:16:14 |
+| 15 | eee   | NULL    | 2023-02-07 16:16:14 |
+| 16 | fff   | NULL    | 2023-02-07 16:16:14 |
+| 17 | ggg   | NULL    | 2023-02-07 16:16:14 |
+| 18 | hhh   | NULL    | 2023-02-07 16:16:14 |
+| 19 | iii   | NULL    | 2023-02-07 16:16:14 |
+| 20 | jjj   | NULL    | 2023-02-07 16:16:14 |
++----+-------+---------+---------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1;
+Query OK, 10 rows affected (0.013 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test1(no, title) values(1, 'aaa');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(2, 'bbb');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(3, 'ccc');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(4, 'ddd');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(5, 'eee');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(6, 'fff');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(7, 'ggg');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(8, 'hhh');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(9, 'iii');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(10, 'jjj');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  1 | aaa   | NULL    | 2023-02-07 16:17:17 |
+|  2 | bbb   | NULL    | 2023-02-07 16:17:17 |
+|  3 | ccc   | NULL    | 2023-02-07 16:17:17 |
+|  4 | ddd   | NULL    | 2023-02-07 16:17:17 |
+|  5 | eee   | NULL    | 2023-02-07 16:17:17 |
+|  6 | fff   | NULL    | 2023-02-07 16:17:17 |
+|  7 | ggg   | NULL    | 2023-02-07 16:17:17 |
+|  8 | hhh   | NULL    | 2023-02-07 16:17:17 |
+|  9 | iii   | NULL    | 2023-02-07 16:17:17 |
+| 10 | jjj   | NULL    | 2023-02-07 16:17:17 |
++----+-------+---------+---------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/a1.gif', 1);
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/a3.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/e1.gif', 5);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/e2.gif', 5);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/j1.gif', 10);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test2;
++-----+--------------------+-----+
+| fno | filepath           | bno |
++-----+--------------------+-----+
+|   1 | c:/download/a1.gif |   1 |
+|   2 | c:/download/a2.gif |   1 |
+|   3 | c:/download/a3.gif |   1 |
+|   4 | c:/download/e1.gif |   5 |
+|   5 | c:/download/e2.gif |   5 |
+|   6 | c:/download/j1.gif |  10 |
++-----+--------------------+-----+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/x.gif', 100);
+Query OK, 1 row affected (0.012 sec)
+
+MariaDB [studydb]> select * from test2;
++-----+--------------------+-----+
+| fno | filepath           | bno |
++-----+--------------------+-----+
+|   1 | c:/download/a1.gif |   1 |
+|   2 | c:/download/a2.gif |   1 |
+|   3 | c:/download/a3.gif |   1 |
+|   4 | c:/download/e1.gif |   5 |
+|   5 | c:/download/e2.gif |   5 |
+|   6 | c:/download/j1.gif |  10 |
+|   7 | c:/download/x.gif  | 100 |
++-----+--------------------+-----+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1 where no=1;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  2 | bbb   | NULL    | 2023-02-07 16:17:17 |
+|  3 | ccc   | NULL    | 2023-02-07 16:17:17 |
+|  4 | ddd   | NULL    | 2023-02-07 16:17:17 |
+|  5 | eee   | NULL    | 2023-02-07 16:17:17 |
+|  6 | fff   | NULL    | 2023-02-07 16:17:17 |
+|  7 | ggg   | NULL    | 2023-02-07 16:17:17 |
+|  8 | hhh   | NULL    | 2023-02-07 16:17:17 |
+|  9 | iii   | NULL    | 2023-02-07 16:17:17 |
+| 10 | jjj   | NULL    | 2023-02-07 16:17:17 |
++----+-------+---------+---------------------+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test2;
++-----+--------------------+-----+
+| fno | filepath           | bno |
++-----+--------------------+-----+
+|   1 | c:/download/a1.gif |   1 |
+|   2 | c:/download/a2.gif |   1 |
+|   3 | c:/download/a3.gif |   1 |
+|   4 | c:/download/e1.gif |   5 |
+|   5 | c:/download/e2.gif |   5 |
+|   6 | c:/download/j1.gif |  10 |
+|   7 | c:/download/x.gif  | 100 |
++-----+--------------------+-----+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> alter table test2
+    -> add constraint test2_fk foreign key (bno) test1 (no);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'test1 (no)' at line 2
+MariaDB [studydb]> alter table test2
+    -> add constraint test2_fk foreign key (bno) references test1 (no);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`studydb`.`#sql-alter-1320-6`, CONSTRAINT `test2_fk` FOREIGN KEY (`bno`) REFERENCES `test1` (`no`))
+MariaDB [studydb]> delete from test1; delete from test2;
+Query OK, 9 rows affected (0.005 sec)
+
+Query OK, 7 rows affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> select * from test2;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> alter table test2
+    -> add constraint test2_fk foreign key (bno) references test1(no);
+Query OK, 0 rows affected (0.024 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> insert into test1(no, title) values(1, 'aaa');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(2, 'bbb');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(3, 'ccc');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(4, 'ddd');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(5, 'eee');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(6, 'fff');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(7, 'ggg');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(8, 'hhh');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(9, 'iii');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, title) values(10, 'jjj');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  1 | aaa   | NULL    | 2023-02-07 16:41:54 |
+|  2 | bbb   | NULL    | 2023-02-07 16:41:54 |
+|  3 | ccc   | NULL    | 2023-02-07 16:41:54 |
+|  4 | ddd   | NULL    | 2023-02-07 16:41:54 |
+|  5 | eee   | NULL    | 2023-02-07 16:41:54 |
+|  6 | fff   | NULL    | 2023-02-07 16:41:54 |
+|  7 | ggg   | NULL    | 2023-02-07 16:41:54 |
+|  8 | hhh   | NULL    | 2023-02-07 16:41:54 |
+|  9 | iii   | NULL    | 2023-02-07 16:41:54 |
+| 10 | jjj   | NULL    | 2023-02-07 16:41:54 |
++----+-------+---------+---------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/a1.gif', 1);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/a3.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/e1.gif', 5);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/e2.gif', 5);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/j1.gif', 10);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test2;
++-----+--------------------+-----+
+| fno | filepath           | bno |
++-----+--------------------+-----+
+|   8 | c:/download/a1.gif |   1 |
+|   9 | c:/download/a2.gif |   1 |
+|  10 | c:/download/a3.gif |   1 |
+|  11 | c:/download/e1.gif |   5 |
+|  12 | c:/download/e2.gif |   5 |
+|  13 | c:/download/j1.gif |  10 |
++-----+--------------------+-----+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test2(filepath, bno) values('c:/download/x.gif', 100);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`studydb`.`test2`, CONSTRAINT `test2_fk` FOREIGN KEY (`bno`) REFERENCES `test1` (`no`))
+MariaDB [studydb]> select * from test2;
++-----+--------------------+-----+
+| fno | filepath           | bno |
++-----+--------------------+-----+
+|   8 | c:/download/a1.gif |   1 |
+|   9 | c:/download/a2.gif |   1 |
+|  10 | c:/download/a3.gif |   1 |
+|  11 | c:/download/e1.gif |   5 |
+|  12 | c:/download/e2.gif |   5 |
+|  13 | c:/download/j1.gif |  10 |
++-----+--------------------+-----+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  1 | aaa   | NULL    | 2023-02-07 16:41:54 |
+|  2 | bbb   | NULL    | 2023-02-07 16:41:54 |
+|  3 | ccc   | NULL    | 2023-02-07 16:41:54 |
+|  4 | ddd   | NULL    | 2023-02-07 16:41:54 |
+|  5 | eee   | NULL    | 2023-02-07 16:41:54 |
+|  6 | fff   | NULL    | 2023-02-07 16:41:54 |
+|  7 | ggg   | NULL    | 2023-02-07 16:41:54 |
+|  8 | hhh   | NULL    | 2023-02-07 16:41:54 |
+|  9 | iii   | NULL    | 2023-02-07 16:41:54 |
+| 10 | jjj   | NULL    | 2023-02-07 16:41:54 |
++----+-------+---------+---------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1 where no=1;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`studydb`.`test2`, CONSTRAINT `test2_fk` FOREIGN KEY (`bno`) REFERENCES `test1` (`no`))
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  1 | aaa   | NULL    | 2023-02-07 16:41:54 |
+|  2 | bbb   | NULL    | 2023-02-07 16:41:54 |
+|  3 | ccc   | NULL    | 2023-02-07 16:41:54 |
+|  4 | ddd   | NULL    | 2023-02-07 16:41:54 |
+|  5 | eee   | NULL    | 2023-02-07 16:41:54 |
+|  6 | fff   | NULL    | 2023-02-07 16:41:54 |
+|  7 | ggg   | NULL    | 2023-02-07 16:41:54 |
+|  8 | hhh   | NULL    | 2023-02-07 16:41:54 |
+|  9 | iii   | NULL    | 2023-02-07 16:41:54 |
+| 10 | jjj   | NULL    | 2023-02-07 16:41:54 |
++----+-------+---------+---------------------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete form test1 where no=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'test1 where no=2' at line 1
+MariaDB [studydb]> delete from test1 where no=2;
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> delete from test1 where no=8;
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+-------+---------+---------------------+
+| no | title | content | rdt                 |
++----+-------+---------+---------------------+
+|  1 | aaa   | NULL    | 2023-02-07 16:41:54 |
+|  3 | ccc   | NULL    | 2023-02-07 16:41:54 |
+|  4 | ddd   | NULL    | 2023-02-07 16:41:54 |
+|  5 | eee   | NULL    | 2023-02-07 16:41:54 |
+|  6 | fff   | NULL    | 2023-02-07 16:41:54 |
+|  7 | ggg   | NULL    | 2023-02-07 16:41:54 |
+|  9 | iii   | NULL    | 2023-02-07 16:41:54 |
+| 10 | jjj   | NULL    | 2023-02-07 16:41:54 |
++----+-------+---------+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from test1 where no=5;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`studydb`.`test2`, CONSTRAINT `test2_fk` FOREIGN KEY (`bno`) REFERENCES `test1` (`no`))
+MariaDB [studydb]> -- # select 테스트 용 테이블 준비
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.019 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> DROP TABLE IF EXISTS tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> DROP TABLE IF EXISTS room RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> DROP TABLE IF EXISTS mgr RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.004 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_appl RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.004 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> DROP TABLE IF EXISTS room_phot RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.004 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> DROP TABLE IF EXISTS memb RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.004 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> DROP TABLE IF EXISTS addr RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.004 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.004 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> CREATE TABLE stnt (
+    ->     mno    INTEGER     NOT NULL COMMENT '수강생번호', -- 수강생번호
+    ->     work   CHAR(1)     NOT NULL COMMENT '재직여부', -- 재직여부
+    ->     acc_no VARCHAR(20) NULL     COMMENT '통장번호', -- 통장번호
+    ->     bank   VARCHAR(50) NULL     COMMENT '은행명' -- 은행명
+    -> )
+    -> COMMENT '수강생';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> ALTER TABLE stnt
+    ->     ADD CONSTRAINT PK_stnt -- 수강생 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 수강생번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_stnt
+    ->     ON stnt ( -- 수강생
+    ->         acc_no ASC, -- 통장번호
+    ->         bank ASC    -- 은행명
+    ->     );
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> CREATE TABLE tcher (
+    ->     mno    INTEGER     NOT NULL COMMENT '강사번호', -- 강사번호
+    ->     acc_no VARCHAR(20) NULL     COMMENT '통장번호', -- 통장번호
+    ->     bank   VARCHAR(50) NULL     COMMENT '은행명', -- 은행명
+    ->     hr_pay INTEGER     NULL     COMMENT '시강료' -- 시강료
+    -> )
+    -> COMMENT '강사';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> ALTER TABLE tcher
+    ->     ADD CONSTRAINT PK_tcher -- 강사 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 강사번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_tcher
+    ->     ON tcher ( -- 강사
+    ->         acc_no ASC, -- 통장번호
+    ->         bank ASC    -- 은행명
+    ->     );
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> CREATE TABLE lect (
+    ->     lno     INTEGER      NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     titl    VARCHAR(255) NOT NULL COMMENT '강의명', -- 강의명
+    ->     sdt     DATE         NOT NULL COMMENT '시작일', -- 시작일
+    ->     edt     DATE         NOT NULL COMMENT '종료일', -- 종료일
+    ->     qnty    INTEGER      NOT NULL COMMENT '최대수용인원', -- 최대수용인원
+    ->     pric    INTEGER      NOT NULL COMMENT '강의료', -- 강의료
+    ->     nat_sup CHAR(1)      NOT NULL COMMENT '정부지원여부', -- 정부지원여부
+    ->     sup_typ VARCHAR(50)  NOT NULL COMMENT '지원타입', -- 지원타입
+    ->     dsct    TEXT         NOT NULL COMMENT '설명', -- 설명
+    ->     rno     INTEGER      NULL     COMMENT '강의실번호', -- 강의실번호
+    ->     mno     INTEGER      NULL     COMMENT '매니저번호' -- 매니저번호
+    -> )
+    -> COMMENT '강의';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT PK_lect -- 강의 기본키
+    ->         PRIMARY KEY (
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의 인덱스
+MariaDB [studydb]> CREATE INDEX IX_lect
+    ->     ON lect( -- 강의
+    ->         titl ASC -- 강의명
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE lect
+    ->     MODIFY COLUMN lno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의번호';
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> CREATE TABLE room (
+    ->     rno  INTEGER     NOT NULL COMMENT '강의실번호', -- 강의실번호
+    ->     loc  VARCHAR(50) NOT NULL COMMENT '지점명', -- 지점명
+    ->     name VARCHAR(50) NOT NULL COMMENT '강의실명', -- 강의실명
+    ->     qnty INTEGER     NOT NULL COMMENT '수용인원' -- 수용인원
+    -> )
+    -> COMMENT '강의실';
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> ALTER TABLE room
+    ->     ADD CONSTRAINT PK_room -- 강의실 기본키
+    ->         PRIMARY KEY (
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_room
+    ->     ON room ( -- 강의실
+    ->         loc ASC,  -- 지점명
+    ->         name ASC  -- 강의실명
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE room
+    ->     MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의실번호';
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> CREATE TABLE mgr (
+    ->     mno  INTEGER     NOT NULL COMMENT '매니저번호', -- 매니저번호
+    ->     dept VARCHAR(50) NULL     COMMENT '부서', -- 부서
+    ->     posi VARCHAR(50) NULL     COMMENT '직위', -- 직위
+    ->     fax  VARCHAR(20) NULL     COMMENT '팩스' -- 팩스
+    -> )
+    -> COMMENT '매니저';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> ALTER TABLE mgr
+    ->     ADD CONSTRAINT PK_mgr -- 매니저 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 매니저번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> CREATE TABLE lect_appl (
+    ->     lano INTEGER  NOT NULL COMMENT '수강신청번호', -- 수강신청번호
+    ->     lno  INTEGER  NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     mno  INTEGER  NOT NULL COMMENT '수강생번호', -- 수강생번호
+    ->     rdt  DATETIME NOT NULL COMMENT '신청일', -- 신청일
+    ->     stat INTEGER  NULL     COMMENT '진행상태' -- 진행상태
+    -> )
+    -> COMMENT '수강신청';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT PK_lect_appl -- 수강신청 기본키
+    ->         PRIMARY KEY (
+    ->             lano -- 수강신청번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_lect_appl
+    ->     ON lect_appl ( -- 수강신청
+    ->         lno ASC, -- 강의번호
+    ->         mno ASC  -- 수강생번호
+    ->     );
+Query OK, 0 rows affected (0.016 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     MODIFY COLUMN lano INTEGER NOT NULL AUTO_INCREMENT COMMENT '수강신청번호';
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> CREATE TABLE room_phot (
+    ->     rpno INTEGER      NOT NULL COMMENT '강의실사진번호', -- 강의실사진번호
+    ->     rno  INTEGER      NOT NULL COMMENT '강의실번호', -- 강의실번호
+    ->     phot VARCHAR(255) NOT NULL COMMENT '사진' -- 사진
+    -> )
+    -> COMMENT '강의실사진';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     ADD CONSTRAINT PK_room_phot -- 강의실사진 기본키
+    ->         PRIMARY KEY (
+    ->             rpno -- 강의실사진번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     MODIFY COLUMN rpno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의실사진번호';
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> CREATE TABLE memb (
+    ->     mno      INTEGER      NOT NULL COMMENT '멤버번호', -- 멤버번호
+    ->     name     VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+    ->     tel      VARCHAR(20)  NOT NULL COMMENT '전화', -- 전화
+    ->     email    VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+    ->     pwd      VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+    ->     phot     VARCHAR(255) NULL     COMMENT '사진', -- 사진
+    ->     ano      INTEGER      NULL     COMMENT '주소번호', -- 주소번호
+    ->     det_addr VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
+    ->     finl_edu VARCHAR(50)  NULL     COMMENT '최종학력', -- 최종학력
+    ->     maj      VARCHAR(50)  NULL     COMMENT '전공', -- 전공
+    ->     sch_nm   VARCHAR(50)  NULL     COMMENT '최종학교' -- 최종학교
+    -> )
+    -> COMMENT '멤버';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> ALTER TABLE memb
+    ->     ADD CONSTRAINT PK_memb -- 멤버 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.045 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_memb
+    ->     ON memb ( -- 멤버
+    ->         email ASC -- 이메일
+    ->     );
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버 인덱스
+MariaDB [studydb]> CREATE INDEX IX_memb
+    ->     ON memb( -- 멤버
+    ->         name ASC -- 이름
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE memb
+    ->     MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT COMMENT '멤버번호';
+Query OK, 0 rows affected (0.054 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> CREATE TABLE addr (
+    ->     ano      INTEGER      NOT NULL COMMENT '주소번호', -- 주소번호
+    ->     pst_no   VARCHAR(5)   NOT NULL COMMENT '우편번호', -- 우편번호
+    ->     bas_addr VARCHAR(255) NOT NULL COMMENT '기본주소' -- 기본주소
+    -> )
+    -> COMMENT '주소';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> ALTER TABLE addr
+    ->     ADD CONSTRAINT PK_addr -- 주소 기본키
+    ->         PRIMARY KEY (
+    ->             ano -- 주소번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소 인덱스
+MariaDB [studydb]> CREATE INDEX IX_addr
+    ->     ON addr( -- 주소
+    ->         pst_no ASC -- 우편번호
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE addr
+    ->     MODIFY COLUMN ano INTEGER NOT NULL AUTO_INCREMENT COMMENT '주소번호';
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> CREATE TABLE lect_tcher (
+    ->     lno INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     mno INTEGER NOT NULL COMMENT '강사번호' -- 강사번호
+    -> )
+    -> COMMENT '강의배정';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT PK_lect_tcher -- 강의배정 기본키
+    ->         PRIMARY KEY (
+    ->             lno, -- 강의번호
+    ->             mno  -- 강사번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.018 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> ALTER TABLE stnt
+    ->     ADD CONSTRAINT FK_memb_TO_stnt -- 멤버 -> 수강생
+    ->         FOREIGN KEY (
+    ->             mno -- 수강생번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> ALTER TABLE tcher
+    ->     ADD CONSTRAINT FK_memb_TO_tcher -- 멤버 -> 강사
+    ->         FOREIGN KEY (
+    ->             mno -- 강사번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT FK_mgr_TO_lect -- 매니저 -> 강의
+    ->         FOREIGN KEY (
+    ->             mno -- 매니저번호
+    ->         )
+    ->         REFERENCES mgr ( -- 매니저
+    ->             mno -- 매니저번호
+    ->         );
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT FK_room_TO_lect -- 강의실 -> 강의
+    ->         FOREIGN KEY (
+    ->             rno -- 강의실번호
+    ->         )
+    ->         REFERENCES room ( -- 강의실
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> ALTER TABLE mgr
+    ->     ADD CONSTRAINT FK_memb_TO_mgr -- 멤버 -> 매니저
+    ->         FOREIGN KEY (
+    ->             mno -- 매니저번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.035 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT FK_stnt_TO_lect_appl -- 수강생 -> 수강신청
+    ->         FOREIGN KEY (
+    ->             mno -- 수강생번호
+    ->         )
+    ->         REFERENCES stnt ( -- 수강생
+    ->             mno -- 수강생번호
+    ->         );
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT FK_lect_TO_lect_appl -- 강의 -> 수강신청
+    ->         FOREIGN KEY (
+    ->             lno -- 강의번호
+    ->         )
+    ->         REFERENCES lect ( -- 강의
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     ADD CONSTRAINT FK_room_TO_room_phot -- 강의실 -> 강의실사진
+    ->         FOREIGN KEY (
+    ->             rno -- 강의실번호
+    ->         )
+    ->         REFERENCES room ( -- 강의실
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> ALTER TABLE memb
+    ->     ADD CONSTRAINT FK_addr_TO_memb -- 주소 -> 멤버
+    ->         FOREIGN KEY (
+    ->             ano -- 주소번호
+    ->         )
+    ->         REFERENCES addr ( -- 주소
+    ->             ano -- 주소번호
+    ->         );
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT FK_tcher_TO_lect_tcher -- 강사 -> 강의배정
+    ->         FOREIGN KEY (
+    ->             mno -- 강사번호
+    ->         )
+    ->         REFERENCES tcher ( -- 강사
+    ->             mno -- 강사번호
+    ->         );
+Query OK, 0 rows affected (0.020 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT FK_lect_TO_lect_tcher -- 강의 -> 강의배정
+    ->         FOREIGN KEY (
+    ->             lno -- 강의번호
+    ->         )
+    ->         REFERENCES lect ( -- 강의
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected (0.074 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| lect              |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
++-------------------+
+12 rows in set (0.001 sec)
+
+MariaDB [studydb]> -- # select 테스트 용 데이터 준비
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강의실 데이터 준비 */
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(1, '강남', '501', 30);
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(2, '강남', '502', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(3, '강남', '503', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(4, '종로', '301', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(5, '종로', '302', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(6, '종로', '303', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(7, '서초', '301', 30);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(8, '서초', '302', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(9, '서초', '501', 30);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(10, '서초', '601', 30);
+Query OK, 1 row affected (0.015 sec)
+
+MariaDB [studydb]> /* 학생 데이터 입력 */
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(100, 's100', '111-1111', 's100@', sha2('1111', 224));
+Query OK, 1 row affected (0.032 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(101, 's101', '111-1111', 's101@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(102, 's102', '111-1111', 's102@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(103, 's103', '111-1111', 's103@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(104, 's104', '111-1111', 's104@', sha2('1111', 224));
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> /* 강사 데이터 입력 */
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(200, 't200', '111-1111', 't200@', sha2('1111', 224));
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(201, 't201', '111-1111', 't201@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(202, 't202', '111-1111', 't202@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(203, 't203', '111-1111', 't203@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(204, 't204', '111-1111', 't204@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(100, 'N', '1000', '비트은행');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(101, 'Y', '1001', '비트은행');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(102, 'N', '1002', '캠프은행');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(103, 'Y', '1003', '우리은행');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(104, 'N', '1004', '국민은행');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(200, 10000, '2000', '신한은행');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(201, 20000, '2001', '농협');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(202, 15000, '2002', '기업은행');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(203, 25000, '2003', '우리은행');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(204, 30000, '2004', '국민은행');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 매니저 데이터 입력 */
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(300, 'm300', '111-1111', 'm300@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(301, 'm301', '111-1111', 'm301@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(302, 'm302', '111-1111', 'm302@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(303, 'm303', '111-1111', 'm303@', sha2('1111', 224));
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(304, 'm304', '111-1111', 'm304@', sha2('1111', 224));
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(300, '시설관리', '주임');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(301, '시설관리', '대리');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(302, '회계', '과장');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(303, '교육', '주임');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(304, '교육', '과장');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 200번 강사는 교육팀 과장이기도 하다.*/
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(200, '교육', '과장');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [studydb]> /* 강의 데이터 입력 */
+MariaDB [studydb]> insert into lect(lno, titl, sdt, edt, qnty, pric, nat_sup, sup_typ, dsct)
+    -> values(1, '자바프로그래밍', '2018-1-1', '2018-5-30', 30, 100, 'Y', '미취업자', 'ok');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into lect(lno, titl, sdt, edt, qnty, pric, nat_sup, sup_typ, dsct)
+    -> values(2, 'IoT프로그래밍', '2018-3-1', '2018-7-30', 30, 200, 'Y', '미취업자', 'ok');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect(lno, titl, sdt, edt, qnty, pric, nat_sup, sup_typ, dsct)
+    -> values(3, '윈도우프로그래밍', '2018-5-1', '2018-10-30', 30, 300, 'Y', '노동부', 'ok');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> /* 강의에 매니저 배정 */
+MariaDB [studydb]> update lect set mno=303 where lno=1;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> update lect set mno=304 where lno=3;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강의에 강의실 배정 */
+MariaDB [studydb]> update lect set rno=1 where lno=1;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> update lect set rno=4 where lno=2;
+Query OK, 1 row affected (0.013 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> /* 수강신청 데이터 입력 */
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(1, 1, 100, '2017-11-2');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(2, 1, 101, '2017-11-3');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(3, 1, 102, '2017-11-4');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(4, 2, 104, '2017-12-6');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(5, 2, 100, '2017-12-7');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(6, 3, 101, '2017-10-8');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(7, 3, 102, '2017-11-9');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(8, 3, 104, '2017-11-11');
+Query OK, 1 row affected (0.001 sec)

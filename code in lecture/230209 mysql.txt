@@ -1,0 +1,610 @@
+Microsoft Windows [Version 10.0.22621.1105]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>cd git
+
+C:\Users\bitcamp\git>cd bitcamp-ncp
+
+C:\Users\bitcamp\git\bitcamp-ncp>dir
+ C 드라이브의 볼륨에는 이름이 없습니다.
+ 볼륨 일련 번호: 2242-81FB
+
+ C:\Users\bitcamp\git\bitcamp-ncp 디렉터리
+
+2023-01-10  오후 05:57    <DIR>          .
+2023-02-08  오후 06:02    <DIR>          ..
+2022-12-15  오후 04:31             3,889 .gitignore
+2022-12-27  오후 12:04    <DIR>          .vscode
+2022-11-24  오후 03:40                10 a.txt
+2023-01-26  오후 12:16    <DIR>          backend-app
+2023-01-10  오후 05:57    <DIR>          css
+2023-01-10  오후 05:57    <DIR>          Do it! HTML+CSS+자바스크립트 웹 표준의 정석_본문_예제소스_220311
+2022-12-27  오후 02:55    <DIR>          eomcs-java-lang
+2023-01-11  오후 07:04    <DIR>          frontend-app
+2022-12-20  오후 04:44                81 hello.c
+2022-12-26  오전 11:14               410 Hello.class
+2022-12-26  오후 07:13               102 Hello.java
+2022-12-26  오전 11:38                95 hello.js
+2023-01-10  오후 05:57    <DIR>          html5
+2022-11-24  오전 11:57                33 ms949.txt
+2023-02-02  오후 05:47    <DIR>          myapp
+2022-11-22  오후 01:05                13 README.md
+2022-11-24  오전 11:58                52 utf16.txt
+2022-11-24  오전 11:58                41 utf8.txt
+2022-12-27  오후 12:58    <DIR>          `html css js exam
+              10개 파일               4,726 바이트
+              11개 디렉터리  47,699,742,720 바이트 남음
+
+C:\Users\bitcamp\git\bitcamp-ncp>cd eomcs-java-lang
+
+C:\Users\bitcamp\git\bitcamp-ncp\eomcs-java-lang>gradle eclipse
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+BUILD SUCCESSFUL in 15s
+3 actionable tasks: 3 executed
+C:\Users\bitcamp\git\bitcamp-ncp\eomcs-java-lang>mysql -u study -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 22
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]> -- 게시판 테이블 삭제
+MariaDB [studydb]> drop table if exists x_board restrict;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 게시물 첨부파일 테이블 삭제
+MariaDB [studydb]> drop table if exists x_board_file restrict;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]>
+MariaDB [studydb]> -- 게시판 테이블 생성
+MariaDB [studydb]> create table x_board (
+    ->   board_id int not null primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   contents text null,
+    ->   created_date datetime null default now(),
+    ->   view_count int null default 0
+    -> );
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 게시물 첨부파일 테이블 생성
+MariaDB [studydb]> create table x_board_file (
+    ->   board_file_id int not null primary key auto_increment,
+    ->   file_path varchar(255) not null,
+    ->   board_id int not null,
+    ->   constraint fk_board_file foreign key (board_id) references x_board(board_id) /* on delete cascade */
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 게시물 데이터 입력
+MariaDB [studydb]> insert into x_board(board_id, title, contents)
+    -> values(1, '제목1', '내용');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board(board_id, title, contents)
+    -> values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board(board_id, title, contents)
+    -> values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board(board_id, title, contents)
+    -> values(4, '제목4', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board(board_id, title, contents)
+    -> values(5, '제목5', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board(board_id, title, contents)
+    -> values(6, '제목6', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 게시물 첨부파일 데이터 입력
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(101, 'a1.gif', 1);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(102, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(103, 'a3.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(104, 'b1.gif', 2);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(105, 'b2.gif', 2);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(106, 'c1.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(107, 'c2.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(108, 'c3.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(109, 'd1.gif', 4);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into x_board_file(board_file_id, file_path, board_id)
+    -> values(110, 'e1.gif', 5);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect2             |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
+| x_board           |
+| x_board_file      |
++-------------------+
+25 rows in set (0.001 sec)
+
+MariaDB [studydb]> select * from x_board;
++----------+-------+----------+---------------------+------------+
+| board_id | title | contents | created_date        | view_count |
++----------+-------+----------+---------------------+------------+
+|        1 | 제목1 | 내용     | 2023-02-09 12:26:37 |          0 |
+|        2 | 제목2 | 내용     | 2023-02-09 12:26:37 |          0 |
+|        3 | 제목3 | 내용     | 2023-02-09 12:26:37 |          0 |
+|        4 | 제목4 | 내용     | 2023-02-09 12:26:37 |          0 |
+|        5 | 제목5 | 내용     | 2023-02-09 12:26:37 |          0 |
+|        6 | 제목6 | 내용     | 2023-02-09 12:26:37 |          0 |
++----------+-------+----------+---------------------+------------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from x_board_file;
++---------------+-----------+----------+
+| board_file_id | file_path | board_id |
++---------------+-----------+----------+
+|           101 | a1.gif    |        1 |
+|           102 | a2.gif    |        1 |
+|           103 | a3.gif    |        1 |
+|           104 | b1.gif    |        2 |
+|           105 | b2.gif    |        2 |
+|           106 | c1.gif    |        3 |
+|           107 | c2.gif    |        3 |
+|           108 | c3.gif    |        3 |
+|           109 | d1.gif    |        4 |
+|           110 | e1.gif    |        5 |
++---------------+-----------+----------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from x_board;
++----------+--------+----------+---------------------+------------+
+| board_id | title  | contents | created_date        | view_count |
++----------+--------+----------+---------------------+------------+
+|        1 | 제목1  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        2 | 제목2  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        3 | 제목3  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        4 | 제목4  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        5 | 제목5  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        6 | 제목6  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        7 | 제목10 | 내용     | 2023-02-09 12:44:45 |          0 |
+|        8 | 제목10 | 내용     | 2023-02-09 12:47:56 |          0 |
+|        9 | 제목11 | 내용     | 2023-02-09 12:47:56 |          0 |
++----------+--------+----------+---------------------+------------+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> truncate from x_board;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from x_board' at line 1
+MariaDB [studydb]> truncate * from x_board;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* from x_board' at line 1
+MariaDB [studydb]> truncate from x_board;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from x_board' at line 1
+MariaDB [studydb]> desc x_board;
++--------------+--------------+------+-----+---------------------+----------------+
+| Field        | Type         | Null | Key | Default             | Extra          |
++--------------+--------------+------+-----+---------------------+----------------+
+| board_id     | int(11)      | NO   | PRI | NULL                | auto_increment |
+| title        | varchar(255) | NO   |     | NULL                |                |
+| contents     | text         | YES  |     | NULL                |                |
+| created_date | datetime     | YES  |     | current_timestamp() |                |
+| view_count   | int(11)      | YES  |     | 0                   |                |
++--------------+--------------+------+-----+---------------------+----------------+
+5 rows in set (0.012 sec)
+
+MariaDB [studydb]> select * from x_board;
++----------+--------+----------+---------------------+------------+
+| board_id | title  | contents | created_date        | view_count |
++----------+--------+----------+---------------------+------------+
+|        2 | 제목2  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        3 | 제목3  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        4 | 제목4  | 내용     | 2023-02-09 12:26:37 |          1 |
+|        5 | 제목5  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        6 | 제목6  | 내용     | 2023-02-09 12:26:37 |          0 |
+|        8 | 제목10 | 내용     | 2023-02-09 12:47:56 |          0 |
+|        9 | 제목11 | 내용     | 2023-02-09 12:47:56 |          0 |
++----------+--------+----------+---------------------+------------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from x_board_file;
++---------------+-----------+----------+
+| board_file_id | file_path | board_id |
++---------------+-----------+----------+
+|           104 | b1.gif    |        2 |
+|           105 | b2.gif    |        2 |
+|           106 | c1.gif    |        3 |
+|           107 | c2.gif    |        3 |
+|           108 | c3.gif    |        3 |
+|           109 | d1.gif    |        4 |
+|           110 | e1.gif    |        5 |
++---------------+-----------+----------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect2             |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
+| x_board           |
+| x_board_file      |
++-------------------+
+25 rows in set (0.001 sec)
+
+MariaDB [studydb]> create table app_board (
+    ->   board_id int not null,
+    ->   title varchar(255) not null,
+    ->   content text not null,
+    ->   pwd varchar(10),
+    ->   created_date datetime default now(),
+    ->   view_cnt int default 0
+    -> );
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_board
+    ->   add constraint primary key (board_id),
+    ->   modify column board_id int not null auto_increment;
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| app_board         |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect2             |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
+| x_board           |
+| x_board_file      |
++-------------------+
+26 rows in set (0.001 sec)
+
+MariaDB [studydb]> desc app_board;
++--------------+--------------+------+-----+---------------------+----------------+
+| Field        | Type         | Null | Key | Default             | Extra          |
++--------------+--------------+------+-----+---------------------+----------------+
+| board_id     | int(11)      | NO   | PRI | NULL                | auto_increment |
+| title        | varchar(255) | NO   |     | NULL                |                |
+| content      | text         | NO   |     | NULL                |                |
+| pwd          | varchar(10)  | YES  |     | NULL                |                |
+| created_date | datetime     | YES  |     | current_timestamp() |                |
+| view_cnt     | int(11)      | YES  |     | 0                   |                |
++--------------+--------------+------+-----+---------------------+----------------+
+6 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into app_board(title, content, pwd) values('aaaa', 'aaaaa', '1111');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from app_board;
++----------+-------+---------+------+---------------------+----------+
+| board_id | title | content | pwd  | created_date        | view_cnt |
++----------+-------+---------+------+---------------------+----------+
+|        1 | aaaa  | aaaaa   | 1111 | 2023-02-09 15:46:32 |        0 |
++----------+-------+---------+------+---------------------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select board_id, title, created_date, view_cnt from app_board order by board_id desc;
++----------+-------+---------------------+----------+
+| board_id | title | created_date        | view_cnt |
++----------+-------+---------------------+----------+
+|        1 | aaaa  | 2023-02-09 15:46:32 |        0 |
++----------+-------+---------------------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select board_id, title, content, created_date, view_cnt from app_board where board_id=1;
++----------+-------+---------+---------------------+----------+
+| board_id | title | content | created_date        | view_cnt |
++----------+-------+---------+---------------------+----------+
+|        1 | aaaa  | aaaaa   | 2023-02-09 15:46:32 |        0 |
++----------+-------+---------+---------------------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> update app_board set title='xxx', content='xxxx' where board_id=1;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> select board_id, title, content, created_date, view_cnt from app_board where board_id=1;
++----------+-------+---------+---------------------+----------+
+| board_id | title | content | created_date        | view_cnt |
++----------+-------+---------+---------------------+----------+
+|        1 | xxx   | xxxx    | 2023-02-09 15:46:32 |        0 |
++----------+-------+---------+---------------------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> delete from app_board where board_id=1;
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [studydb]> select board_id, title, content, created_date, view_cnt from app_board where board_id=1;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> create table app_student (
+    ->   student_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now(),
+    ->   pst_no varchar(5),
+    ->   bas_addr varchar(255),
+    ->   det_addr varchar(255),
+    ->   work boolean,
+    ->   gender char(1),
+    ->   level int
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_student
+    ->   add constraint primary key (student_id),
+    ->   modify column student_id int not null auto_increment;
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| app_board         |
+| app_student       |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect2             |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
+| x_board           |
+| x_board_file      |
++-------------------+
+27 rows in set (0.001 sec)
+
+MariaDB [studydb]> desc app_student;
++--------------+--------------+------+-----+---------------------+----------------+
+| Field        | Type         | Null | Key | Default             | Extra          |
++--------------+--------------+------+-----+---------------------+----------------+
+| student_id   | int(11)      | NO   | PRI | NULL                | auto_increment |
+| name         | varchar(50)  | NO   |     | NULL                |                |
+| tel          | varchar(20)  | YES  |     | NULL                |                |
+| created_date | datetime     | YES  |     | current_timestamp() |                |
+| pst_no       | varchar(5)   | YES  |     | NULL                |                |
+| bas_addr     | varchar(255) | YES  |     | NULL                |                |
+| det_addr     | varchar(255) | YES  |     | NULL                |                |
+| work         | tinyint(1)   | YES  |     | NULL                |                |
+| gender       | char(1)      | YES  |     | NULL                |                |
+| level        | int(11)      | YES  |     | NULL                |                |
++--------------+--------------+------+-----+---------------------+----------------+
+10 rows in set (0.020 sec)
+
+MariaDB [studydb]> create table app_teacher (
+    ->   student_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now(),
+    ->   email varchar(50),
+    ->   degree int,
+    ->   school varchar(50),
+    ->   major varchar(50),
+    ->   wage int
+    -> );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_teacher
+    ->   add constraint primary key (teacher_id),
+    ->   modify column teacher_id int not null auto_increment;
+ERROR 1054 (42S22): Unknown column 'teacher_id' in 'app_teacher'
+MariaDB [studydb]> create table app_teacher (
+    ->   teacher_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now(),
+    ->   email varchar(50),
+    ->   degree int,
+    ->   school varchar(50),
+    ->   major varchar(50),
+    ->   wage int
+    -> );
+ERROR 1050 (42S01): Table 'app_teacher' already exists
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_teacher
+    ->   add constraint primary key (teacher_id),
+    ->   modify column teacher_id int not null auto_increment;
+ERROR 1054 (42S22): Unknown column 'teacher_id' in 'app_teacher'
+MariaDB [studydb]> create table app_teacher (
+    ->   teacher_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now(),
+    ->   email varchar(50),
+    ->   degree int,
+    ->   school varchar(50),
+    ->   major varchar(50),
+    ->   wage int
+    -> );
+ERROR 1050 (42S01): Table 'app_teacher' already exists
+MariaDB [studydb]> drop table app_teacher;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]> create table app_teacher (
+    ->   teacher_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now(),
+    ->   email varchar(50),
+    ->   degree int,
+    ->   school varchar(50),
+    ->   major varchar(50),
+    ->   wage int
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_teacher
+    ->   add constraint primary key (teacher_id),
+    ->   modify column teacher_id int not null auto_increment;
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_teacher;
++--------------+-------------+------+-----+---------------------+----------------+
+| Field        | Type        | Null | Key | Default             | Extra          |
++--------------+-------------+------+-----+---------------------+----------------+
+| teacher_id   | int(11)     | NO   | PRI | NULL                | auto_increment |
+| name         | varchar(50) | NO   |     | NULL                |                |
+| tel          | varchar(20) | YES  |     | NULL                |                |
+| created_date | datetime    | YES  |     | current_timestamp() |                |
+| email        | varchar(50) | YES  |     | NULL                |                |
+| degree       | int(11)     | YES  |     | NULL                |                |
+| school       | varchar(50) | YES  |     | NULL                |                |
+| major        | varchar(50) | YES  |     | NULL                |                |
+| wage         | int(11)     | YES  |     | NULL                |                |
++--------------+-------------+------+-----+---------------------+----------------+
+9 rows in set (0.018 sec)
+
+MariaDB [studydb]> select * from app_student;
++------------+------+------+---------------------+--------+----------+----------+------+--------+-------+
+| student_id | name | tel  | created_date        | pst_no | bas_addr | det_addr | work | gender | level |
++------------+------+------+---------------------+--------+----------+----------+------+--------+-------+
+|          1 | aaa  | 1111 | 2023-02-09 17:03:25 | 01234  | basic    | detail   |    0 | M      |     0 |
++------------+------+------+---------------------+--------+----------+----------+------+--------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select student_id, name, tel, work, level from app_student;
++------------+------+------+------+-------+
+| student_id | name | tel  | work | level |
++------------+------+------+------+-------+
+|          1 | aaa  | 1111 |    0 |     0 |
++------------+------+------+------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_teacher;
++------------+------+------+---------------------+-------+--------+--------+-------+-------+
+| teacher_id | name | tel  | created_date        | email | degree | school | major | wage  |
++------------+------+------+---------------------+-------+--------+--------+-------+-------+
+|          1 | aaa  | 1111 | 2023-02-09 17:30:52 | e     |      1 | qqq    | www   | 11111 |
++------------+------+------+---------------------+-------+--------+--------+-------+-------+
+1 row in set (0.000 sec)

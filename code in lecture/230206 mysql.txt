@@ -1,0 +1,2306 @@
+Microsoft Windows [Version 10.0.22621.1105]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>mysql -u root -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE USER 'study'@'localhost' IDENTIFIED BY '1111';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [(none)]> CREATE USER 'study'@'%' IDENTIFIED BY '1111';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [(none)]> select user, host from mysql.user
+    -> ;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| study       | %               |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-48te820 |
+| mariadb.sys | localhost       |
+| root        | localhost       |
+| study       | localhost       |
++-------------+-----------------+
+7 rows in set (0.003 sec)
+
+MariaDB [(none)]> select user, host from mysql.user;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| study       | %               |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-48te820 |
+| mariadb.sys | localhost       |
+| root        | localhost       |
+| study       | localhost       |
++-------------+-----------------+
+7 rows in set (0.000 sec)
+
+MariaDB [(none)]> CREATE DATABASE studydb CHARACTER SET utf8 COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [(none)]> show batabases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'batabases' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| studydb            |
+| sys                |
++--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [(none)]> GRANT ALL ON studydb.* TO 'study'@'localhost';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> GRANT ALL ON studydb.* TO 'study'@'%';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> quit
+Bye
+
+C:\Users\bitcamp>mysql -u study -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| studydb            |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [(none)]> create table test01 (
+    ->     name varchar(50) not null,
+    ->     kor int not null,
+    ->     eng int not null,
+    ->     math int not null,
+    ->     sum int not null,
+    ->     aver float not null
+    ->   );
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create table studydb.test01 (
+    ->     name varchar(50) not null,
+    ->     kor int not null,
+    ->     eng int not null,
+    ->     math int not null,
+    ->     sum int not null,
+    ->     aver float not null
+    ->   );
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [(none)]> drop table test01;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> drop table studydb.test01;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]> create table test01 (
+    ->     name varchar(50) not null,
+    ->     kor int not null,
+    ->     eng int not null,
+    ->     math int not null,
+    ->     sum int not null,
+    ->     aver float not null
+    ->   );
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test01            |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> describe test01;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | NO   |     | NULL    |       |
+| kor   | int(11)     | NO   |     | NULL    |       |
+| eng   | int(11)     | NO   |     | NULL    |       |
+| math  | int(11)     | NO   |     | NULL    |       |
+| sum   | int(11)     | NO   |     | NULL    |       |
+| aver  | float       | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.023 sec)
+
+MariaDB [studydb]> desc test01;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | NO   |     | NULL    |       |
+| kor   | int(11)     | NO   |     | NULL    |       |
+| eng   | int(11)     | NO   |     | NULL    |       |
+| math  | int(11)     | NO   |     | NULL    |       |
+| sum   | int(11)     | NO   |     | NULL    |       |
+| aver  | float       | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.011 sec)
+
+MariaDB [studydb]> drop table test01;
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [studydb]> create table test1 (
+    ->     no int,
+    ->     name varchar(20)
+    ->   );
+Query OK, 0 rows affected (0.023 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> desc test01;
+ERROR 1146 (42S02): Table 'studydb.test01' doesn't exist
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.016 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(1, 'aaa');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
++------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name, no) values('bbb', 2);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
++------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, 'ccc');
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
+| NULL | ccc  |
++------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(4, null);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
+| NULL | ccc  |
+|    4 | NULL |
++------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, null);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, null);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, null);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
+| NULL | ccc  |
+|    4 | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | NULL |
++------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name) values('xxx');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
+| NULL | ccc  |
+|    4 | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | xxx  |
++------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no) values(100);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
+| NULL | ccc  |
+|    4 | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | xxx  |
+|  100 | NULL |
++------+------+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1() values();
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+|    2 | bbb  |
+| NULL | ccc  |
+|    4 | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | NULL |
+| NULL | xxx  |
+|  100 | NULL |
+| NULL | NULL |
++------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     no int not null,
+    ->     name varchar(20)
+    ->   );
+ERROR 1050 (42S01): Table 'test1' already exists
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]> show tables
+    -> ;
+Empty set (0.001 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     no int not null,
+    ->     name varchar(20)
+    ->   );
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [studydb]> show tables
+    -> ;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(1, 'aaa');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(2, null);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, 'ccc');
+ERROR 1048 (23000): Column 'no' cannot be null
+MariaDB [studydb]> insert into test1(name) values('ccc');
+ERROR 1364 (HY000): Field 'no' doesn't have a default value
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [studydb]> show tables;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> create table test1(
+    ->     no int not null,
+    ->     name varchar(20) default 'noname',
+    ->     age int default 20
+    ->   );
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   |     | NULL    |       |
+| name  | varchar(20) | YES  |     | noname  |       |
+| age   | int(11)     | YES  |     | 20      |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1(no, name, age) values(1, 'aaa', 20);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+
+| no | name | age  |
++----+------+------+
+|  1 | aaa  |   20 |
++----+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, name, age) values(1, null, 20);
+Query OK, 1 row affected (0.012 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+
+| no | name | age  |
++----+------+------+
+|  1 | aaa  |   20 |
+|  1 | NULL |   20 |
++----+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, age) values(3, 30);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+--------+------+
+| no | name   | age  |
++----+--------+------+
+|  1 | aaa    |   20 |
+|  1 | NULL   |   20 |
+|  3 | noname |   30 |
++----+--------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no) values(4);
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [studydb]> select * from test1;
++----+--------+------+
+| no | name   | age  |
++----+--------+------+
+|  1 | aaa    |   20 |
+|  1 | NULL   |   20 |
+|  3 | noname |   30 |
+|  4 | noname |   20 |
++----+--------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no) values(5);
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> show tables;
+Empty set (0.000 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     c1 int,
+    ->     c2 float,
+    ->     c3 numeric(6,2), /* 소수점 자릿수를 지정하면 부동소수점으로 사용 */
+    ->     c4 numeric -- decimal 과 같다
+    ->   );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [studydb]> desc test1;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| c1    | int(11)       | YES  |     | NULL    |       |
+| c2    | float         | YES  |     | NULL    |       |
+| c3    | decimal(6,2)  | YES  |     | NULL    |       |
+| c4    | decimal(10,0) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+4 rows in set (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values(100);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values(3.14);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values(100.98);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+------+
+| c1   | c2   | c3   | c4   |
++------+------+------+------+
+|  100 | NULL | NULL | NULL |
+|    3 | NULL | NULL | NULL |
+|  101 | NULL | NULL | NULL |
++------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values(100);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values(3.14);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values(3.14159);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+---------+------+------+
+| c1   | c2      | c3   | c4   |
++------+---------+------+------+
+|  100 |    NULL | NULL | NULL |
+|    3 |    NULL | NULL | NULL |
+|  101 |    NULL | NULL | NULL |
+| NULL |     100 | NULL | NULL |
+| NULL |    3.14 | NULL | NULL |
+| NULL | 3.14159 | NULL | NULL |
++------+---------+------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(100);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(123456789); /* 입력 오류. 5자리 초과 */
+ERROR 1264 (22003): Out of range value for column 'c3' at row 1
+MariaDB [studydb]>   insert into test1(c3) values(12345); /* 입력 오류. 1자리 초과 */
+ERROR 1264 (22003): Out of range value for column 'c3' at row 1
+MariaDB [studydb]>   insert into test1(c3) values(1234);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(3.14);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(3.14159); /* 2자리를 초과한 값은 반올림. */
+Query OK, 1 row affected, 1 warning (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(3.14551); /* 2자리를 초과한 값은 반올림. */
+Query OK, 1 row affected, 1 warning (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+---------+---------+------+
+| c1   | c2      | c3      | c4   |
++------+---------+---------+------+
+|  100 |    NULL |    NULL | NULL |
+|    3 |    NULL |    NULL | NULL |
+|  101 |    NULL |    NULL | NULL |
+| NULL |     100 |    NULL | NULL |
+| NULL |    3.14 |    NULL | NULL |
+| NULL | 3.14159 |    NULL | NULL |
+| NULL |    NULL |  100.00 | NULL |
+| NULL |    NULL | 1234.00 | NULL |
+| NULL |    NULL |    3.14 | NULL |
+| NULL |    NULL |    3.14 | NULL |
+| NULL |    NULL |    3.15 | NULL |
++------+---------+---------+------+
+11 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c4) values(1234567890);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(c4) values(12.34567890); /* 소수점은 반올림 처리됨 */
+Query OK, 1 row affected, 1 warning (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c4) values(12345678.90); /* 소수점은 반올림 처리됨 */
+Query OK, 1 row affected, 1 warning (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+---------+---------+------------+
+| c1   | c2      | c3      | c4         |
++------+---------+---------+------------+
+|  100 |    NULL |    NULL |       NULL |
+|    3 |    NULL |    NULL |       NULL |
+|  101 |    NULL |    NULL |       NULL |
+| NULL |     100 |    NULL |       NULL |
+| NULL |    3.14 |    NULL |       NULL |
+| NULL | 3.14159 |    NULL |       NULL |
+| NULL |    NULL |  100.00 |       NULL |
+| NULL |    NULL | 1234.00 |       NULL |
+| NULL |    NULL |    3.14 |       NULL |
+| NULL |    NULL |    3.14 |       NULL |
+| NULL |    NULL |    3.15 |       NULL |
+| NULL |    NULL |    NULL | 1234567890 |
+| NULL |    NULL |    NULL |         12 |
+| NULL |    NULL |    NULL |   12345679 |
++------+---------+---------+------------+
+14 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     c1 char(5),
+    ->     c2 varchar(5),
+    ->     c3 varchar(21000)
+    ->   );
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('abcde');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('가나다라마'); /* 한글 영어 상관없이 5자 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('abcdefghi'); /* 입력 크기 초과 오류! */
+ERROR 1406 (22001): Data too long for column 'c1' at row 1
+MariaDB [studydb]>   insert into test1(c1) values('가나다라마바'); /* 입력 크기 초과 오류! */
+ERROR 1406 (22001): Data too long for column 'c1' at row 1
+MariaDB [studydb]> desc test1;
++-------+----------------+------+-----+---------+-------+
+| Field | Type           | Null | Key | Default | Extra |
++-------+----------------+------+-----+---------+-------+
+| c1    | char(5)        | YES  |     | NULL    |       |
+| c2    | varchar(5)     | YES  |     | NULL    |       |
+| c3    | varchar(21000) | YES  |     | NULL    |       |
++-------+----------------+------+-----+---------+-------+
+3 rows in set (0.010 sec)
+
+MariaDB [studydb]> select * from test1;
++------------+------+------+
+| c1         | c2   | c3   |
++------------+------+------+
+|            | NULL | NULL |
+| abcde      | NULL | NULL |
+| 가나다라마 | NULL | NULL |
++------------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('abc');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values('abc');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------------+------+------+
+| c1         | c2   | c3   |
++------------+------+------+
+|            | NULL | NULL |
+| abcde      | NULL | NULL |
+| 가나다라마 | NULL | NULL |
+| abc        | NULL | NULL |
+| NULL       | abc  | NULL |
++------------+------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where c1='abc';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| abc  | NULL | NULL |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where c1='abc  ';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| abc  | NULL | NULL |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where c1='abc   ';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| abc  | NULL | NULL |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select * from test1 where c2='abc  ';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| NULL | abc  | NULL |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     c1 date,
+    ->     c2 time,
+    ->     c3 datetime
+    ->   );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> desc test1;
++-------+----------+------+-----+---------+-------+
+| Field | Type     | Null | Key | Default | Extra |
++-------+----------+------+-----+---------+-------+
+| c1    | date     | YES  |     | NULL    |       |
+| c2    | time     | YES  |     | NULL    |       |
+| c3    | datetime | YES  |     | NULL    |       |
++-------+----------+------+-----+---------+-------+
+3 rows in set (0.015 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('2022-02-21');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values('16:12:35');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values('2022-2-21 16:5:3');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('2022-02-21 16:13:33'); /* 날짜 정보만 저장*/
+Query OK, 1 row affected, 1 warning (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values('2022-02-21 16:13:33'); /* 시간 정보만 저장*/
+Query OK, 1 row affected, 1 warning (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values('2022-02-21'); /* 시간 정보는 0을 설정된다.*/
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values('16:13:33'); /* 실행 오류!*/
+ERROR 1292 (22007): Incorrect datetime value: '16:13:33' for column `studydb`.`test1`.`c3` at row 1
+MariaDB [studydb]> select * from test1;
++------------+----------+---------------------+
+| c1         | c2       | c3                  |
++------------+----------+---------------------+
+| 2022-02-21 | NULL     | NULL                |
+| NULL       | 16:12:35 | NULL                |
+| NULL       | NULL     | 2022-02-21 16:05:03 |
+| 2022-02-21 | NULL     | NULL                |
+| NULL       | 16:13:33 | NULL                |
+| NULL       | NULL     | 2022-02-21 00:00:00 |
++------------+----------+---------------------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     c1 char(1),
+    ->     c2 int,
+    ->     c3 boolean
+    ->   );
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [studydb]> desc test1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| c1    | char(1)    | YES  |     | NULL    |       |
+| c2    | int(11)    | YES  |     | NULL    |       |
+| c3    | tinyint(1) | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+3 rows in set (0.015 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('Y'); /* yes */
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('N'); /* no */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('T'); /* true */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('F'); /* false */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('1'); /* true */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c1) values('0'); /* false */
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| Y    | NULL | NULL |
+| N    | NULL | NULL |
+| T    | NULL | NULL |
+| F    | NULL | NULL |
+| 1    | NULL | NULL |
+| 0    | NULL | NULL |
++------+------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values(1); /* true */
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(c2) values(0); /* false */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| Y    | NULL | NULL |
+| N    | NULL | NULL |
+| T    | NULL | NULL |
+| F    | NULL | NULL |
+| 1    | NULL | NULL |
+| 0    | NULL | NULL |
+| NULL |    1 | NULL |
+| NULL |    0 | NULL |
++------+------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values('Y'); /* error */
+ERROR 1366 (22007): Incorrect integer value: 'Y' for column `studydb`.`test1`.`c3` at row 1
+MariaDB [studydb]>   insert into test1(c3) values('N'); /* error */
+ERROR 1366 (22007): Incorrect integer value: 'N' for column `studydb`.`test1`.`c3` at row 1
+MariaDB [studydb]>   insert into test1(c3) values('T'); /* error */
+ERROR 1366 (22007): Incorrect integer value: 'T' for column `studydb`.`test1`.`c3` at row 1
+MariaDB [studydb]>   insert into test1(c3) values('F'); /* error */
+ERROR 1366 (22007): Incorrect integer value: 'F' for column `studydb`.`test1`.`c3` at row 1
+MariaDB [studydb]>   insert into test1(c3) values(true); /* 저장할 때 1 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(false); /* 저장할 때 0 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values('1'); /* true -> 1 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values('0'); /* false -> 0 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(1); /* true -> 1 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(c3) values(0); /* false -> 0 */
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| Y    | NULL | NULL |
+| N    | NULL | NULL |
+| T    | NULL | NULL |
+| F    | NULL | NULL |
+| 1    | NULL | NULL |
+| 0    | NULL | NULL |
+| NULL |    1 | NULL |
+| NULL |    0 | NULL |
+| NULL | NULL |    1 |
+| NULL | NULL |    0 |
+| NULL | NULL |    1 |
+| NULL | NULL |    0 |
+| NULL | NULL |    1 |
+| NULL | NULL |    0 |
++------+------+------+
+14 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [studydb]> show tables;
+Empty set (0.000 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     name varchar(20),
+    ->     kor int,
+    ->     eng int,
+    ->     math int
+    ->   );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.022 sec)
+
+MariaDB [studydb]>   insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(name,kor,eng,math) values('bbb', 90, 90, 90);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+------+
+| name | kor  | eng  | math |
++------+------+------+------+
+| aaa  |  100 |  100 |  100 |
+| bbb  |   90 |   90 |   90 |
++------+------+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100); /* 중복 허용*/
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+------+
+| name | kor  | eng  | math |
++------+------+------+------+
+| aaa  |  100 |  100 |  100 |
+| bbb  |   90 |   90 |   90 |
+| aaa  |  100 |  100 |  100 |
++------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     name varchar(20) primary key,
+    ->     kor int,
+    ->     eng int,
+    ->     math int
+    ->   );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | NO   | PRI | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.012 sec)
+
+MariaDB [studydb]>   insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(name,kor,eng,math) values('bbb', 90, 90, 90);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+------+
+| name | kor  | eng  | math |
++------+------+------+------+
+| aaa  |  100 |  100 |  100 |
+| bbb  |   90 |   90 |   90 |
++------+------+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100); /* 중복 오류!*/
+ERROR 1062 (23000): Duplicate entry 'aaa' for key 'PRIMARY'
+MariaDB [studydb]> insert into test1(kor,eng,math) values(100, 100, 100); /* PK는 기본이 not null 이다. */
+
+ERROR 1364 (HY000): Field 'name' doesn't have a default value
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     name varchar(20) primary key,
+    ->     age int primary key,
+    ->     kor int,
+    ->     eng int,
+    ->     math int
+    ->   ); /* 실행 오류 */
+ERROR 1068 (42000): Multiple primary key defined
+MariaDB [studydb]>   create table test1(
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int,
+    ->     constraint test1_pk primary key(name, age)
+    ->   );
+Query OK, 0 rows affected, 1 warning (0.014 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | NO   | PRI | NULL    |       |
+| age   | int(11)     | NO   | PRI | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(name, age, kor, eng, math) values('aa', 10, 100, 100, 100);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(name, age, kor, eng, math) values('bb', 20, 90, 90, 90);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | NO   | PRI | NULL    |       |
+| age   | int(11)     | NO   | PRI | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.012 sec)
+
+MariaDB [studydb]> select * from test1;
++------+-----+------+------+------+
+| name | age | kor  | eng  | math |
++------+-----+------+------+------+
+| aa   |  10 |  100 |  100 |  100 |
+| bb   |  20 |   90 |   90 |   90 |
++------+-----+------+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(name, age, kor, eng, math) values('aa', 11, 88, 88, 88);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+-----+------+------+------+
+| name | age | kor  | eng  | math |
++------+-----+------+------+------+
+| aa   |  10 |  100 |  100 |  100 |
+| aa   |  11 |   88 |   88 |   88 |
+| bb   |  20 |   90 |   90 |   90 |
++------+-----+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(name, age, kor, eng, math) values('ab', 10, 88, 88, 88);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select * from test1;
++------+-----+------+------+------+
+| name | age | kor  | eng  | math |
++------+-----+------+------+------+
+| aa   |  10 |  100 |  100 |  100 |
+| aa   |  11 |   88 |   88 |   88 |
+| ab   |  10 |   88 |   88 |   88 |
+| bb   |  20 |   90 |   90 |   90 |
++------+-----+------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(name, age, kor, eng, math) values('aa', 10, 88, 88, 88);
+ERROR 1062 (23000): Duplicate entry 'aa-10' for key 'PRIMARY'
+MariaDB [studydb]> select kor, end, math from test1 where name='aa' and age=11;
+ERROR 1054 (42S22): Unknown column 'end' in 'field list'
+MariaDB [studydb]> select kor, eng, math from test1 where name='aa' and age=11;
++------+------+------+
+| kor  | eng  | math |
++------+------+------+
+|   88 |   88 |   88 |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select kor, eng, math from test1 where name='aa' and age=10;
++------+------+------+
+| kor  | eng  | math |
++------+------+------+
+|  100 |  100 |  100 |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     no int primary key, /* 학번 */
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int
+    ->   );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.038 sec)
+
+MariaDB [studydb]> insert into test1(no,name,age,kor,eng,math) values(1,'a',10,90,90,90);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(2,'a',11,91,91,91);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(3,'b',11,81,81,81);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(4,'c',20,81,81,81);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+------+------+
+| no | name | age  | kor  | eng  | math |
++----+------+------+------+------+------+
+|  1 | a    |   10 |   90 |   90 |   90 |
+|  2 | a    |   11 |   91 |   91 |   91 |
+|  3 | b    |   11 |   81 |   81 |   81 |
+|  4 | c    |   20 |   81 |   81 |   81 |
++----+------+------+------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(4,'d',21,81,81,81);
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+MariaDB [studydb]>  insert into test1(no,name,age,kor,eng,math) values(5,'c',20,81,81,81);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]>  insert into test1(no,name,age,kor,eng,math) values(5,'c',20,81,81,81);
+ERROR 1062 (23000): Duplicate entry '5' for key 'PRIMARY'
+MariaDB [studydb]>  insert into test1(no,name,age,kor,eng,math) values(6,'c',20,81,81,81);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>  insert into test1(no,name,age,kor,eng,math) values(7,'c',20,81,81,81);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>  insert into test1(no,name,age,kor,eng,math) values(8,'c',20,81,81,81);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.011 sec)
+
+MariaDB [studydb]> select * from test1;
++----+------+------+------+------+------+
+| no | name | age  | kor  | eng  | math |
++----+------+------+------+------+------+
+|  1 | a    |   10 |   90 |   90 |   90 |
+|  2 | a    |   11 |   91 |   91 |   91 |
+|  3 | b    |   11 |   81 |   81 |   81 |
+|  4 | c    |   20 |   81 |   81 |   81 |
+|  5 | c    |   20 |   81 |   81 |   81 |
+|  6 | c    |   20 |   81 |   81 |   81 |
+|  7 | c    |   20 |   81 |   81 |   81 |
+|  8 | c    |   20 |   81 |   81 |   81 |
++----+------+------+------+------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]> create table test1(
+    ->     no int primary key,
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int,
+    ->     constraint test1_uk unique (name, age)
+    ->   );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  | MUL | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.019 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(1,'a',10,90,90,90);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(2,'a',11,91,91,91);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(3,'b',11,81,81,81);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(4,'c',20,81,81,81);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select * from test1;
++----+------+------+------+------+------+
+| no | name | age  | kor  | eng  | math |
++----+------+------+------+------+------+
+|  1 | a    |   10 |   90 |   90 |   90 |
+|  2 | a    |   11 |   91 |   91 |   91 |
+|  3 | b    |   11 |   81 |   81 |   81 |
+|  4 | c    |   20 |   81 |   81 |   81 |
++----+------+------+------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(4,'d',21,81,81,81);
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+MariaDB [studydb]>   insert into test1(no,name,age,kor,eng,math) values(5,'c',20,81,81,81);
+ERROR 1062 (23000): Duplicate entry 'c-20' for key 'test1_uk'
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  | MUL | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.007 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     no int,
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int,
+    ->     constraint primary key(no),
+    ->     constraint test1_uk unique (name, age)
+    ->   );
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  | MUL | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.013 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     no int,
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int
+    ->   );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.014 sec)
+
+MariaDB [studydb]>   alter table test1
+    ->     add constraint test1_pk primary key(no);
+Query OK, 0 rows affected, 1 warning (0.034 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.014 sec)
+
+MariaDB [studydb]>   alter table test1
+    ->     add constraint test1_uk unique (name, age);
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  | MUL | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.015 sec)
+
+MariaDB [studydb]> exit
+Bye
+
+C:\Users\bitcamp>mysql -u root -p
+Enter password: ***
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Users\bitcamp>mysql -u root -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> drop database studydb;
+Query OK, 1 row affected (0.035 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [(none)]> select * from mysql.user;
++-----------------+-------------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+---------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+---------+--------------+--------------------+
+| Host            | User        | Password                                  | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv | Drop_priv | Reload_priv | Shutdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_table_priv | Lock_tables_priv | Execute_priv | Repl_slave_priv | Repl_client_priv | Create_view_priv | Show_view_priv | Create_routine_priv | Alter_routine_priv | Create_user_priv | Event_priv | Trigger_priv | Create_tablespace_priv | Delete_history_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_connections | max_user_connections | plugin                | authentication_string                     | password_expired | is_role | default_role | max_statement_time |
++-----------------+-------------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+---------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+---------+--------------+--------------------+
+| localhost       | mariadb.sys |                                           | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N
+      | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      | N                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password |
+                  | Y                | N       |              |           0.000000 |
+| localhost       | root        | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+      | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      | Y                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N                | N       |              |           0.000000 |
+| desktop-48te820 | root        | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+      | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      | Y                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N                | N       |              |           0.000000 |
+| 127.0.0.1       | root        | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+      | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      | Y                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N                | N       |              |           0.000000 |
+| ::1             | root        | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+      | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      | Y                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N                | N       |              |           0.000000 |
+| localhost       | study       | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N
+      | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      | N                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N                | N       |              |           0.000000 |
+| %               | study       | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N
+      | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      | N                   |          |            |             |              |             0 |           0 |               0 |                    0 | mysql_native_password | *89C6B530AA78695E257E55D63C00A6EC9AD3E977 | N                | N       |              |           0.000000 |
++-----------------+-------------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+---------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+---------+--------------+--------------------+
+7 rows in set (0.005 sec)
+
+MariaDB [(none)]> desc mysql.user;
++------------------------+---------------------+------+-----+----------+-------+
+| Field                  | Type                | Null | Key | Default  | Extra |
++------------------------+---------------------+------+-----+----------+-------+
+| Host                   | char(255)           | NO   |     |          |       |
+| User                   | char(128)           | NO   |     |          |       |
+| Password               | longtext            | YES  |     | NULL     |       |
+| Select_priv            | varchar(1)          | YES  |     | NULL     |       |
+| Insert_priv            | varchar(1)          | YES  |     | NULL     |       |
+| Update_priv            | varchar(1)          | YES  |     | NULL     |       |
+| Delete_priv            | varchar(1)          | YES  |     | NULL     |       |
+| Create_priv            | varchar(1)          | YES  |     | NULL     |       |
+| Drop_priv              | varchar(1)          | YES  |     | NULL     |       |
+| Reload_priv            | varchar(1)          | YES  |     | NULL     |       |
+| Shutdown_priv          | varchar(1)          | YES  |     | NULL     |       |
+| Process_priv           | varchar(1)          | YES  |     | NULL     |       |
+| File_priv              | varchar(1)          | YES  |     | NULL     |       |
+| Grant_priv             | varchar(1)          | YES  |     | NULL     |       |
+| References_priv        | varchar(1)          | YES  |     | NULL     |       |
+| Index_priv             | varchar(1)          | YES  |     | NULL     |       |
+| Alter_priv             | varchar(1)          | YES  |     | NULL     |       |
+| Show_db_priv           | varchar(1)          | YES  |     | NULL     |       |
+| Super_priv             | varchar(1)          | YES  |     | NULL     |       |
+| Create_tmp_table_priv  | varchar(1)          | YES  |     | NULL     |       |
+| Lock_tables_priv       | varchar(1)          | YES  |     | NULL     |       |
+| Execute_priv           | varchar(1)          | YES  |     | NULL     |       |
+| Repl_slave_priv        | varchar(1)          | YES  |     | NULL     |       |
+| Repl_client_priv       | varchar(1)          | YES  |     | NULL     |       |
+| Create_view_priv       | varchar(1)          | YES  |     | NULL     |       |
+| Show_view_priv         | varchar(1)          | YES  |     | NULL     |       |
+| Create_routine_priv    | varchar(1)          | YES  |     | NULL     |       |
+| Alter_routine_priv     | varchar(1)          | YES  |     | NULL     |       |
+| Create_user_priv       | varchar(1)          | YES  |     | NULL     |       |
+| Event_priv             | varchar(1)          | YES  |     | NULL     |       |
+| Trigger_priv           | varchar(1)          | YES  |     | NULL     |       |
+| Create_tablespace_priv | varchar(1)          | YES  |     | NULL     |       |
+| Delete_history_priv    | varchar(1)          | YES  |     | NULL     |       |
+| ssl_type               | varchar(9)          | YES  |     | NULL     |       |
+| ssl_cipher             | longtext            | NO   |     |          |       |
+| x509_issuer            | longtext            | NO   |     |          |       |
+| x509_subject           | longtext            | NO   |     |          |       |
+| max_questions          | bigint(20) unsigned | NO   |     | 0        |       |
+| max_updates            | bigint(20) unsigned | NO   |     | 0        |       |
+| max_connections        | bigint(20) unsigned | NO   |     | 0        |       |
+| max_user_connections   | bigint(21)          | NO   |     | 0        |       |
+| plugin                 | longtext            | NO   |     |          |       |
+| authentication_string  | longtext            | NO   |     |          |       |
+| password_expired       | varchar(1)          | NO   |     |          |       |
+| is_role                | varchar(1)          | YES  |     | NULL     |       |
+| default_role           | longtext            | NO   |     |          |       |
+| max_statement_time     | decimal(12,6)       | NO   |     | 0.000000 |       |
++------------------------+---------------------+------+-----+----------+-------+
+47 rows in set (0.011 sec)
+
+MariaDB [(none)]> select Host, user from mysql.user;
++-----------------+-------------+
+| Host            | User        |
++-----------------+-------------+
+| %               | study       |
+| 127.0.0.1       | root        |
+| ::1             | root        |
+| desktop-48te820 | root        |
+| localhost       | mariadb.sys |
+| localhost       | root        |
+| localhost       | study       |
++-----------------+-------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> drop user 'study'@'localhost';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [(none)]> select Host, user from mysql.user;
++-----------------+-------------+
+| Host            | User        |
++-----------------+-------------+
+| %               | study       |
+| 127.0.0.1       | root        |
+| ::1             | root        |
+| desktop-48te820 | root        |
+| localhost       | mariadb.sys |
+| localhost       | root        |
++-----------------+-------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> drop user 'study'@'%';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> select Host, user from mysql.user;
++-----------------+-------------+
+| Host            | User        |
++-----------------+-------------+
+| 127.0.0.1       | root        |
+| ::1             | root        |
+| desktop-48te820 | root        |
+| localhost       | mariadb.sys |
+| localhost       | root        |
++-----------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [(none)]> CREATE USER 'study'@'localhost';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [(none)]> select Host, user from mysql.user;
++-----------------+-------------+
+| Host            | User        |
++-----------------+-------------+
+| 127.0.0.1       | root        |
+| ::1             | root        |
+| desktop-48te820 | root        |
+| localhost       | mariadb.sys |
+| localhost       | root        |
+| localhost       | study       |
++-----------------+-------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+C:\Users\bitcamp>mysql -u root -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 7
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE USER 'study'@'%';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [(none)]> select Host, user from mysql.user;
++-----------------+-------------+
+| Host            | User        |
++-----------------+-------------+
+| %               | study       |
+| 127.0.0.1       | root        |
+| ::1             | root        |
+| desktop-48te820 | root        |
+| localhost       | mariadb.sys |
+| localhost       | root        |
+| localhost       | study       |
++-----------------+-------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> select user, host from mysql.user;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| study       | %               |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-48te820 |
+| mariadb.sys | localhost       |
+| root        | localhost       |
+| study       | localhost       |
++-------------+-----------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> alter user 'study'@'localhost' identified by '1111';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [(none)]> alter user 'study'@'%' identified by '1111';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> create database studydb character set utf8 collate utf8_general_ci;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> show database
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| studydb            |
+| sys                |
++--------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [(none)]> GRANT ALL ON studydb.* TO 'study'@'localhost';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]> show tables;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> CREATE USER 'user1'@'localhost' identified by '1111';
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [studydb]> select user, host from mysql.user;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| study       | %               |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-48te820 |
+| mariadb.sys | localhost       |
+| root        | localhost       |
+| study       | localhost       |
+| user1       | localhost       |
++-------------+-----------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> CREATE USER 'user2'@'localhost' identified by '1111';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [studydb]> CREATE USER 'user3'@'localhost' identified by '1111';
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> CREATEUSER 'user4'@'localhost' identified by '1111';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CREATEUSER 'user4'@'localhost' identified by '1111'' at line 1
+MariaDB [studydb]> CREATE USER 'user4'@'localhost' identified by '1111';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [studydb]> CREATE USER 'user5'@
+    -> 'localhost' identified by '1111';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''localhost' identified by '1111'' at line 2
+MariaDB [studydb]> CREATE USER 'user5'@'localhost' identified by '1111';
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [studydb]> select user, host from mysql.user;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| study       | %               |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-48te820 |
+| mariadb.sys | localhost       |
+| root        | localhost       |
+| study       | localhost       |
+| user1       | localhost       |
+| user2       | localhost       |
+| user3       | localhost       |
+| user4       | localhost       |
+| user5       | localhost       |
++-------------+-----------------+
+12 rows in set (0.001 sec)
+
+MariaDB [studydb]> CREATE BATABASE user1db CHARATER SET utf8 COLLATE UTF8_GENERAL_CI;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'BATABASE user1db CHARATER SET utf8 COLLATE UTF8_GENERAL_CI' at line 1
+MariaDB [studydb]> CREATE BATABASE user1db CHARACTER SET utf8 COLLATE UTF8_GENERAL_CI;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'BATABASE user1db CHARACTER SET utf8 COLLATE UTF8_GENERAL_CI' at line 1
+MariaDB [studydb]> CREATE DATABASE user1db CHARACTER SET utf8 COLLATE UTF8_GENERAL_CI;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> CREATE DATABASE user2db CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> CREATE DATABASE user3db CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> CREATE DATABASE user4db CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> CREATE DATABASE user5db CHARACTER SET UTF8 COLLATE UTF8_GENERAL_CI;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> show dabatases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'dabatases' at line 1
+MariaDB [studydb]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| studydb            |
+| sys                |
+| user1db            |
+| user2db            |
+| user3db            |
+| user4db            |
+| user5db            |
++--------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [studydb]> create database studydb1;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> drop databases studydb1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databases studydb1' at line 1
+MariaDB [studydb]> drop database studydb1;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [studydb]> alter
+    ->
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [studydb]> use studydb;
+Database changed
+MariaDB [studydb]> create table test01 {
+    -> Bye
+Ctrl-C -- exit!
+
+C:\Users\bitcamp>create table test01(
+'create'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\Users\bitcamp>mysql -u root -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit
+Bye
+
+C:\Users\bitcamp>mysql -u study -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| studydb            |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [(none)]> use studydb
+Database changed
+MariaDB [studydb]> create table test01 (
+    -> name varchar(50) not null,
+    -> kor int not null,
+    -> eng int not null,
+    -> math int not null,
+    -> sum int not null,
+    -> aver int not null
+    -> );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> desc test01;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | NO   |     | NULL    |       |
+| kor   | int(11)     | NO   |     | NULL    |       |
+| eng   | int(11)     | NO   |     | NULL    |       |
+| math  | int(11)     | NO   |     | NULL    |       |
+| sum   | int(11)     | NO   |     | NULL    |       |
+| aver  | int(11)     | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.014 sec)
+
+MariaDB [studydb]> drop table test01;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> no int,
+    -> name varchar(20)
+    -> );
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(1, 'aaa');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, 'bbb');
+Query OK, 1 row affected (0.012 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(3, null);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, null);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+
+| no   | name |
++------+------+
+|    1 | aaa  |
+| NULL | bbb  |
+|    3 | NULL |
+| NULL | NULL |
++------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.010 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> no int not null,
+    -> name varchar(20)
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.016 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(1, 'aaa');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(null, 'bbb');
+ERROR 1048 (23000): Column 'no' cannot be null
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> no int not null,
+    -> name varchar(20) default 'noname',
+    -> age int default 20
+    -> );
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   |     | NULL    |       |
+| name  | varchar(20) | YES  |     | noname  |       |
+| age   | int(11)     | YES  |     | 20      |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.016 sec)
+
+MariaDB [studydb]> insert into(no, name, age) values(1, 'aaa', 30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(no, name, age) values(1, 'aaa', 30)' at line 1
+MariaDB [studydb]> insert into test1(no, name, age) values(1, 'aaa', 30);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> insert into test1(no, age) values(3, 30);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++----+--------+------+
+| no | name   | age  |
++----+--------+------+
+|  1 | aaa    |   30 |
+|  3 | noname |   30 |
++----+--------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(no, name) values(4, 'ddd');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> insert into test1(no) values(5);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++----+--------+------+
+| no | name   | age  |
++----+--------+------+
+|  1 | aaa    |   30 |
+|  3 | noname |   30 |
+|  4 | ddd    |   20 |
+|  5 | noname |   20 |
++----+--------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> c1 int,
+    -> c2 float,
+    -> c3 numeric(6, 2),
+    -> c4 numeric
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> desc test1;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| c1    | int(11)       | YES  |     | NULL    |       |
+| c2    | float         | YES  |     | NULL    |       |
+| c3    | decimal(6,2)  | YES  |     | NULL    |       |
+| c4    | decimal(10,0) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+4 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1(C1) VALUES(100);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into test1(c1) values(3.14);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(c1) values(100.98);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> desc test1;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| c1    | int(11)       | YES  |     | NULL    |       |
+| c2    | float         | YES  |     | NULL    |       |
+| c3    | decimal(6,2)  | YES  |     | NULL    |       |
+| c4    | decimal(10,0) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+4 rows in set (0.011 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+------+
+| c1   | c2   | c3   | c4   |
++------+------+------+------+
+|  100 | NULL | NULL | NULL |
+|    3 | NULL | NULL | NULL |
+|  101 | NULL | NULL | NULL |
++------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(c2) values(100);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(c2) values(3.14);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(c2) values(3.14159);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from test1;
++------+---------+------+------+
+| c1   | c2      | c3   | c4   |
++------+---------+------+------+
+|  100 |    NULL | NULL | NULL |
+|    3 |    NULL | NULL | NULL |
+|  101 |    NULL | NULL | NULL |
+| NULL |     100 | NULL | NULL |
+| NULL |    3.14 | NULL | NULL |
+| NULL | 3.14159 | NULL | NULL |
++------+---------+------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(c3) values(100);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> c1 char(5),
+    -> c2 varchar(5),
+    -> c3 varchar(21000)
+    -> );
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [studydb]> insert into test1(c1) values('');
+Query OK, 1 row affected (0.012 sec)
+
+MariaDB [studydb]> insert into test1(c1) values('가나다라마');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------------+------+------+
+| c1         | c2   | c3   |
++------------+------+------+
+|            | NULL | NULL |
+| 가나다라마 | NULL | NULL |
++------------+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(c1) values('abc');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> selec * from test1 where c1='abc';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'selec * from test1 where c1='abc'' at line 1
+MariaDB [studydb]> select * from test1 where c1='abc';
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| abc  | NULL | NULL |
++------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> c1 date,
+    -> c2 time,
+    -> c3 datetime
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]> desc test1;
++-------+----------+------+-----+---------+-------+
+| Field | Type     | Null | Key | Default | Extra |
++-------+----------+------+-----+---------+-------+
+| c1    | date     | YES  |     | NULL    |       |
+| c2    | time     | YES  |     | NULL    |       |
+| c3    | datetime | YES  |     | NULL    |       |
++-------+----------+------+-----+---------+-------+
+3 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1(c1) values('2022-02-21');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------------+------+------+
+| c1         | c2   | c3   |
++------------+------+------+
+| 2022-02-21 | NULL | NULL |
++------------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(c2) values('16:12:35');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------------+----------+------+
+| c1         | c2       | c3   |
++------------+----------+------+
+| 2022-02-21 | NULL     | NULL |
+| NULL       | 16:12:35 | NULL |
++------------+----------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> insert into test1(c3) values('2022-2-21 16:5:3');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------------+----------+---------------------+
+| c1         | c2       | c3                  |
++------------+----------+---------------------+
+| 2022-02-21 | NULL     | NULL                |
+| NULL       | 16:12:35 | NULL                |
+| NULL       | NULL     | 2022-02-21 16:05:03 |
++------------+----------+---------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> create table test1 (
+    -> c1 char(1),
+    -> c2 int,
+    -> c3 boolean
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]> insert into test1(c1) values('Y');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into test1(c2) values(1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into test1(c3) values(true);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+
+| c1   | c2   | c3   |
++------+------+------+
+| Y    | NULL | NULL |
+| NULL |    1 | NULL |
+| NULL | NULL |    1 |
++------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> create table test1(
+    -> name varchar(20) primary key,
+    -> kor int,
+    -> eng int,
+    -> math int
+    -> );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | NO   | PRI | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.015 sec)
+
+MariaDB [studydb]> insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> select * from test1;
++------+------+------+------+
+| name | kor  | eng  | math |
++------+------+------+------+
+| aaa  |  100 |  100 |  100 |
++------+------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]> create table test1(
+    -> name varchar(20),
+    -> age int,
+    -> kor int,
+    -> eng int,
+    -> math int,
+    -> constraint test1_pk primary key(name, age)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | NO   | PRI | NULL    |       |
+| age   | int(11)     | NO   | PRI | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.014 sec)
+
+MariaDB [studydb]> insert into test1(name,age,kor,eng,math) values('aa', 10, 100, 100, 100);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> insert into test1(name,age,kor,eng,math) values('bb', 20, 90, 90, 89);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]> create table test1(
+    -> no int primary key,
+    -> name varchar(20),
+    -> age int,
+    -> kor int,
+    -> eng int,
+    -> math int
+    -> );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.015 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]> create table test1(
+    -> no int primary key,
+    -> name varchar(20),
+    -> age int,
+    -> kor int,
+    -> eng int,
+    -> math int,
+    -> constraint test1_uk unique (name, age)
+    -> );
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> create table test1(
+    -> NO INt,
+    -> name varchar(20),
+    -> age int,
+    -> kor int,
+    -> eng int,
+    -> math int,
+    -> constraint primary key(no),
+    -> constraint test1_uk unique(name, age)
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> drop table test1;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [studydb]>   create table test1(
+    ->     no int,
+    ->     name varchar(20),
+    ->     age int,
+    ->     kor int,
+    ->     eng int,
+    ->     math int
+    ->   );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> alter table test1
+    -> add constraint test1_pk primary key(no);
+Query OK, 0 rows affected, 1 warning (0.028 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.013 sec)
+
+MariaDB [studydb]> alter table test1
+    -> add constraint test1_uk unique (name, age);
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc test1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| no    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(20) | YES  | MUL | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| kor   | int(11)     | YES  |     | NULL    |       |
+| eng   | int(11)     | YES  |     | NULL    |       |
+| math  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.014 sec)
+
+MariaDB [studydb]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| studydb            |
++--------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop database studydb;
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [(none)]> mysql -u root -p
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'mysql -u root -p' at line 1
+MariaDB [(none)]> exit
+Bye
+
+C:\Users\bitcamp>mysql -u root -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| user1db            |
+| user2db            |
+| user3db            |
+| user4db            |
+| user5db            |
++--------------------+
+9 rows in set (0.000 sec)
+
+MariaDB [(none)]> drop database user1db;
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [(none)]> drop database user2db;
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [(none)]> drop database user3db;
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [(none)]> drop database user4db;
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [(none)]> drop database user5db;
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+C:\Users\bitcamp>

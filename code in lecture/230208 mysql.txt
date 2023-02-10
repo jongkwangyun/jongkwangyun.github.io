@@ -1,0 +1,4796 @@
+Microsoft Windows [Version 10.0.22621.1105]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>mysql -u study -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 7
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use studydb;
+Database changed
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| lect              |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
++-------------------+
+12 rows in set (0.006 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_appl RESTRICT;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_tcher RESTRICT;
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS tcher RESTRICT;
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS mgr RESTRICT;
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]> DROP TABLE MEMB;
+Query OK, 0 rows affected (0.041 sec)
+
+MariaDB [studydb]> DROP TABLE addr;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> DROP TABLE room;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]> DROP TABLE room_phot;
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [studydb]> DROP TABLE room;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
+| test2             |
++-------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> -- # select 테스트 용 테이블 준비
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> DROP TABLE IF EXISTS tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> DROP TABLE IF EXISTS room RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> DROP TABLE IF EXISTS mgr RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_appl RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> DROP TABLE IF EXISTS room_phot RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> DROP TABLE IF EXISTS memb RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> DROP TABLE IF EXISTS addr RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> CREATE TABLE stnt (
+    ->     mno    INTEGER     NOT NULL COMMENT '수강생번호', -- 수강생번호
+    ->     work   CHAR(1)     NOT NULL COMMENT '재직여부', -- 재직여부
+    ->     acc_no VARCHAR(20) NULL     COMMENT '통장번호', -- 통장번호
+    ->     bank   VARCHAR(50) NULL     COMMENT '은행명' -- 은행명
+    -> )
+    -> COMMENT '수강생';
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> ALTER TABLE stnt
+    ->     ADD CONSTRAINT PK_stnt -- 수강생 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 수강생번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_stnt
+    ->     ON stnt ( -- 수강생
+    ->         acc_no ASC, -- 통장번호
+    ->         bank ASC    -- 은행명
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> CREATE TABLE tcher (
+    ->     mno    INTEGER     NOT NULL COMMENT '강사번호', -- 강사번호
+    ->     acc_no VARCHAR(20) NULL     COMMENT '통장번호', -- 통장번호
+    ->     bank   VARCHAR(50) NULL     COMMENT '은행명', -- 은행명
+    ->     hr_pay INTEGER     NULL     COMMENT '시강료' -- 시강료
+    -> )
+    -> COMMENT '강사';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> ALTER TABLE tcher
+    ->     ADD CONSTRAINT PK_tcher -- 강사 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 강사번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_tcher
+    ->     ON tcher ( -- 강사
+    ->         acc_no ASC, -- 통장번호
+    ->         bank ASC    -- 은행명
+    ->     );
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> CREATE TABLE lect (
+    ->     lno     INTEGER      NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     titl    VARCHAR(255) NOT NULL COMMENT '강의명', -- 강의명
+    ->     sdt     DATE         NOT NULL COMMENT '시작일', -- 시작일
+    ->     edt     DATE         NOT NULL COMMENT '종료일', -- 종료일
+    ->     qnty    INTEGER      NOT NULL COMMENT '최대수용인원', -- 최대수용인원
+    ->     pric    INTEGER      NOT NULL COMMENT '강의료', -- 강의료
+    ->     nat_sup CHAR(1)      NOT NULL COMMENT '정부지원여부', -- 정부지원여부
+    ->     sup_typ VARCHAR(50)  NOT NULL COMMENT '지원타입', -- 지원타입
+    ->     dsct    TEXT         NOT NULL COMMENT '설명', -- 설명
+    ->     rno     INTEGER      NULL     COMMENT '강의실번호', -- 강의실번호
+    ->     mno     INTEGER      NULL     COMMENT '매니저번호' -- 매니저번호
+    -> )
+    -> COMMENT '강의';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT PK_lect -- 강의 기본키
+    ->         PRIMARY KEY (
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의 인덱스
+MariaDB [studydb]> CREATE INDEX IX_lect
+    ->     ON lect( -- 강의
+    ->         titl ASC -- 강의명
+    ->     );
+Query OK, 0 rows affected (0.016 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE lect
+    ->     MODIFY COLUMN lno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의번호';
+Query OK, 0 rows affected (0.027 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> CREATE TABLE room (
+    ->     rno  INTEGER     NOT NULL COMMENT '강의실번호', -- 강의실번호
+    ->     loc  VARCHAR(50) NOT NULL COMMENT '지점명', -- 지점명
+    ->     name VARCHAR(50) NOT NULL COMMENT '강의실명', -- 강의실명
+    ->     qnty INTEGER     NOT NULL COMMENT '수용인원' -- 수용인원
+    -> )
+    -> COMMENT '강의실';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> ALTER TABLE room
+    ->     ADD CONSTRAINT PK_room -- 강의실 기본키
+    ->         PRIMARY KEY (
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_room
+    ->     ON room ( -- 강의실
+    ->         loc ASC,  -- 지점명
+    ->         name ASC  -- 강의실명
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE room
+    ->     MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의실번호';
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> CREATE TABLE mgr (
+    ->     mno  INTEGER     NOT NULL COMMENT '매니저번호', -- 매니저번호
+    ->     dept VARCHAR(50) NULL     COMMENT '부서', -- 부서
+    ->     posi VARCHAR(50) NULL     COMMENT '직위', -- 직위
+    ->     fax  VARCHAR(20) NULL     COMMENT '팩스' -- 팩스
+    -> )
+    -> COMMENT '매니저';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> ALTER TABLE mgr
+    ->     ADD CONSTRAINT PK_mgr -- 매니저 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 매니저번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.028 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> CREATE TABLE lect_appl (
+    ->     lano INTEGER  NOT NULL COMMENT '수강신청번호', -- 수강신청번호
+    ->     lno  INTEGER  NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     mno  INTEGER  NOT NULL COMMENT '수강생번호', -- 수강생번호
+    ->     rdt  DATETIME NOT NULL COMMENT '신청일', -- 신청일
+    ->     stat INTEGER  NULL     COMMENT '진행상태' -- 진행상태
+    -> )
+    -> COMMENT '수강신청';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT PK_lect_appl -- 수강신청 기본키
+    ->         PRIMARY KEY (
+    ->             lano -- 수강신청번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.019 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_lect_appl
+    ->     ON lect_appl ( -- 수강신청
+    ->         lno ASC, -- 강의번호
+    ->         mno ASC  -- 수강생번호
+    ->     );
+Query OK, 0 rows affected (0.017 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     MODIFY COLUMN lano INTEGER NOT NULL AUTO_INCREMENT COMMENT '수강신청번호';
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> CREATE TABLE room_phot (
+    ->     rpno INTEGER      NOT NULL COMMENT '강의실사진번호', -- 강의실사진번호
+    ->     rno  INTEGER      NOT NULL COMMENT '강의실번호', -- 강의실번호
+    ->     phot VARCHAR(255) NOT NULL COMMENT '사진' -- 사진
+    -> )
+    -> COMMENT '강의실사진';
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     ADD CONSTRAINT PK_room_phot -- 강의실사진 기본키
+    ->         PRIMARY KEY (
+    ->             rpno -- 강의실사진번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     MODIFY COLUMN rpno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의실사진번호';
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> CREATE TABLE memb (
+    ->     mno      INTEGER      NOT NULL COMMENT '멤버번호', -- 멤버번호
+    ->     name     VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+    ->     tel      VARCHAR(20)  NOT NULL COMMENT '전화', -- 전화
+    ->     email    VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+    ->     pwd      VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+    ->     phot     VARCHAR(255) NULL     COMMENT '사진', -- 사진
+    ->     ano      INTEGER      NULL     COMMENT '주소번호', -- 주소번호
+    ->     det_addr VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
+    ->     finl_edu VARCHAR(50)  NULL     COMMENT '최종학력', -- 최종학력
+    ->     maj      VARCHAR(50)  NULL     COMMENT '전공', -- 전공
+    ->     sch_nm   VARCHAR(50)  NULL     COMMENT '최종학교' -- 최종학교
+    -> )
+    -> COMMENT '멤버';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> ALTER TABLE memb
+    ->     ADD CONSTRAINT PK_memb -- 멤버 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.048 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_memb
+    ->     ON memb ( -- 멤버
+    ->         email ASC -- 이메일
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버 인덱스
+MariaDB [studydb]> CREATE INDEX IX_memb
+    ->     ON memb( -- 멤버
+    ->         name ASC -- 이름
+    ->     );
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE memb
+    ->     MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT COMMENT '멤버번호';
+Query OK, 0 rows affected (0.051 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> CREATE TABLE addr (
+    ->     ano      INTEGER      NOT NULL COMMENT '주소번호', -- 주소번호
+    ->     pst_no   VARCHAR(5)   NOT NULL COMMENT '우편번호', -- 우편번호
+    ->     bas_addr VARCHAR(255) NOT NULL COMMENT '기본주소' -- 기본주소
+    -> )
+    -> COMMENT '주소';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> ALTER TABLE addr
+    ->     ADD CONSTRAINT PK_addr -- 주소 기본키
+    ->         PRIMARY KEY (
+    ->             ano -- 주소번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.020 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소 인덱스
+MariaDB [studydb]> CREATE INDEX IX_addr
+    ->     ON addr( -- 주소
+    ->         pst_no ASC -- 우편번호
+    ->     );
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE addr
+    ->     MODIFY COLUMN ano INTEGER NOT NULL AUTO_INCREMENT COMMENT '주소번호';
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> CREATE TABLE lect_tcher (
+    ->     lno INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     mno INTEGER NOT NULL COMMENT '강사번호' -- 강사번호
+    -> )
+    -> COMMENT '강의배정';
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT PK_lect_tcher -- 강의배정 기본키
+    ->         PRIMARY KEY (
+    ->             lno, -- 강의번호
+    ->             mno  -- 강사번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> ALTER TABLE stnt
+    ->     ADD CONSTRAINT FK_memb_TO_stnt -- 멤버 -> 수강생
+    ->         FOREIGN KEY (
+    ->             mno -- 수강생번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> ALTER TABLE tcher
+    ->     ADD CONSTRAINT FK_memb_TO_tcher -- 멤버 -> 강사
+    ->         FOREIGN KEY (
+    ->             mno -- 강사번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.043 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT FK_mgr_TO_lect -- 매니저 -> 강의
+    ->         FOREIGN KEY (
+    ->             mno -- 매니저번호
+    ->         )
+    ->         REFERENCES mgr ( -- 매니저
+    ->             mno -- 매니저번호
+    ->         );
+Query OK, 0 rows affected (0.027 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT FK_room_TO_lect -- 강의실 -> 강의
+    ->         FOREIGN KEY (
+    ->             rno -- 강의실번호
+    ->         )
+    ->         REFERENCES room ( -- 강의실
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> ALTER TABLE mgr
+    ->     ADD CONSTRAINT FK_memb_TO_mgr -- 멤버 -> 매니저
+    ->         FOREIGN KEY (
+    ->             mno -- 매니저번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT FK_stnt_TO_lect_appl -- 수강생 -> 수강신청
+    ->         FOREIGN KEY (
+    ->             mno -- 수강생번호
+    ->         )
+    ->         REFERENCES stnt ( -- 수강생
+    ->             mno -- 수강생번호
+    ->         );
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT FK_lect_TO_lect_appl -- 강의 -> 수강신청
+    ->         FOREIGN KEY (
+    ->             lno -- 강의번호
+    ->         )
+    ->         REFERENCES lect ( -- 강의
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     ADD CONSTRAINT FK_room_TO_room_phot -- 강의실 -> 강의실사진
+    ->         FOREIGN KEY (
+    ->             rno -- 강의실번호
+    ->         )
+    ->         REFERENCES room ( -- 강의실
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> ALTER TABLE memb
+    ->     ADD CONSTRAINT FK_addr_TO_memb -- 주소 -> 멤버
+    ->         FOREIGN KEY (
+    ->             ano -- 주소번호
+    ->         )
+    ->         REFERENCES addr ( -- 주소
+    ->             ano -- 주소번호
+    ->         );
+Query OK, 0 rows affected (0.057 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT FK_tcher_TO_lect_tcher -- 강사 -> 강의배정
+    ->         FOREIGN KEY (
+    ->             mno -- 강사번호
+    ->         )
+    ->         REFERENCES tcher ( -- 강사
+    ->             mno -- 강사번호
+    ->         );
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT FK_lect_TO_lect_tcher -- 강의 -> 강의배정
+    ->         FOREIGN KEY (
+    ->             lno -- 강의번호
+    ->         )
+    ->         REFERENCES lect ( -- 강의
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected (0.035 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| lect              |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
++-------------------+
+12 rows in set (0.000 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> DROP TABLE IF EXISTS tcher RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> DROP TABLE IF EXISTS room RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> DROP TABLE IF EXISTS mgr RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_appl RESTRICT;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> DROP TABLE IF EXISTS room_phot RESTRICT;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> DROP TABLE IF EXISTS memb RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> DROP TABLE IF EXISTS addr RESTRICT;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_tcher RESTRICT;
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| lect              |
+| memb              |
+| mgr               |
+| room              |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
++-------------------+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> DROP TABLE IF EXISTS tcher RESTRICT;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> DROP TABLE IF EXISTS room RESTRICT;
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> DROP TABLE IF EXISTS mgr RESTRICT;
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_appl RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> DROP TABLE IF EXISTS room_phot RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.005 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> DROP TABLE IF EXISTS memb RESTRICT;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> DROP TABLE IF EXISTS addr RESTRICT;
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.010 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| test1             |
+| test2             |
++-------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> -- # select 테스트 용 테이블 준비
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> DROP TABLE IF EXISTS stnt RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.027 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> DROP TABLE IF EXISTS tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> DROP TABLE IF EXISTS lect RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.019 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> DROP TABLE IF EXISTS room RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> DROP TABLE IF EXISTS mgr RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_appl RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> DROP TABLE IF EXISTS room_phot RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> DROP TABLE IF EXISTS memb RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> DROP TABLE IF EXISTS addr RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.020 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> DROP TABLE IF EXISTS lect_tcher RESTRICT;
+Query OK, 0 rows affected, 1 warning (0.016 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> CREATE TABLE stnt (
+    ->     mno    INTEGER     NOT NULL COMMENT '수강생번호', -- 수강생번호
+    ->     work   CHAR(1)     NOT NULL COMMENT '재직여부', -- 재직여부
+    ->     acc_no VARCHAR(20) NULL     COMMENT '통장번호', -- 통장번호
+    ->     bank   VARCHAR(50) NULL     COMMENT '은행명' -- 은행명
+    -> )
+    -> COMMENT '수강생';
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> ALTER TABLE stnt
+    ->     ADD CONSTRAINT PK_stnt -- 수강생 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 수강생번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.052 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_stnt
+    ->     ON stnt ( -- 수강생
+    ->         acc_no ASC, -- 통장번호
+    ->         bank ASC    -- 은행명
+    ->     );
+Query OK, 0 rows affected (0.042 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> CREATE TABLE tcher (
+    ->     mno    INTEGER     NOT NULL COMMENT '강사번호', -- 강사번호
+    ->     acc_no VARCHAR(20) NULL     COMMENT '통장번호', -- 통장번호
+    ->     bank   VARCHAR(50) NULL     COMMENT '은행명', -- 은행명
+    ->     hr_pay INTEGER     NULL     COMMENT '시강료' -- 시강료
+    -> )
+    -> COMMENT '강사';
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> ALTER TABLE tcher
+    ->     ADD CONSTRAINT PK_tcher -- 강사 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 강사번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.071 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_tcher
+    ->     ON tcher ( -- 강사
+    ->         acc_no ASC, -- 통장번호
+    ->         bank ASC    -- 은행명
+    ->     );
+Query OK, 0 rows affected (0.062 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> CREATE TABLE lect (
+    ->     lno     INTEGER      NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     titl    VARCHAR(255) NOT NULL COMMENT '강의명', -- 강의명
+    ->     sdt     DATE         NOT NULL COMMENT '시작일', -- 시작일
+    ->     edt     DATE         NOT NULL COMMENT '종료일', -- 종료일
+    ->     qnty    INTEGER      NOT NULL COMMENT '최대수용인원', -- 최대수용인원
+    ->     pric    INTEGER      NOT NULL COMMENT '강의료', -- 강의료
+    ->     nat_sup CHAR(1)      NOT NULL COMMENT '정부지원여부', -- 정부지원여부
+    ->     sup_typ VARCHAR(50)  NOT NULL COMMENT '지원타입', -- 지원타입
+    ->     dsct    TEXT         NOT NULL COMMENT '설명', -- 설명
+    ->     rno     INTEGER      NULL     COMMENT '강의실번호', -- 강의실번호
+    ->     mno     INTEGER      NULL     COMMENT '매니저번호' -- 매니저번호
+    -> )
+    -> COMMENT '강의';
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT PK_lect -- 강의 기본키
+    ->         PRIMARY KEY (
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.054 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의 인덱스
+MariaDB [studydb]> CREATE INDEX IX_lect
+    ->     ON lect( -- 강의
+    ->         titl ASC -- 강의명
+    ->     );
+Query OK, 0 rows affected (0.042 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE lect
+    ->     MODIFY COLUMN lno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의번호';
+Query OK, 0 rows affected (0.081 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> CREATE TABLE room (
+    ->     rno  INTEGER     NOT NULL COMMENT '강의실번호', -- 강의실번호
+    ->     loc  VARCHAR(50) NOT NULL COMMENT '지점명', -- 지점명
+    ->     name VARCHAR(50) NOT NULL COMMENT '강의실명', -- 강의실명
+    ->     qnty INTEGER     NOT NULL COMMENT '수용인원' -- 수용인원
+    -> )
+    -> COMMENT '강의실';
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실
+MariaDB [studydb]> ALTER TABLE room
+    ->     ADD CONSTRAINT PK_room -- 강의실 기본키
+    ->         PRIMARY KEY (
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.055 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_room
+    ->     ON room ( -- 강의실
+    ->         loc ASC,  -- 지점명
+    ->         name ASC  -- 강의실명
+    ->     );
+Query OK, 0 rows affected (0.045 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE room
+    ->     MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의실번호';
+Query OK, 0 rows affected (0.064 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> CREATE TABLE mgr (
+    ->     mno  INTEGER     NOT NULL COMMENT '매니저번호', -- 매니저번호
+    ->     dept VARCHAR(50) NULL     COMMENT '부서', -- 부서
+    ->     posi VARCHAR(50) NULL     COMMENT '직위', -- 직위
+    ->     fax  VARCHAR(20) NULL     COMMENT '팩스' -- 팩스
+    -> )
+    -> COMMENT '매니저';
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> ALTER TABLE mgr
+    ->     ADD CONSTRAINT PK_mgr -- 매니저 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 매니저번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.055 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> CREATE TABLE lect_appl (
+    ->     lano INTEGER  NOT NULL COMMENT '수강신청번호', -- 수강신청번호
+    ->     lno  INTEGER  NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     mno  INTEGER  NOT NULL COMMENT '수강생번호', -- 수강생번호
+    ->     rdt  DATETIME NOT NULL COMMENT '신청일', -- 신청일
+    ->     stat INTEGER  NULL     COMMENT '진행상태' -- 진행상태
+    -> )
+    -> COMMENT '수강신청';
+Query OK, 0 rows affected (0.030 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT PK_lect_appl -- 수강신청 기본키
+    ->         PRIMARY KEY (
+    ->             lano -- 수강신청번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.066 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_lect_appl
+    ->     ON lect_appl ( -- 수강신청
+    ->         lno ASC, -- 강의번호
+    ->         mno ASC  -- 수강생번호
+    ->     );
+Query OK, 0 rows affected (0.043 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     MODIFY COLUMN lano INTEGER NOT NULL AUTO_INCREMENT COMMENT '수강신청번호';
+Query OK, 0 rows affected (0.060 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> CREATE TABLE room_phot (
+    ->     rpno INTEGER      NOT NULL COMMENT '강의실사진번호', -- 강의실사진번호
+    ->     rno  INTEGER      NOT NULL COMMENT '강의실번호', -- 강의실번호
+    ->     phot VARCHAR(255) NOT NULL COMMENT '사진' -- 사진
+    -> )
+    -> COMMENT '강의실사진';
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     ADD CONSTRAINT PK_room_phot -- 강의실사진 기본키
+    ->         PRIMARY KEY (
+    ->             rpno -- 강의실사진번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.054 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     MODIFY COLUMN rpno INTEGER NOT NULL AUTO_INCREMENT COMMENT '강의실사진번호';
+Query OK, 0 rows affected (0.064 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> CREATE TABLE memb (
+    ->     mno      INTEGER      NOT NULL COMMENT '멤버번호', -- 멤버번호
+    ->     name     VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+    ->     tel      VARCHAR(20)  NOT NULL COMMENT '전화', -- 전화
+    ->     email    VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+    ->     pwd      VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+    ->     phot     VARCHAR(255) NULL     COMMENT '사진', -- 사진
+    ->     ano      INTEGER      NULL     COMMENT '주소번호', -- 주소번호
+    ->     det_addr VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
+    ->     finl_edu VARCHAR(50)  NULL     COMMENT '최종학력', -- 최종학력
+    ->     maj      VARCHAR(50)  NULL     COMMENT '전공', -- 전공
+    ->     sch_nm   VARCHAR(50)  NULL     COMMENT '최종학교' -- 최종학교
+    -> )
+    -> COMMENT '멤버';
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> ALTER TABLE memb
+    ->     ADD CONSTRAINT PK_memb -- 멤버 기본키
+    ->         PRIMARY KEY (
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.073 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버 유니크 인덱스
+MariaDB [studydb]> CREATE UNIQUE INDEX UIX_memb
+    ->     ON memb ( -- 멤버
+    ->         email ASC -- 이메일
+    ->     );
+Query OK, 0 rows affected (0.043 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버 인덱스
+MariaDB [studydb]> CREATE INDEX IX_memb
+    ->     ON memb( -- 멤버
+    ->         name ASC -- 이름
+    ->     );
+Query OK, 0 rows affected (0.042 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE memb
+    ->     MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT COMMENT '멤버번호';
+Query OK, 0 rows affected (0.092 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> CREATE TABLE addr (
+    ->     ano      INTEGER      NOT NULL COMMENT '주소번호', -- 주소번호
+    ->     pst_no   VARCHAR(5)   NOT NULL COMMENT '우편번호', -- 우편번호
+    ->     bas_addr VARCHAR(255) NOT NULL COMMENT '기본주소' -- 기본주소
+    -> )
+    -> COMMENT '주소';
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소
+MariaDB [studydb]> ALTER TABLE addr
+    ->     ADD CONSTRAINT PK_addr -- 주소 기본키
+    ->         PRIMARY KEY (
+    ->             ano -- 주소번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.057 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 주소 인덱스
+MariaDB [studydb]> CREATE INDEX IX_addr
+    ->     ON addr( -- 주소
+    ->         pst_no ASC -- 우편번호
+    ->     );
+Query OK, 0 rows affected (0.043 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> ALTER TABLE addr
+    ->     MODIFY COLUMN ano INTEGER NOT NULL AUTO_INCREMENT COMMENT '주소번호';
+Query OK, 0 rows affected (0.061 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> CREATE TABLE lect_tcher (
+    ->     lno INTEGER NOT NULL COMMENT '강의번호', -- 강의번호
+    ->     mno INTEGER NOT NULL COMMENT '강사번호' -- 강사번호
+    -> )
+    -> COMMENT '강의배정';
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT PK_lect_tcher -- 강의배정 기본키
+    ->         PRIMARY KEY (
+    ->             lno, -- 강의번호
+    ->             mno  -- 강사번호
+    ->         );
+Query OK, 0 rows affected, 1 warning (0.060 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강생
+MariaDB [studydb]> ALTER TABLE stnt
+    ->     ADD CONSTRAINT FK_memb_TO_stnt -- 멤버 -> 수강생
+    ->         FOREIGN KEY (
+    ->             mno -- 수강생번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.079 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강사
+MariaDB [studydb]> ALTER TABLE tcher
+    ->     ADD CONSTRAINT FK_memb_TO_tcher -- 멤버 -> 강사
+    ->         FOREIGN KEY (
+    ->             mno -- 강사번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.065 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT FK_mgr_TO_lect -- 매니저 -> 강의
+    ->         FOREIGN KEY (
+    ->             mno -- 매니저번호
+    ->         )
+    ->         REFERENCES mgr ( -- 매니저
+    ->             mno -- 매니저번호
+    ->         );
+Query OK, 0 rows affected (0.067 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의
+MariaDB [studydb]> ALTER TABLE lect
+    ->     ADD CONSTRAINT FK_room_TO_lect -- 강의실 -> 강의
+    ->         FOREIGN KEY (
+    ->             rno -- 강의실번호
+    ->         )
+    ->         REFERENCES room ( -- 강의실
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected (0.075 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 매니저
+MariaDB [studydb]> ALTER TABLE mgr
+    ->     ADD CONSTRAINT FK_memb_TO_mgr -- 멤버 -> 매니저
+    ->         FOREIGN KEY (
+    ->             mno -- 매니저번호
+    ->         )
+    ->         REFERENCES memb ( -- 멤버
+    ->             mno -- 멤버번호
+    ->         );
+Query OK, 0 rows affected (0.066 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT FK_stnt_TO_lect_appl -- 수강생 -> 수강신청
+    ->         FOREIGN KEY (
+    ->             mno -- 수강생번호
+    ->         )
+    ->         REFERENCES stnt ( -- 수강생
+    ->             mno -- 수강생번호
+    ->         );
+Query OK, 0 rows affected (0.071 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 수강신청
+MariaDB [studydb]> ALTER TABLE lect_appl
+    ->     ADD CONSTRAINT FK_lect_TO_lect_appl -- 강의 -> 수강신청
+    ->         FOREIGN KEY (
+    ->             lno -- 강의번호
+    ->         )
+    ->         REFERENCES lect ( -- 강의
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected (0.083 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의실사진
+MariaDB [studydb]> ALTER TABLE room_phot
+    ->     ADD CONSTRAINT FK_room_TO_room_phot -- 강의실 -> 강의실사진
+    ->         FOREIGN KEY (
+    ->             rno -- 강의실번호
+    ->         )
+    ->         REFERENCES room ( -- 강의실
+    ->             rno -- 강의실번호
+    ->         );
+Query OK, 0 rows affected (0.073 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 멤버
+MariaDB [studydb]> ALTER TABLE memb
+    ->     ADD CONSTRAINT FK_addr_TO_memb -- 주소 -> 멤버
+    ->         FOREIGN KEY (
+    ->             ano -- 주소번호
+    ->         )
+    ->         REFERENCES addr ( -- 주소
+    ->             ano -- 주소번호
+    ->         );
+Query OK, 0 rows affected (0.094 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT FK_tcher_TO_lect_tcher -- 강사 -> 강의배정
+    ->         FOREIGN KEY (
+    ->             mno -- 강사번호
+    ->         )
+    ->         REFERENCES tcher ( -- 강사
+    ->             mno -- 강사번호
+    ->         );
+Query OK, 0 rows affected (0.066 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> -- 강의배정
+MariaDB [studydb]> ALTER TABLE lect_tcher
+    ->     ADD CONSTRAINT FK_lect_TO_lect_tcher -- 강의 -> 강의배정
+    ->         FOREIGN KEY (
+    ->             lno -- 강의번호
+    ->         )
+    ->         REFERENCES lect ( -- 강의
+    ->             lno -- 강의번호
+    ->         );
+Query OK, 0 rows affected (0.067 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> -- # select 테스트 용 데이터 준비
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강의실 데이터 준비 */
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(1, '강남', '501', 30);
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(2, '강남', '502', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(3, '강남', '503', 30);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(4, '종로', '301', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(5, '종로', '302', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(6, '종로', '303', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(7, '서초', '301', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(8, '서초', '302', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(9, '서초', '501', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into room(rno, loc, name, qnty) values(10, '서초', '601', 30);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 학생 데이터 입력 */
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(100, 's100', '111-1111', 's100@', sha2('1111', 224));
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(101, 's101', '111-1111', 's101@', sha2('1111', 224));
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(102, 's102', '111-1111', 's102@', sha2('1111', 224));
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(103, 's103', '111-1111', 's103@', sha2('1111', 224));
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(104, 's104', '111-1111', 's104@', sha2('1111', 224));
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(100, 'N', '1000', '비트은행');
+Query OK, 1 row affected (0.021 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(101, 'Y', '1001', '비트은행');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(102, 'N', '1002', '캠프은행');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(103, 'Y', '1003', '우리은행');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into stnt(mno, work, acc_no, bank)
+    -> values(104, 'N', '1004', '국민은행');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강사 데이터 입력 */
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(200, 't200', '111-1111', 't200@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(201, 't201', '111-1111', 't201@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(202, 't202', '111-1111', 't202@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(203, 't203', '111-1111', 't203@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(204, 't204', '111-1111', 't204@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(200, 10000, '2000', '신한은행');
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(201, 20000, '2001', '농협');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(202, 15000, '2002', '기업은행');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(203, 25000, '2003', '우리은행');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into tcher(mno, hr_pay, acc_no, bank)
+    -> values(204, 30000, '2004', '국민은행');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 매니저 데이터 입력 */
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(300, 'm300', '111-1111', 'm300@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(301, 'm301', '111-1111', 'm301@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(302, 'm302', '111-1111', 'm302@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(303, 'm303', '111-1111', 'm303@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into memb(mno, name, tel, email, pwd)
+    -> values(304, 'm304', '111-1111', 'm304@', sha2('1111', 224));
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(300, '시설관리', '주임');
+Query OK, 1 row affected (0.022 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(301, '시설관리', '대리');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(302, '회계', '과장');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(303, '교육', '주임');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(304, '교육', '과장');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 200번 강사는 교육팀 과장이기도 하다.*/
+MariaDB [studydb]> insert into mgr(mno, dept, posi)
+    -> values(200, '교육', '과장');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강의 데이터 입력 */
+MariaDB [studydb]> insert into lect(lno, titl, sdt, edt, qnty, pric, nat_sup, sup_typ, dsct)
+    -> values(1, '자바프로그래밍', '2018-1-1', '2018-5-30', 30, 100, 'Y', '미취업자', 'ok');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [studydb]> insert into lect(lno, titl, sdt, edt, qnty, pric, nat_sup, sup_typ, dsct)
+    -> values(2, 'IoT프로그래밍', '2018-3-1', '2018-7-30', 30, 200, 'Y', '미취업자', 'ok');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into lect(lno, titl, sdt, edt, qnty, pric, nat_sup, sup_typ, dsct)
+    -> values(3, '윈도우프로그래밍', '2018-5-1', '2018-10-30', 30, 300, 'Y', '노동부', 'ok');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강의에 매니저 배정 */
+MariaDB [studydb]> update lect set mno=303 where lno=1;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> update lect set mno=304 where lno=3;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 강의에 강의실 배정 */
+MariaDB [studydb]> update lect set rno=1 where lno=1;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]> update lect set rno=4 where lno=2;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> /* 수강신청 데이터 입력 */
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(1, 1, 100, '2017-11-2');
+Query OK, 1 row affected (0.021 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(2, 1, 101, '2017-11-3');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(3, 1, 102, '2017-11-4');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(4, 2, 104, '2017-12-6');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(5, 2, 100, '2017-12-7');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(6, 3, 101, '2017-10-8');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(7, 3, 102, '2017-11-9');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [studydb]> insert into lect_appl(lano, lno, mno, rdt) values(8, 3, 104, '2017-11-11');
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [studydb]> select all loc from room;
++------+
+| loc  |
++------+
+| 강남 |
+| 강남 |
+| 강남 |
+| 서초 |
+| 서초 |
+| 서초 |
+| 서초 |
+| 종로 |
+| 종로 |
+| 종로 |
++------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct loc from room;
++------+
+| loc  |
++------+
+| 강남 |
+| 서초 |
+| 종로 |
++------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct loc, name from room;
++------+------+
+| loc  | name |
++------+------+
+| 강남 | 501  |
+| 강남 | 502  |
+| 강남 | 503  |
+| 서초 | 301  |
+| 서초 | 302  |
+| 서초 | 501  |
+| 서초 | 601  |
+| 종로 | 301  |
+| 종로 | 302  |
+| 종로 | 303  |
++------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   9 | 서초 | 501  |
+|  10 | 서초 | 601  |
+|   4 | 종로 | 301  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room
+    -> order by name asc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   4 | 종로 | 301  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
+|   9 | 서초 | 501  |
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|  10 | 서초 | 601  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room
+    -> order by name;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   4 | 종로 | 301  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
+|   9 | 서초 | 501  |
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|  10 | 서초 | 601  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room
+    -> order by name desc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|  10 | 서초 | 601  |
+|   3 | 강남 | 503  |
+|   2 | 강남 | 502  |
+|   9 | 서초 | 501  |
+|   1 | 강남 | 501  |
+|   6 | 종로 | 303  |
+|   5 | 종로 | 302  |
+|   8 | 서초 | 302  |
+|   7 | 서초 | 301  |
+|   4 | 종로 | 301  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room
+    -> order by name asc, loc asc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   7 | 서초 | 301  |
+|   4 | 종로 | 301  |
+|   8 | 서초 | 302  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
+|   1 | 강남 | 501  |
+|   9 | 서초 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|  10 | 서초 | 601  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room
+    -> order by loc asc, name asc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   9 | 서초 | 501  |
+|  10 | 서초 | 601  |
+|   4 | 종로 | 301  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   rno,
+    ->   loc,
+    ->   name
+    -> from
+    ->   room
+    -> order by
+    ->   loc asc,
+    ->   name desc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   3 | 강남 | 503  |
+|   2 | 강남 | 502  |
+|   1 | 강남 | 501  |
+|  10 | 서초 | 601  |
+|   9 | 서초 | 501  |
+|   8 | 서초 | 302  |
+|   7 | 서초 | 301  |
+|   6 | 종로 | 303  |
+|   5 | 종로 | 302  |
+|   4 | 종로 | 301  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room
+    -> order by loc asc, name desc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   3 | 강남 | 503  |
+|   2 | 강남 | 502  |
+|   1 | 강남 | 501  |
+|  10 | 서초 | 601  |
+|   9 | 서초 | 501  |
+|   8 | 서초 | 302  |
+|   7 | 서초 | 301  |
+|   6 | 종로 | 303  |
+|   5 | 종로 | 302  |
+|   4 | 종로 | 301  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, name
+    -> from room
+    -> order by loc asc, name desc;
++-----+------+
+| rno | name |
++-----+------+
+|   3 | 503  |
+|   2 | 502  |
+|   1 | 501  |
+|  10 | 601  |
+|   9 | 501  |
+|   8 | 302  |
+|   7 | 301  |
+|   6 | 303  |
+|   5 | 302  |
+|   4 | 301  |
++-----+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select concat(name, '-', loc) as class_name
+    -> from room
+    -> where loc <> '강남'
+    -> order by class_name;
++------------+
+| class_name |
++------------+
+| 301-서초   |
+| 301-종로   |
+| 302-서초   |
+| 302-종로   |
+| 303-종로   |
+| 501-서초   |
+| 601-서초   |
++------------+
+7 rows in set (0.004 sec)
+
+MariaDB [studydb]> select concat(name, '-', loc) as class_name
+    -> from room
+    -> where loc<>'강남'
+    -> order by loc desc;
++------------+
+| class_name |
++------------+
+| 303-종로   |
+| 302-종로   |
+| 301-종로   |
+| 601-서초   |
+| 501-서초   |
+| 302-서초   |
+| 301-서초   |
++------------+
+7 rows in set (0.001 sec)
+
+MariaDB [studydb]> select rno, loc, name
+    -> from room;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   9 | 서초 | 501  |
+|  10 | 서초 | 601  |
+|   4 | 종로 | 301  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, name
+    -> from room
+    -> order by loc asc, name asc;
++-----+------+
+| rno | name |
++-----+------+
+|   1 | 501  |
+|   2 | 502  |
+|   3 | 503  |
+|   7 | 301  |
+|   8 | 302  |
+|   9 | 501  |
+|  10 | 601  |
+|   4 | 301  |
+|   5 | 302  |
+|   6 | 303  |
++-----+------+
+10 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->   concat(name,'-',loc) as class_name
+    -> from
+    ->   room
+    -> where
+    ->   loc <> '강남'
+    -> order by
+    ->   class_name; -- select 절에 있는 컬럼 또는 테이블 컬럼
++------------+
+| class_name |
++------------+
+| 301-서초   |
+| 301-종로   |
+| 302-서초   |
+| 302-종로   |
+| 303-종로   |
+| 501-서초   |
+| 601-서초   |
++------------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno as room_no, loc as location, name
+    -> from room;
++---------+----------+------+
+| room_no | location | name |
++---------+----------+------+
+|       1 | 강남     | 501  |
+|       2 | 강남     | 502  |
+|       3 | 강남     | 503  |
+|       7 | 서초     | 301  |
+|       8 | 서초     | 302  |
+|       9 | 서초     | 501  |
+|      10 | 서초     | 601  |
+|       4 | 종로     | 301  |
+|       5 | 종로     | 302  |
+|       6 | 종로     | 303  |
++---------+----------+------+
+10 rows in set (0.001 sec)
+
+MariaDB [studydb]> select rno 'room no', loc location, name from room;
++---------+----------+------+
+| room no | location | name |
++---------+----------+------+
+|       1 | 강남     | 501  |
+|       2 | 강남     | 502  |
+|       3 | 강남     | 503  |
+|       7 | 서초     | 301  |
+|       8 | 서초     | 302  |
+|       9 | 서초     | 501  |
+|      10 | 서초     | 601  |
+|       4 | 종로     | 301  |
+|       5 | 종로     | 302  |
+|       6 | 종로     | 303  |
++---------+----------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select concat(name, '(', loc, ')') title from room;
++-----------+
+| title     |
++-----------+
+| 501(강남) |
+| 502(강남) |
+| 503(강남) |
+| 301(서초) |
+| 302(서초) |
+| 501(서초) |
+| 601(서초) |
+| 301(종로) |
+| 302(종로) |
+| 303(종로) |
++-----------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select count(*) from room;
++----------+
+| count(*) |
++----------+
+|       10 |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select count(*) cnt from room where loc='서초';
++-----+
+| cnt |
++-----+
+|   4 |
++-----+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select count(rno) from room;
++------------+
+| count(rno) |
++------------+
+|         10 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select count(loc) from room;
++------------+
+| count(loc) |
++------------+
+|         10 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select * from room;
++-----+------+------+------+
+| rno | loc  | name | qnty |
++-----+------+------+------+
+|   1 | 강남 | 501  |   30 |
+|   2 | 강남 | 502  |   30 |
+|   3 | 강남 | 503  |   30 |
+|   4 | 종로 | 301  |   30 |
+|   5 | 종로 | 302  |   30 |
+|   6 | 종로 | 303  |   30 |
+|   7 | 서초 | 301  |   30 |
+|   8 | 서초 | 302  |   30 |
+|   9 | 서초 | 501  |   30 |
+|  10 | 서초 | 601  |   30 |
++-----+------+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from lect;
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+| lno | titl             | sdt        | edt        | qnty | pric | nat_sup | sup_typ  | dsct | rno  | mno  |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+|   1 | 자바프로그래밍   | 2018-01-01 | 2018-05-30 |   30 |  100 | Y       | 미취업자 | ok   |    1 |  303 |
+|   2 | IoT프로그래밍    | 2018-03-01 | 2018-07-30 |   30 |  200 | Y       | 미취업자 | ok   |    4 | NULL |
+|   3 | 윈도우프로그래밍 | 2018-05-01 | 2018-10-30 |   30 |  300 | Y       | 노동부   | ok   | NULL |  304 |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select count(*) from lect;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select count(mno) from lect;
++------------+
+| count(mno) |
++------------+
+|          2 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select bank from stnt;
++----------+
+| bank     |
++----------+
+| 비트은행 |
+| 비트은행 |
+| 캠프은행 |
+| 우리은행 |
+| 국민은행 |
++----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct bank from stat;
+ERROR 1146 (42S02): Table 'studydb.stat' doesn't exist
+MariaDB [studydb]> select distinct bank from stnt;
++----------+
+| bank     |
++----------+
+| 비트은행 |
+| 캠프은행 |
+| 우리은행 |
+| 국민은행 |
++----------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct bank from tcher;
++----------+
+| bank     |
++----------+
+| 신한은행 |
+| 농협     |
+| 기업은행 |
+| 우리은행 |
+| 국민은행 |
++----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select bank from tcher;
++----------+
+| bank     |
++----------+
+| 신한은행 |
+| 농협     |
+| 기업은행 |
+| 우리은행 |
+| 국민은행 |
++----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct bank from stnt
+    -> union select distinct bank from tcher;
++----------+
+| bank     |
++----------+
+| 비트은행 |
+| 캠프은행 |
+| 우리은행 |
+| 국민은행 |
+| 신한은행 |
+| 농협     |
+| 기업은행 |
++----------+
+7 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct bank from stnt
+    -> union all select distinct bank from tcher;
++----------+
+| bank     |
++----------+
+| 비트은행 |
+| 캠프은행 |
+| 우리은행 |
+| 국민은행 |
+| 신한은행 |
+| 농협     |
+| 기업은행 |
+| 우리은행 |
+| 국민은행 |
++----------+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select distinct bank
+    -> from stnt
+    -> where not bank in (select distinct bank from tcher);
++----------+
+| bank     |
++----------+
+| 비트은행 |
+| 캠프은행 |
++----------+
+2 rows in set (0.004 sec)
+
+MariaDB [studydb]> select distinct bank
+    -> from stnt
+    -> where bank in (select distinct bank from tcher);
++----------+
+| bank     |
++----------+
+| 우리은행 |
+| 국민은행 |
++----------+
+2 rows in set (0.004 sec)
+
+MariaDB [studydb]> select distinct bank from stnt where bank not in (select distinct bank from tcher);
++----------+
+| bank     |
++----------+
+| 비트은행 |
+| 캠프은행 |
++----------+
+2 rows in set (0.001 sec)
+
+MariaDB [studydb]> select distinct bank from stnt where bank in (select distinct bank from tcher);
++----------+
+| bank     |
++----------+
+| 우리은행 |
+| 국민은행 |
++----------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> create table board1 (
+    ->   bno int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text
+    -> );
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [studydb]> create table attach_file1 (
+    ->   fno int primary key auto_increment,
+    ->   filepath varchar(255) not null,
+    ->   bno int not null
+    -> );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> alter table attach_file1
+    ->   add constraint attach_file1_fk foreign key (bno) references board1 (bno);
+Query OK, 0 rows affected (0.027 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> insert into board1 values(1, '제목1', '내용');
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [studydb]> insert into board1 values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into board1 values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file1 values(101, 'a1.gif', 1);
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [studydb]> insert into attach_file1 values(102, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file1 values(103, 'c1.gif', 3);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into attach_file1 values(104, 'c1.gif', 30);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`studydb`.`attach_file1`, CONSTRAINT `attach_file1_fk` FOREIGN KEY (`bno`) REFERENCES `board1` (`bno`))
+MariaDB [studydb]>
+MariaDB [studydb]> select bno, title from board1;
++-----+-------+
+| bno | title |
++-----+-------+
+|   1 | 제목1 |
+|   2 | 제목2 |
+|   3 | 제목3 |
++-----+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select fno, filepath, bno from attach_file1;
++-----+----------+-----+
+| fno | filepath | bno |
++-----+----------+-----+
+| 101 | a1.gif   |   1 |
+| 102 | a2.gif   |   1 |
+| 103 | c1.gif   |   3 |
++-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select
+    ->   bno, title, content, fno, filepath
+    -> from board1 cross join attach_file1;
+ERROR 1052 (23000): Column 'bno' in field list is ambiguous
+MariaDB [studydb]> select board1.bno, title, content, fno, filepath
+    -> from board1 cross join attach_file1;
++-----+-------+---------+-----+----------+
+| bno | title | content | fno | filepath |
++-----+-------+---------+-----+----------+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |
+|   1 | 제목1 | 내용    | 103 | c1.gif   |
+|   2 | 제목2 | 내용    | 101 | a1.gif   |
+|   2 | 제목2 | 내용    | 102 | a2.gif   |
+|   2 | 제목2 | 내용    | 103 | c1.gif   |
+|   3 | 제목3 | 내용    | 101 | a1.gif   |
+|   3 | 제목3 | 내용    | 102 | a2.gif   |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |
++-----+-------+---------+-----+----------+
+9 rows in set (0.001 sec)
+
+MariaDB [studydb]> select board1.bno, title, content, fno, filepath, attach_file1.bno
+    -> from board1 cross join attach_file1;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   1 | 제목1 | 내용    | 103 | c1.gif   |   3 |
+|   2 | 제목2 | 내용    | 101 | a1.gif   |   1 |
+|   2 | 제목2 | 내용    | 102 | a2.gif   |   1 |
+|   2 | 제목2 | 내용    | 103 | c1.gif   |   3 |
+|   3 | 제목3 | 내용    | 101 | a1.gif   |   1 |
+|   3 | 제목3 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select board1.bno, title, content, fno, filepath, attach_file1.bno
+    -> from board1, attach_file1;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   1 | 제목1 | 내용    | 103 | c1.gif   |   3 |
+|   2 | 제목2 | 내용    | 101 | a1.gif   |   1 |
+|   2 | 제목2 | 내용    | 102 | a2.gif   |   1 |
+|   2 | 제목2 | 내용    | 103 | c1.gif   |   3 |
+|   3 | 제목3 | 내용    | 101 | a1.gif   |   1 |
+|   3 | 제목3 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 as b cross join attach_file1 as a;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   1 | 제목1 | 내용    | 103 | c1.gif   |   3 |
+|   2 | 제목2 | 내용    | 101 | a1.gif   |   1 |
+|   2 | 제목2 | 내용    | 102 | a2.gif   |   1 |
+|   2 | 제목2 | 내용    | 103 | c1.gif   |   3 |
+|   3 | 제목3 | 내용    | 101 | a1.gif   |   1 |
+|   3 | 제목3 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 b, attach_file1 a;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   1 | 제목1 | 내용    | 103 | c1.gif   |   3 |
+|   2 | 제목2 | 내용    | 101 | a1.gif   |   1 |
+|   2 | 제목2 | 내용    | 102 | a2.gif   |   1 |
+|   2 | 제목2 | 내용    | 103 | c1.gif   |   3 |
+|   3 | 제목3 | 내용    | 101 | a1.gif   |   1 |
+|   3 | 제목3 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+9 rows in set (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 b natural join attach_file1 a;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 b natural join attach_file1 a
+    -> where b.bno = a.bno;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 b cross join attach_file1 a
+    -> where b.bno = a.bno;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 b cross join attach_file1 a;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   1 | 제목1 | 내용    | 103 | c1.gif   |   3 |
+|   2 | 제목2 | 내용    | 101 | a1.gif   |   1 |
+|   2 | 제목2 | 내용    | 102 | a2.gif   |   1 |
+|   2 | 제목2 | 내용    | 103 | c1.gif   |   3 |
+|   3 | 제목3 | 내용    | 101 | a1.gif   |   1 |
+|   3 | 제목3 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, title, content, fno, filepath, a.bno
+    -> from board1 b, attach_file1 a
+    -> where b.bno = a.bno;
++-----+-------+---------+-----+----------+-----+
+| bno | title | content | fno | filepath | bno |
++-----+-------+---------+-----+----------+-----+
+|   1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|   1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|   3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++-----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> create table board2 (
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text
+    -> );
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table attach_file2 (
+    ->   no int primary key auto_increment,
+    ->   filepath varchar(255) not null,
+    ->   bno int not null
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table attach_file2
+    ->   add constraint attach_file2_fk foreign key (bno) references board2 (no);
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into board2 values(1, '제목1', '내용');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into board2 values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into board2 values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into attach_file2 values(101, 'a1.gif', 1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into attach_file2 values(102, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file2 values(103, 'c1.gif', 3);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select * from board2;
++----+-------+---------+
+| no | title | content |
++----+-------+---------+
+|  1 | 제목1 | 내용    |
+|  2 | 제목2 | 내용    |
+|  3 | 제목3 | 내용    |
++----+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from attach_file2;
++-----+----------+-----+
+| no  | filepath | bno |
++-----+----------+-----+
+| 101 | a1.gif   |   1 |
+| 102 | a2.gif   |   1 |
+| 103 | c1.gif   |   3 |
++-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.no, title, content, a.no, filepath, bno
+    -> from board2 b natural join attach_file2 a;
+Empty set (0.001 sec)
+
+MariaDB [studydb]> select b.no, title, content, a.no, filepath, bno
+    -> from board2 b, attach_file2 a
+    -> where b.no = a.bno;
++----+-------+---------+-----+----------+-----+
+| no | title | content | no  | filepath | bno |
++----+-------+---------+-----+----------+-----+
+|  1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|  1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> create table board3 (
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text
+    -> );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table attach_file3 (
+    ->   no int primary key auto_increment,
+    ->   filepath varchar(255) not null,
+    ->   bno int not null
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table attach_file3
+    ->   add constraint attach_file3_fk foreign key (bno) references board3 (no);
+Query OK, 0 rows affected (0.024 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into board3 values(1, '제목1', '내용');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into board3 values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into board3 values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into attach_file3 values(1, 'a1.gif', 1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into attach_file3 values(2, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file3 values(3, 'c1.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> seelct * from board3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'seelct * from board3' at line 1
+MariaDB [studydb]> select * from board3;
++----+-------+---------+
+| no | title | content |
++----+-------+---------+
+|  1 | 제목1 | 내용    |
+|  2 | 제목2 | 내용    |
+|  3 | 제목3 | 내용    |
++----+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from attach_file3;
++----+----------+-----+
+| no | filepath | bno |
++----+----------+-----+
+|  1 | a1.gif   |   1 |
+|  2 | a2.gif   |   1 |
+|  3 | c1.gif   |   3 |
++----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table attach_file2;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [studydb]> drop table board2;
+Query OK, 0 rows affected (0.019 sec)
+
+MariaDB [studydb]> create table board2 (
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text
+    -> );
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table attach_file2 (
+    ->   fno int primary key auto_increment,
+    ->   filepath varchar(255) not null,
+    ->   bno int not null
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table attach_file2
+    ->   add constraint attach_file2_fk foreign key (bno) references board2 (no);
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into board2 values(1, '제목1', '내용');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into board2 values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into board2 values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into attach_file2 values(101, 'a1.gif', 1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into attach_file2 values(102, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file2 values(103, 'c1.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from board2;
++----+-------+---------+
+| no | title | content |
++----+-------+---------+
+|  1 | 제목1 | 내용    |
+|  2 | 제목2 | 내용    |
+|  3 | 제목3 | 내용    |
++----+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from attach_file2;
++-----+----------+-----+
+| fno | filepath | bno |
++-----+----------+-----+
+| 101 | a1.gif   |   1 |
+| 102 | a2.gif   |   1 |
+| 103 | c1.gif   |   3 |
++-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board2 b natural join attach_file2 a;
++----+-------+---------+-----+----------+-----+
+| no | title | content | fno | filepath | bno |
++----+-------+---------+-----+----------+-----+
+|  1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|  2 | 제목2 | 내용    | 101 | a1.gif   |   1 |
+|  3 | 제목3 | 내용    | 101 | a1.gif   |   1 |
+|  1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|  2 | 제목2 | 내용    | 102 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    | 102 | a2.gif   |   1 |
+|  1 | 제목1 | 내용    | 103 | c1.gif   |   3 |
+|  2 | 제목2 | 내용    | 103 | c1.gif   |   3 |
+|  3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++----+-------+---------+-----+----------+-----+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board2 b, attach_file2 a
+    -> where b.no = a.bno;
++----+-------+---------+-----+----------+-----+
+| no | title | content | fno | filepath | bno |
++----+-------+---------+-----+----------+-----+
+|  1 | 제목1 | 내용    | 101 | a1.gif   |   1 |
+|  1 | 제목1 | 내용    | 102 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    | 103 | c1.gif   |   3 |
++----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.no, title, content, a.no, filepath, bno
+    -> from board3 b natural join attach_file3 a;
++----+-------+---------+----+----------+-----+
+| no | title | content | no | filepath | bno |
++----+-------+---------+----+----------+-----+
+|  1 | 제목1 | 내용    |  1 | a1.gif   |   1 |
+|  2 | 제목2 | 내용    |  2 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    |  3 | c1.gif   |   3 |
++----+-------+---------+----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.no, title, content, a.no, filepath, bno
+    -> from board3 b, attach_file3 a
+    -> where b.no = a.bno;
++----+-------+---------+----+----------+-----+
+| no | title | content | no | filepath | bno |
++----+-------+---------+----+----------+-----+
+|  1 | 제목1 | 내용    |  1 | a1.gif   |   1 |
+|  1 | 제목1 | 내용    |  2 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    |  3 | c1.gif   |   3 |
++----+-------+---------+----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> create table board4 (
+    ->   bno int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table attach_file4 (
+    ->   fno int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   bno int not null
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table attach_file4
+    ->   add constraint attach_file4_fk foreign key (bno) references board4 (bno);
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into board4 values(1, '제목1', '내용');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into board4 values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into board4 values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into attach_file4 values(1, 'a1.gif', 1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> insert into attach_file4 values(2, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file4 values(3, 'c1.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select * from board4;
++-----+-------+---------+
+| bno | title | content |
++-----+-------+---------+
+|   1 | 제목1 | 내용    |
+|   2 | 제목2 | 내용    |
+|   3 | 제목3 | 내용    |
++-----+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from attach_file4;
++-----+--------+-----+
+| fno | title  | bno |
++-----+--------+-----+
+|   1 | a1.gif |   1 |
+|   2 | a2.gif |   1 |
+|   3 | c1.gif |   3 |
++-----+--------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, b.title, content, a.fno, a.title, a.bno
+    -> from board4 b natural join attach_file4 a;
+Empty set (0.001 sec)
+
+MariaDB [studydb]> select b.bno, b.title, content, a.fno, a.title, a.bno
+    -> from board4 b, attach_file4 a
+    -> where b.bno = a.bno;
++-----+-------+---------+-----+--------+-----+
+| bno | title | content | fno | title  | bno |
++-----+-------+---------+-----+--------+-----+
+|   1 | 제목1 | 내용    |   1 | a1.gif |   1 |
+|   1 | 제목1 | 내용    |   2 | a2.gif |   1 |
+|   3 | 제목3 | 내용    |   3 | c1.gif |   3 |
++-----+-------+---------+-----+--------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, b.title, content, a.fno, a.title, a.bno
+    -> from board4 b join attach_file4 a on b.bno=a.bno;
++-----+-------+---------+-----+--------+-----+
+| bno | title | content | fno | title  | bno |
++-----+-------+---------+-----+--------+-----+
+|   1 | 제목1 | 내용    |   1 | a1.gif |   1 |
+|   1 | 제목1 | 내용    |   2 | a2.gif |   1 |
+|   3 | 제목3 | 내용    |   3 | c1.gif |   3 |
++-----+-------+---------+-----+--------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select b.bno, b.title, content, a.fno, a.title, a.bno
+    -> from board4 b join attach_file4 a using (bno);
++-----+-------+---------+-----+--------+-----+
+| bno | title | content | fno | title  | bno |
++-----+-------+---------+-----+--------+-----+
+|   1 | 제목1 | 내용    |   1 | a1.gif |   1 |
+|   1 | 제목1 | 내용    |   2 | a2.gif |   1 |
+|   3 | 제목3 | 내용    |   3 | c1.gif |   3 |
++-----+-------+---------+-----+--------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board5 b join attach_file5 a using (bno);
+ERROR 1146 (42S02): Table 'studydb.board5' doesn't exist
+MariaDB [studydb]> create table board5 (
+    ->   no int primary key auto_increment,
+    ->   title varchar(255) not null,
+    ->   content text
+    -> );
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> create table attach_file5 (
+    ->   fno int primary key auto_increment,
+    ->   filepath varchar(255) not null,
+    ->   bno int not null
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table attach_file5
+    ->   add constraint attach_file5_fk foreign key (bno) references board5 (no);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into board5 values(1, '제목1', '내용');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [studydb]> insert into board5 values(2, '제목2', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into board5 values(3, '제목3', '내용');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> insert into attach_file5 values(1, 'a1.gif', 1);
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [studydb]> insert into attach_file5 values(2, 'a2.gif', 1);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> insert into attach_file5 values(3, 'c1.gif', 3);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board5 b join attach_file5 a using (bno);
+ERROR 1054 (42S22): Unknown column 'bno' in 'from clause'
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board5 b join attach_file5 a on b.no = a.bno;
++----+-------+---------+-----+----------+-----+
+| no | title | content | fno | filepath | bno |
++----+-------+---------+-----+----------+-----+
+|  1 | 제목1 | 내용    |   1 | a1.gif   |   1 |
+|  1 | 제목1 | 내용    |   2 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    |   3 | c1.gif   |   3 |
++----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board5 b inner join attach_file5 a on b.no = a.bno;
++----+-------+---------+-----+----------+-----+
+| no | title | content | fno | filepath | bno |
++----+-------+---------+-----+----------+-----+
+|  1 | 제목1 | 내용    |   1 | a1.gif   |   1 |
+|  1 | 제목1 | 내용    |   2 | a2.gif   |   1 |
+|  3 | 제목3 | 내용    |   3 | c1.gif   |   3 |
++----+-------+---------+-----+----------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board5 b left outer join attach_file5 a on b.no = a.bno;
++----+-------+---------+------+----------+------+
+| no | title | content | fno  | filepath | bno  |
++----+-------+---------+------+----------+------+
+|  1 | 제목1 | 내용    |    1 | a1.gif   |    1 |
+|  1 | 제목1 | 내용    |    2 | a2.gif   |    1 |
+|  3 | 제목3 | 내용    |    3 | c1.gif   |    3 |
+|  2 | 제목2 | 내용    | NULL | NULL     | NULL |
++----+-------+---------+------+----------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [studydb]> select no, title, content, fno, filepath, bno
+    -> from board5 b left outer join attach_file5 a on b.no = a.bno
+    -> order by no desc;
++----+-------+---------+------+----------+------+
+| no | title | content | fno  | filepath | bno  |
++----+-------+---------+------+----------+------+
+|  3 | 제목3 | 내용    |    3 | c1.gif   |    3 |
+|  2 | 제목2 | 내용    | NULL | NULL     | NULL |
+|  1 | 제목1 | 내용    |    1 | a1.gif   |    1 |
+|  1 | 제목1 | 내용    |    2 | a2.gif   |    1 |
++----+-------+---------+------+----------+------+
+4 rows in set (0.012 sec)
+
+MariaDB [studydb]> select lno, titl, rno, mno from lect;
++-----+------------------+------+------+
+| lno | titl             | rno  | mno  |
++-----+------------------+------+------+
+|   1 | 자바프로그래밍   |    1 |  303 |
+|   2 | IoT프로그래밍    |    4 | NULL |
+|   3 | 윈도우프로그래밍 | NULL |  304 |
++-----+------------------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select lno, titl, rno, mno from lect;
++-----+------------------+------+------+
+| lno | titl             | rno  | mno  |
++-----+------------------+------+------+
+|   1 | 자바프로그래밍   |    1 |  303 |
+|   2 | IoT프로그래밍    |    4 | NULL |
+|   3 | 윈도우프로그래밍 | NULL |  304 |
++-----+------------------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select rno, loc, name from room;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   9 | 서초 | 501  |
+|  10 | 서초 | 601  |
+|   4 | 종로 | 301  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
++-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     l.lno,
+    ->     l.titl,
+    ->     l.rno,
+    ->     r.rno,
+    ->     r.loc,
+    ->     r.name
+    -> from lect l
+    ->     inner join room r on l.rno=r.rno;
++-----+----------------+------+-----+------+------+
+| lno | titl           | rno  | rno | loc  | name |
++-----+----------------+------+-----+------+------+
+|   1 | 자바프로그래밍 |    1 |   1 | 강남 | 501  |
+|   2 | IoT프로그래밍  |    4 |   4 | 종로 | 301  |
++-----+----------------+------+-----+------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->   r.rno,
+    ->   r.name,
+    ->   r.loc,
+    ->   l.titl
+    -> from room r
+    ->     inner join lect l on r.rno = l.rno;
++-----+------+------+----------------+
+| rno | name | loc  | titl           |
++-----+------+------+----------------+
+|   1 | 501  | 강남 | 자바프로그래밍 |
+|   4 | 301  | 종로 | IoT프로그래밍  |
++-----+------+------+----------------+
+2 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     l.lno,
+    ->     l.titl,
+    ->     r.rno,
+    ->     r.loc,
+    ->     r.name
+    -> from lect l
+    ->     left outer join room r on l.rno=r.rno;
++-----+------------------+------+------+------+
+| lno | titl             | rno  | loc  | name |
++-----+------------------+------+------+------+
+|   1 | 자바프로그래밍   |    1 | 강남 | 501  |
+|   2 | IoT프로그래밍    |    4 | 종로 | 301  |
+|   3 | 윈도우프로그래밍 | NULL | NULL | NULL |
++-----+------------------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     l.lno,
+    ->     l.titl,
+    ->     r.rno,
+    ->     r.loc,
+    ->     r.name
+    -> from lect l
+    ->     right outer join room r on l.rno=r.rno;
++------+----------------+-----+------+------+
+| lno  | titl           | rno | loc  | name |
++------+----------------+-----+------+------+
+|    1 | 자바프로그래밍 |   1 | 강남 | 501  |
+|    2 | IoT프로그래밍  |   4 | 종로 | 301  |
+| NULL | NULL           |   2 | 강남 | 502  |
+| NULL | NULL           |   3 | 강남 | 503  |
+| NULL | NULL           |   7 | 서초 | 301  |
+| NULL | NULL           |   8 | 서초 | 302  |
+| NULL | NULL           |   9 | 서초 | 501  |
+| NULL | NULL           |  10 | 서초 | 601  |
+| NULL | NULL           |   5 | 종로 | 302  |
+| NULL | NULL           |   6 | 종로 | 303  |
++------+----------------+-----+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
++-------------------+
+22 rows in set (0.001 sec)
+
+MariaDB [studydb]> select * from memb;
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| mno | name | tel      | email | pwd                                                      | phot | ano  | det_addr | finl_edu | maj  | sch_nm |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| 100 | s100 | 111-1111 | s100@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 101 | s101 | 111-1111 | s101@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 102 | s102 | 111-1111 | s102@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 103 | s103 | 111-1111 | s103@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 104 | s104 | 111-1111 | s104@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 200 | t200 | 111-1111 | t200@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 201 | t201 | 111-1111 | t201@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 202 | t202 | 111-1111 | t202@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 203 | t203 | 111-1111 | t203@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 204 | t204 | 111-1111 | t204@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 300 | m300 | 111-1111 | m300@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 301 | m301 | 111-1111 | m301@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 302 | m302 | 111-1111 | m302@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 303 | m303 | 111-1111 | m303@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 304 | m304 | 111-1111 | m304@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from stnt;
++-----+------+--------+----------+
+| mno | work | acc_no | bank     |
++-----+------+--------+----------+
+| 100 | N    | 1000   | 비트은행 |
+| 101 | Y    | 1001   | 비트은행 |
+| 102 | N    | 1002   | 캠프은행 |
+| 103 | Y    | 1003   | 우리은행 |
+| 104 | N    | 1004   | 국민은행 |
++-----+------+--------+----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select mno, name from memb;
++-----+------+
+| mno | name |
++-----+------+
+| 300 | m300 |
+| 301 | m301 |
+| 302 | m302 |
+| 303 | m303 |
+| 304 | m304 |
+| 100 | s100 |
+| 101 | s101 |
+| 102 | s102 |
+| 103 | s103 |
+| 104 | s104 |
+| 200 | t200 |
+| 201 | t201 |
+| 202 | t202 |
+| 203 | t203 |
+| 204 | t204 |
++-----+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select mno, name from memb mselect mno, name from memb
+    -> left outer join stnt s on m.mno = s.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'mno, name from memb
+left outer join stnt s on m.mno = s.mno' at line 1
+MariaDB [studydb]> select m.mno, m.name, s.work
+    -> from memb m
+    -> left outer join stnt s on m.mno = s.mno;
++-----+------+------+
+| mno | name | work |
++-----+------+------+
+| 300 | m300 | NULL |
+| 301 | m301 | NULL |
+| 302 | m302 | NULL |
+| 303 | m303 | NULL |
+| 304 | m304 | NULL |
+| 100 | s100 | N    |
+| 101 | s101 | Y    |
+| 102 | s102 | N    |
+| 103 | s103 | Y    |
+| 104 | s104 | N    |
+| 200 | t200 | NULL |
+| 201 | t201 | NULL |
+| 202 | t202 | NULL |
+| 203 | t203 | NULL |
+| 204 | t204 | NULL |
++-----+------+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> desc memb;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| mno      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(50)  | NO   | MUL | NULL    |                |
+| tel      | varchar(20)  | NO   |     | NULL    |                |
+| email    | varchar(40)  | NO   | UNI | NULL    |                |
+| pwd      | varchar(100) | NO   |     | NULL    |                |
+| phot     | varchar(255) | YES  |     | NULL    |                |
+| ano      | int(11)      | YES  | MUL | NULL    |                |
+| det_addr | varchar(255) | YES  |     | NULL    |                |
+| finl_edu | varchar(50)  | YES  |     | NULL    |                |
+| maj      | varchar(50)  | YES  |     | NULL    |                |
+| sch_nm   | varchar(50)  | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+11 rows in set (0.006 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select
+    ->   m.mno,
+    ->   m.name
+    -> from memb m;
++-----+------+
+| mno | name |
++-----+------+
+| 300 | m300 |
+| 301 | m301 |
+| 302 | m302 |
+| 303 | m303 |
+| 304 | m304 |
+| 100 | s100 |
+| 101 | s101 |
+| 102 | s102 |
+| 103 | s103 |
+| 104 | s104 |
+| 200 | t200 |
+| 201 | t201 |
+| 202 | t202 |
+| 203 | t203 |
+| 204 | t204 |
++-----+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   s.mno,
+    ->   s.work
+    -> from stnt s;
++-----+------+
+| mno | work |
++-----+------+
+| 100 | N    |
+| 101 | Y    |
+| 102 | N    |
+| 103 | Y    |
+| 104 | N    |
++-----+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   m.mno,
+    ->   m.name,
+    ->   s.mno,
+    ->   s.work
+    -> from memb m join stnt s on m.mno=s.mno;
++-----+------+-----+------+
+| mno | name | mno | work |
++-----+------+-----+------+
+| 100 | s100 | 100 | N    |
+| 101 | s101 | 101 | Y    |
+| 102 | s102 | 102 | N    |
+| 103 | s103 | 103 | Y    |
+| 104 | s104 | 104 | N    |
++-----+------+-----+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   m.mno,
+    ->   m.name,
+    ->   s.mno,
+    ->   s.work
+    -> from memb m left outer join stnt s on m.mno=s.mno;
++-----+------+------+------+
+| mno | name | mno  | work |
++-----+------+------+------+
+| 300 | m300 | NULL | NULL |
+| 301 | m301 | NULL | NULL |
+| 302 | m302 | NULL | NULL |
+| 303 | m303 | NULL | NULL |
+| 304 | m304 | NULL | NULL |
+| 100 | s100 |  100 | N    |
+| 101 | s101 |  101 | Y    |
+| 102 | s102 |  102 | N    |
+| 103 | s103 |  103 | Y    |
+| 104 | s104 |  104 | N    |
+| 200 | t200 | NULL | NULL |
+| 201 | t201 | NULL | NULL |
+| 202 | t202 | NULL | NULL |
+| 203 | t203 | NULL | NULL |
+| 204 | t204 | NULL | NULL |
++-----+------+------+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   m.mno,
+    ->   m.name,
+    ->   s.work
+    -> from memb m
+    ->   left outer join stnt s on m.mno=s.mno;
++-----+------+------+
+| mno | name | work |
++-----+------+------+
+| 300 | m300 | NULL |
+| 301 | m301 | NULL |
+| 302 | m302 | NULL |
+| 303 | m303 | NULL |
+| 304 | m304 | NULL |
+| 100 | s100 | N    |
+| 101 | s101 | Y    |
+| 102 | s102 | N    |
+| 103 | s103 | Y    |
+| 104 | s104 | N    |
+| 200 | t200 | NULL |
+| 201 | t201 | NULL |
+| 202 | t202 | NULL |
+| 203 | t203 | NULL |
+| 204 | t204 | NULL |
++-----+------+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> order by
+    ->   m.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  m.mno' at line 1
+MariaDB [studydb]>
+MariaDB [studydb]> select
+    ->   m.mno,
+    ->   m.name,
+    ->   s.work
+    -> from memb m
+    ->   left outer join stnt s on m.mno=s.mno;
++-----+------+------+
+| mno | name | work |
++-----+------+------+
+| 300 | m300 | NULL |
+| 301 | m301 | NULL |
+| 302 | m302 | NULL |
+| 303 | m303 | NULL |
+| 304 | m304 | NULL |
+| 100 | s100 | N    |
+| 101 | s101 | Y    |
+| 102 | s102 | N    |
+| 103 | s103 | Y    |
+| 104 | s104 | N    |
+| 200 | t200 | NULL |
+| 201 | t201 | NULL |
+| 202 | t202 | NULL |
+| 203 | t203 | NULL |
+| 204 | t204 | NULL |
++-----+------+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> order by
+    ->   m.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  m.mno' at line 1
+MariaDB [studydb]> select
+    ->   m.mno,
+    ->   m.name,
+    ->   s.work
+    -> from memb m
+    ->   left outer join stnt s on m.mno=s.mno
+    -> order by
+    ->   m.mno;
++-----+------+------+
+| mno | name | work |
++-----+------+------+
+| 100 | s100 | N    |
+| 101 | s101 | Y    |
+| 102 | s102 | N    |
+| 103 | s103 | Y    |
+| 104 | s104 | N    |
+| 200 | t200 | NULL |
+| 201 | t201 | NULL |
+| 202 | t202 | NULL |
+| 203 | t203 | NULL |
+| 204 | t204 | NULL |
+| 300 | m300 | NULL |
+| 301 | m301 | NULL |
+| 302 | m302 | NULL |
+| 303 | m303 | NULL |
+| 304 | m304 | NULL |
++-----+------+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
++-------------------+
+22 rows in set (0.001 sec)
+
+MariaDB [studydb]> desc stnt;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| mno    | int(11)     | NO   | PRI | NULL    |       |
+| work   | char(1)     | NO   |     | NULL    |       |
+| acc_no | varchar(20) | YES  | MUL | NULL    |       |
+| bank   | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.013 sec)
+
+MariaDB [studydb]> desc lect;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| lno     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| titl    | varchar(255) | NO   | MUL | NULL    |                |
+| sdt     | date         | NO   |     | NULL    |                |
+| edt     | date         | NO   |     | NULL    |                |
+| qnty    | int(11)      | NO   |     | NULL    |                |
+| pric    | int(11)      | NO   |     | NULL    |                |
+| nat_sup | char(1)      | NO   |     | NULL    |                |
+| sup_typ | varchar(50)  | NO   |     | NULL    |                |
+| dsct    | text         | NO   |     | NULL    |                |
+| rno     | int(11)      | YES  | MUL | NULL    |                |
+| mno     | int(11)      | YES  | MUL | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+11 rows in set (0.009 sec)
+
+MariaDB [studydb]> select * from lect;
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+| lno | titl             | sdt        | edt        | qnty | pric | nat_sup | sup_typ  | dsct | rno  | mno  |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+|   1 | 자바프로그래밍   | 2018-01-01 | 2018-05-30 |   30 |  100 | Y       | 미취업자 | ok   |    1 |  303 |
+|   2 | IoT프로그래밍    | 2018-03-01 | 2018-07-30 |   30 |  200 | Y       | 미취업자 | ok   |    4 | NULL |
+|   3 | 윈도우프로그래밍 | 2018-05-01 | 2018-10-30 |   30 |  300 | Y       | 노동부   | ok   | NULL |  304 |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> desc room
+    -> ;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| rno   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| loc   | varchar(50) | NO   | MUL | NULL    |                |
+| name  | varchar(50) | NO   |     | NULL    |                |
+| qnty  | int(11)     | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+4 rows in set (0.010 sec)
+
+MariaDB [studydb]> select * from room;
++-----+------+------+------+
+| rno | loc  | name | qnty |
++-----+------+------+------+
+|   1 | 강남 | 501  |   30 |
+|   2 | 강남 | 502  |   30 |
+|   3 | 강남 | 503  |   30 |
+|   4 | 종로 | 301  |   30 |
+|   5 | 종로 | 302  |   30 |
+|   6 | 종로 | 303  |   30 |
+|   7 | 서초 | 301  |   30 |
+|   8 | 서초 | 302  |   30 |
+|   9 | 서초 | 501  |   30 |
+|  10 | 서초 | 601  |   30 |
++-----+------+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> desc lect_appl;
++-------+----------+------+-----+---------+----------------+
+| Field | Type     | Null | Key | Default | Extra          |
++-------+----------+------+-----+---------+----------------+
+| lano  | int(11)  | NO   | PRI | NULL    | auto_increment |
+| lno   | int(11)  | NO   | MUL | NULL    |                |
+| mno   | int(11)  | NO   | MUL | NULL    |                |
+| rdt   | datetime | NO   |     | NULL    |                |
+| stat  | int(11)  | YES  |     | NULL    |                |
++-------+----------+------+-----+---------+----------------+
+5 rows in set (0.013 sec)
+
+MariaDB [studydb]> select lano, rdt from lect_appl;
++------+---------------------+
+| lano | rdt                 |
++------+---------------------+
+|    1 | 2017-11-02 00:00:00 |
+|    2 | 2017-11-03 00:00:00 |
+|    3 | 2017-11-04 00:00:00 |
+|    4 | 2017-12-06 00:00:00 |
+|    5 | 2017-12-07 00:00:00 |
+|    6 | 2017-10-08 00:00:00 |
+|    7 | 2017-11-09 00:00:00 |
+|    8 | 2017-11-11 00:00:00 |
++------+---------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> select name from memb;
++------+
+| name |
++------+
+| m300 |
+| m301 |
+| m302 |
+| m303 |
+| m304 |
+| s100 |
+| s101 |
+| s102 |
+| s103 |
+| s104 |
+| t200 |
+| t201 |
+| t202 |
+| t203 |
+| t204 |
++------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from memb;
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| mno | name | tel      | email | pwd                                                      | phot | ano  | det_addr | finl_edu | maj  | sch_nm |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| 100 | s100 | 111-1111 | s100@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 101 | s101 | 111-1111 | s101@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 102 | s102 | 111-1111 | s102@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 103 | s103 | 111-1111 | s103@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 104 | s104 | 111-1111 | s104@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 200 | t200 | 111-1111 | t200@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 201 | t201 | 111-1111 | t201@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 202 | t202 | 111-1111 | t202@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 203 | t203 | 111-1111 | t203@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 204 | t204 | 111-1111 | t204@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 300 | m300 | 111-1111 | m300@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 301 | m301 | 111-1111 | m301@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 302 | m302 | 111-1111 | m302@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 303 | m303 | 111-1111 | m303@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 304 | m304 | 111-1111 | m304@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from stnt;
++-----+------+--------+----------+
+| mno | work | acc_no | bank     |
++-----+------+--------+----------+
+| 100 | N    | 1000   | 비트은행 |
+| 101 | Y    | 1001   | 비트은행 |
+| 102 | N    | 1002   | 캠프은행 |
+| 103 | Y    | 1003   | 우리은행 |
+| 104 | N    | 1004   | 국민은행 |
++-----+------+--------+----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select name from memb m
+    -> left outer join stnt s on m.mno=s.mno;
++------+
+| name |
++------+
+| m300 |
+| m301 |
+| m302 |
+| m303 |
+| m304 |
+| s100 |
+| s101 |
+| s102 |
+| s103 |
+| s104 |
+| t200 |
+| t201 |
+| t202 |
+| t203 |
+| t204 |
++------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select m.name s.wrok from memb m
+    -> left outer join stnt s on m.mno=s.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.wrok from memb m
+left outer join stnt s on m.mno=s.mno' at line 1
+MariaDB [studydb]> select m.name s.work from memb m
+    -> left outer join stnt s on m.mno=s.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.work from memb m
+left outer join stnt s on m.mno=s.mno' at line 1
+MariaDB [studydb]> select m.name
+    -> from memb m
+    -> left outer join stnt s on m.mno=s.mno;
++------+
+| name |
++------+
+| m300 |
+| m301 |
+| m302 |
+| m303 |
+| m304 |
+| s100 |
+| s101 |
+| s102 |
+| s103 |
+| s104 |
+| t200 |
+| t201 |
+| t202 |
+| t203 |
+| t204 |
++------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select *
+    -> from memb m
+    -> left outer join stnt s on m.mno=s.mno;
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+------+------+--------+----------+
+| mno | name | tel      | email | pwd                                                      | phot | ano  | det_addr | finl_edu | maj  | sch_nm | mno  | work | acc_no | bank     |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+------+------+--------+----------+
+| 100 | s100 | 111-1111 | s100@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |  100 | N    | 1000   | 비트은행 |
+| 101 | s101 | 111-1111 | s101@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |  101 | Y    | 1001   | 비트은행 |
+| 102 | s102 | 111-1111 | s102@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |  102 | N    | 1002   | 캠프은행 |
+| 103 | s103 | 111-1111 | s103@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |  103 | Y    | 1003   | 우리은행 |
+| 104 | s104 | 111-1111 | s104@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |  104 | N    | 1004   | 국민은행 |
+| 200 | t200 | 111-1111 | t200@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 201 | t201 | 111-1111 | t201@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 202 | t202 | 111-1111 | t202@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 203 | t203 | 111-1111 | t203@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 204 | t204 | 111-1111 | t204@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 300 | m300 | 111-1111 | m300@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 301 | m301 | 111-1111 | m301@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 302 | m302 | 111-1111 | m302@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 303 | m303 | 111-1111 | m303@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
+| 304 | m304 | 111-1111 | m304@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   | NULL | NULL | NULL   | NULL     |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+------+------+--------+----------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select m.name, s.work
+    -> from memb m
+    -> left outer join stnt s on m.mno=s.mno;
++------+------+
+| name | work |
++------+------+
+| m300 | NULL |
+| m301 | NULL |
+| m302 | NULL |
+| m303 | NULL |
+| m304 | NULL |
+| s100 | N    |
+| s101 | Y    |
+| s102 | N    |
+| s103 | Y    |
+| s104 | N    |
+| t200 | NULL |
+| t201 | NULL |
+| t202 | NULL |
+| t203 | NULL |
+| t204 | NULL |
++------+------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select lano, rdt, m.name, s.work from lect_appl;
+ERROR 1054 (42S22): Unknown column 'm.name' in 'field list'
+MariaDB [studydb]> left outer join (
+    -> select m.name, s.work
+    -> from memb m
+    -> left outer join stnt s on m.mno=s.mno);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'left outer join (
+select m.name, s.work
+from memb m
+left outer join stnt s on...' at line 1
+MariaDB [studydb]> select la.lano, la.rdt
+    -> from lect_appl la
+    -> join left l on la.lno=l.lno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'left l on la.lno=l.lno' at line 3
+MariaDB [studydb]> select la.lano, la.rdt
+    -> from lect_appl la
+    -> join lect l on la.lno=l.lno;
++------+---------------------+
+| lano | rdt                 |
++------+---------------------+
+|    1 | 2017-11-02 00:00:00 |
+|    2 | 2017-11-03 00:00:00 |
+|    3 | 2017-11-04 00:00:00 |
+|    4 | 2017-12-06 00:00:00 |
+|    5 | 2017-12-07 00:00:00 |
+|    6 | 2017-10-08 00:00:00 |
+|    7 | 2017-11-09 00:00:00 |
+|    8 | 2017-11-11 00:00:00 |
++------+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from lect_appl;
++------+-----+-----+---------------------+------+
+| lano | lno | mno | rdt                 | stat |
++------+-----+-----+---------------------+------+
+|    1 |   1 | 100 | 2017-11-02 00:00:00 | NULL |
+|    2 |   1 | 101 | 2017-11-03 00:00:00 | NULL |
+|    3 |   1 | 102 | 2017-11-04 00:00:00 | NULL |
+|    4 |   2 | 104 | 2017-12-06 00:00:00 | NULL |
+|    5 |   2 | 100 | 2017-12-07 00:00:00 | NULL |
+|    6 |   3 | 101 | 2017-10-08 00:00:00 | NULL |
+|    7 |   3 | 102 | 2017-11-09 00:00:00 | NULL |
+|    8 |   3 | 104 | 2017-11-11 00:00:00 | NULL |
++------+-----+-----+---------------------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from stnt;
++-----+------+--------+----------+
+| mno | work | acc_no | bank     |
++-----+------+--------+----------+
+| 100 | N    | 1000   | 비트은행 |
+| 101 | Y    | 1001   | 비트은행 |
+| 102 | N    | 1002   | 캠프은행 |
+| 103 | Y    | 1003   | 우리은행 |
+| 104 | N    | 1004   | 국민은행 |
++-----+------+--------+----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   la.rdt
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno;
++------+---------------------+
+| lano | rdt                 |
++------+---------------------+
+|    1 | 2017-11-02 00:00:00 |
+|    2 | 2017-11-03 00:00:00 |
+|    3 | 2017-11-04 00:00:00 |
+|    4 | 2017-12-06 00:00:00 |
+|    5 | 2017-12-07 00:00:00 |
+|    6 | 2017-10-08 00:00:00 |
+|    7 | 2017-11-09 00:00:00 |
+|    8 | 2017-11-11 00:00:00 |
++------+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->
+    ->   s.work,
+    ->   la.rdt
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno;
++------+------------------+------+---------------------+
+| lano | titl             | work | rdt                 |
++------+------------------+------+---------------------+
+|    1 | 자바프로그래밍   | N    | 2017-11-02 00:00:00 |
+|    2 | 자바프로그래밍   | Y    | 2017-11-03 00:00:00 |
+|    3 | 자바프로그래밍   | N    | 2017-11-04 00:00:00 |
+|    4 | IoT프로그래밍    | N    | 2017-12-06 00:00:00 |
+|    5 | IoT프로그래밍    | N    | 2017-12-07 00:00:00 |
+|    6 | 윈도우프로그래밍 | Y    | 2017-10-08 00:00:00 |
+|    7 | 윈도우프로그래밍 | N    | 2017-11-09 00:00:00 |
+|    8 | 윈도우프로그래밍 | N    | 2017-11-11 00:00:00 |
++------+------------------+------+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno;
++------+------------------+------+------+---------------------+
+| lano | titl             | name | work | rdt                 |
++------+------------------+------+------+---------------------+
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 00:00:00 |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 00:00:00 |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 00:00:00 |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 00:00:00 |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 00:00:00 |
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 00:00:00 |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 00:00:00 |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 00:00:00 |
++------+------------------+------+------+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt,
+    ->   l.rno
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno;
++------+----------------+------+------+---------------------+------+
+| lano | titl           | name | work | rdt                 | rno  |
++------+----------------+------+------+---------------------+------+
+|    1 | 자바프로그래밍 | s100 | N    | 2017-11-02 00:00:00 |    1 |
+|    5 | IoT프로그래밍  | s100 | N    | 2017-12-07 00:00:00 |    4 |
+|    2 | 자바프로그래밍 | s101 | Y    | 2017-11-03 00:00:00 |    1 |
+|    3 | 자바프로그래밍 | s102 | N    | 2017-11-04 00:00:00 |    1 |
+|    4 | IoT프로그래밍  | s104 | N    | 2017-12-06 00:00:00 |    4 |
++------+----------------+------+------+---------------------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from mgr;
++-----+----------+------+------+
+| mno | dept     | posi | fax  |
++-----+----------+------+------+
+| 200 | 교육     | 과장 | NULL |
+| 300 | 시설관리 | 주임 | NULL |
+| 301 | 시설관리 | 대리 | NULL |
+| 302 | 회계     | 과장 | NULL |
+| 303 | 교육     | 주임 | NULL |
+| 304 | 교육     | 과장 | NULL |
++-----+----------+------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from memb;
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| mno | name | tel      | email | pwd                                                      | phot | ano  | det_addr | finl_edu | maj  | sch_nm |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| 100 | s100 | 111-1111 | s100@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 101 | s101 | 111-1111 | s101@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 102 | s102 | 111-1111 | s102@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 103 | s103 | 111-1111 | s103@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 104 | s104 | 111-1111 | s104@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 200 | t200 | 111-1111 | t200@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 201 | t201 | 111-1111 | t201@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 202 | t202 | 111-1111 | t202@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 203 | t203 | 111-1111 | t203@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 204 | t204 | 111-1111 | t204@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 300 | m300 | 111-1111 | m300@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 301 | m301 | 111-1111 | m301@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 302 | m302 | 111-1111 | m302@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 303 | m303 | 111-1111 | m303@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 304 | m304 | 111-1111 | m304@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt,
+    ->   l.rno,
+    ->   g.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   join mgr g on m.mno=g.mno;
+ERROR 1054 (42S22): Unknown column 'g.name' in 'field list'
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt,
+    ->   l.rno,
+    ->   m.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   join mgr g on m.mno=g.mno;
+Empty set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt,
+    ->   l.rno
+    ->   -- m.name,
+    ->   -- g.posi
+    -> from lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   join mgr g on m.mno=g.mno;
+Empty set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt,
+    ->   l.rno
+    ->   -- m.name,
+    ->   -- g.posi
+    -> from lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   left outer join mgr g on m.mno=g.mno;
++------+----------------+------+------+---------------------+------+
+| lano | titl           | name | work | rdt                 | rno  |
++------+----------------+------+------+---------------------+------+
+|    1 | 자바프로그래밍 | s100 | N    | 2017-11-02 00:00:00 |    1 |
+|    5 | IoT프로그래밍  | s100 | N    | 2017-12-07 00:00:00 |    4 |
+|    2 | 자바프로그래밍 | s101 | Y    | 2017-11-03 00:00:00 |    1 |
+|    3 | 자바프로그래밍 | s102 | N    | 2017-11-04 00:00:00 |    1 |
+|    4 | IoT프로그래밍  | s104 | N    | 2017-12-06 00:00:00 |    4 |
++------+----------------+------+------+---------------------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   la.rdt,
+    ->   l.rno
+    ->   m.name,
+    ->   g.posi
+    -> from lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   left outer join mgr g on m.mno=g.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.name,
+  g.posi
+from lect_appl la
+  join lect l on la.lno=l.lno
+  join stnt s...' at line 8
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt),
+    ->   l.rno,
+    ->   -- m.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   left outer join mgr g on m.mno=g.mno;
++------+----------------+------+------+--------------+------+------+
+| lano | titl           | name | work | date(la.rdt) | rno  | posi |
++------+----------------+------+------+--------------+------+------+
+|    1 | 자바프로그래밍 | s100 | N    | 2017-11-02   |    1 | NULL |
+|    2 | 자바프로그래밍 | s101 | Y    | 2017-11-03   |    1 | NULL |
+|    3 | 자바프로그래밍 | s102 | N    | 2017-11-04   |    1 | NULL |
+|    5 | IoT프로그래밍  | s100 | N    | 2017-12-07   |    4 | NULL |
+|    4 | IoT프로그래밍  | s104 | N    | 2017-12-06   |    4 | NULL |
++------+----------------+------+------+--------------+------+------+
+5 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as date,
+    ->   l.rno,
+    ->   -- m.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   left outer join mgr g on m.mno=g.mno;
++------+----------------+------+------+------------+------+------+
+| lano | titl           | name | work | date       | rno  | posi |
++------+----------------+------+------+------------+------+------+
+|    1 | 자바프로그래밍 | s100 | N    | 2017-11-02 |    1 | NULL |
+|    2 | 자바프로그래밍 | s101 | Y    | 2017-11-03 |    1 | NULL |
+|    3 | 자바프로그래밍 | s102 | N    | 2017-11-04 |    1 | NULL |
+|    5 | IoT프로그래밍  | s100 | N    | 2017-12-07 |    4 | NULL |
+|    4 | IoT프로그래밍  | s104 | N    | 2017-12-06 |    4 | NULL |
++------+----------------+------+------+------------+------+------+
+5 rows in set (0.001 sec)
+
+MariaDB [studydb]> select * from mgr;
++-----+----------+------+------+
+| mno | dept     | posi | fax  |
++-----+----------+------+------+
+| 200 | 교육     | 과장 | NULL |
+| 300 | 시설관리 | 주임 | NULL |
+| 301 | 시설관리 | 대리 | NULL |
+| 302 | 회계     | 과장 | NULL |
+| 303 | 교육     | 주임 | NULL |
+| 304 | 교육     | 과장 | NULL |
++-----+----------+------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   l.rno,
+    ->   -- m.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   left outer join mgr g on l.mno=g.mno;
++------+----------------+------+------+------------+------+------+
+| lano | titl           | name | work | reg_dt     | rno  | posi |
++------+----------------+------+------+------------+------+------+
+|    1 | 자바프로그래밍 | s100 | N    | 2017-11-02 |    1 | 주임 |
+|    5 | IoT프로그래밍  | s100 | N    | 2017-12-07 |    4 | NULL |
+|    2 | 자바프로그래밍 | s101 | Y    | 2017-11-03 |    1 | 주임 |
+|    3 | 자바프로그래밍 | s102 | N    | 2017-11-04 |    1 | 주임 |
+|    4 | IoT프로그래밍  | s104 | N    | 2017-12-06 |    4 | NULL |
++------+----------------+------+------+------------+------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   l.rno,
+    ->   m.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   join room r on l.rno=r.rno
+    ->   left outer join mgr g on l.mno=g.mno;
++------+----------------+------+------+------------+------+------+------+
+| lano | titl           | name | work | reg_dt     | rno  | name | posi |
++------+----------------+------+------+------------+------+------+------+
+|    1 | 자바프로그래밍 | s100 | N    | 2017-11-02 |    1 | s100 | 주임 |
+|    5 | IoT프로그래밍  | s100 | N    | 2017-12-07 |    4 | s100 | NULL |
+|    2 | 자바프로그래밍 | s101 | Y    | 2017-11-03 |    1 | s101 | 주임 |
+|    3 | 자바프로그래밍 | s102 | N    | 2017-11-04 |    1 | s102 | 주임 |
+|    4 | IoT프로그래밍  | s104 | N    | 2017-12-06 |    4 | s104 | NULL |
++------+----------------+------+------+------------+------+------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   l.rno,
+    ->   m.name,
+    ->   g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join mgr g on l.mno=g.mno;
++------+------------------+------+------+------------+------+------+------+
+| lano | titl             | name | work | reg_dt     | rno  | name | posi |
++------+------------------+------+------+------------+------+------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 |    1 | s100 | 주임 |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 |    4 | s100 | NULL |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 |    1 | s101 | 주임 |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL | s101 | 과장 |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 |    1 | s102 | 주임 |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL | s102 | 과장 |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 |    4 | s104 | NULL |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL | s104 | 과장 |
++------+------------------+------+------+------------+------+------+------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name,
+    ->   m2.name,
+    ->   -- g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   join memb m2 on l.mno=m2.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from
+  lect_appl la
+  join lect l on la.lno=l.lno
+  join stnt s on la.mno=s.m...' at line 10
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name,
+    ->   m2.name,
+    ->   -- g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join memb m2 on l.mno=m2.mno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from
+  lect_appl la
+  join lect l on la.lno=l.lno
+  join stnt s on la.mno=s.m...' at line 10
+MariaDB [studydb]> order by
+    ->   la.lano asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  la.lano asc' at line 1
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name,
+    ->   m2.name
+    ->   -- g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join memb m2 on l.mno=m2.mno;
++------+------------------+------+------+------------+------+------+
+| lano | titl             | name | work | reg_dt     | name | name |
++------+------------------+------+------+------------+------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 | 501  | m303 |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 | 301  | NULL |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 | 501  | m303 |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL | m304 |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 | 501  | m303 |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL | m304 |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 | 301  | NULL |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL | m304 |
++------+------------------+------+------+------------+------+------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> order by
+    ->   la.lano asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  la.lano asc' at line 1
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name as room,
+    ->   m2.name
+    ->   -- g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join memb m2 on l.mno=m2.mno;
++------+------------------+------+------+------------+------+------+
+| lano | titl             | name | work | reg_dt     | room | name |
++------+------------------+------+------+------------+------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 | 501  | m303 |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 | 301  | NULL |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 | 501  | m303 |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL | m304 |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 | 501  | m303 |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL | m304 |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 | 301  | NULL |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL | m304 |
++------+------------------+------+------+------------+------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> order by
+    ->   la.lano asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  la.lano asc' at line 1
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name as room,
+    ->   m2.name as mgr_name
+    ->   -- g.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join memb m2 on l.mno=m2.mno;
++------+------------------+------+------+------------+------+----------+
+| lano | titl             | name | work | reg_dt     | room | mgr_name |
++------+------------------+------+------+------------+------+----------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 | 501  | m303     |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 | 301  | NULL     |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 | 501  | m303     |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL | m304     |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 | 501  | m303     |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL | m304     |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 | 301  | NULL     |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL | m304     |
++------+------------------+------+------+------------+------+----------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> order by
+    ->   la.lano asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  la.lano asc' at line 1
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name as room,
+    ->   m2.name as mgr_name,
+    ->   mr.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join memb m2 on l.mno=m2.mno
+    ->   left outer join mgr mr on l.mno=mr.mno;
++------+------------------+------+------+------------+------+----------+------+
+| lano | titl             | name | work | reg_dt     | room | mgr_name | posi |
++------+------------------+------+------+------------+------+----------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 | 501  | m303     | 주임 |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 | 301  | NULL     | NULL |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 | 501  | m303     | 주임 |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL | m304     | 과장 |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 | 501  | m303     | 주임 |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL | m304     | 과장 |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 | 301  | NULL     | NULL |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL | m304     | 과장 |
++------+------------------+------+------+------------+------+----------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> order by
+    ->   la.lano asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  la.lano asc' at line 1
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name as room,
+    ->   m2.name as mgr_name,
+    ->   mr.posi
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join stnt s on la.mno=s.mno
+    ->   join memb m on la.mno=m.mno
+    ->   left outer join room r on l.rno=r.rno
+    ->   left outer join memb m2 on l.mno=m2.mno
+    ->   left outer join mgr mr on l.mno=mr.mno
+    -> order by
+    ->   la.lano asc;
++------+------------------+------+------+------------+------+----------+------+
+| lano | titl             | name | work | reg_dt     | room | mgr_name | posi |
++------+------------------+------+------+------------+------+----------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 | 501  | m303     | 주임 |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 | 501  | m303     | 주임 |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 | 501  | m303     | 주임 |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 | 301  | NULL     | NULL |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 | 301  | NULL     | NULL |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL | m304     | 과장 |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL | m304     | 과장 |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL | m304     | 과장 |
++------+------------------+------+------+------------+------+----------+------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> select * from lect_appl;
++------+-----+-----+---------------------+------+
+| lano | lno | mno | rdt                 | stat |
++------+-----+-----+---------------------+------+
+|    1 |   1 | 100 | 2017-11-02 00:00:00 | NULL |
+|    2 |   1 | 101 | 2017-11-03 00:00:00 | NULL |
+|    3 |   1 | 102 | 2017-11-04 00:00:00 | NULL |
+|    4 |   2 | 104 | 2017-12-06 00:00:00 | NULL |
+|    5 |   2 | 100 | 2017-12-07 00:00:00 | NULL |
+|    6 |   3 | 101 | 2017-10-08 00:00:00 | NULL |
+|    7 |   3 | 102 | 2017-11-09 00:00:00 | NULL |
+|    8 |   3 | 104 | 2017-11-11 00:00:00 | NULL |
++------+-----+-----+---------------------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from lect;
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+| lno | titl             | sdt        | edt        | qnty | pric | nat_sup | sup_typ  | dsct | rno  | mno  |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+|   1 | 자바프로그래밍   | 2018-01-01 | 2018-05-30 |   30 |  100 | Y       | 미취업자 | ok   |    1 |  303 |
+|   2 | IoT프로그래밍    | 2018-03-01 | 2018-07-30 |   30 |  200 | Y       | 미취업자 | ok   |    4 | NULL |
+|   3 | 윈도우프로그래밍 | 2018-05-01 | 2018-10-30 |   30 |  300 | Y       | 노동부   | ok   | NULL |  304 |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from stnt;
++-----+------+--------+----------+
+| mno | work | acc_no | bank     |
++-----+------+--------+----------+
+| 100 | N    | 1000   | 비트은행 |
+| 101 | Y    | 1001   | 비트은행 |
+| 102 | N    | 1002   | 캠프은행 |
+| 103 | Y    | 1003   | 우리은행 |
+| 104 | N    | 1004   | 국민은행 |
++-----+------+--------+----------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from memb;
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| mno | name | tel      | email | pwd                                                      | phot | ano  | det_addr | finl_edu | maj  | sch_nm |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+| 100 | s100 | 111-1111 | s100@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 101 | s101 | 111-1111 | s101@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 102 | s102 | 111-1111 | s102@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 103 | s103 | 111-1111 | s103@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 104 | s104 | 111-1111 | s104@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 200 | t200 | 111-1111 | t200@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 201 | t201 | 111-1111 | t201@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 202 | t202 | 111-1111 | t202@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 203 | t203 | 111-1111 | t203@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 204 | t204 | 111-1111 | t204@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 300 | m300 | 111-1111 | m300@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 301 | m301 | 111-1111 | m301@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 302 | m302 | 111-1111 | m302@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 303 | m303 | 111-1111 | m303@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
+| 304 | m304 | 111-1111 | m304@ | 9cb7b5b974b6df070cb60bbeb134ea461541b92187d54372f4b144de | NULL | NULL | NULL     | NULL     | NULL | NULL   |
++-----+------+----------+-------+----------------------------------------------------------+------+------+----------+----------+------+--------+
+15 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join memb m on la.mno=m.mno;
++------+------------------+------+
+| lano | titl             | name |
++------+------------------+------+
+|    5 | IoT프로그래밍    | s100 |
+|    4 | IoT프로그래밍    | s104 |
+|    6 | 윈도우프로그래밍 | s101 |
+|    7 | 윈도우프로그래밍 | s102 |
+|    8 | 윈도우프로그래밍 | s104 |
+|    1 | 자바프로그래밍   | s100 |
+|    2 | 자바프로그래밍   | s101 |
+|    3 | 자바프로그래밍   | s102 |
++------+------------------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> order by
+    ->   la.lano asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by
+  la.lano asc' at line 1
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join memb m on la.mno=m.mno
+    ->   join stnt s on la.mno=s.mno
+    -> order by
+    ->   la.lano asc;
++------+------------------+------+------+
+| lano | titl             | name | work |
++------+------------------+------+------+
+|    1 | 자바프로그래밍   | s100 | N    |
+|    2 | 자바프로그래밍   | s101 | Y    |
+|    3 | 자바프로그래밍   | s102 | N    |
+|    4 | IoT프로그래밍    | s104 | N    |
+|    5 | IoT프로그래밍    | s100 | N    |
+|    6 | 윈도우프로그래밍 | s101 | Y    |
+|    7 | 윈도우프로그래밍 | s102 | N    |
+|    8 | 윈도우프로그래밍 | s104 | N    |
++------+------------------+------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from lect;
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+| lno | titl             | sdt        | edt        | qnty | pric | nat_sup | sup_typ  | dsct | rno  | mno  |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+|   1 | 자바프로그래밍   | 2018-01-01 | 2018-05-30 |   30 |  100 | Y       | 미취업자 | ok   |    1 |  303 |
+|   2 | IoT프로그래밍    | 2018-03-01 | 2018-07-30 |   30 |  200 | Y       | 미취업자 | ok   |    4 | NULL |
+|   3 | 윈도우프로그래밍 | 2018-05-01 | 2018-10-30 |   30 |  300 | Y       | 노동부   | ok   | NULL |  304 |
++-----+------------------+------------+------------+------+------+---------+----------+------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from room;
++-----+------+------+------+
+| rno | loc  | name | qnty |
++-----+------+------+------+
+|   1 | 강남 | 501  |   30 |
+|   2 | 강남 | 502  |   30 |
+|   3 | 강남 | 503  |   30 |
+|   4 | 종로 | 301  |   30 |
+|   5 | 종로 | 302  |   30 |
+|   6 | 종로 | 303  |   30 |
+|   7 | 서초 | 301  |   30 |
+|   8 | 서초 | 302  |   30 |
+|   9 | 서초 | 501  |   30 |
+|  10 | 서초 | 601  |   30 |
++-----+------+------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   r.name as room
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join memb m on la.mno=m.mno
+    ->   join stnt s on la.mno=s.mno
+    ->   left outer join room r on l.rno=r.rno
+    -> order by
+    ->   la.lano asc;
++------+------------------+------+------+------+
+| lano | titl             | name | work | room |
++------+------------------+------+------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 501  |
+|    2 | 자바프로그래밍   | s101 | Y    | 501  |
+|    3 | 자바프로그래밍   | s102 | N    | 501  |
+|    4 | IoT프로그래밍    | s104 | N    | 301  |
+|    5 | IoT프로그래밍    | s100 | N    | 301  |
+|    6 | 윈도우프로그래밍 | s101 | Y    | NULL |
+|    7 | 윈도우프로그래밍 | s102 | N    | NULL |
+|    8 | 윈도우프로그래밍 | s104 | N    | NULL |
++------+------------------+------+------+------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   l.titl,
+    ->   m.name,
+    ->   s.work,
+    ->   date(la.rdt) as reg_dt,
+    ->   r.name as room
+    -> from
+    ->   lect_appl la
+    ->   join lect l on la.lno=l.lno
+    ->   join memb m on la.mno=m.mno
+    ->   join stnt s on la.mno=s.mno
+    ->   left outer join room r on l.rno=r.rno
+    -> order by
+    ->   la.lano asc;
++------+------------------+------+------+------------+------+
+| lano | titl             | name | work | reg_dt     | room |
++------+------------------+------+------+------------+------+
+|    1 | 자바프로그래밍   | s100 | N    | 2017-11-02 | 501  |
+|    2 | 자바프로그래밍   | s101 | Y    | 2017-11-03 | 501  |
+|    3 | 자바프로그래밍   | s102 | N    | 2017-11-04 | 501  |
+|    4 | IoT프로그래밍    | s104 | N    | 2017-12-06 | 301  |
+|    5 | IoT프로그래밍    | s100 | N    | 2017-12-07 | 301  |
+|    6 | 윈도우프로그래밍 | s101 | Y    | 2017-10-08 | NULL |
+|    7 | 윈도우프로그래밍 | s102 | N    | 2017-11-09 | NULL |
+|    8 | 윈도우프로그래밍 | s104 | N    | 2017-11-11 | NULL |
++------+------------------+------+------+------------+------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     la.lno,
+    ->     la.mno,
+    ->     la.rdt
+    -> from lect_appl la;
++------+-----+-----+---------------------+
+| lano | lno | mno | rdt                 |
++------+-----+-----+---------------------+
+|    1 |   1 | 100 | 2017-11-02 00:00:00 |
+|    2 |   1 | 101 | 2017-11-03 00:00:00 |
+|    3 |   1 | 102 | 2017-11-04 00:00:00 |
+|    4 |   2 | 104 | 2017-12-06 00:00:00 |
+|    5 |   2 | 100 | 2017-12-07 00:00:00 |
+|    6 |   3 | 101 | 2017-10-08 00:00:00 |
+|    7 |   3 | 102 | 2017-11-09 00:00:00 |
+|    8 |   3 | 104 | 2017-11-11 00:00:00 |
++------+-----+-----+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   la.lano,
+    ->   la.lno,
+    ->   la.mno,
+    ->   date_format(la.rdt, '%m/%d/%Y') reg_dt
+    -> from lect_appl la;
++------+-----+-----+------------+
+| lano | lno | mno | reg_dt     |
++------+-----+-----+------------+
+|    1 |   1 | 100 | 11/02/2017 |
+|    2 |   1 | 101 | 11/03/2017 |
+|    3 |   1 | 102 | 11/04/2017 |
+|    4 |   2 | 104 | 12/06/2017 |
+|    5 |   2 | 100 | 12/07/2017 |
+|    6 |   3 | 101 | 10/08/2017 |
+|    7 |   3 | 102 | 11/09/2017 |
+|    8 |   3 | 104 | 11/11/2017 |
++------+-----+-----+------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     (select titl from lect where lno=la.lno) as lect_title,
+    ->     la.mno,
+    ->     la.rdt
+    -> from lect_appl la;
++------+------------------+-----+---------------------+
+| lano | lect_title       | mno | rdt                 |
++------+------------------+-----+---------------------+
+|    1 | 자바프로그래밍   | 100 | 2017-11-02 00:00:00 |
+|    2 | 자바프로그래밍   | 101 | 2017-11-03 00:00:00 |
+|    3 | 자바프로그래밍   | 102 | 2017-11-04 00:00:00 |
+|    4 | IoT프로그래밍    | 104 | 2017-12-06 00:00:00 |
+|    5 | IoT프로그래밍    | 100 | 2017-12-07 00:00:00 |
+|    6 | 윈도우프로그래밍 | 101 | 2017-10-08 00:00:00 |
+|    7 | 윈도우프로그래밍 | 102 | 2017-11-09 00:00:00 |
+|    8 | 윈도우프로그래밍 | 104 | 2017-11-11 00:00:00 |
++------+------------------+-----+---------------------+
+8 rows in set (0.005 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     (select titl from lect where lno=la.lno) as lect_title,
+    ->     (select name from memb where mno=la.mno) as stud_name,
+    ->     la.rdt
+    -> from lect_appl la;
++------+------------------+-----------+---------------------+
+| lano | lect_title       | stud_name | rdt                 |
++------+------------------+-----------+---------------------+
+|    1 | 자바프로그래밍   | s100      | 2017-11-02 00:00:00 |
+|    2 | 자바프로그래밍   | s101      | 2017-11-03 00:00:00 |
+|    3 | 자바프로그래밍   | s102      | 2017-11-04 00:00:00 |
+|    4 | IoT프로그래밍    | s104      | 2017-12-06 00:00:00 |
+|    5 | IoT프로그래밍    | s100      | 2017-12-07 00:00:00 |
+|    6 | 윈도우프로그래밍 | s101      | 2017-10-08 00:00:00 |
+|    7 | 윈도우프로그래밍 | s102      | 2017-11-09 00:00:00 |
+|    8 | 윈도우프로그래밍 | s104      | 2017-11-11 00:00:00 |
++------+------------------+-----------+---------------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     l.lno,
+    ->     l.titl,
+    ->     l.rno,
+    ->     l.mno
+    -> from lect l;
++-----+------------------+------+------+
+| lno | titl             | rno  | mno  |
++-----+------------------+------+------+
+|   1 | 자바프로그래밍   |    1 |  303 |
+|   2 | IoT프로그래밍    |    4 | NULL |
+|   3 | 윈도우프로그래밍 | NULL |  304 |
++-----+------------------+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     l.lno,
+    ->     l.titl,
+    ->     (select name from room where rno=l.rno) as room_name,
+    ->     (select name from memb where mno=l.mno) as manager_name,
+    ->     (select posi from mgr where mno=l.mno) as manager_posi
+    -> from lect l;
++-----+------------------+-----------+--------------+--------------+
+| lno | titl             | room_name | manager_name | manager_posi |
++-----+------------------+-----------+--------------+--------------+
+|   1 | 자바프로그래밍   | 501       | m303         | 주임         |
+|   2 | IoT프로그래밍    | 301       | NULL         | NULL         |
+|   3 | 윈도우프로그래밍 | NULL      | m304         | 과장         |
++-----+------------------+-----------+--------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->     la2.lano,
+    ->     la2.rdt,
+    ->     la2.sname,
+    ->     la2.work,
+    ->     l2.titl,
+    ->     l2.rname,
+    ->     l2.mname,
+    ->     l2.posi
+    -> from (
+    ->         select
+    ->             la.lano,
+    ->             la.lno,
+    ->             la.rdt,
+    ->             m.name sname,
+    ->             s.work
+    ->         from lect_appl la
+    ->             inner join memb m on la.mno=m.mno
+    ->             inner join stnt s on la.mno=s.mno) la2
+    ->      inner join (
+    ->         select
+    ->             l.lno,
+    ->             l.titl,
+    ->             r.name rname,
+    ->             m.name mname,
+    ->             mr.posi
+    ->         from lect l
+    ->             left outer join room r on l.rno=r.rno
+    ->             left outer join memb m on l.mno=m.mno
+    ->             left outer join mgr mr on l.mno=mr.mno
+    ->      ) l2 on la2.lno=l2.lno;
++------+---------------------+-------+------+------------------+-------+-------+------+
+| lano | rdt                 | sname | work | titl             | rname | mname | posi |
++------+---------------------+-------+------+------------------+-------+-------+------+
+|    1 | 2017-11-02 00:00:00 | s100  | N    | 자바프로그래밍   | 501   | m303  | 주임 |
+|    5 | 2017-12-07 00:00:00 | s100  | N    | IoT프로그래밍    | 301   | NULL  | NULL |
+|    2 | 2017-11-03 00:00:00 | s101  | Y    | 자바프로그래밍   | 501   | m303  | 주임 |
+|    6 | 2017-10-08 00:00:00 | s101  | Y    | 윈도우프로그래밍 | NULL  | m304  | 과장 |
+|    3 | 2017-11-04 00:00:00 | s102  | N    | 자바프로그래밍   | 501   | m303  | 주임 |
+|    7 | 2017-11-09 00:00:00 | s102  | N    | 윈도우프로그래밍 | NULL  | m304  | 과장 |
+|    4 | 2017-12-06 00:00:00 | s104  | N    | IoT프로그래밍    | 301   | NULL  | NULL |
+|    8 | 2017-11-11 00:00:00 | s104  | N    | 윈도우프로그래밍 | NULL  | m304  | 과장 |
++------+---------------------+-------+------+------------------+-------+-------+------+
+8 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->             la.lano,
+    ->             la.lno,
+    ->             la.rdt,
+    ->             m.name sname,
+    ->             s.work
+    ->         from lect_appl la
+    ->             inner join memb m on la.mno=m.mno
+    ->             inner join stnt s on la.mno=s.mno) la2
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') la2' at line 9
+MariaDB [studydb]> select
+    ->             la.lano,
+    ->             la.lno,
+    ->             la.rdt,
+    ->             m.name sname,
+    ->             s.work
+    ->         from lect_appl la
+    ->             inner join memb m on la.mno=m.mno
+    ->             inner join stnt s on la.mno=s.mno) la2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') la2' at line 9
+MariaDB [studydb]> select
+    ->             la.lano,
+    ->             la.lno,
+    ->             la.rdt,
+    ->             m.name sname,
+    ->             s.work
+    ->         from lect_appl la
+    ->             inner join memb m on la.mno=m.mno
+    ->             inner join stnt s on la.mno=s.mno;
++------+-----+---------------------+-------+------+
+| lano | lno | rdt                 | sname | work |
++------+-----+---------------------+-------+------+
+|    1 |   1 | 2017-11-02 00:00:00 | s100  | N    |
+|    2 |   1 | 2017-11-03 00:00:00 | s101  | Y    |
+|    3 |   1 | 2017-11-04 00:00:00 | s102  | N    |
+|    4 |   2 | 2017-12-06 00:00:00 | s104  | N    |
+|    5 |   2 | 2017-12-07 00:00:00 | s100  | N    |
+|    6 |   3 | 2017-10-08 00:00:00 | s101  | Y    |
+|    7 |   3 | 2017-11-09 00:00:00 | s102  | N    |
+|    8 |   3 | 2017-11-11 00:00:00 | s104  | N    |
++------+-----+---------------------+-------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> create view lect2 as
+    -> select
+    ->     l.lno,
+    ->     l.titl,
+    ->     (select name from room where rno=l.rno) as room_name,
+    ->     l.mno as manager_no,
+    ->     (select name from memb where mno=l.mno) as manager_name,
+    ->     (select posi from mgr where mno=l.mno) as manager_posi
+    -> from lect l;
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [studydb]> select * from lect2;
++-----+------------------+-----------+------------+--------------+--------------+
+| lno | titl             | room_name | manager_no | manager_name | manager_posi |
++-----+------------------+-----------+------------+--------------+--------------+
+|   1 | 자바프로그래밍   | 501       |        303 | m303         | 주임         |
+|   2 | IoT프로그래밍    | 301       |       NULL | NULL         | NULL         |
+|   3 | 윈도우프로그래밍 | NULL      |        304 | m304         | 과장         |
++-----+------------------+-----------+------------+--------------+--------------+
+3 rows in set (0.010 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     (select name from memb where mno=la.mno) as stud_name,
+    ->     lec.titl,
+    ->     lec.room_name,
+    ->     lec.manager_name,
+    ->     lec.manager_posi
+    -> from lect_appl la
+    ->     join lect2 lec on la.lno=lec.lno;
++------+-----------+------------------+-----------+--------------+--------------+
+| lano | stud_name | titl             | room_name | manager_name | manager_posi |
++------+-----------+------------------+-----------+--------------+--------------+
+|    1 | s100      | 자바프로그래밍   | 501       | m303         | 주임         |
+|    2 | s101      | 자바프로그래밍   | 501       | m303         | 주임         |
+|    3 | s102      | 자바프로그래밍   | 501       | m303         | 주임         |
+|    5 | s100      | IoT프로그래밍    | 301       | NULL         | NULL         |
+|    4 | s104      | IoT프로그래밍    | 301       | NULL         | NULL         |
+|    6 | s101      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
+|    7 | s102      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
+|    8 | s104      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
++------+-----------+------------------+-----------+--------------+--------------+
+8 rows in set (0.000 sec)
+
+MariaDB [studydb]> select mno from mgr where posi in ('과장', '주임')
+    -> ;
++-----+
+| mno |
++-----+
+| 200 |
+| 300 |
+| 302 |
+| 303 |
+| 304 |
++-----+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     /* (select titl from lect where lno=la.lno) as lect_title, */
+    ->     (select name from memb where mno=la.mno) as stud_name,
+    ->     lec.titl,
+    ->     lec.room_name,
+    ->     /* lec.manager_no, */
+    ->     lec.manager_name,
+    ->     lec.manager_posi
+    -> from lect_appl la
+    ->     join lect2 as lec on la.lno=lec.lno
+    -> where
+    ->     lec.manager_no in (select mno from mgr where posi in ('과장', '주임'));
++------+-----------+------------------+-----------+--------------+--------------+
+| lano | stud_name | titl             | room_name | manager_name | manager_posi |
++------+-----------+------------------+-----------+--------------+--------------+
+|    1 | s100      | 자바프로그래밍   | 501       | m303         | 주임         |
+|    2 | s101      | 자바프로그래밍   | 501       | m303         | 주임         |
+|    3 | s102      | 자바프로그래밍   | 501       | m303         | 주임         |
+|    6 | s101      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
+|    7 | s102      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
+|    8 | s104      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
++------+-----------+------------------+-----------+--------------+--------------+
+6 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     /* (select titl from lect where lno=la.lno) as lect_title, */
+    ->     (select name from memb where mno=la.mno) as stud_name,
+    ->     lec.titl,
+    ->     lec.room_name,
+    ->     /* lec.manager_no, */
+    ->     lec.manager_name,
+    ->     lec.manager_posi
+    -> from lect_appl la
+    ->     join lect2 as lec on la.lno=lec.lno
+    -> where
+    ->     lec.manager_no in (select mno from mgr where posi in ('과장'));
++------+-----------+------------------+-----------+--------------+--------------+
+| lano | stud_name | titl             | room_name | manager_name | manager_posi |
++------+-----------+------------------+-----------+--------------+--------------+
+|    6 | s101      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
+|    7 | s102      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
+|    8 | s104      | 윈도우프로그래밍 | NULL      | m304         | 과장         |
++------+-----------+------------------+-----------+--------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->     la.lano,
+    ->     /* (select titl from lect where lno=la.lno) as lect_title, */
+    ->     (select name from memb where mno=la.mno) as stud_name,
+    ->     lec.titl,
+    ->     lec.room_name,
+    ->     /* lec.manager_no, */
+    ->     lec.manager_name,
+    ->     lec.manager_posi
+    -> from lect_appl la
+    ->     join lect2 as lec on la.lno=lec.lno
+    -> where
+    ->     lec.manager_no in (select mno from mgr where posi in ('주임'));
++------+-----------+----------------+-----------+--------------+--------------+
+| lano | stud_name | titl           | room_name | manager_name | manager_posi |
++------+-----------+----------------+-----------+--------------+--------------+
+|    1 | s100      | 자바프로그래밍 | 501       | m303         | 주임         |
+|    2 | s101      | 자바프로그래밍 | 501       | m303         | 주임         |
+|    3 | s102      | 자바프로그래밍 | 501       | m303         | 주임         |
++------+-----------+----------------+-----------+--------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [studydb]> select rno from lect where lno=la.lno;
+ERROR 1054 (42S22): Unknown column 'la.lno' in 'where clause'
+MariaDB [studydb]> select
+    ->     r.rno,
+    ->     r.loc,
+    ->     r.name
+    -> from
+    ->     room r;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   1 | 강남 | 501  |
+|   2 | 강남 | 502  |
+|   3 | 강남 | 503  |
+|   7 | 서초 | 301  |
+|   8 | 서초 | 302  |
+|   9 | 서초 | 501  |
+|  10 | 서초 | 601  |
+|   4 | 종로 | 301  |
+|   5 | 종로 | 302  |
+|   6 | 종로 | 303  |
++-----+------+------+
+10 rows in set (0.001 sec)
+
+MariaDB [studydb]> select
+    ->     r.rno, -- 그룹으로 묶인 경우 그 그룹의 첫 번째 데이터 값만 출력한다.
+    ->     r.loc,
+    ->     r.name -- 그룹으로 묶인 경우 그 그룹의 첫 번째 데이터 값만 출력한다.
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc;
++-----+------+------+
+| rno | loc  | name |
++-----+------+------+
+|   1 | 강남 | 501  |
+|   7 | 서초 | 301  |
+|   4 | 종로 | 301  |
++-----+------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     r.loc
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc;
++------+
+| loc  |
++------+
+| 강남 |
+| 서초 |
+| 종로 |
++------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     r.loc,
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc;
++------+-----+
+| loc  | cnt |
++------+-----+
+| 강남 |   3 |
+| 서초 |   4 |
+| 종로 |   3 |
++------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc
+    -> having
+    ->     count(*) > 3; -- 집합 함수, group by 조건 컬럼, select 절의 컬럼 사용 가능
++-----+
+| cnt |
++-----+
+|   4 |
++-----+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     r.loc,
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc
+    -> having
+    ->     count(*) > 3; -- 집합 함수, group by 조건 컬럼, select 절의 컬럼 사용 가능
++------+-----+
+| loc  | cnt |
++------+-----+
+| 서초 |   4 |
++------+-----+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> -- 예2) having 절에서 group by 조건 컬럼 사용
+MariaDB [studydb]> select
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc
+    -> having
+    ->     r.loc = '강남'; -- 집합 함수, group by 조건 컬럼, select 절의 컬럼 사용 가능
++-----+
+| cnt |
++-----+
+|   3 |
++-----+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> -- 예3) having 절에서 select 절 컬럼 사용
+MariaDB [studydb]> select
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc
+    -> having
+    ->     cnt > 3; -- 집합 함수, group by 조건 컬럼, select 절의 컬럼 사용 가능
++-----+
+| cnt |
++-----+
+|   4 |
++-----+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     r.name,
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc;
++------+-----+
+| name | cnt |
++------+-----+
+| 501  |   3 |
+| 301  |   4 |
+| 301  |   3 |
++------+-----+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     r.name,
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc
+    -> having
+    ->     r.name = '302';
+Empty set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->     r.loc,
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> group by
+    ->     r.loc
+    -> having
+    ->     r.name = '302';
+ERROR 1054 (42S22): Unknown column 'r.name' in 'having clause'
+MariaDB [studydb]> select
+    ->     'okok' as test,
+    ->     r.loc as location,
+    ->     count(*) as cnt
+    -> from
+    ->     room r
+    -> where
+    ->     r.loc <> '강남'
+    -> group by
+    ->     r.loc
+    -> having
+    ->     cnt > 2 and test = 'okok'
+    -> order by
+    ->     cnt desc;
++------+----------+-----+
+| test | location | cnt |
++------+----------+-----+
+| okok | 서초     |   4 |
+| okok | 종로     |   3 |
++------+----------+-----+
+2 rows in set (0.001 sec)
