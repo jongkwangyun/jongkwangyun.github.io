@@ -1,0 +1,741 @@
+Microsoft Windows [Version 10.0.22621.1105]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>cd git
+
+C:\Users\bitcamp\git>mysql -u study -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 150
+Server version: 10.6.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use studydb
+Database changed
+MariaDB [studydb]> create table app_member(
+    ->   member_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now(),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 6
+MariaDB [studydb]> create table app_member(
+    ->   member_id int not null,
+    ->   name varchar(50) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now()
+    -> );
+Query OK, 0 rows affected (0.023 sec)
+
+MariaDB [studydb]> alter table app_member
+    ->   add constraint primary key (member_id),
+    ->   modify column member_id int not null auto_increment;
+Query OK, 0 rows affected (0.028 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_member;
++--------------+-------------+------+-----+---------------------+----------------+
+| Field        | Type        | Null | Key | Default             | Extra          |
++--------------+-------------+------+-----+---------------------+----------------+
+| member_id    | int(11)     | NO   | PRI | NULL                | auto_increment |
+| name         | varchar(50) | NO   |     | NULL                |                |
+| tel          | varchar(20) | YES  |     | NULL                |                |
+| created_date | datetime    | YES  |     | current_timestamp() |                |
++--------------+-------------+------+-----+---------------------+----------------+
+4 rows in set (0.021 sec)
+
+MariaDB [studydb]> drop table if exists app_student restrict;
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [studydb]> create table app_student(
+    ->   member_id int not null,
+    ->   pst_no varchar(5),
+    ->   bas_addr varchar(255),
+    ->   det_addr varchar(255),
+    ->   work boolean,
+    ->   gender char(1),
+    ->   level int
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> alter table app_student
+    ->   add constraint primary key (member_id),
+    ->   add constraint app_student_fk foreign key (member_id) references app_member (member_id);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| member_id | int(11)      | NO   | PRI | NULL    |       |
+| pst_no    | varchar(5)   | YES  |     | NULL    |       |
+| bas_addr  | varchar(255) | YES  |     | NULL    |       |
+| det_addr  | varchar(255) | YES  |     | NULL    |       |
+| work      | tinyint(1)   | YES  |     | NULL    |       |
+| gender    | char(1)      | YES  |     | NULL    |       |
+| level     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.014 sec)
+
+MariaDB [studydb]> drop table if exists app_teacher restrict;
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [studydb]> create table app_teacher(
+    ->   member_id int not null,
+    ->   email varchar(50),
+    ->   degree int,
+    ->   school varchar(50),
+    ->   major varchar(50),
+    ->   wage int
+    -> );
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [studydb]> alter table app_teacher
+    ->   add constraint primary key (member_id),
+    ->   add constraint app_teacher_fk foreign key (member_id) references app_member (member_id);
+Query OK, 0 rows affected (0.036 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>   show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| app_board         |
+| app_member        |
+| app_student       |
+| app_teacher       |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect2             |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
+| x_board           |
+| x_board_file      |
++-------------------+
+29 rows in set (0.005 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+-------+---------------------+
+| member_id | name | tel   | created_date        |
++-----------+------+-------+---------------------+
+|         1 | aaa  | 1111  | 2023-02-13 12:03:25 |
+|         2 | aaa  | 11112 | 2023-02-13 12:03:32 |
+|         3 | aaa  | 11113 | 2023-02-13 12:03:35 |
+|         4 | aaa  | 11114 | 2023-02-13 12:03:39 |
++-----------+------+-------+---------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+--------+---------------------+
+| member_id | name | tel    | created_date        |
++-----------+------+--------+---------------------+
+|         1 | aaa  | 1111   | 2023-02-13 12:03:25 |
+|         2 | xxx  | 101010 | 2023-02-13 12:03:32 |
+|         3 | aaa  | 11113  | 2023-02-13 12:03:35 |
+|         4 | aaa  | 11114  | 2023-02-13 12:03:39 |
++-----------+------+--------+---------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+--------+---------------------+
+| member_id | name | tel    | created_date        |
++-----------+------+--------+---------------------+
+|         1 | aaa  | 1111   | 2023-02-13 12:03:25 |
+|         2 | xxx  | 101010 | 2023-02-13 12:03:32 |
+|         4 | aaa  | 11114  | 2023-02-13 12:03:39 |
++-----------+------+--------+---------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+--------+---------------------+
+| member_id | name | tel    | created_date        |
++-----------+------+--------+---------------------+
+|         1 | aaa  | 1111   | 2023-02-13 12:03:25 |
+|         2 | xxx  | 101010 | 2023-02-13 12:03:32 |
+|         4 | aaa  | 11114  | 2023-02-13 12:03:39 |
++-----------+------+--------+---------------------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> drop table if exists app_student restrict;
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [studydb]> drop table if exists app_teacher restrict;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> drop table if exists app_member restrict;
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [studydb]> show tables;
++-------------------+
+| Tables_in_studydb |
++-------------------+
+| addr              |
+| app_board         |
+| attach_file1      |
+| attach_file2      |
+| attach_file3      |
+| attach_file4      |
+| attach_file5      |
+| board1            |
+| board2            |
+| board3            |
+| board4            |
+| board5            |
+| lect              |
+| lect2             |
+| lect_appl         |
+| lect_tcher        |
+| memb              |
+| mgr               |
+| room              |
+| room_phot         |
+| stnt              |
+| tcher             |
+| test1             |
+| test2             |
+| x_board           |
+| x_board_file      |
++-------------------+
+26 rows in set (0.001 sec)
+
+MariaDB [studydb]> create table app_member(
+    ->   member_id int not null,
+    ->   name varchar(50) not null,
+    ->   email varchar(50) not null,
+    ->   pwd varchar(20) not null,
+    ->   tel varchar(20),
+    ->   created_date datetime default now()
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]> alter table app_member
+    ->   add constraint primary key (member_id),
+    ->   modify column member_id int not null auto_increment;
+Query OK, 0 rows affected (0.029 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> alter table app_member
+    ->   add constraint app_member_uk unique (email);
+Query OK, 0 rows affected (0.029 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_member;
++--------------+-------------+------+-----+---------------------+----------------+
+| Field        | Type        | Null | Key | Default             | Extra          |
++--------------+-------------+------+-----+---------------------+----------------+
+| member_id    | int(11)     | NO   | PRI | NULL                | auto_increment |
+| name         | varchar(50) | NO   |     | NULL                |                |
+| email        | varchar(50) | NO   | UNI | NULL                |                |
+| pwd          | varchar(20) | NO   |     | NULL                |                |
+| tel          | varchar(20) | YES  |     | NULL                |                |
+| created_date | datetime    | YES  |     | current_timestamp() |                |
++--------------+-------------+------+-----+---------------------+----------------+
+6 rows in set (0.015 sec)
+
+MariaDB [studydb]> create table app_student(
+    ->   member_id int not null,
+    ->   pst_no varchar(5),
+    ->   bas_addr varchar(255),
+    ->   det_addr varchar(255),
+    ->   work boolean,
+    ->   gender char(1),
+    ->   level int
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [studydb]> desc app_student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| member_id | int(11)      | NO   |     | NULL    |       |
+| pst_no    | varchar(5)   | YES  |     | NULL    |       |
+| bas_addr  | varchar(255) | YES  |     | NULL    |       |
+| det_addr  | varchar(255) | YES  |     | NULL    |       |
+| work      | tinyint(1)   | YES  |     | NULL    |       |
+| gender    | char(1)      | YES  |     | NULL    |       |
+| level     | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.013 sec)
+
+MariaDB [studydb]> alter table app_student
+    ->   modify column work boolean not null,
+    ->   modify column level int not null;
+Query OK, 0 rows affected (0.020 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| member_id | int(11)      | NO   |     | NULL    |       |
+| pst_no    | varchar(5)   | YES  |     | NULL    |       |
+| bas_addr  | varchar(255) | YES  |     | NULL    |       |
+| det_addr  | varchar(255) | YES  |     | NULL    |       |
+| work      | tinyint(1)   | NO   |     | NULL    |       |
+| gender    | char(1)      | YES  |     | NULL    |       |
+| level     | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.013 sec)
+
+MariaDB [studydb]> create table app_teacher(
+    ->   member_id int not null,
+    ->   degree int,
+    ->   school varchar(50),
+    ->   major varchar(50),
+    ->   wage int
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_teacher
+    ->   add constraint primary key (member_id),
+    ->   add constraint app_teacher_fk foreign key (member_id) references app_member (member_id);
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]>
+MariaDB [studydb]> alter table app_teacher
+    ->   modify column degree int not null,
+    ->   modify column wage int not null;
+Query OK, 0 rows affected (0.035 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_teacher;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| member_id | int(11)     | NO   | PRI | NULL    |       |
+| degree    | int(11)     | NO   |     | NULL    |       |
+| school    | varchar(50) | YES  |     | NULL    |       |
+| major     | varchar(50) | YES  |     | NULL    |       |
+| wage      | int(11)     | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.010 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------+--------+---------------------+
+| member_id | name | email         | pwd  | tel    | created_date        |
++-----------+------+---------------+------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 1111 | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | null          | 1111 | 101010 | 2023-02-13 12:44:44 |
+|         3 | aaa2 | aaa2@test.com | 1111 | 11114  | 2023-02-13 12:44:49 |
+|         4 | aaa3 | aaa3@test.com | 1111 | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 1111 | 11114  | 2023-02-13 12:45:29 |
++-----------+------+---------------+------+--------+---------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------+--------+---------------------+
+| member_id | name | email         | pwd  | tel    | created_date        |
++-----------+------+---------------+------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 1111 | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | xxx@test.com  | 1111 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3 | aaa3@test.com | 1111 | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 1111 | 11114  | 2023-02-13 12:45:29 |
++-----------+------+---------------+------+--------+---------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> alter table app_member
+    ->   modify column pwd varchar(100) not null;
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> alter table app_member
+    -> ;
+Query OK, 0 rows affected (0.058 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_member;
++--------------+--------------+------+-----+---------------------+----------------+
+| Field        | Type         | Null | Key | Default             | Extra          |
++--------------+--------------+------+-----+---------------------+----------------+
+| member_id    | int(11)      | NO   | PRI | NULL                | auto_increment |
+| name         | varchar(50)  | NO   |     | NULL                |                |
+| email        | varchar(50)  | NO   | UNI | NULL                |                |
+| pwd          | varchar(100) | NO   |     | NULL                |                |
+| tel          | varchar(20)  | YES  |     | NULL                |                |
+| created_date | datetime     | YES  |     | current_timestamp() |                |
++--------------+--------------+------+-----+---------------------+----------------+
+6 rows in set (0.006 sec)
+
+MariaDB [studydb]> select sha2('1111',256);
++------------------------------------------------------------------+
+| sha2('1111',256)                                                 |
++------------------------------------------------------------------+
+| 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
++------------------------------------------------------------------+
+1 row in set (0.004 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------+--------+---------------------+
+| member_id | name | email         | pwd  | tel    | created_date        |
++-----------+------+---------------+------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 1111 | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | xxx@test.com  | 1111 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3 | aaa3@test.com | 1111 | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 1111 | 11114  | 2023-02-13 12:45:29 |
++-----------+------+---------------+------+--------+---------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select memeber_id, pwd from app_member;
+ERROR 1054 (42S22): Unknown column 'memeber_id' in 'field list'
+MariaDB [studydb]> select member_id, pwd from app_member;
++-----------+------+
+| member_id | pwd  |
++-----------+------+
+|         1 | 1111 |
+|         2 | 1111 |
+|         4 | 1111 |
+|         6 | 1111 |
++-----------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> update app_member set pwd = sha2('1111', 256);
+Query OK, 4 rows affected (0.013 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+MariaDB [studydb]> select member_id, pwd from app_member;
++-----------+------------------------------------------------------------------+
+| member_id | pwd                                                              |
++-----------+------------------------------------------------------------------+
+|         1 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
+|         2 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
+|         4 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
+|         6 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
++-----------+------------------------------------------------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+| member_id | name | email         | pwd                                                              | tel    | created_date        |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | xxx@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3 | aaa3@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:45:29 |
+|         7 | aaa5 | aaa5@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 13:03:09 |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select member_id, pwd from app_member;
++-----------+------------------------------------------------------------------+
+| member_id | pwd                                                              |
++-----------+------------------------------------------------------------------+
+|         1 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
+|         2 | edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9 |
+|         4 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
+|         6 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
+|         7 | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c |
++-----------+------------------------------------------------------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> desc app_student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| member_id | int(11)      | NO   |     | NULL    |       |
+| pst_no    | varchar(5)   | YES  |     | NULL    |       |
+| bas_addr  | varchar(255) | YES  |     | NULL    |       |
+| det_addr  | varchar(255) | YES  |     | NULL    |       |
+| work      | tinyint(1)   | NO   |     | NULL    |       |
+| gender    | char(1)      | YES  |     | NULL    |       |
+| level     | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.010 sec)
+
+MariaDB [studydb]> select
+    ->   m.member_id,
+    ->   m.name,
+    ->   m.email,
+    ->   m.tel,
+    ->   s.work,
+    ->   s.level
+    -> from app_student s
+    ->   inner join app_member m on s.member_id = m.member_id
+    -> order by
+    ->   name asc;
+Empty set (0.001 sec)
+
+MariaDB [studydb]> select member_id, name from app_member;
++-----------+------+
+| member_id | name |
++-----------+------+
+|         1 | aaa  |
+|         2 | xxx  |
+|         4 | aaa3 |
+|         6 | aaa3 |
+|         7 | aaa5 |
++-----------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+----------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr | det_addr | work | gender | level |
++-----------+--------+----------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로 | 101호    |    1 | M      |     2 |
+|         1 | 11111  | 강남대로 | 101호    |    1 | M      |     2 |
+|         1 | 11111  | 강남대로 | 101호    |    1 | M      |     2 |
++-----------+--------+----------+----------+------+--------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> truncate table app_student;
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [studydb]> alter table app_student
+    ->   add constraint primary key (member_id),
+    ->   add constraint app_student_fk foreign key (member_id) references app_member (member_id);
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> alter table app_student
+    ->   modify column work boolean not null,
+    ->   modify column level int not null;
+Query OK, 0 rows affected (0.018 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [studydb]> desc app_student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| member_id | int(11)      | NO   | PRI | NULL    |       |
+| pst_no    | varchar(5)   | YES  |     | NULL    |       |
+| bas_addr  | varchar(255) | YES  |     | NULL    |       |
+| det_addr  | varchar(255) | YES  |     | NULL    |       |
+| work      | tinyint(1)   | NO   |     | NULL    |       |
+| gender    | char(1)      | YES  |     | NULL    |       |
+| level     | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.007 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+----------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr | det_addr | work | gender | level |
++-----------+--------+----------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로 | 101호    |    1 | M      |     2 |
++-----------+--------+----------+----------+------+--------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_atudent;
+ERROR 1146 (42S02): Table 'studydb.app_atudent' doesn't exist
+MariaDB [studydb]> select * from app_student;
++-----------+--------+-----------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr  | det_addr | work | gender | level |
++-----------+--------+-----------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로  | 101호    |    1 | M      |     2 |
+|         2 | 11112  | 강남대로2 | 101호    |    1 | M      |     2 |
+|         4 | 11112  | 강남대로3 | 101호    |    0 | W      |     0 |
+|         6 | 11112  | 강남대로6 | 102호    |    0 | W      |     1 |
+|         7 | 11117  | 강남대로7 | 107호    |    0 | W      |     1 |
++-----------+--------+-----------+----------+------+--------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> select
+    ->   m.member_id,
+    ->   m.name,
+    ->   m.email,
+    ->   m.tel,
+    ->   s.work,
+    ->   s.level
+    -> from app_student s
+    ->   inner join app_member m on s.member_id = m.member_id
+    -> order by
+    ->   name asc;
++-----------+------+---------------+--------+------+-------+
+| member_id | name | email         | tel    | work | level |
++-----------+------+---------------+--------+------+-------+
+|         1 | aaa  | aaa@test.com  | 11114  |    1 |     2 |
+|         6 | aaa3 | aaa4@test.com | 11114  |    0 |     1 |
+|         4 | aaa3 | aaa3@test.com | 11114  |    0 |     0 |
+|         7 | aaa5 | aaa5@test.com | 1111   |    0 |     1 |
+|         2 | xxx  | xxx@test.com  | 101010 |    1 |     2 |
++-----------+------+---------------+--------+------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [studydb]> delete from app_student where member_id=4;
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [studydb]> select
+    ->   m.member_id,
+    ->   m.name,
+    ->   m.email,
+    ->   m.tel,
+    ->   s.work,
+    ->   s.level
+    -> from app_student s
+    ->   inner join app_member m on s.member_id = m.member_id
+    -> order by
+    ->   name asc;
++-----------+------+---------------+--------+------+-------+
+| member_id | name | email         | tel    | work | level |
++-----------+------+---------------+--------+------+-------+
+|         1 | aaa  | aaa@test.com  | 11114  |    1 |     2 |
+|         6 | aaa3 | aaa4@test.com | 11114  |    0 |     1 |
+|         7 | aaa5 | aaa5@test.com | 1111   |    0 |     1 |
+|         2 | xxx  | xxx@test.com  | 101010 |    1 |     2 |
++-----------+------+---------------+--------+------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+-----------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr  | det_addr | work | gender | level |
++-----------+--------+-----------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로  | 101호    |    1 | M      |     2 |
+|         2 | 11112  | 강남대로2 | 101호    |    1 | M      |     2 |
+|         6 | 11112  | 강남대로6 | 102호    |    0 | W      |     1 |
+|         7 | 11117  | 강남대로7 | 107호    |    0 | W      |     1 |
++-----------+--------+-----------+----------+------+--------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+--------------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr     | det_addr | work | gender | level |
++-----------+--------+--------------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로     | 101호    |    1 | M      |     2 |
+|         2 | 11112  | 강남대로2    | 101호    |    1 | M      |     2 |
+|         6 | 11112  | 강남대로6    | 102호    |    0 | W      |     1 |
+|         7 | 33333  | 강남대로10xx | 110호xx  |    1 | M      |     2 |
++-----------+--------+--------------+----------+------+--------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+--------------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr     | det_addr | work | gender | level |
++-----------+--------+--------------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로     | 101호    |    1 | M      |     2 |
+|         6 | 11112  | 강남대로6    | 102호    |    0 | W      |     1 |
+|         7 | 33333  | 강남대로10xx | 110호xx  |    1 | M      |     2 |
++-----------+--------+--------------+----------+------+--------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+| member_id | name | email         | pwd                                                              | tel    | created_date        |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | xxx@test.com  | edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3 | aaa3@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:45:29 |
+|         7 | aaa5 | aaa5@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 13:03:09 |
+|         8 | ccc  | ccc@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1212   | 2023-02-13 16:14:27 |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+--------------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr     | det_addr | work | gender | level |
++-----------+--------+--------------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로     | 101호    |    1 | M      |     2 |
+|         6 | 11112  | 강남대로6    | 102호    |    0 | W      |     1 |
+|         7 | 33333  | 강남대로10xx | 110호xx  |    1 | M      |     2 |
++-----------+--------+--------------+----------+------+--------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+--------------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr     | det_addr | work | gender | level |
++-----------+--------+--------------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로     | 101호    |    1 | M      |     2 |
+|         6 | 11112  | 강남대로6    | 102호    |    0 | W      |     1 |
+|         7 | 33333  | 강남대로10xx | 110호xx  |    1 | M      |     2 |
++-----------+--------+--------------+----------+------+--------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+| member_id | name | email         | pwd                                                              | tel    | created_date        |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | xxx@test.com  | edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3 | aaa3@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:45:29 |
+|         7 | aaa5 | aaa5@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 13:03:09 |
+|         8 | ccc  | ccc@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1212   | 2023-02-13 16:14:27 |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+| member_id | name | email         | pwd                                                              | tel    | created_date        |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+|         1 | aaa  | aaa@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx  | xxx@test.com  | edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3 | aaa3@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3 | aaa4@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:45:29 |
+|         7 | aaa5 | aaa5@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 13:03:09 |
+|         8 | ccc  | ccc@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1212   | 2023-02-13 16:14:27 |
++-----------+------+---------------+------------------------------------------------------------------+--------+---------------------+
+6 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+-------+----------------+------------------------------------------------------------------+--------+---------------------+
+| member_id | name  | email          | pwd                                                              | tel    | created_date        |
++-----------+-------+----------------+------------------------------------------------------------------+--------+---------------------+
+|         1 | aaa   | aaa@test.com   | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:26 |
+|         2 | xxx   | xxx@test.com   | edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3  | aaa3@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3  | aaa4@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:45:29 |
+|         7 | aaa5  | aaa5@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 13:03:09 |
+|         8 | ccc   | ccc@test.com   | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1212   | 2023-02-13 16:14:27 |
+|        12 | aaa21 | aaa21@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 16:53:24 |
+|        13 | aaa22 | aaa22@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 17:05:06 |
+|        14 | ddd   | ddd@test.com   | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1      | 2023-02-13 17:08:04 |
++-----------+-------+----------------+------------------------------------------------------------------+--------+---------------------+
+9 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+--------------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr     | det_addr | work | gender | level |
++-----------+--------+--------------+----------+------+--------+-------+
+|         1 | 11111  | 강남대로     | 101호    |    1 | M      |     2 |
+|         6 | 11112  | 강남대로6    | 102호    |    0 | W      |     1 |
+|         7 | 33333  | 강남대로10xx | 110호xx  |    1 | M      |     2 |
+|        14 | 1      | 1            | 1        |    1 | W      |     1 |
++-----------+--------+--------------+----------+------+--------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_student;
++-----------+--------+--------------+----------+------+--------+-------+
+| member_id | pst_no | bas_addr     | det_addr | work | gender | level |
++-----------+--------+--------------+----------+------+--------+-------+
+|         1 | 1x     | 1x           | 1x       |    0 | W      |     0 |
+|         6 | 11112  | 강남대로6    | 102호    |    0 | W      |     1 |
+|         7 | 33333  | 강남대로10xx | 110호xx  |    1 | M      |     2 |
++-----------+--------+--------------+----------+------+--------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [studydb]> select * from app_member;
++-----------+-------+----------------+------------------------------------------------------------------+--------+---------------------+
+| member_id | name  | email          | pwd                                                              | tel    | created_date        |
++-----------+-------+----------------+------------------------------------------------------------------+--------+---------------------+
+|         1 | aaxx  | null           | 74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b | 1x     | 2023-02-13 12:44:26 |
+|         2 | xxx   | xxx@test.com   | edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9 | 101010 | 2023-02-13 12:44:44 |
+|         4 | aaa3  | aaa3@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:44:54 |
+|         6 | aaa3  | aaa4@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 11114  | 2023-02-13 12:45:29 |
+|         7 | aaa5  | aaa5@test.com  | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 13:03:09 |
+|         8 | ccc   | ccc@test.com   | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1212   | 2023-02-13 16:14:27 |
+|        12 | aaa21 | aaa21@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 16:53:24 |
+|        13 | aaa22 | aaa22@test.com | 0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c | 1111   | 2023-02-13 17:05:06 |
++-----------+-------+----------------+------------------------------------------------------------------+--------+---------------------+
+8 rows in set (0.000 sec)

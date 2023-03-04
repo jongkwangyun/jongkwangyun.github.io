@@ -7,6 +7,21 @@
   <title>Practice</title>
 </head>
 <body>
-  <script src="practice.js"></script>
+  <button type="button" id="btn-modal">open modal</button>
+  
+  <dialog>
+    안녕! 난 모달!
+    <form method="dialog">
+      <button>Close</button>
+    </form>
+  </dialog>
+  <script>
+    const btnModal = document.querySelector('#btn-modal');
+    const dialog = document.querySelector('dialog');
+    
+    btnModal.addEventListener('click', () => {
+      dialog.showModal();
+    })
+  </script>
 </body>
 </html>
