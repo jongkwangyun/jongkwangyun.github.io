@@ -1,0 +1,97 @@
+Microsoft Windows [Version 10.0.22621.1265]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>cd git
+
+C:\Users\bitcamp\git>cd bitcamp-ncp
+
+C:\Users\bitcamp\git\bitcamp-ncp>cd myapp
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp>cd app-server
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server>cd src/main/resources/static/temp
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npm init -y
+Wrote to C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp\package.json:
+
+{
+  "name": "temp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npm install terser
+
+added 12 packages, and audited 13 packages in 54s
+
+found 0 vulnerabilities
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx terser test.js
+"use strict";class LikeButton extends React.Component{constructor(props){super(props);this.state={liked:false}}render(){if(this.state.liked){return"좋아합니다!"}return React.createElement("button",{onClick:()=>{this.setState({liked:true})}},"좋아요!")}}document.querySelectorAll(".like-container").forEach((likeContainer=>{const root=ReactDOM.createRoot(likeContainer);root.render(React.createElement(LikeButton))}));
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx terser test.js
+"use strict";console.log("시작됨");class LikeButton extends React.Component{constructor(props){super(props);this.state={liked:false}}render(){if(this.state.liked){return"좋아합니다!"}return React.createElement("button",{onClick:()=>{this.setState({liked:true})}},"좋아요!")}}document.querySelectorAll(".like-container").forEach((likeContainer=>{const root=ReactDOM.createRoot(likeContainer);root.render(React.createElement(LikeButton))}));console.log("종료됨");
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx terser test.js
+"use strict";console.log("시작됨");class LikeButton extends React.Component{constructor(props){super(props);this.state={liked:false}}render(){if(this.state.liked){return"좋아합니다!"}return React.createElement("button",{onClick:()=>{this.setState({liked:true})}},"좋아요!")}}document.querySelectorAll(".like-container").forEach((likeContainer=>{const root=ReactDOM.createRoot(likeContainer);root.render(React.createElement(LikeButton))}));console.log("종료됨");
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx terser test.js -c
+"use strict";console.log("시작됨");class LikeButton extends React.Component{constructor(props){super(props),this.state={liked:!1}}render(){return this.state.liked?"좋아합니다!":React.createElement("button",{onClick:()=>{this.setState({liked:!0})}},"좋아요!")}}document.querySelectorAll(".like-container").forEach((likeContainer=>{ReactDOM.createRoot(likeContainer).render(React.createElement(LikeButton))})),console.log("종료됨");
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx terser test.js -c -m
+"use strict";console.log("시작됨");class LikeButton extends React.Component{constructor(e){super(e),this.state={liked:!1}}render(){return this.state.liked?"좋아합니다!":React.createElement("button",{onClick:()=>{this.setState({liked:!0})}},"좋아요!")}}document.querySelectorAll(".like-container").forEach((e=>{ReactDOM.createRoot(e).render(React.createElement(LikeButton))})),console.log("종료됨");
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx terser test.js -c -m -o test.min.js
+
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npm install babel-cli@6 babel-preset-react-app@3
+npm WARN deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+npm WARN deprecated chokidar@1.7.0: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+npm WARN deprecated browserslist@2.11.3: Browserslist 2 could fail on reading Browserslist >3.0 config used in other tools.
+npm WARN deprecated core-js@2.6.12: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+
+added 311 packages, and audited 324 packages in 8s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+11 vulnerabilities (2 low, 9 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\resources\static\temp>npx babel --watch src --out-dir . --pre
+sets react-app/prod
+src\test.js -> test.js
+src\test1.js -> test1.js
+src\test3.js -> test3.js
+src\test4.js -> test4.js
+src\test2.js -> test2.js
+src\test5.js -> test5.js
+src\test6.js -> test6.js
+src\test1.js -> test1.js
+src\test2.js -> test2.js
+src\test3.js -> test3.js
+src\test4.js -> test4.js
+src\test5.js -> test5.js
+src\test4.js -> test4.js
+src\test6.js -> test6.js
+src\test6.js -> test6.js
+src\test4.js -> test4.js
