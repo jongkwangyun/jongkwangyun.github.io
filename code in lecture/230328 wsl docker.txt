@@ -1,0 +1,447 @@
+PowerShell 7.3.3
+PS C:\Users\bitcamp> cd git
+PS C:\Users\bitcamp\git> cd .\bitcamp-ncp\
+PS C:\Users\bitcamp\git\bitcamp-ncp> cd .\myapp\
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> cd app-server
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server> cd src/main/webapp
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\webapp> npm install
+
+added 8 packages, and audited 9 packages in 631ms
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\webapp> cd ../../..
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server> cd ..
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> gradle build
+
+> Task :app-server:compileJava
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Teacher.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Student.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+2 warnings
+
+BUILD SUCCESSFUL in 11s
+13 actionable tasks: 13 executed
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> gradle clean
+
+BUILD SUCCESSFUL in 793ms
+1 actionable task: 1 executed
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> gradle build
+
+> Task :app-server:compileJava
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Student.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Teacher.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+2 warnings
+
+BUILD SUCCESSFUL in 6s
+13 actionable tasks: 13 executed
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> java -jar app-server/build/libs/app-server-0.0.1-SNAPSHOT.jar
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.4)
+
+2023-03-28T10:23:00.038+09:00  INFO 4672 --- [           main] bitcamp.myapp.App                        : Starting App v0.0.1-SNAPSHOT using Java 17.0.5 with PID 4672 (C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\build\libs\app-server-0.0.1-SNAPSHOT.jar started by bitcamp in C:\Users\bitcamp\git\bitcamp-ncp\myapp)
+2023-03-28T10:23:00.041+09:00 DEBUG 4672 --- [           main] bitcamp.myapp.App                        : Running with Spring Boot v3.0.4, Spring v6.0.6
+2023-03-28T10:23:00.042+09:00  INFO 4672 --- [           main] bitcamp.myapp.App                        : No active profile set, falling back to 1 default profile: "default"
+2023-03-28T10:23:00.995+09:00  WARN 4672 --- [           main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set onWebSocketDeploymentInfo, the default pool will be used
+2023-03-28T10:23:01.017+09:00  INFO 4672 --- [           main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2023-03-28T10:23:01.020+09:00  INFO 4672 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 912 ms
+2023-03-28T10:23:01.556+09:00  INFO 4672 --- [           main] bitcamp.myapp.App$$SpringCGLIB$$0        : App.addInterceptors() 호출됨!
+2023-03-28T10:23:01.705+09:00  INFO 4672 --- [           main] io.undertow                              : starting server: Undertow - 2.3.4.Final
+2023-03-28T10:23:01.712+09:00  INFO 4672 --- [           main] org.xnio                                 : XNIO version 3.8.8.Final
+2023-03-28T10:23:01.719+09:00  INFO 4672 --- [           main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.8.Final
+2023-03-28T10:23:01.826+09:00  INFO 4672 --- [           main] org.jboss.threads                        : JBoss Threads version 3.5.0.Final
+2023-03-28T10:23:01.869+09:00  INFO 4672 --- [           main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 80 (http) with context path '/web'
+2023-03-28T10:23:01.883+09:00  INFO 4672 --- [           main] bitcamp.myapp.App                        : Started App in 2.21 seconds (processrunning for 2.578)
+2023-03-28T10:23:19.882+09:00  INFO 4672 --- [  XNIO-1 task-3] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28T10:23:19.882+09:00  INFO 4672 --- [  XNIO-1 task-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-03-28T10:23:19.884+09:00  INFO 4672 --- [  XNIO-1 task-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-03-28T10:25:12.788+09:00  INFO 4672 --- [ionShutdownHook] io.undertow                              : stopping server: Undertow - 2.3.4.Final
+2023-03-28T10:25:12.792+09:00  INFO 4672 --- [ionShutdownHook] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> gradle clean
+
+BUILD SUCCESSFUL in 775ms
+1 actionable task: 1 executed
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> gradle build
+
+> Task :app-server:compileJava
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Student.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Teacher.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+2 warnings
+
+BUILD SUCCESSFUL in 9s
+13 actionable tasks: 13 executed
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> java -jar app-server/build/libs/app-server-0.0.1-SNAPSHOT.jar
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.4)
+
+2023-03-28T10:28:13.464+09:00  INFO 15008 --- [           main] bitcamp.myapp.App                        : Starting App v0.0.1-SNAPSHOT using Java 17.0.5 with PID 15008 (C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\build\libs\app-server-0.0.1-SNAPSHOT.jar started by bitcamp in C:\Users\bitcamp\git\bitcamp-ncp\myapp)
+2023-03-28T10:28:13.465+09:00 DEBUG 15008 --- [           main] bitcamp.myapp.App                        : Running with Spring Boot v3.0.4, Spring v6.0.6
+2023-03-28T10:28:13.467+09:00  INFO 15008 --- [           main] bitcamp.myapp.App                        : No active profile set, falling backto 1 default profile: "default"
+2023-03-28T10:28:14.409+09:00  WARN 15008 --- [           main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-03-28T10:28:14.426+09:00  INFO 15008 --- [           main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2023-03-28T10:28:14.428+09:00  INFO 15008 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 898 ms
+2023-03-28T10:28:14.980+09:00  INFO 15008 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-03-28T10:28:14.983+09:00  INFO 15008 --- [           main] bitcamp.myapp.App$$SpringCGLIB$$0        : App.addInterceptors() 호출됨!
+2023-03-28T10:28:15.163+09:00  INFO 15008 --- [           main] io.undertow                              : starting server: Undertow - 2.3.4.Final
+2023-03-28T10:28:15.170+09:00  INFO 15008 --- [           main] org.xnio                                 : XNIO version 3.8.8.Final
+2023-03-28T10:28:15.177+09:00  INFO 15008 --- [           main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.8.Final
+2023-03-28T10:28:15.272+09:00  INFO 15008 --- [           main] org.jboss.threads                        : JBoss Threads version 3.5.0.Final
+2023-03-28T10:28:15.336+09:00  INFO 15008 --- [           main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 80 (http) with context path '/web'
+2023-03-28T10:28:15.346+09:00  INFO 15008 --- [           main] bitcamp.myapp.App                        : Started App in 2.258 seconds (process running for 2.623)
+2023-03-28T10:28:15.451+09:00  INFO 15008 --- [  XNIO-1 task-2] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-28T10:28:15.451+09:00  INFO 15008 --- [  XNIO-1 task-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-03-28T10:28:15.452+09:00  INFO 15008 --- [  XNIO-1 task-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-03-28T10:28:25.772+09:00  INFO 15008 --- [  XNIO-1 task-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-28T10:28:25.835+09:00  INFO 15008 --- [  XNIO-1 task-2] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@3bf34eea
+2023-03-28T10:28:25.838+09:00  INFO 15008 --- [  XNIO-1 task-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-28T10:28:25.845+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.m.d.TeacherDao.findByEmailAndPassword  : ==>  Preparing: select m.member_id,m.name, m.email, m.tel, m.created_date, t.degree, t.school, t.major, t.wage from app_teacher t inner join app_member m on t.member_id = m.member_id where m.email = ? and m.pwd = sha2(?,256)
+2023-03-28T10:28:25.865+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.m.d.TeacherDao.findByEmailAndPassword  : ==> Parameters: admin(String), 1111(String)
+2023-03-28T10:28:25.887+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.m.d.TeacherDao.findByEmailAndPassword  : <==      Total: 0
+2023-03-28T10:28:31.346+09:00 DEBUG 15008 --- [  XNIO-1 task-3] b.m.d.TeacherDao.findByEmailAndPassword  : ==>  Preparing: select m.member_id,m.name, m.email, m.tel, m.created_date, t.degree, t.school, t.major, t.wage from app_teacher t inner join app_member m on t.member_id = m.member_id where m.email = ? and m.pwd = sha2(?,256)
+2023-03-28T10:28:31.346+09:00 DEBUG 15008 --- [  XNIO-1 task-3] b.m.d.TeacherDao.findByEmailAndPassword  : ==> Parameters: admin@test.com(String), 1111(String)
+2023-03-28T10:28:31.355+09:00 DEBUG 15008 --- [  XNIO-1 task-3] b.m.d.TeacherDao.findByEmailAndPassword  : <==      Total: 1
+2023-03-28T10:28:45.683+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.myapp.controller.BoardController       : BoardController.list() 호출됨!
+2023-03-28T10:28:45.699+09:00 DEBUG 15008 --- [  XNIO-1 task-2] bitcamp.myapp.dao.BoardDao.findAll       : ==>  Preparing: select b.board_id, b.title, b.writer, b.created_date, b.view_cnt, m.name from app_board b inner join app_member m on b.writer = m.member_id order by b.board_id desc
+2023-03-28T10:28:45.700+09:00 DEBUG 15008 --- [  XNIO-1 task-2] bitcamp.myapp.dao.BoardDao.findAll       : ==> Parameters:
+2023-03-28T10:28:45.710+09:00 DEBUG 15008 --- [  XNIO-1 task-2] bitcamp.myapp.dao.BoardDao.findAll       : <==      Total: 16
+2023-03-28T10:29:13.900+09:00 DEBUG 15008 --- [  XNIO-1 task-2] bitcamp.myapp.dao.BoardDao.insert        : ==>  Preparing: insert into app_board(title, content, writer) values(?, ?, ?)
+2023-03-28T10:29:13.901+09:00 DEBUG 15008 --- [  XNIO-1 task-2] bitcamp.myapp.dao.BoardDao.insert        : ==> Parameters: testetset(String), test(String), 84(Integer)
+2023-03-28T10:29:13.906+09:00 DEBUG 15008 --- [  XNIO-1 task-2] bitcamp.myapp.dao.BoardDao.insert        : <==    Updates: 1
+2023-03-28T10:29:13.909+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.myapp.dao.BoardFileDao.insertList      : ==>  Preparing: insert into app_board_file(filepath, origin_filename, mime_type, board_id) values (?, ?, ?, ?)
+2023-03-28T10:29:13.910+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.myapp.dao.BoardFileDao.insertList      : ==> Parameters: ad0851d6-c5d3-4f36-b6a2-87cc10f9acfc(String), xWPIxen.jpg(String), image/jpeg(String), 91(Integer)
+2023-03-28T10:29:13.911+09:00 DEBUG 15008 --- [  XNIO-1 task-2] b.myapp.dao.BoardFileDao.insertList      : <==    Updates: 1
+2023-03-28T10:29:13.982+09:00 DEBUG 15008 --- [  XNIO-1 task-3] b.myapp.controller.BoardController       : BoardController.list() 호출됨!
+2023-03-28T10:29:13.984+09:00 DEBUG 15008 --- [  XNIO-1 task-3] bitcamp.myapp.dao.BoardDao.findAll       : ==>  Preparing: select b.board_id, b.title, b.writer, b.created_date, b.view_cnt, m.name from app_board b inner join app_member m on b.writer = m.member_id order by b.board_id desc
+2023-03-28T10:29:13.984+09:00 DEBUG 15008 --- [  XNIO-1 task-3] bitcamp.myapp.dao.BoardDao.findAll       : ==> Parameters:
+2023-03-28T10:29:13.990+09:00 DEBUG 15008 --- [  XNIO-1 task-3] bitcamp.myapp.dao.BoardDao.findAll       : <==      Total: 17
+2023-03-28T10:29:44.404+09:00  INFO 15008 --- [ionShutdownHook] io.undertow                              : stopping server: Undertow - 2.3.4.Final
+2023-03-28T10:29:44.407+09:00  INFO 15008 --- [ionShutdownHook] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-03-28T10:29:44.408+09:00  INFO 15008 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-03-28T10:29:44.414+09:00  INFO 15008 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> bash
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp$ cd
+study@DESKTOP-48TE820:~$ pwd
+/home/study
+study@DESKTOP-48TE820:~$ ls
+study@DESKTOP-48TE820:~$ exit
+logout
+PS C:\Users\bitcamp\git\bitcamp-ncp\myapp> bash
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp$ cd app-server
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ ls
+Dockerfile  bin  build  build.gradle  doc  src
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.1
+
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images
+
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker
+
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images
+Error response from daemon: dial unix /mnt/wsl/docker-desktop/shared-sockets/guest-services/docker.proxy.sock: connect: no such file or directory
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images
+REPOSITORY          TAG       IMAGE ID       CREATED        SIZE
+docker101tutorial   latest    f97b09902265   23 hours ago   47MB
+alpine/git          latest    22d84a66cda4   4 months ago   43.6MB
+ubuntu              14.04     13b66b487594   2 years ago    197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.1
+"docker build" requires exactly 1 argument.
+See 'docker build --help'.
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.1 .
+[+] Building 8.7s (7/7) FINISHED
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 189B                                                                               0.0s
+ => [internal] load .dockerignore                                                                                  0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load metadata for docker.io/library/openjdk:17                                                      2.6s
+ => [internal] load build context                                                                                  0.3s
+ => => transferring context: 26.62MB                                                                               0.2s
+ => [1/2] FROM docker.io/library/openjdk:17@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7  4.8s
+ => => resolve docker.io/library/openjdk:17@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7  0.1s
+ => => sha256:5e28ba2b4cdb3a7c3bd0ee2e635a5f6481682b77eabf8b51a17ea8bfe1c05697 4.45kB / 4.45kB                     0.0s
+ => => sha256:38a980f2cc8accf69c23deae6743d42a87eb34a54f02396f3fcfd7c2d06e2c5b 42.11MB / 42.11MB                   0.9s
+ => => sha256:de849f1cfbe60b1c06a1db83a3129ab0ea397c4852b98e3e4300b12ee57ba111 13.53MB / 13.53MB                   0.7s
+ => => sha256:a7203ca35e75e068651c9907d659adc721dba823441b78639fde66fc988f042f 187.53MB / 187.53MB                 2.9s
+ => => sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7d8 1.04kB / 1.04kB                     0.0s
+ => => sha256:98f0304b3a3b7c12ce641177a99d1f3be56f532473a528fda38d53d519cafb13 954B / 954B                         0.0s
+ => => extracting sha256:38a980f2cc8accf69c23deae6743d42a87eb34a54f02396f3fcfd7c2d06e2c5b                          1.5s
+ => => extracting sha256:de849f1cfbe60b1c06a1db83a3129ab0ea397c4852b98e3e4300b12ee57ba111                          0.3s
+ => => extracting sha256:a7203ca35e75e068651c9907d659adc721dba823441b78639fde66fc988f042f                          1.5s
+ => [2/2] COPY build/libs/app-server-0.0.1-SNAPSHOT.jar app.jar                                                    0.9s
+ => exporting to image                                                                                             0.1s
+ => => exporting layers                                                                                            0.1s
+ => => writing image sha256:227e8353d91b32dd57e83844dfa2bbe15c46d4582fce0757d10396c0ac684f4c                       0.0s
+ => => naming to docker.io/jongkwangyun/myapp:0.0.1                                                                0.0s
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images
+REPOSITORY           TAG       IMAGE ID       CREATED          SIZE
+jongkwangyun/myapp   0.0.1     227e8353d91b   29 seconds ago   498MB
+docker101tutorial    latest    f97b09902265   23 hours ago     47MB
+alpine/git           latest    22d84a66cda4   4 months ago     43.6MB
+ubuntu               14.04     13b66b487594   2 years ago      197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker run -d -p 80:80 jongkwangyun/myapp:0.0.1
+5eadb0e5d3985d77653aec0e11b67859c44e1a7aeba4d304f6300cba3bd61b6a
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps
+CONTAINER ID   IMAGE                      COMMAND               CREATED          STATUS          PORTS                NAMES
+5eadb0e5d398   jongkwangyun/myapp:0.0.1   "java -jar app.jar"   22 seconds ago   Up 21 seconds   0.0.0.0:80->80/tcp   hardcore_diffie
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container rename hardcore_diffie myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps
+CONTAINER ID   IMAGE                      COMMAND               CREATED              STATUS              PORTS
+      NAMES
+5eadb0e5d398   jongkwangyun/myapp:0.0.1   "java -jar app.jar"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp   myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container stop
+"docker container stop" requires at least 1 argument.
+See 'docker container stop --help'.
+
+Usage:  docker container stop [OPTIONS] CONTAINER [CONTAINER...]
+
+Stop one or more running containers
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container stop myapp
+myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container rm myapp
+myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED        STATUS                    PORTS     NAMES
+2a850a3af665   ubuntu:14.04        "/bin/bash"              23 hours ago   Exited (0) 23 hours ago             myubuntu
+d35bd639949d   docker101tutorial   "/docker-entrypoint.…"   23 hours ago   Exited (0) 23 hours ago             docker-tutorial
+69beda111d46   alpine/git          "git clone https://g…"   23 hours ago   Exited (0) 23 hours ago             repo
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jongkwangyun/myapp:0.0.1
+Untagged: jongkwangyun/myapp:0.0.1
+Deleted: sha256:227e8353d91b32dd57e83844dfa2bbe15c46d4582fce0757d10396c0ac684f4c
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images
+REPOSITORY          TAG       IMAGE ID       CREATED        SIZE
+docker101tutorial   latest    f97b09902265   23 hours ago   47MB
+alpine/git          latest    22d84a66cda4   4 months ago   43.6MB
+ubuntu              14.04     13b66b487594   2 years ago    197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image ls
+REPOSITORY          TAG       IMAGE ID       CREATED        SIZE
+docker101tutorial   latest    f97b09902265   23 hours ago   47MB
+alpine/git          latest    22d84a66cda4   4 months ago   43.6MB
+ubuntu              14.04     13b66b487594   2 years ago    197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle clean
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle build
+
+> Task :app-server:compileJava
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Teacher.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+C:\Users\bitcamp\git\bitcamp-ncp\myapp\app-server\src\main\java\bitcamp\myapp\vo\Student.java:5: warning: Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+@Data
+^
+2 warnings
+
+BUILD SUCCESSFUL in 9s
+13 actionable tasks: 13 executed
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle build
+
+BUILD SUCCESSFUL in 7s
+13 actionable tasks: 11 executed, 2 up-to-date
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.2 .
+[+] Building 2.6s (7/7) FINISHED
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 38B                                                                                0.0s
+ => [internal] load .dockerignore                                                                                  0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load metadata for docker.io/library/openjdk:17                                                      1.7s
+ => [internal] load build context                                                                                  0.3s
+ => => transferring context: 26.62MB                                                                               0.2s
+ => CACHED [1/2] FROM docker.io/library/openjdk:17@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b  0.0s
+ => [2/2] COPY build/libs/app-server-0.0.1-SNAPSHOT.jar app.jar                                                    0.3s
+ => exporting to image                                                                                             0.2s
+ => => exporting layers                                                                                            0.1s
+ => => writing image sha256:efe130964928dac3647dbe78f9a27474ffd68e3011d3b5514caa76b020e3a785                       0.0s
+ => => naming to docker.io/jongkwangyun/myapp:0.0.2                                                                0.0s
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image ls
+REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
+jongkwangyun/myapp   0.0.2     efe130964928   7 seconds ago   498MB
+docker101tutorial    latest    f97b09902265   23 hours ago    47MB
+alpine/git           latest    22d84a66cda4   4 months ago    43.6MB
+ubuntu               14.04     13b66b487594   2 years ago     197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker run -d --name myapp -p 80:80 jongkwangyun/myapp:0.0.2
+b5d05a2085b69aa25f89513cf72b773704746364e4552288a8a11bb019019b0a
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps
+CONTAINER ID   IMAGE                      COMMAND               CREATED         STATUS         PORTS                NAMES
+b5d05a2085b6   jongkwangyun/myapp:0.0.2   "java -jar app.jar"   5 seconds ago   Up 4 seconds   0.0.0.0:80->80/tcp   myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jongkwangyun/myapp
+Error: No such image: jongkwangyun/myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jongkwangyun/myapp:0.0.2
+Error response from daemon: conflict: unable to remove repository reference "jongkwangyun/myapp:0.0.2" (must force) - container b5d05a2085b6 is using its referenced image efe130964928
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container stop myapp
+myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jongkwangyun/myapp:0.0.2
+Error response from daemon: conflict: unable to remove repository reference "jongkwangyun/myapp:0.0.2" (must force) - container b5d05a2085b6 is using its referenced image efe130964928
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jongkwangyun/myapp:0.0.2
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jon
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images
+REPOSITORY           TAG       IMAGE ID       CREATED          SIZE
+jongkwangyun/myapp   0.0.2     efe130964928   12 minutes ago   498MB
+docker101tutorial    latest    f97b09902265   23 hours ago     47MB
+alpine/git           latest    22d84a66cda4   4 months ago     43.6MB
+ubuntu               14.04     13b66b487594   2 years ago      197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container rm myapp
+myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm myapp
+Error: No such image: myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker image rm jongkwangyun/myapp:0.0.2
+Untagged: jongkwangyun/myapp:0.0.2
+Deleted: sha256:efe130964928dac3647dbe78f9a27474ffd68e3011d3b5514caa76b020e3a785
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle clean
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle build
+
+BUILD SUCCESSFUL in 8s
+13 actionable tasks: 13 executed
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.2 .
+[+] Building 1.7s (6/6) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                      0.0s
+ => => transferring dockerfile: 189B                                                                                                      0.0s
+ => [internal] load .dockerignore                                                                                                         0.0s
+ => => transferring context: 2B                                                                                                           0.0s
+ => [internal] load metadata for docker.io/library/openjdk:17                                                                             1.6s
+ => [internal] load build context                                                                                                         0.1s
+ => => transferring context: 57B                                                                                                          0.1s
+ => CACHED [1/2] FROM docker.io/library/openjdk:17@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7d8                0.0s
+ => ERROR [2/2] COPY build/libs/app-server-0.0.2-SNAPSHOT.jar app.jar                                                                     0.0s
+------
+ > [2/2] COPY build/libs/app-server-0.0.2-SNAPSHOT.jar app.jar:
+------
+failed to compute cache key: "/build/libs/app-server-0.0.2-SNAPSHOT.jar" not found: not found
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.2 .
+[+] Building 1.0s (6/6) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                      0.1s
+ => => transferring dockerfile: 38B                                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                         0.1s
+ => => transferring context: 2B                                                                                                           0.0s
+ => [internal] load metadata for docker.io/library/openjdk:17                                                                             0.7s
+ => CACHED [1/2] FROM docker.io/library/openjdk:17@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7d8                0.0s
+ => [internal] load build context                                                                                                         0.1s
+ => => transferring context: 57B                                                                                                          0.1s
+ => ERROR [2/2] COPY build/libs/app-server-0.0.2-SNAPSHOT.jar app.jar                                                                     0.0s
+------
+ > [2/2] COPY build/libs/app-server-0.0.2-SNAPSHOT.jar app.jar:
+------
+failed to compute cache key: "/build/libs/app-server-0.0.2-SNAPSHOT.jar" not found: not found
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle clean
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ gradle build
+
+BUILD SUCCESSFUL in 8s
+13 actionable tasks: 13 executed
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker build -t jongkwangyun/myapp:0.0.2 .
+[+] Building 1.8s (7/7) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                      0.1s
+ => => transferring dockerfile: 38B                                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                         0.1s
+ => => transferring context: 2B                                                                                                           0.0s
+ => [internal] load metadata for docker.io/library/openjdk:17                                                                             0.8s
+ => [internal] load build context                                                                                                         0.3s
+ => => transferring context: 26.62MB                                                                                                      0.2s
+ => CACHED [1/2] FROM docker.io/library/openjdk:17@sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7d8                0.0s
+ => [2/2] COPY build/libs/app-server-0.0.2-SNAPSHOT.jar app.jar                                                                           0.3s
+ => exporting to image                                                                                                                    0.2s
+ => => exporting layers                                                                                                                   0.2s
+ => => writing image sha256:9c5da84c56b88476b6c43d750341d1d01d407b12428721f4c9f90606471793ac                                              0.0s
+ => => naming to docker.io/jongkwangyun/myapp:0.0.2                                                                                       0.0s
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker images;
+REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
+jongkwangyun/myapp   0.0.2     9c5da84c56b8   5 seconds ago   498MB
+docker101tutorial    latest    f97b09902265   24 hours ago    47MB
+alpine/git           latest    22d84a66cda4   4 months ago    43.6MB
+ubuntu               14.04     13b66b487594   2 years ago     197MB
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker run -d -p 80:80 jongkwangyun/myapp:0.0.2
+81aa2fc28b73f39acf6d153e4468eac71eaece0767c815a8190f33b96fde11f4
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container stop myapp
+Error response from daemon: No such container: myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker stop myapp
+Error response from daemon: No such container: myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps
+CONTAINER ID   IMAGE                      COMMAND               CREATED          STATUS          PORTS                NAMES
+81aa2fc28b73   jongkwangyun/myapp:0.0.2   "java -jar app.jar"   36 seconds ago   Up 35 seconds   0.0.0.0:80->80/tcp   sharp_liskov
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker stop sharp_liskov
+sharp_liskov
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container rm myapp
+Error: No such container: myapp
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker container rm sharp_liskov
+sharp_liskov
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ ls -al /mnt/c/Users/bitcamp.webapp-upload
+ls: cannot access '/mnt/c/Users/bitcamp.webapp-upload': No such file or directory
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ ls -al /mnt/c/Users/bitcamp/webapp-upload
+total 7344
+drwxrwxrwx 1 study study    4096 Mar 28 10:29 .
+drwxrwxrwx 1 study study    4096 Mar 27 20:28 ..
+-rwxrwxrwx 1 study study  699013 Mar 14 12:43 9a26189e-c61d-4fd3-b58d-ea687d6e6c6c
+-rwxrwxrwx 1 study study  699013 Mar 28 10:29 ad0851d6-c5d3-4f36-b6a2-87cc10f9acfc
+-rwxrwxrwx 1 study study  672871 Mar 27 13:50 c86446ef-d033-41d7-88af-59743af8b4aa
+-rwxrwxrwx 1 study study 5440907 Mar 14 11:50 f94a1b7d-f81e-4186-b8ea-e62ead8ba086
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker run -d -p 80:80 -v /mnt/c/Users/bitcamp/webapp-upload:/root
+/webapp-upload --name myapp jongkwangyun/myapp:0.0.2
+bc1ab77bb6b1969049951b5cd5c6efb291e7876ab000c218e08359e580f02c53
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$ docker ps -a
+CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS                    PORTS                NAMES
+bc1ab77bb6b1   jongkwangyun/myapp:0.0.2   "java -jar app.jar"      6 minutes ago   Up 6 minutes              0.0.0.0:80->80/tcp   myapp
+2a850a3af665   ubuntu:14.04               "/bin/bash"              24 hours ago    Exited (0) 24 hours ago                        myubuntu
+d35bd639949d   docker101tutorial          "/docker-entrypoint.…"   24 hours ago    Exited (0) 24 hours ago                        docker-tutorial
+69beda111d46   alpine/git                 "git clone https://g…"   24 hours ago    Exited (0) 24 hours ago                        repo
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp/git/bitcamp-ncp/myapp/app-server$

@@ -1,0 +1,1784 @@
+Microsoft Windows [Version 10.0.22621.1413]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\bitcamp>cd vm-projects
+
+C:\Users\bitcamp\vm-projects>cd host2
+
+C:\Users\bitcamp\vm-projects\host2>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'sysnet4admin/Ubuntu-k8s' version '0.7.1' is up to date...
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: hostonly
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 6.0.0 r127566
+    default: VirtualBox Version: 7.0
+==> default: Configuring and enabling network interfaces...
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/bitcamp/vm-projects/host2
+Vagrant was unable to mount VirtualBox shared folders. This is usually
+because the filesystem "vboxsf" is not available. This filesystem is
+made available via the VirtualBox Guest Additions and kernel module.
+Please verify that these guest additions are properly installed in the
+guest. This is not a bug in Vagrant and is usually caused by a faulty
+Vagrant box. For context, the command attempted was:
+
+mount -t vboxsf -o uid=1000
+안녕히가세요,gid=1000,_netdev vagrant /vagrant
+
+The error output from the command was:
+
+bash: line 5: 안녕히가세요,gid=1000,_netdev: command not found
+
+C:\Users\bitcamp\vm-projects\host2>vagrant ssh
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-52-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Last login: Wed Mar 22 12:30:17 2023 from 10.0.2.2
+vagrant@k8s:~$ sudo docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+centos       7         eeb6ee3f44bd   18 months ago   204MB
+ubuntu       14.04     13b66b487594   24 months ago   197MB
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED        STATUS                       PORTS                NAMES
+94107a76b98d   ubuntu:14.04   "/bin/bash"   18 hours ago   Exited (255) 3 minutes ago   0.0.0.0:80->80/tcp   mywebserverbf862e6385c4   ubuntu:14.04   "/bin/bash"   18 hours ago   Exited (255) 3 minutes ago                        network_test
+vagrant@k8s:~$ sudo docker start mywebserver
+mywebserver
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED        STATUS                       PORTS                NAMES
+94107a76b98d   ubuntu:14.04   "/bin/bash"   18 hours ago   Up 9 seconds                 0.0.0.0:80->80/tcp   mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"   18 hours ago   Exited (255) 6 minutes ago                        network_test
+vagrant@k8s:~$ sudo docker network
+
+Usage:  docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+  rm          Remove one or more networks
+
+Run 'docker network COMMAND --help' for more information on a command.
+vagrant@k8s:~$ sudo docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+48728ee11746   bridge    bridge    local
+08f7e556aa06   host      host      local
+a95b98528a73   none      null      local
+vagrant@k8s:~$ sudo docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "48728ee117463c286f0fec90fe6a7a588eb97a937a847fa548f653adcee98073",
+        "Created": "2023-03-23T09:37:05.499460432+09:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "94107a76b98d95eab91be507fc0c2f4ee42ba07db29f481ba8194b1f661e793f": {
+                "Name": "mywebserver",
+                "EndpointID": "b171a78c0f646a338f0d869733bba8eada16b643eb07d00960582d2398c3b276",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+vagrant@k8s:~$ ping 172.17.0.2
+PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
+64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.058 ms
+64 bytes from 172.17.0.2: icmp_seq=2 ttl=64 time=0.037 ms
+64 bytes from 172.17.0.2: icmp_seq=3 ttl=64 time=0.036 ms
+64 bytes from 172.17.0.2: icmp_seq=4 ttl=64 time=0.032 ms
+64 bytes from 172.17.0.2: icmp_seq=5 ttl=64 time=0.088 ms
+^C
+--- 172.17.0.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4095ms
+rtt min/avg/max/mdev = 0.032/0.050/0.088/0.020 ms
+vagrant@k8s:~$ curl http://172.17.0.2
+curl: (7) Failed to connect to 172.17.0.2 port 80 after 0 ms: Connection refused
+vagrant@k8s:~$ curl http://172.17.0.2:80
+curl: (7) Failed to connect to 172.17.0.2 port 80 after 0 ms: Connection refused
+vagrant@k8s:~$ sudo docker pa -a
+unknown shorthand flag: 'a' in -a
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Log in to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.10.2)
+  buildx*     Docker Buildx (Docker Inc., v0.10.2)
+  compose*    Docker Compose (Docker Inc., v2.16.0)
+  compose*    Docker Compose (Docker Inc., v2.16.0)
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.23.0)
+  scan*       Docker Scan (Docker Inc., v0.23.0)
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default "/root/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level ("debug", "info", "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/root/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/root/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/root/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED        STATUS                        PORTS                NAMES
+94107a76b98d   ubuntu:14.04   "/bin/bash"   18 hours ago   Up 6 minutes                  0.0.0.0:80->80/tcp   mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"   18 hours ago   Exited (255) 12 minutes ago                        network_testvagrant@k8s:~$
+vagrant@k8s:~$ sudo docker ps -a
+^T^E^R
+^T^ECONTAINER ID   IMAGE          COMMAND       CREATED        STATUS                        PORTS                NAMES
+94107a76b98d   ubuntu:14.04   "/bin/bash"   18 hours ago   Up 8 minutes                  0.0.0.0:80->80/tcp   mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"   18 hours ago   Exited (255) 14 minutes ago                        network_testvagrant@k8s:~$ sudo docker run -i -t --name mywebserver2 -p 80 ubuntu:14.04
+root@7a49dd3d33bb:/# apt update
+Get:1 http://security.ubuntu.com trusty-security InRelease [56.4 kB]
+Ign http://archive.ubuntu.com trusty InRelease
+Get:2 http://archive.ubuntu.com trusty-updates InRelease [56.4 kB]
+Get:3 http://security.ubuntu.com trusty-security/main amd64 Packages [1557 kB]
+Get:4 https://esm.ubuntu.com trusty-infra-security InRelease
+Get:5 http://archive.ubuntu.com trusty-backports InRelease [65.9 kB]
+Get:6 https://esm.ubuntu.com trusty-infra-updates InRelease
+Hit http://archive.ubuntu.com trusty Release.gpg
+Get:7 http://archive.ubuntu.com trusty-updates/main amd64 Packages [2183 kB]
+Get:8 https://esm.ubuntu.com trusty-infra-security/main amd64 Packages
+Get:9 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [28.7 kB]
+Get:10 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [931 kB]
+Get:11 https://esm.ubuntu.com trusty-infra-updates/main amd64 Packages
+Get:12 http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages [21.7 kB]
+Get:13 http://archive.ubuntu.com trusty-backports/main amd64 Packages [14.7 kB]
+Get:14 http://archive.ubuntu.com trusty-backports/restricted amd64 Packages [40 B]
+Get:15 http://archive.ubuntu.com trusty-backports/universe amd64 Packages [52.5 kB]
+Get:16 http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages [1392 B]
+Hit http://archive.ubuntu.com trusty Release
+Get:17 http://archive.ubuntu.com trusty/main amd64 Packages [1743 kB]
+Setting up libapr1:amd64 (1.5.0-1) ...
+Setting up libaprutil1:amd64 (1.5.3-1) ...
+Setting up xml-core (0.13+nmu2) ...
+Setting up libaprutil1-dbd-sqlite3:amd64 (1.5.3-1) ...
+Setting up libaprutil1-ldap:amd64 (1.5.3-1) ...
+Setting up apache2-bin (2.4.7-1ubuntu4.22) ...
+Setting up apache2-data (2.4.7-1ubuntu4.22) ...
+Setting up apache2 (2.4.7-1ubuntu4.22) ...
+Enabling module mpm_event.
+Enabling module authz_core.
+Enabling module authz_host.
+Enabling module authn_core.
+Enabling module auth_basic.
+Enabling module access_compat.
+Enabling module authn_file.
+Enabling module authz_user.
+Enabling module alias.
+Enabling module dir.
+Enabling module autoindex.
+Enabling module env.
+Enabling module mime.
+Enabling module negotiation.
+Enabling module setenvif.
+Enabling module filter.
+Enabling module deflate.
+Enabling module status.
+Enabling conf charset.
+Enabling conf localized-error-pages.
+Enabling conf other-vhosts-access-log.
+Enabling conf security.
+Enabling conf serve-cgi-bin.
+Enabling site 000-default.
+invoke-rc.d: policy-rc.d denied execution of start.
+Setting up ssl-cert (1.0.33) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.15) ...
+Processing triggers for sgml-base (1.26+nmu4ubuntu1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+root@7a49dd3d33bb:/# service apache2 start
+ * Starting web server apache2                                                                                            AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.3. Set the 'ServerName' directive globally to suppress this message
+ *
+root@7a49dd3d33bb:/# vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS                        PORTS                   NAMES
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"   2 minutes ago   Up 2 minutes                  0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"   18 hours ago    Up 11 minutes                 0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"   18 hours ago    Exited (255) 17 minutes ago                           network_test
+vagrant@k8s:~$ sudo docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "48728ee117463c286f0fec90fe6a7a588eb97a937a847fa548f653adcee98073",
+        "Created": "2023-03-23T09:37:05.499460432+09:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "7a49dd3d33bb5da623162b66bbbbbed6bd7ed24b32640df279c7a5eca46b7cda": {
+                "Name": "mywebserver2",
+                "EndpointID": "d86c85768de58a680ffe019b8593cce6635ca86feebd68b03829bc943f6be23f",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "94107a76b98d95eab91be507fc0c2f4ee42ba07db29f481ba8194b1f661e793f": {
+                "Name": "mywebserver",
+                "EndpointID": "b171a78c0f646a338f0d869733bba8eada16b643eb07d00960582d2398c3b276",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+vagrant@k8s:~$ ping 172.17.0.3
+PING 172.17.0.3 (172.17.0.3) 56(84) bytes of data.
+64 bytes from 172.17.0.3: icmp_seq=1 ttl=64 time=0.037 ms
+64 bytes from 172.17.0.3: icmp_seq=2 ttl=64 time=0.091 ms
+64 bytes from 172.17.0.3: icmp_seq=3 ttl=64 time=0.047 ms
+^C
+--- 172.17.0.3 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2052ms
+rtt min/avg/max/mdev = 0.037/0.058/0.091/0.023 ms
+vagrant@k8s:~$ curl http://172.17.0.3
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!--
+    Modified from the Debian original for Ubuntu
+    Last updated: 2014-03-19
+    See: https://launchpad.net/bugs/1288690
+  -->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Apache2 Ubuntu Default Page: It works</title>
+    <style type="text/css" media="screen">
+  * {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
+
+  body, html {
+    padding: 3px 3px 3px 3px;
+
+    background-color: #D8DBE2;
+
+    font-family: Verdana, sans-serif;
+    font-size: 11pt;
+    text-align: center;
+  }
+
+  div.main_page {
+    position: relative;
+    display: table;
+
+    width: 800px;
+
+    margin-bottom: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 0px 0px 0px;
+
+    border-width: 2px;
+    border-color: #212738;
+    border-style: solid;
+
+    background-color: #FFFFFF;
+
+    text-align: center;
+  }
+
+  div.page_header {
+    height: 99px;
+    width: 100%;
+
+    background-color: #F5F6F7;
+  }
+
+  div.page_header span {
+    margin: 15px 0px 0px 50px;
+
+    font-size: 180%;
+    font-weight: bold;
+  }
+
+  div.page_header img {
+    margin: 3px 0px 0px 40px;
+
+    border: 0px 0px 0px;
+  }
+
+  div.table_of_contents {
+    clear: left;
+
+    min-width: 200px;
+
+    margin: 3px 3px 3px 3px;
+
+    background-color: #FFFFFF;
+
+    text-align: left;
+  }
+
+  div.table_of_contents_item {
+    clear: left;
+
+    width: 100%;
+
+    margin: 4px 0px 0px 0px;
+
+    background-color: #FFFFFF;
+
+    color: #000000;
+    text-align: left;
+  }
+
+  div.table_of_contents_item a {
+    margin: 6px 0px 0px 6px;
+  }
+
+  div.content_section {
+    margin: 3px 3px 3px 3px;
+
+    background-color: #FFFFFF;
+
+    text-align: left;
+  }
+
+  div.content_section_text {
+    padding: 4px 8px 4px 8px;
+
+    color: #000000;
+    font-size: 100%;
+  }
+
+  div.content_section_text pre {
+    margin: 8px 0px 8px 0px;
+    padding: 8px 8px 8px 8px;
+
+    border-width: 1px;
+    border-style: dotted;
+    border-color: #000000;
+
+    background-color: #F5F6F7;
+
+    font-style: italic;
+  }
+
+  div.content_section_text p {
+    margin-bottom: 6px;
+  }
+
+  div.content_section_text ul, div.content_section_text li {
+    padding: 4px 8px 4px 16px;
+  }
+
+  div.section_header {
+    padding: 3px 6px 3px 6px;
+
+    background-color: #8E9CB2;
+
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 112%;
+    text-align: center;
+  }
+
+  div.section_header_red {
+    background-color: #CD214F;
+  }
+
+  div.section_header_grey {
+    background-color: #9F9386;
+  }
+
+  .floating_element {
+    position: relative;
+    float: left;
+  }
+
+  div.table_of_contents_item a,
+  div.content_section_text a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  div.table_of_contents_item a:link,
+  div.table_of_contents_item a:visited,
+  div.table_of_contents_item a:active {
+    color: #000000;
+  }
+
+  div.table_of_contents_item a:hover {
+    background-color: #000000;
+
+    color: #FFFFFF;
+  }
+
+  div.content_section_text a:link,
+  div.content_section_text a:visited,
+   div.content_section_text a:active {
+    background-color: #DCDFE6;
+
+    color: #000000;
+  }
+
+  div.content_section_text a:hover {
+    background-color: #000000;
+
+    color: #DCDFE6;
+  }
+
+  div.validator {
+  }
+    </style>
+  </head>
+  <body>
+    <div class="main_page">
+      <div class="page_header floating_element">
+        <img src="/icons/ubuntu-logo.png" alt="Ubuntu Logo" class="floating_element"/>
+        <span class="floating_element">
+          Apache2 Ubuntu Default Page
+        </span>
+      </div>
+<!--      <div class="table_of_contents floating_element">
+        <div class="section_header section_header_grey">
+          TABLE OF CONTENTS
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#about">About</a>
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#changes">Changes</a>
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#scope">Scope</a>
+        </div>
+        <div class="table_of_contents_item floating_element">
+          <a href="#files">Config files</a>
+        </div>
+      </div>
+-->
+      <div class="content_section floating_element">
+
+
+        <div class="section_header section_header_red">
+          <div id="about"></div>
+          It works!
+        </div>
+        <div class="content_section_text">
+          <p>
+                This is the default welcome page used to test the correct
+                operation of the Apache2 server after installation on Ubuntu systems.
+                It is based on the equivalent page on Debian, from which the Ubuntu Apache
+                packaging is derived.
+                If you can read this page, it means that the Apache HTTP server installed at
+                this site is working properly. You should <b>replace this file</b> (located at
+                <tt>/var/www/html/index.html</tt>) before continuing to operate your HTTP server.
+          </p>
+
+
+          <p>
+                If you are a normal user of this web site and don't know what this page is
+                about, this probably means that the site is currently unavailable due to
+                maintenance.
+                If the problem persists, please contact the site's administrator.
+          </p>
+
+        </div>
+        <div class="section_header">
+          <div id="changes"></div>
+                Configuration Overview
+        </div>
+        <div class="content_section_text">
+          <p>
+                Ubuntu's Apache2 default configuration is different from the
+                upstream default configuration, and split into several files optimized for
+                interaction with Ubuntu tools. The configuration system is
+                <b>fully documented in
+                /usr/share/doc/apache2/README.Debian.gz</b>. Refer to this for the full
+                documentation. Documentation for the web server itself can be
+                found by accessing the <a href="/manual">manual</a> if the <tt>apache2-doc</tt>
+                package was installed on this server.
+
+          </p>
+          <p>
+                The configuration layout for an Apache2 web server installation on Ubuntu systems is as follows:
+          </p>
+          <pre>
+/etc/apache2/
+|-- apache2.conf
+|       `--  ports.conf
+|-- mods-enabled
+|       |-- *.load
+|       `-- *.conf
+|-- conf-enabled
+|       `-- *.conf
+|-- sites-enabled
+|       `-- *.conf
+          </pre>
+          <ul>
+                        <li>
+                           <tt>apache2.conf</tt> is the main configuration
+                           file. It puts the pieces together by including all remaining configuration
+                           files when starting up the web server.
+                        </li>
+
+                        <li>
+                           <tt>ports.conf</tt> is always included from the
+                           main configuration file. It is used to determine the listening ports for
+                           incoming connections, and this file can be customized anytime.
+                        </li>
+
+                        <li>
+                           Configuration files in the <tt>mods-enabled/</tt>,
+                           <tt>conf-enabled/</tt> and <tt>sites-enabled/</tt> directories contain
+                           particular configuration snippets which manage modules, global configuration
+                           fragments, or virtual host configurations, respectively.
+                        </li>
+
+                        <li>
+                           They are activated by symlinking available
+                           configuration files from their respective
+                           *-available/ counterparts. These should be managed
+                           by using our helpers
+                           <tt>
+                                <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=a2enmod">a2enmod</a>,
+                                <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=a2dismod">a2dismod</a>,
+                           </tt>
+                           <tt>
+                                <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=a2ensite">a2ensite</a>,
+                                <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=a2dissite">a2dissite</a>,
+                            </tt>
+                                and
+                           <tt>
+                                <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=a2enconf">a2enconf</a>,
+                                <a href="http://manpages.debian.org/cgi-bin/man.cgi?query=a2disconf">a2disconf</a>
+                           </tt>. See their respective man pages for detailed information.
+                        </li>
+
+                        <li>
+                           The binary is called apache2. Due to the use of
+                           environment variables, in the default configuration, apache2 needs to be
+                           started/stopped with <tt>/etc/init.d/apache2</tt> or <tt>apache2ctl</tt>.
+                           <b>Calling <tt>/usr/bin/apache2</tt> directly will not work</b> with the
+                           default configuration.
+                        </li>
+          </ul>
+        </div>
+
+        <div class="section_header">
+            <div id="docroot"></div>
+                Document Roots
+        </div>
+
+        <div class="content_section_text">
+            <p>
+                By default, Ubuntu does not allow access through the web browser to
+                <em>any</em> file apart of those located in <tt>/var/www</tt>,
+                <a href="http://httpd.apache.org/docs/2.4/mod/mod_userdir.html">public_html</a>
+                directories (when enabled) and <tt>/usr/share</tt> (for web
+                applications). If your site is using a web document root
+                located elsewhere (such as in <tt>/srv</tt>) you may need to whitelist your
+                document root directory in <tt>/etc/apache2/apache2.conf</tt>.
+            </p>
+            <p>
+                The default Ubuntu document root is <tt>/var/www/html</tt>. You
+                can make your own virtual hosts under /var/www. This is different
+                to previous releases which provides better security out of the box.
+            </p>
+        </div>
+
+        <div class="section_header">
+          <div id="bugs"></div>
+                Reporting Problems
+        </div>
+        <div class="content_section_text">
+          <p>
+                Please use the <tt>ubuntu-bug</tt> tool to report bugs in the
+                Apache2 package with Ubuntu. However, check <a
+                href="https://bugs.launchpad.net/ubuntu/+source/apache2">existing
+                bug reports</a> before reporting a new bug.
+          </p>
+          <p>
+                Please report bugs specific to modules (such as PHP and others)
+                to respective packages, not to the web server itself.
+          </p>
+        </div>
+
+
+
+
+      </div>
+    </div>
+    <div class="validator">
+    <p>
+      <a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+    </p>
+    </div>
+  </body>
+</html>
+
+vagrant@k8s:~$ sudo docker images
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+centos       7         eeb6ee3f44bd   18 months ago   204MB
+ubuntu       14.04     13b66b487594   24 months ago   197MB
+vagrant@k8s:~$ sudo docker run -d --name wordpressdb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wordpress mysql:5.7
+Unable to find image 'mysql:5.7' locally
+5.7: Pulling from library/mysql
+2ec521688c56: Pull complete
+f911f9b90db6: Pull complete
+38eb4fe7ed26: Pull complete
+01f772a6b25f: Pull complete
+499456357ebf: Pull complete
+274f3ad0dcec: Pull complete
+3e6a5b12e1de: Pull complete
+de0c5c82dbbc: Pull complete
+c9bd281f4600: Pull complete
+3289c4277a83: Pull complete
+8b66f10a11fa: Pull complete
+Digest: sha256:1780318bdabc0edd36907bf91b47632eb912e8ea91258eca3590f8aca6f54836
+Status: Downloaded newer image for mysql:5.7
+8f37283c3afad00bf52eaacc0187521e7add68ba01c2b319120f611324937af6
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                        PORTS                   NAMES
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   14 seconds ago   Up 13 seconds                 3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              13 minutes ago   Up 13 minutes                 0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              18 hours ago     Up 22 minutes                 0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              18 hours ago     Exited (255) 28 minutes ago                           network_test
+vagrant@k8s:~$ sudo docker run -d --name wordpress -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=password --link wordpressdb:mysql -p 80 wordpress
+Unable to find image 'wordpress:latest' locally
+latest: Pulling from library/wordpress
+3f9582a2cbe7: Pull complete
+0b95dc92ce55: Pull complete
+3630ff9f8131: Pull complete
+49efbc577363: Pull complete
+df983cae2963: Pull complete
+52fed2cf4dcf: Pull complete
+badf42672f1b: Pull complete
+baaffcad7804: Pull complete
+e65c63290641: Pull complete
+56fbc7142e6c: Pull complete
+0b0f64aca9a8: Pull complete
+1a0de30c1e15: Pull complete
+c28dd6954d0b: Pull complete
+12b130c64439: Pull complete
+b7956b05af90: Pull complete
+bce2c530d546: Pull complete
+275d52fd4f6c: Pull complete
+841c64b802b3: Pull complete
+af298c263b20: Pull complete
+6d98f1e7e80e: Pull complete
+e77d1e0ab8c5: Pull complete
+Digest: sha256:52496c5b4dbfe89fc4a646bad5b247d10df32fe1c9a49e7cde90cf3d320230a1
+Status: Downloaded newer image for wordpress:latest
+41fb7deace8a4d63bf673115044dfaaa7c4041476c1cb4ca3f340ed7246359bd
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                        PORTS                   NAMES
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   37 seconds ago   Up 36 seconds                 0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   15 minutes ago   Up 15 minutes                 3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              28 minutes ago   Up 28 minutes                 0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              18 hours ago     Up 38 minutes                 0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              19 hours ago     Exited (255) 44 minutes ago                           network_test
+vagrant@k8s:~$ sudo docker run -d --name detach_test ubuntu:14.04
+4a9fb0edc2df6bbab4a88e14ddd71be9101a63e6d24ae97174a8c59579f21527
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                           PORTS                   NAMES
+4a9fb0edc2df   ubuntu:14.04   "/bin/bash"              9 seconds ago    Exited (0) 8 seconds ago                                 detach_test
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes                    0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   34 minutes ago   Up 34 minutes                    3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              47 minutes ago   Up 47 minutes                    0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              19 hours ago     Up 56 minutes                    0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              19 hours ago     Exited (255) About an hour ago                           network_test
+vagrant@k8s:~$ sudo docker exec wordpressdb ls
+bin
+boot
+dev
+docker-entrypoint-initdb.d
+entrypoint.sh
+etc
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+vagrant@k8s:~$ sudo docker exec wordpressdb ifconfig
+OCI runtime exec failed: exec failed: unable to start container process: exec: "ifconfig": executable file not found in $PATH: unknown
+vagrant@k8s:~$ sudo docker exec wordpressdb whoami
+root
+vagrant@k8s:~$ sudo docker exec wordpressdb who am i
+vagrant@k8s:~$ sudo docker exec wordpressdb "who am i"
+OCI runtime exec failed: exec failed: unable to start container process: exec: "who am i": executable file not found in $PATH: unknown
+vagrant@k8s:~$ sudo docker exec wordpressdb uname -a
+Linux 8f37283c3afa 5.15.0-52-generic #58-Ubuntu SMP Thu Oct 13 08:03:55 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+vagrant@k8s:~$ sudo docker exec -it wordpressdb /bin/bash
+bash-4.2# env
+HOSTNAME=8f37283c3afa
+TERM=xterm
+MYSQL_VERSION=5.7.41-1.el7
+MYSQL_DATABASE=wordpress
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/
+MYSQL_SHELL_VERSION=8.0.32-1.el7
+SHLVL=1
+HOME=/root
+MYSQL_MAJOR=5.7
+GOSU_VERSION=1.16
+MYSQL_ROOT_PASSWORD=password
+_=/usr/bin/env
+bash-4.2# exit
+exit
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                           PORTS                   NAMES
+4a9fb0edc2df   ubuntu:14.04   "/bin/bash"              9 minutes ago    Exited (0) 9 minutes ago                                 detach_test
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   28 minutes ago   Up 28 minutes                    0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   43 minutes ago   Up 43 minutes                    3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              56 minutes ago   Up 56 minutes                    0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              19 hours ago     Up About an hour                 0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              19 hours ago     Exited (255) About an hour ago                           network_test
+vagrant@k8s:~$ sudo docker exec -it wordpress /bin/bash
+root@41fb7deace8a:/var/www/html# env
+MYSQL_PORT_33060_TCP_ADDR=172.17.0.4
+MYSQL_PORT=tcp://172.17.0.4:3306
+MYSQL_PORT_3306_TCP_ADDR=172.17.0.4
+MYSQL_NAME=/wordpress/mysql
+MYSQL_ENV_MYSQL_ROOT_PASSWORD=password
+MYSQL_PORT_3306_TCP_PORT=3306
+HOSTNAME=41fb7deace8a
+PHP_VERSION=8.0.28
+APACHE_CONFDIR=/etc/apache2
+PHP_INI_DIR=/usr/local/etc/php
+GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F 2C16C765DBE54A088130F1BC4B9B5F600B55F3B4
+MYSQL_ENV_MYSQL_MAJOR=5.7
+PHP_LDFLAGS=-Wl,-O1 -pie
+MYSQL_PORT_3306_TCP=tcp://172.17.0.4:3306
+PWD=/var/www/html
+HOME=/root
+MYSQL_ENV_GOSU_VERSION=1.16
+MYSQL_PORT_33060_TCP_PROTO=tcp
+MYSQL_ENV_MYSQL_SHELL_VERSION=8.0.32-1.el7
+PHP_SHA256=5e07278a1f315a67d36a676c01343ca2d4da5ec5bdb15d018e4248b3012bc0cd
+WORDPRESS_DB_HOST=mysql
+PHPIZE_DEPS=autoconf            dpkg-dev                file            g++             gcc             libc-dev                make            pkg-config             re2c
+TERM=xterm
+PHP_URL=https://www.php.net/distributions/php-8.0.28.tar.xz
+MYSQL_PORT_33060_TCP_PORT=33060
+MYSQL_PORT_3306_TCP_PROTO=tcp
+SHLVL=1
+PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+MYSQL_PORT_33060_TCP=tcp://172.17.0.4:33060
+WORDPRESS_DB_PASSWORD=password
+APACHE_ENVVARS=/etc/apache2/envvars
+MYSQL_ENV_MYSQL_DATABASE=wordpress
+WORDPRESS_DB_USER=root
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PHP_ASC_URL=https://www.php.net/distributions/php-8.0.28.tar.xz.asc
+PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+MYSQL_ENV_MYSQL_VERSION=5.7.41-1.el7
+_=/usr/bin/env
+root@41fb7deace8a:/var/www/html# exit
+exit
+vagrant@k8s:~$ sudo docker run -d --name wordpressdb_hostvolume -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=wordpress -v /home/wordpress_db:/var/lib/mysql mysql:5.7
+db94c0883a0633278e6fc4a7d17fc2e959997bc60c8e0cd3322604360dff3dab
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS                           PORTS                   NAMES
+db94c0883a06   mysql:5.7      "docker-entrypoint.s…"   7 seconds ago       Up 6 seconds                     3306/tcp, 33060/tcp     wordpressdb_hostvolume
+4a9fb0edc2df   ubuntu:14.04   "/bin/bash"              21 minutes ago      Exited (0) 21 minutes ago                                detach_test
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   40 minutes ago      Up 40 minutes                    0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   55 minutes ago      Up 55 minutes                    3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              About an hour ago   Up About an hour                 0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              19 hours ago        Up About an hour                 0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              19 hours ago        Exited (255) About an hour ago                           network_test
+vagrant@k8s:~$ sudo docker exec -it wordpressdb_hostvolume /bin/bash
+bash-4.2# cd /var/lib/mysql
+bash-4.2# ls -al
+total 188488
+drwxr-xr-x 6 mysql root      4096 Mar 23 02:00 .
+drwxr-xr-x 1 root  root      4096 Mar 21 20:51 ..
+-rw-r----- 1 mysql mysql       56 Mar 23 02:00 auto.cnf
+-rw------- 1 mysql mysql     1676 Mar 23 02:00 ca-key.pem
+-rw-r--r-- 1 mysql mysql     1112 Mar 23 02:00 ca.pem
+-rw-r--r-- 1 mysql mysql     1112 Mar 23 02:00 client-cert.pem
+-rw------- 1 mysql mysql     1676 Mar 23 02:00 client-key.pem
+-rw-r----- 1 mysql mysql     1318 Mar 23 02:00 ib_buffer_pool
+-rw-r----- 1 mysql mysql 50331648 Mar 23 02:00 ib_logfile0
+-rw-r----- 1 mysql mysql 50331648 Mar 23 02:00 ib_logfile1
+-rw-r----- 1 mysql mysql 79691776 Mar 23 02:00 ibdata1
+-rw-r----- 1 mysql mysql 12582912 Mar 23 02:00 ibtmp1
+drwxr-x--- 2 mysql mysql     4096 Mar 23 02:00 mysql
+lrwxrwxrwx 1 mysql mysql       27 Mar 23 02:00 mysql.sock -> /var/run/mysqld/mysqld.sock
+drwxr-x--- 2 mysql mysql     4096 Mar 23 02:00 performance_schema
+-rw------- 1 mysql mysql     1676 Mar 23 02:00 private_key.pem
+-rw-r--r-- 1 mysql mysql      452 Mar 23 02:00 public_key.pem
+-rw-r--r-- 1 mysql mysql     1112 Mar 23 02:00 server-cert.pem
+-rw------- 1 mysql mysql     1680 Mar 23 02:00 server-key.pem
+drwxr-x--- 2 mysql mysql    12288 Mar 23 02:00 sys
+drwxr-x--- 2 mysql mysql     4096 Mar 23 02:00 wordpress
+bash-4.2# pwd
+/var/lib/mysql
+bash-4.2# exit
+exit
+vagrant@k8s:~$ cd /home
+vagrant@k8s:/home$ ls
+vagrant  wordpress_db
+vagrant@k8s:/home$ cd wordpress_db/
+vagrant@k8s:/home/wordpress_db$ ls
+auto.cnf    ca.pem           client-key.pem  ibdata1      ib_logfile1  mysql       performance_schema  public_key.pem   server-key.pem  wordpress
+ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile0  ibtmp1       mysql.sock  private_key.pem     server-cert.pem  sys
+vagrant@k8s:/home/wordpress_db$ sudo docker run -d --name wordpress_hostvolume -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=password --link wordpressdb_hostvolume:mysql -p 80 wordpress
+a8eaa8216f80edd15a278973f7a25f7c5611bf45f1276bc3c27fcf36c830bb08
+vagrant@k8s:/home/wordpress_db$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS                           PORTS                   NAMES
+a8eaa8216f80   wordpress      "docker-entrypoint.s…"   5 seconds ago       Up 4 seconds                     0.0.0.0:32770->80/tcp   wordpress_hostvolume
+db94c0883a06   mysql:5.7      "docker-entrypoint.s…"   5 minutes ago       Up 5 minutes                     3306/tcp, 33060/tcp     wordpressdb_hostvolume
+4a9fb0edc2df   ubuntu:14.04   "/bin/bash"              26 minutes ago      Exited (0) 26 minutes ago                                detach_test
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   45 minutes ago      Up 45 minutes                    0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   About an hour ago   Up About an hour                 3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              About an hour ago   Up About an hour                 0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              19 hours ago        Up About an hour                 0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              19 hours ago        Exited (255) About an hour ago                           network_test
+vagrant@k8s:/home/wordpress_db$ $ sudo docker stop wordpress_hostvolume wordpressdb_hostvolume
+-bash: $: command not found
+vagrant@k8s:/home/wordpress_db$ $ sudo docker stop wordpress_hostvolume wordpressdb_hostvolume
+-bash: $: command not found
+vagrant@k8s:/home/wordpress_db$ sudo docker stop wordpress_hostvolume wordpressdb_hostvolume
+wordpress_hostvolume
+wordpressdb_hostvolume
+vagrant@k8s:/home/wordpress_db$ sudo docker rm wordpress_hostvolume wordpressdb_hostvolume
+wordpress_hostvolume
+wordpressdb_hostvolume
+vagrant@k8s:/home/wordpress_db$ sudo docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS                      PORTS                   NAMES
+4a9fb0edc2df   ubuntu:14.04   "/bin/bash"              29 minutes ago      Exited (0) 29 minutes ago                           detach_test
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   48 minutes ago      Up 48 minutes               0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   About an hour ago   Up About an hour            3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              About an hour ago   Up About an hour            0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              19 hours ago        Up About an hour            0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04   "/bin/bash"              20 hours ago        Exited (255) 2 hours ago                            network_test
+vagrant@k8s:/home/wordpress_db$ cd
+vagrant@k8s:~$ cd /home/wordpress_db/
+vagrant@k8s:/home/wordpress_db$ ls
+auto.cnf    ca.pem           client-key.pem  ibdata1      ib_logfile1  mysql.sock          private_key.pem  server-cert.pem  sys
+ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile0  mysql        performance_schema  public_key.pem   server-key.pem   wordpress
+vagrant@k8s:/home/wordpress_db$ cd
+vagrant@k8s:~$ sudo docker run -i -t --name volume_dummy alicek106/volume_test
+Unable to find image 'alicek106/volume_test:latest' locally
+latest: Pulling from alicek106/volume_test
+56eb14001ceb: Pull complete
+7ff49c327d83: Pull complete
+6e532f87f96d: Pull complete
+3ce63537e70c: Pull complete
+587f7dba3172: Pull complete
+Digest: sha256:e0287b5cfd550b270e4243344093994b7b1df07112b4661c1bf324d9ac9c04aa
+Status: Downloaded newer image for alicek106/volume_test:latest
+root@47a8a54c624b:/# cd home
+root@47a8a54c624b:/home# cd testdir_2/
+root@47a8a54c624b:/home/testdir_2# ls
+test
+root@47a8a54c624b:/home/testdir_2# cat test
+testdir_2!
+root@47a8a54c624b:/home/testdir_2# exit
+exit
+vagrant@k8s:~$ sudo docker run -i -t --name volume_override -v /home/wordpress_db:/home/testdir_2 alicek106/volume_test
+root@2f0f275a0fb7:/# cd /home/testdir_2/
+root@2f0f275a0fb7:/home/testdir_2# ls
+auto.cnf    ca.pem           client-key.pem  ib_logfile0  ibdata1  mysql.sock          private_key.pem  server-cert.pem  sys
+ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile1  mysql    performance_schema  public_key.pem   server-key.pem   wordpress
+root@2f0f275a0fb7:/home/testdir_2# touch ohora
+root@2f0f275a0fb7:/home/testdir_2# ls
+auto.cnf    ca.pem           client-key.pem  ib_logfile0  ibdata1  mysql.sock  performance_schema  public_key.pem   server-key.pem  wordpress
+ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile1  mysql    ohora       private_key.pem     server-cert.pem  sys
+root@2f0f275a0fb7:/home/testdir_2# exit
+exit
+vagrant@k8s:~$ cd /home/wordpress_db/
+vagrant@k8s:/home/wordpress_db$ ls
+auto.cnf    ca.pem           client-key.pem  ibdata1      ib_logfile1  mysql.sock  performance_schema  public_key.pem   server-key.pem  wordpress
+ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile0  mysql        ohora       private_key.pem     server-cert.pem  sys
+vagrant@k8s:/home/wordpress_db$ sudo docker run -i -t --name volumes_from_container --volumes-from volume_override ubuntu:14.04
+root@09d471678091:/# cd /home/testdir_2/
+root@09d471678091:/home/testdir_2# ls
+auto.cnf    ca.pem           client-key.pem  ib_logfile0  ibdata1  mysql.sock  performance_schema  public_key.pem   server-key.pem  wordpress
+ca-key.pem  client-cert.pem  ib_buffer_pool  ib_logfile1  mysql    ohora       private_key.pem     server-cert.pem  sys
+root@09d471678091:/home/testdir_2# exit
+exit
+vagrant@k8s:/home/wordpress_db$ sudo docker run -i -t --name volumes_from_container2 ubuntu:14.04
+root@bb3835310916:/# cd /home
+root@bb3835310916:/home# ls
+root@bb3835310916:/home# exit
+exit
+vagrant@k8s:/home/wordpress_db$ sudo docker volume ls
+DRIVER    VOLUME NAME
+local     1aca65d04a571fe667b26c08228a330e3d26a4e77e9e8bf670dd1e40e7b2dab9
+local     9bbcaac11b73dd8a501a492afd154f56512c9615567bc0721ca076823fd7a553
+local     4317166b14ee38cee3d7393a990306b5bae881dd7d12ce241279f10d7d7dbf00
+vagrant@k8s:/home/wordpress_db$ sudo docker volume prune
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B
+vagrant@k8s:/home/wordpress_db$ sudo docker volume ls
+DRIVER    VOLUME NAME
+local     1aca65d04a571fe667b26c08228a330e3d26a4e77e9e8bf670dd1e40e7b2dab9
+local     9bbcaac11b73dd8a501a492afd154f56512c9615567bc0721ca076823fd7a553
+local     4317166b14ee38cee3d7393a990306b5bae881dd7d12ce241279f10d7d7dbf00
+vagrant@k8s:/home/wordpress_db$ sudo docker volume create --name myvolume
+myvolume
+vagrant@k8s:/home/wordpress_db$ sudo docker volume ls
+DRIVER    VOLUME NAME
+local     1aca65d04a571fe667b26c08228a330e3d26a4e77e9e8bf670dd1e40e7b2dab9
+local     9bbcaac11b73dd8a501a492afd154f56512c9615567bc0721ca076823fd7a553
+local     4317166b14ee38cee3d7393a990306b5bae881dd7d12ce241279f10d7d7dbf00
+local     myvolume
+vagrant@k8s:/home/wordpress_db$ sudo docker run -i -t --name myvolume_1 -v myvolume:/root/ ubuntu:14.04
+root@b5bc1d7edfb6:/# echo Hello, world!
+Hello, world!
+root@b5bc1d7edfb6:/# echo Hello, world! >> /root/test
+root@b5bc1d7edfb6:/# cd /root
+root@b5bc1d7edfb6:~# ls
+test
+root@b5bc1d7edfb6:~# cat test
+Hello, world!
+root@b5bc1d7edfb6:~# exit
+exit
+vagrant@k8s:/home/wordpress_db$ sudo docker run -i -t --name myvolume_2 -v myvolume:/root/ ubuntu:14.04
+root@62dd176e1cf0:/# cd /root/
+root@62dd176e1cf0:~# ls
+test
+root@62dd176e1cf0:~# cat test
+Hello, world!
+root@62dd176e1cf0:~# exit
+exit
+vagrant@k8s:/home/wordpress_db$ sudo docker inspect --type volume myvolume
+[
+    {
+        "CreatedAt": "2023-03-23T11:42:45+09:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/myvolume/_data",
+        "Name": "myvolume",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+vagrant@k8s:/home/wordpress_db$ cd /var/lib/docker/volumes/myvolume/
+-bash: cd: /var/lib/docker/volumes/myvolume/: Permission denied
+vagrant@k8s:/home/wordpress_db$ sudo cd /var/lib/docker/volumes/myvolume/
+sudo: cd: command not found
+sudo: "cd" is a shell built-in command, it cannot be run directly.
+sudo: the -s option may be used to run a privileged shell.
+sudo: the -D option may be used to run a command in a specific directory.
+vagrant@k8s:/home/wordpress_db$ cd ../..
+vagrant@k8s:/$ sudo cd /var/lib/docker/volumes/myvolume/
+sudo: cd: command not found
+sudo: "cd" is a shell built-in command, it cannot be run directly.
+sudo: the -s option may be used to run a privileged shell.
+sudo: the -D option may be used to run a command in a specific directory.
+vagrant@k8s:/$ cd /var/lib/docker/volumes/myvolume/
+-bash: cd: /var/lib/docker/volumes/myvolume/: Permission denied
+vagrant@k8s:/$ cd ~
+vagrant@k8s:~$ cd /var/lib/docker/volumes/myvolume/
+-bash: cd: /var/lib/docker/volumes/myvolume/: Permission denied
+vagrant@k8s:~$ sudo cd /var/lib/docker/volumes/myvolume/
+sudo: cd: command not found
+sudo: "cd" is a shell built-in command, it cannot be run directly.
+sudo: the -s option may be used to run a privileged shell.
+sudo: the -D option may be used to run a command in a specific directory.
+vagrant@k8s:~$ sudo ls -al /var/lib/docker/volumes/myvolume/_data
+total 24
+drwx------ 2 root root 4096 Mar 23 11:48 .
+drwx-----x 3 root root 4096 Mar 23 11:42 ..
+-rw------- 1 root root  105 Mar 23 11:49 .bash_history
+-rw-r--r-- 1 root root 3106 Feb 20  2014 .bashrc
+-rw-r--r-- 1 root root  140 Feb 20  2014 .profile
+-rw-r--r-- 1 root root   14 Mar 23 11:45 test
+vagrant@k8s:~$ sudo docker run -i -t --name volume_auto -v /root/ ubuntu:14.04
+root@405ec99a36e0:/# exit
+exit
+vagrant@k8s:~$ sudo docker volume ls
+DRIVER    VOLUME NAME
+local     1aca65d04a571fe667b26c08228a330e3d26a4e77e9e8bf670dd1e40e7b2dab9
+local     9bbcaac11b73dd8a501a492afd154f56512c9615567bc0721ca076823fd7a553
+local     4317166b14ee38cee3d7393a990306b5bae881dd7d12ce241279f10d7d7dbf00
+local     c283f498a571d073902cb882dafb50b6740ecab658f454278912b5547ded755d
+local     myvolume
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                         PORTS                   NAMES
+405ec99a36e0   ubuntu:14.04            "/bin/bash"              51 seconds ago      Exited (0) 46 seconds ago                              volume_auto
+62dd176e1cf0   ubuntu:14.04            "/bin/bash"              4 minutes ago       Exited (0) 3 minutes ago                               myvolume_2
+b5bc1d7edfb6   ubuntu:14.04            "/bin/bash"              8 minutes ago       Exited (0) 4 minutes ago                               myvolume_1
+bb3835310916   ubuntu:14.04            "/bin/bash"              25 minutes ago      Exited (0) 25 minutes ago                              volumes_from_container2
+09d471678091   ubuntu:14.04            "/bin/bash"              27 minutes ago      Exited (0) 26 minutes ago                              volumes_from_container
+2f0f275a0fb7   alicek106/volume_test   "/bin/bash"              35 minutes ago      Exited (0) 33 minutes ago                              volume_override
+47a8a54c624b   alicek106/volume_test   "/bin/bash"              41 minutes ago      Exited (0) 38 minutes ago                              volume_dummy
+4a9fb0edc2df   ubuntu:14.04            "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           detach_test
+41fb7deace8a   wordpress               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04            "/bin/bash"              2 hours ago         Up 2 hours                     0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04            "/bin/bash"              20 hours ago        Up 2 hours                     0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04            "/bin/bash"              20 hours ago        Exited (255) 2 hours ago                               network_test
+vagrant@k8s:~$ sudo docker volume prune
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B
+vagrant@k8s:~$ ifconfig
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        ether 02:42:4b:2f:00:66  txqueuelen 0  (Ethernet)
+        RX packets 7456  bytes 6020237 (6.0 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 9724  bytes 21356183 (21.3 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        ether 08:00:00:00:00:00  txqueuelen 1000  (Ethernet)
+        RX packets 306343  bytes 451478476 (451.4 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 26216  bytes 2087652 (2.0 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.10  netmask 255.255.255.0  broadcast 192.168.1.255
+        ether 08:00:27:cd:04:84  txqueuelen 1000  (Ethernet)
+        RX packets 3025  bytes 483403 (483.4 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 4897  bytes 5863612 (5.8 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 420  bytes 48184 (48.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 420  bytes 48184 (48.1 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth01db77f: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 26:c4:13:ce:76:63  txqueuelen 0  (Ethernet)
+        RX packets 2862  bytes 1603630 (1.6 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 3025  bytes 2287662 (2.2 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethda5bef4: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether c6:8e:c4:05:af:0e  txqueuelen 0  (Ethernet)
+        RX packets 4509  bytes 5122815 (5.1 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 4996  bytes 3257681 (3.2 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethe18d461: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 3e:a8:89:d2:30:aa  txqueuelen 0  (Ethernet)
+        RX packets 4332  bytes 261834 (261.8 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 5286  bytes 17980639 (17.9 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethef23556: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether be:f5:a6:b3:a7:94  txqueuelen 0  (Ethernet)
+        RX packets 124  bytes 6772 (6.7 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 130  bytes 8348 (8.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vagrant@k8s:~$ sudo docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS                   NAMES
+41fb7deace8a   wordpress      "docker-entrypoint.s…"   2 hours ago    Up 2 hours   0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7      "docker-entrypoint.s…"   2 hours ago    Up 2 hours   3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04   "/bin/bash"              2 hours ago    Up 2 hours   0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04   "/bin/bash"              20 hours ago   Up 2 hours   0.0.0.0:80->80/tcp      mywebserver
+vagrant@k8s:~$ sudo docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+48728ee11746   bridge    bridge    local
+08f7e556aa06   host      host      local
+a95b98528a73   none      null      local
+vagrant@k8s:~$ sudo docker search ubuntu
+NAME                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+ubuntu                           Ubuntu is a Debian-based Linux operating sys…   15741     [OK]
+websphere-liberty                WebSphere Liberty multi-architecture images …   293       [OK]
+open-liberty                     Open Liberty multi-architecture images based…   59        [OK]
+neurodebian                      NeuroDebian provides neuroscience research s…   99        [OK]
+ubuntu-debootstrap               DEPRECATED; use "ubuntu" instead                50        [OK]
+ubuntu-upstart                   DEPRECATED, as is Upstart (find other proces…   112       [OK]
+ubuntu/nginx                     Nginx, a high-performance reverse proxy & we…   83
+ubuntu/cortex                    Cortex provides storage for Prometheus. Long…   3
+ubuntu/squid                     Squid is a caching proxy for the Web. Long-t…   52
+ubuntu/apache2                   Apache, a secure & extensible open-source HT…   55
+ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   43
+ubuntu/redis                     Redis, an open source key-value store. Long-…   17
+ubuntu/bind9                     BIND 9 is a very flexible, full-featured DNS…   46
+ubuntu/prometheus                Prometheus is a systems and service monitori…   40
+ubuntu/kafka                     Apache Kafka, a distributed event streaming …   26
+ubuntu/postgres                  PostgreSQL is an open source object-relation…   27
+ubuntu/zookeeper                 ZooKeeper maintains configuration informatio…   5
+ubuntu/grafana                   Grafana, a feature rich metrics dashboard & …   7
+ubuntu/memcached                 Memcached, in-memory keyvalue store for smal…   5
+ubuntu/prometheus-alertmanager   Alertmanager handles client alerts from Prom…   8
+ubuntu/dotnet-deps               Chiselled Ubuntu for self-contained .NET & A…   6
+ubuntu/cassandra                 Cassandra, an open source NoSQL distributed …   2
+ubuntu/dotnet-runtime            Chiselled Ubuntu runtime image for .NET apps…   5
+ubuntu/telegraf                  Telegraf collects, processes, aggregates & w…   4
+ubuntu/dotnet-aspnet             Chiselled Ubuntu runtime image for ASP.NET a…   3
+vagrant@k8s:~$ sudo docker search ubuntu:14.04
+NAME                                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+devorbitus/ubuntu-bash-jq-curl       Based on Ubuntu:14.04 and only adding curl a…   0
+leslau/nxlog                         nxlog ce image base on ubuntu:14.04             2                    [OK]
+blacktobacco/ajenti                  Ajenti web hosting panel server based on Ubu…   7                    [OK]
+pkubicki/atom-rc-base                Open SSH with SASS and RSYNC installed on Ub…   1
+meedan/base                          meedan base image FROM ubuntu:14.04             0                    [OK]
+bdkdevorg/bm.docker.varnish          ubuntu:14.04, varnish, curl, supervisor         0                    [OK]
+zeerdonker/docker-oracle-java        ubuntu:14.04 based oracle-java 8 build          0                    [OK]
+savaki/dynamodb                      DynamoDB using ubuntu:14.04 and oracle-java8    0                    [OK]
+pranay/sinatra                       FROM ubuntu:14.04 RUN apt-get update && apt-…   0
+edse/ubuntu-nginx-mysql-php-nodejs   Docker container built from Ubuntu:14.04 wit…   15                   [OK]
+nuagebec/etcd                        etcd image for docker build on nuagebec/ubun…   1                    [OK]
+vik733/haproxy-consul_template       Container on Ubuntu:14.04 with haproxy and c…   0
+mrhub/snort                          snort on ubuntu:14.04                           0                    [OK]
+slyn/mongodb                         mongodb - ubuntu:14.04                          0                    [OK]
+jcirizar/devimg                      Ubuntu:14.04 with NVM and more.                 1                    [OK]
+bohanzhang/ubuntu_cn                 国内用户的Ubuntu Dockerfile 基于 ubuntu:14.04   1                    [OK]
+jorgeluisrmx/ubuntu-dev-base         Ubuntu:14.04 + C/C++ Python  dev libs image     1                    [OK]
+letterer/swift-docker                ubuntu:14.04 with Apple swift                   0                    [OK]
+takeharu/ubuntu-mysql                MySQL on Ubuntu:14.04                           1                    [OK]
+jorgeluisrmx/ros-indigo              ROS Indigo on Ubuntu:14.04                      1                    [OK]
+jorgeluisrmx/gazebo5                 Gazebo5 on Ubuntu:14.04                         0                    [OK]
+mikefaille/etcd                      etcd image for docker build on nuagebec/ubun…   1                    [OK]
+hieisky/ubuntu-base                  To build a ubuntu:14.04.4 base image.           0                    [OK]
+rpaliwal/golang                      golang repo based on ubuntu:14.04 instead of…   0
+huangchaosuper/devops                ubuntu:14.04 logstash:1.4.2 zabbix-agent:2.2…   1
+vagrant@k8s:~$ sudo docker search sysnet4admin
+NAME                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+sysnet4admin/echo-hname                                                         0
+sysnet4admin/net-tools                                                          0
+sysnet4admin/audit-trail                                                        0
+sysnet4admin/chk-hn             Check hostname from outside of k8s cluster a…   1
+sysnet4admin/echo-ip                                                            0
+sysnet4admin/chk-log                                                            0
+sysnet4admin/dashboard          dashboard for helm-chart                        0
+sysnet4admin/tardy-nginx                                                        0
+sysnet4admin/chk-ip             Check IP address from outside of k8s cluster…   0
+sysnet4admin/sleepy                                                             0
+sysnet4admin/echo-nginx         echo <hostname>                                 1
+sysnet4admin/chk-info                                                           0
+sysnet4admin/nginx-status       exporting nginx status to /status               0
+sysnet4admin/net-tools-ifn                                                      0
+sysnet4admin/kustomize                                                          0
+sysnet4admin/mysql-auth                                                         1
+sysnet4admin/healthz-nginx                                                      0
+sysnet4admin/kdbench                                                            0
+sysnet4admin/ssh                                                                0
+sysnet4admin/metric-generator   Metric generating purpose.                      0
+sysnet4admin/echo-iptrace                                                       0
+sysnet4admin/dbench                                                             0
+sysnet4admin/ssh-root                                                           0
+vagrant@k8s:~$ sudo docker run -i -t --name commit_test ubuntu:14.04
+root@1f35ef48a938:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@1f35ef48a938:/# echo Hello, world! >> first
+root@1f35ef48a938:/# ls
+bin  boot  dev  etc  first  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@1f35ef48a938:/# exit
+exit
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                         PORTS                   NAMES
+1f35ef48a938   ubuntu:14.04            "/bin/bash"              50 seconds ago      Exited (0) 8 seconds ago                               commit_test
+405ec99a36e0   ubuntu:14.04            "/bin/bash"              15 minutes ago      Exited (0) 14 minutes ago                              volume_auto
+62dd176e1cf0   ubuntu:14.04            "/bin/bash"              18 minutes ago      Exited (0) 17 minutes ago                              myvolume_2
+b5bc1d7edfb6   ubuntu:14.04            "/bin/bash"              22 minutes ago      Exited (0) 18 minutes ago                              myvolume_1
+bb3835310916   ubuntu:14.04            "/bin/bash"              40 minutes ago      Exited (0) 39 minutes ago                              volumes_from_container2
+09d471678091   ubuntu:14.04            "/bin/bash"              41 minutes ago      Exited (0) 40 minutes ago                              volumes_from_container
+2f0f275a0fb7   alicek106/volume_test   "/bin/bash"              49 minutes ago      Exited (0) 48 minutes ago                              volume_override
+47a8a54c624b   alicek106/volume_test   "/bin/bash"              55 minutes ago      Exited (0) 52 minutes ago                              volume_dummy
+4a9fb0edc2df   ubuntu:14.04            "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           detach_test
+41fb7deace8a   wordpress               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04            "/bin/bash"              2 hours ago         Up 2 hours                     0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04            "/bin/bash"              20 hours ago        Up 2 hours                     0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04            "/bin/bash"              21 hours ago        Exited (255) 2 hours ago                               network_test
+vagrant@k8s:~$ sudo docker commit -a "jongkwangyun" -m "my first commit" commit_test commit_test:first
+sha256:6901a563cce7245ae41f964a379b1a18ef825ce88c2e848d8ff3183ef81e3409
+vagrant@k8s:~$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+commit_test             first     6901a563cce7   13 seconds ago   197MB
+mysql                   5.7       b6ee2207ee7a   30 hours ago     455MB
+wordpress               latest    8fec96b2307f   2 weeks ago      615MB
+centos                  7         eeb6ee3f44bd   18 months ago    204MB
+ubuntu                  14.04     13b66b487594   24 months ago    197MB
+alicek106/volume_test   latest    342a67bc9486   6 years ago      197MB
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS                   NAMES
+1f35ef48a938   ubuntu:14.04            "/bin/bash"              4 minutes ago    Exited (0) 4 minutes ago                            commit_test
+405ec99a36e0   ubuntu:14.04            "/bin/bash"              18 minutes ago   Exited (0) 18 minutes ago                           volume_auto
+62dd176e1cf0   ubuntu:14.04            "/bin/bash"              22 minutes ago   Exited (0) 21 minutes ago                           myvolume_2
+b5bc1d7edfb6   ubuntu:14.04            "/bin/bash"              26 minutes ago   Exited (0) 22 minutes ago                           myvolume_1
+bb3835310916   ubuntu:14.04            "/bin/bash"              44 minutes ago   Exited (0) 43 minutes ago                           volumes_from_container2
+09d471678091   ubuntu:14.04            "/bin/bash"              45 minutes ago   Exited (0) 44 minutes ago                           volumes_from_container
+2f0f275a0fb7   alicek106/volume_test   "/bin/bash"              53 minutes ago   Exited (0) 51 minutes ago                           volume_override
+47a8a54c624b   alicek106/volume_test   "/bin/bash"              59 minutes ago   Exited (0) 56 minutes ago                           volume_dummy
+4a9fb0edc2df   ubuntu:14.04            "/bin/bash"              2 hours ago      Exited (0) 2 hours ago                              detach_test
+41fb7deace8a   wordpress               "docker-entrypoint.s…"   2 hours ago      Up 2 hours                  0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7               "docker-entrypoint.s…"   2 hours ago      Up 2 hours                  3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04            "/bin/bash"              2 hours ago      Up 2 hours                  0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04            "/bin/bash"              20 hours ago     Up 2 hours                  0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04            "/bin/bash"              21 hours ago     Exited (255) 3 hours ago                            network_test
+vagrant@k8s:~$ sudo docker run -it --name commit_test2 commit_test:first
+root@292eb3966176:/# ls
+bin  boot  dev  etc  first  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@292eb3966176:/# exit
+exit
+vagrant@k8s:~$ sudo docker start comit_test2
+Error response from daemon: No such container: comit_test2
+Error: failed to start containers: comit_test2
+vagrant@k8s:~$
+vagrant@k8s:~$ sudo docker start commit_test2
+commit_test2
+vagrant@k8s:~$ sudo docker attach commit_test2
+root@292eb3966176:/# echo Hi~~~~ >> second
+root@292eb3966176:/# ls
+bin  boot  dev  etc  first  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  second  srv  sys  tmp  usr  var
+root@292eb3966176:/# exit
+exit
+vagrant@k8s:~$ sudo docker commit -a "jongkwangyun" -m "my second commit" commit_test2 commit_test:second
+sha256:b580c5f61a40f5ac97a8181ab4c499058968e6a7ab650cba5294a7e4ae35a1d8
+vagrant@k8s:~$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+commit_test             second    b580c5f61a40   10 seconds ago   197MB
+commit_test             first     6901a563cce7   7 minutes ago    197MB
+mysql                   5.7       b6ee2207ee7a   30 hours ago     455MB
+wordpress               latest    8fec96b2307f   2 weeks ago      615MB
+centos                  7         eeb6ee3f44bd   18 months ago    204MB
+ubuntu                  14.04     13b66b487594   24 months ago    197MB
+alicek106/volume_test   latest    342a67bc9486   6 years ago      197MB
+vagrant@k8s:~$ sudo docker inspect commit_test:second
+[
+    {
+        "Id": "sha256:b580c5f61a40f5ac97a8181ab4c499058968e6a7ab650cba5294a7e4ae35a1d8",
+        "RepoTags": [
+            "commit_test:second"
+        ],
+        "RepoDigests": [],
+        "Parent": "sha256:6901a563cce7245ae41f964a379b1a18ef825ce88c2e848d8ff3183ef81e3409",
+        "Comment": "my second commit",
+        "Created": "2023-03-23T03:17:42.373467349Z",
+        "Container": "292eb396617684aa835ca951f765ffab933084e4083b8da12c4b2506726bc11c",
+        "ContainerConfig": {
+            "Hostname": "292eb3966176",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": true,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "commit_test:first",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "23.0.1",
+        "Author": "jongkwangyun",
+        "Config": {
+            "Hostname": "292eb3966176",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": true,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "commit_test:first",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 196513585,
+        "VirtualSize": 196513585,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/a75bbd3ecc16529749e96a020810ea03f1187ead190c9b815d3545fec987553d/diff:/var/lib/docker/overlay2/110fc16db6e20ecd57d7b757e602761e99d7f990f1934aa089b7f484a8973c13/diff:/var/lib/docker/overlay2/ba96411b1ae4380f0f7d92962140ca0297643e0b3fbc5f380ea39cd73c0a2bdd/diff:/var/lib/docker/overlay2/65d421ccc199cb0cc282027a774ff23cc46038a383a1d03ac0fb5755171b539c/diff",
+                "MergedDir": "/var/lib/docker/overlay2/6c86ccceefe97b4443a617b7741c40730ef0c83358551f0fbcc7d231d7cbec30/merged",
+                "UpperDir": "/var/lib/docker/overlay2/6c86ccceefe97b4443a617b7741c40730ef0c83358551f0fbcc7d231d7cbec30/diff",
+                "WorkDir": "/var/lib/docker/overlay2/6c86ccceefe97b4443a617b7741c40730ef0c83358551f0fbcc7d231d7cbec30/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:f2fa9f4cf8fd0a521d40e34492b522cee3f35004047e617c75fadeb8bfd1e6b7",
+                "sha256:30d3c4334a2379748937816c01f5c972a8291a5ccc958d6b33d735457a16196e",
+                "sha256:83109fa660b2ed9307948505abd3c1f24c27c64009691067edb765bd3714b98d",
+                "sha256:d5cf155337fc5d7c9fa11e0c0809e34ccd96878219a9f1a08d3af611a0eae7b8",
+                "sha256:090f50ea2eeb9e3652f64e074c8a68315d63934776f2dc0f73591939d1bdebc6"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2023-03-23T12:17:42.381741632+09:00"
+        }
+    }
+]
+vagrant@k8s:~$ sudo docker inspect ubuntu:14.04
+[
+    {
+        "Id": "sha256:13b66b487594a1f2b75396013bc05d29d9f527852d96c5577cc4f187559875d0",
+        "RepoTags": [
+            "ubuntu:14.04"
+        ],
+        "RepoDigests": [
+            "ubuntu@sha256:64483f3496c1373bfd55348e88694d1c4d0c9b660dee6bfef5e12f43b9933b30"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2021-03-25T22:33:44.754436368Z",
+        "Container": "a55677c29cfc1b4d4574b70df6fb6aa1db116fecd36b66d33ed480999a14037d",
+        "ContainerConfig": {
+            "Hostname": "a55677c29cfc",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"/bin/bash\"]"
+            ],
+            "Image": "sha256:8de4ecfd37404a523d0253873a2b15a274d3657e9f726b472eb82c32ffbc76f4",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "19.03.12",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "sha256:8de4ecfd37404a523d0253873a2b15a274d3657e9f726b472eb82c32ffbc76f4",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 196513448,
+        "VirtualSize": 196513448,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/ba96411b1ae4380f0f7d92962140ca0297643e0b3fbc5f380ea39cd73c0a2bdd/diff:/var/lib/docker/overlay2/65d421ccc199cb0cc282027a774ff23cc46038a383a1d03ac0fb5755171b539c/diff",
+                "MergedDir": "/var/lib/docker/overlay2/110fc16db6e20ecd57d7b757e602761e99d7f990f1934aa089b7f484a8973c13/merged",
+                "UpperDir": "/var/lib/docker/overlay2/110fc16db6e20ecd57d7b757e602761e99d7f990f1934aa089b7f484a8973c13/diff",
+                "WorkDir": "/var/lib/docker/overlay2/110fc16db6e20ecd57d7b757e602761e99d7f990f1934aa089b7f484a8973c13/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:f2fa9f4cf8fd0a521d40e34492b522cee3f35004047e617c75fadeb8bfd1e6b7",
+                "sha256:30d3c4334a2379748937816c01f5c972a8291a5ccc958d6b33d735457a16196e",
+                "sha256:83109fa660b2ed9307948505abd3c1f24c27c64009691067edb765bd3714b98d"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+vagrant@k8s:~$ sudo docker history ubuntu:14.04
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+13b66b487594   24 months ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      24 months ago   /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+<missing>      24 months ago   /bin/sh -c [ -z "$(apt-get indextargets)" ]     0B
+<missing>      24 months ago   /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   195kB
+<missing>      24 months ago   /bin/sh -c #(nop) ADD file:276b5d943a4d284f8…   196MB
+vagrant@k8s:~$ sudo docker history commit_test:first
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+6901a563cce7   11 minutes ago   /bin/bash                                       53B       my first commit
+13b66b487594   24 months ago    /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      24 months ago    /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+<missing>      24 months ago    /bin/sh -c [ -z "$(apt-get indextargets)" ]     0B
+<missing>      24 months ago    /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   195kB
+<missing>      24 months ago    /bin/sh -c #(nop) ADD file:276b5d943a4d284f8…   196MB
+vagrant@k8s:~$ sudo docker history commit_test:second
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+b580c5f61a40   4 minutes ago    /bin/bash                                       84B       my second commit
+6901a563cce7   12 minutes ago   /bin/bash                                       53B       my first commit
+13b66b487594   24 months ago    /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      24 months ago    /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+<missing>      24 months ago    /bin/sh -c [ -z "$(apt-get indextargets)" ]     0B
+<missing>      24 months ago    /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   195kB
+<missing>      24 months ago    /bin/sh -c #(nop) ADD file:276b5d943a4d284f8…   196MB
+vagrant@k8s:~$ sudo docker rmi commit_test
+Error response from daemon: No such image: commit_test:latest
+vagrant@k8s:~$ sudo docker rmi commit_test:first
+Error response from daemon: conflict: unable to remove repository reference "commit_test:first" (must force) - container 292eb3966176 is using its referenced image 6901a563cce7
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                         PORTS                   NAMES
+292eb3966176   commit_test:first       "/bin/bash"              11 minutes ago      Exited (0) 7 minutes ago                               commit_test2
+1f35ef48a938   ubuntu:14.04            "/bin/bash"              17 minutes ago      Exited (0) 17 minutes ago                              commit_test
+405ec99a36e0   ubuntu:14.04            "/bin/bash"              31 minutes ago      Exited (0) 31 minutes ago                              volume_auto
+62dd176e1cf0   ubuntu:14.04            "/bin/bash"              35 minutes ago      Exited (0) 34 minutes ago                              myvolume_2
+b5bc1d7edfb6   ubuntu:14.04            "/bin/bash"              39 minutes ago      Exited (0) 35 minutes ago                              myvolume_1
+bb3835310916   ubuntu:14.04            "/bin/bash"              57 minutes ago      Exited (0) 56 minutes ago                              volumes_from_container2
+09d471678091   ubuntu:14.04            "/bin/bash"              58 minutes ago      Exited (0) 57 minutes ago                              volumes_from_container
+2f0f275a0fb7   alicek106/volume_test   "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volume_override
+47a8a54c624b   alicek106/volume_test   "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volume_dummy
+4a9fb0edc2df   ubuntu:14.04            "/bin/bash"              2 hours ago         Exited (0) 2 hours ago                                 detach_test
+41fb7deace8a   wordpress               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04            "/bin/bash"              3 hours ago         Up 3 hours                     0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04            "/bin/bash"              20 hours ago        Up 3 hours                     0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04            "/bin/bash"              21 hours ago        Exited (255) 3 hours ago                               network_test
+vagrant@k8s:~$ sudo docker rmi -f commit_test:first
+Untagged: commit_test:first
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                         PORTS                   NAMES
+292eb3966176   6901a563cce7            "/bin/bash"              13 minutes ago      Exited (0) 9 minutes ago                               commit_test2
+1f35ef48a938   ubuntu:14.04            "/bin/bash"              19 minutes ago      Exited (0) 18 minutes ago                              commit_test
+405ec99a36e0   ubuntu:14.04            "/bin/bash"              33 minutes ago      Exited (0) 33 minutes ago                              volume_auto
+62dd176e1cf0   ubuntu:14.04            "/bin/bash"              37 minutes ago      Exited (0) 36 minutes ago                              myvolume_2
+b5bc1d7edfb6   ubuntu:14.04            "/bin/bash"              41 minutes ago      Exited (0) 37 minutes ago                              myvolume_1
+bb3835310916   ubuntu:14.04            "/bin/bash"              58 minutes ago      Exited (0) 58 minutes ago                              volumes_from_container2
+09d471678091   ubuntu:14.04            "/bin/bash"              About an hour ago   Exited (0) 59 minutes ago                              volumes_from_container
+2f0f275a0fb7   alicek106/volume_test   "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volume_override
+47a8a54c624b   alicek106/volume_test   "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volume_dummy
+4a9fb0edc2df   ubuntu:14.04            "/bin/bash"              2 hours ago         Exited (0) 2 hours ago                                 detach_test
+41fb7deace8a   wordpress               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04            "/bin/bash"              3 hours ago         Up 3 hours                     0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04            "/bin/bash"              20 hours ago        Up 3 hours                     0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04            "/bin/bash"              21 hours ago        Exited (255) 3 hours ago                               network_test
+vagrant@k8s:~$ sudo docker images -f dangling=true
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+vagrant@k8s:~$ sudo docker save -o ubuntu_14_04.tar ubuntu:14.04
+vagrant@k8s:~$ ls
+ a       bashrc_copy   docker-install.sh   filename.sh    hello    'Hello World'   ls_err.txt   ls.txt   temp2       test12.sh   test4.sh   test7.sh   test.txt
+ a.txt   b.txt         file1               greeting2.sh   hello1    host_link      ls_log2      mybin    test10.sh   test13.sh   test5.sh   test8.sh   ubuntu_14_04.tar
+ b       color.sh      file2               greeting.sh    hello.c   ls_err2        ls_log3      ok       test11.sh   test14.sh   test6.sh   test9.sh
+vagrant@k8s:~$ sudo docker load -i ubuntu_14_04.tar
+Loaded image: ubuntu:14.04
+vagrant@k8s:~$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+commit_test             second    b580c5f61a40   11 minutes ago   197MB
+mysql                   5.7       b6ee2207ee7a   31 hours ago     455MB
+wordpress               latest    8fec96b2307f   2 weeks ago      615MB
+centos                  7         eeb6ee3f44bd   18 months ago    204MB
+ubuntu                  14.04     13b66b487594   24 months ago    197MB
+alicek106/volume_test   latest    342a67bc9486   6 years ago      197MB
+vagrant@k8s:~$ sudo docker images -a -f dangling=true
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+vagrant@k8s:~$ sudo docker run -i -t --name mycontainer1 ubuntu:14.04
+root@ba5094bd4ad2:/# echo my name is eomjinyoung >> test
+root@ba5094bd4ad2:/# nano test
+bash: nano: command not found
+root@ba5094bd4ad2:/# echo my name is jongkwangyun > test
+root@ba5094bd4ad2:/# cat test
+my name is jongkwangyun
+root@ba5094bd4ad2:/# exit
+exit
+vagrant@k8s:~$ sudo docker commit mycontainer1 hello-docker:0.1
+sha256:667868c071a3005b14fdeea6c288945ef6cc1a9453fd3413abfb9f81608c4898
+vagrant@k8s:~$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+hello-docker            0.1       667868c071a3   6 seconds ago    197MB
+commit_test             second    b580c5f61a40   18 minutes ago   197MB
+mysql                   5.7       b6ee2207ee7a   31 hours ago     455MB
+wordpress               latest    8fec96b2307f   2 weeks ago      615MB
+centos                  7         eeb6ee3f44bd   18 months ago    204MB
+ubuntu                  14.04     13b66b487594   24 months ago    197MB
+alicek106/volume_test   latest    342a67bc9486   6 years ago      197MB
+vagrant@k8s:~$ sudo docker tag hello-docker:0.1 jongkwangyun/hello-docker:0.1
+vagrant@k8s:~$ sudo docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED              SIZE
+jongkwangyun/hello-docker   0.1       667868c071a3   About a minute ago   197MB
+hello-docker                0.1       667868c071a3   About a minute ago   197MB
+commit_test                 second    b580c5f61a40   20 minutes ago       197MB
+mysql                       5.7       b6ee2207ee7a   31 hours ago         455MB
+wordpress                   latest    8fec96b2307f   2 weeks ago          615MB
+centos                      7         eeb6ee3f44bd   18 months ago        204MB
+ubuntu                      14.04     13b66b487594   24 months ago        197MB
+alicek106/volume_test       latest    342a67bc9486   6 years ago          197MB
+vagrant@k8s:~$ sudo docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: jongkwangyun
+Password:
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+vagrant@k8s:~$ sudo docker push jongkwangyun/hello-docker:0.1
+The push refers to repository [docker.io/jongkwangyun/hello-docker]
+e0e07abffb03: Pushed
+83109fa660b2: Mounted from library/ubuntu
+30d3c4334a23: Mounted from library/ubuntu
+f2fa9f4cf8fd: Mounted from library/ubuntu
+0.1: digest: sha256:f638c24feba6cc951570b5aa957e31091f6b042426074ed6faa99fd7c08bf115 size: 1152
+vagrant@k8s:~$ sudo docker rmi hello-docker:0.1
+Untagged: hello-docker:0.1
+vagrant@k8s:~$ sudo docker jongkwangyun/hello-docker:0.1
+docker: 'jongkwangyun/hello-docker:0.1' is not a docker command.
+See 'docker --help'
+vagrant@k8s:~$ sudo docker rmi jongkwangyun/hello-docker:0.1
+Untagged: jongkwangyun/hello-docker:0.1
+Untagged: jongkwangyun/hello-docker@sha256:f638c24feba6cc951570b5aa957e31091f6b042426074ed6faa99fd7c08bf115
+Deleted: sha256:667868c071a3005b14fdeea6c288945ef6cc1a9453fd3413abfb9f81608c4898
+Deleted: sha256:4b089b0f9e1e5157198f699b6ce9f8e1e16c24368072d61f17adaa8fb62785ba
+vagrant@k8s:~$ sudo docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                         PORTS                   NAMES
+ba5094bd4ad2   ubuntu:14.04            "/bin/bash"              8 minutes ago       Exited (0) 6 minutes ago                               mycontainer1
+292eb3966176   6901a563cce7            "/bin/bash"              30 minutes ago      Exited (0) 25 minutes ago                              commit_test2
+1f35ef48a938   ubuntu:14.04            "/bin/bash"              36 minutes ago      Exited (0) 35 minutes ago                              commit_test
+405ec99a36e0   ubuntu:14.04            "/bin/bash"              50 minutes ago      Exited (0) 50 minutes ago                              volume_auto
+62dd176e1cf0   ubuntu:14.04            "/bin/bash"              54 minutes ago      Exited (0) 52 minutes ago                              myvolume_2
+b5bc1d7edfb6   ubuntu:14.04            "/bin/bash"              57 minutes ago      Exited (0) 54 minutes ago                              myvolume_1
+bb3835310916   ubuntu:14.04            "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volumes_from_container2
+09d471678091   ubuntu:14.04            "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volumes_from_container
+2f0f275a0fb7   alicek106/volume_test   "/bin/bash"              About an hour ago   Exited (0) About an hour ago                           volume_override
+47a8a54c624b   alicek106/volume_test   "/bin/bash"              2 hours ago         Exited (0) About an hour ago                           volume_dummy
+4a9fb0edc2df   ubuntu:14.04            "/bin/bash"              2 hours ago         Exited (0) 2 hours ago                                 detach_test
+41fb7deace8a   wordpress               "docker-entrypoint.s…"   2 hours ago         Up 2 hours                     0.0.0.0:32769->80/tcp   wordpress
+8f37283c3afa   mysql:5.7               "docker-entrypoint.s…"   3 hours ago         Up 3 hours                     3306/tcp, 33060/tcp     wordpressdb
+7a49dd3d33bb   ubuntu:14.04            "/bin/bash"              3 hours ago         Up 3 hours                     0.0.0.0:32768->80/tcp   mywebserver2
+94107a76b98d   ubuntu:14.04            "/bin/bash"              21 hours ago        Up 3 hours                     0.0.0.0:80->80/tcp      mywebserver
+bf862e6385c4   ubuntu:14.04            "/bin/bash"              21 hours ago        Exited (255) 3 hours ago                               network_test
+vagrant@k8s:~$ sudo docker images
+REPOSITORY              TAG       IMAGE ID       CREATED          SIZE
+commit_test             second    b580c5f61a40   24 minutes ago   197MB
+mysql                   5.7       b6ee2207ee7a   31 hours ago     455MB
+wordpress               latest    8fec96b2307f   2 weeks ago      615MB
+centos                  7         eeb6ee3f44bd   18 months ago    204MB
+ubuntu                  14.04     13b66b487594   24 months ago    197MB
+alicek106/volume_test   latest    342a67bc9486   6 years ago      197MB
+vagrant@k8s:~$ sudo docker run -it --name ohora jongkwangyun/hello-docker:0.1
+Unable to find image 'jongkwangyun/hello-docker:0.1' locally
+0.1: Pulling from jongkwangyun/hello-docker
+2e6e20c8e2e6: Already exists
+0551a797c01d: Already exists
+512123a864da: Already exists
+3963baff25b7: Pull complete
+Digest: sha256:f638c24feba6cc951570b5aa957e31091f6b042426074ed6faa99fd7c08bf115
+Status: Downloaded newer image for jongkwangyun/hello-docker:0.1
+root@877e113e6982:/# sudo docker images
+sudo: docker: command not found
+root@877e113e6982:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  test  tmp  usr  var
+root@877e113e6982:/# cat test
+my name is jongkwangyun
+root@877e113e6982:/# exit
+exit
+vagrant@k8s:~$ sudo dockerimages
+sudo: dockerimages: command not found
+vagrant@k8s:~$ sudo docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED          SIZE
+jongkwangyun/hello-docker   0.1       667868c071a3   7 minutes ago    197MB
+commit_test                 second    b580c5f61a40   26 minutes ago   197MB
+mysql                       5.7       b6ee2207ee7a   31 hours ago     455MB
+wordpress                   latest    8fec96b2307f   2 weeks ago      615MB
+centos                      7         eeb6ee3f44bd   18 months ago    204MB
+ubuntu                      14.04     13b66b487594   24 months ago    197MB
+alicek106/volume_test       latest    342a67bc9486   6 years ago      197MB
+vagrant@k8s:~$ docker images -f dangling=true
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/images/json?filters=%7B%22dangling%22%3A%7B%22true%22%3Atrue%7D%7D": dial unix /var/run/docker.sock: connect: permission denied
+vagrant@k8s:~$ sudo docker images -f dangling=true
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+vagrant@k8s:~$ sudo docker images -a dangling=true
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+vagrant@k8s:~$
