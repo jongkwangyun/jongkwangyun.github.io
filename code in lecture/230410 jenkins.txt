@@ -1,0 +1,308 @@
+PowerShell 7.3.3
+PS C:\Users\bitcamp> bash
+study@DESKTOP-48TE820:/mnt/c/Users/bitcamp$ cd
+study@DESKTOP-48TE820:~$ pwd
+/home/study
+study@DESKTOP-48TE820:~$ ssh root@175.106.99.37
+The authenticity of host '175.106.99.37 (175.106.99.37)' can't be established.
+ECDSA key fingerprint is SHA256:IqwnJiPQwGaWuJ3OTqHE7hTYUgLva6bFRZhwUVt/OEA.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '175.106.99.37' (ECDSA) to the list of known hosts.
+root@175.106.99.37's password:
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-99-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon 10 Apr 2023 05:38:09 PM KST
+
+  System load:  0.0               Processes:             125
+  Usage of /:   5.5% of 48.96GB   Users logged in:       0
+  Memory usage: 6%                IPv4 address for eth0: 10.0.1.7
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@bitcamp-jenkins:~# passwd
+New password:
+Retype new password:
+passwd: password updated successfully
+root@bitcamp-jenkins:~# exit
+logout
+Connection to 175.106.99.37 closed.
+study@DESKTOP-48TE820:~$ ssh root@175.106.99.37
+root@175.106.99.37's password:
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-99-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon 10 Apr 2023 05:39:45 PM KST
+
+  System load:  0.01              Processes:             128
+  Usage of /:   5.6% of 48.96GB   Users logged in:       0
+  Memory usage: 6%                IPv4 address for eth0: 10.0.1.7
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Apr 10 17:38:10 2023 from 14.63.62.56
+root@bitcamp-jenkins:~# apt remove docker docker-engine docker.io containerd runc
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package docker-engine
+root@bitcamp-jenkins:~# rm -rf /var/lib/docker
+root@bitcamp-jenkins:~# rm -rf /var/lib/containerd
+root@bitcamp-jenkins:~# apt-get update
+Hit:1 http://repo.ncloud.com/ubuntu focal InRelease
+Hit:2 http://repo.ncloud.com/ubuntu focal-updates InRelease
+Hit:3 http://repo.ncloud.com/ubuntu focal-backports InRelease
+Hit:4 http://repo.ncloud.com/ubuntu focal-security InRelease
+Reading package lists... Done
+root@bitcamp-jenkins:~# curl
+curl: try 'curl --help' or 'curl --manual' for more information
+root@bitcamp-jenkins:~# curl https://get.docker.com > docker-install.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 18565  100 18565    0     0   788k      0 --:--:-- --:--:-- --:--:--  788k
+root@bitcamp-jenkins:~# chmod +x docker-install.sh
+root@bitcamp-jenkins:~# ls -al
+total 48
+drwx------  4 root root  4096 Apr 10 17:42 .
+drwxr-xr-x 20 root root  4096 Feb 10  2022 ..
+-rw-------  1 root root     0 Apr 10 17:39 .bash_history
+-rw-r--r--  1 root root  3106 Dec  5  2019 .bashrc
+drwx------  2 root root  4096 Apr 10 17:38 .cache
+-rwxr-xr-x  1 root root 18565 Apr 10 17:42 docker-install.sh
+-rw-------  1 root root    52 Jan 27  2022 .lesshst
+-rw-r--r--  1 root root   161 Dec  5  2019 .profile
+drwxr-xr-x  2 root root  4096 Jan 27  2022 .vim
+root@bitcamp-jenkins:~# ./docker-install.sh
+# Executing docker install script, commit: a8a6b338bdfedd7ddefb96fe3e7fe7d4036d945a
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
++ sh -c mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings
++ sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
++ sh -c chmod a+r /etc/apt/keyrings/docker.gpg
++ sh -c echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu focal stable" > /etc/apt/sources.list.d/docker.list
++ sh -c apt-get update -qq >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
++ sh -c docker version
+Client: Docker Engine - Community
+ Version:           23.0.3
+ API version:       1.42
+ Go version:        go1.19.7
+ Git commit:        3e7cbfd
+ Built:             Tue Apr  4 22:06:10 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          23.0.3
+  API version:      1.42 (minimum version 1.12)
+  Go version:       go1.19.7
+  Git commit:       59118bf
+  Built:            Tue Apr  4 22:06:10 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.20
+  GitCommit:        2806fc1057397dbaeefbea0e4e17bddfbd388f38
+ runc:
+  Version:          1.1.5
+  GitCommit:        v1.1.5-0-gf19387a
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+================================================================================
+
+To run Docker as a non-privileged user, consider setting up the
+Docker daemon in rootless mode for your user:
+
+    dockerd-rootless-setuptool.sh install
+
+Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.
+
+
+To run the Docker daemon as a fully privileged service, but granting non-root
+users access, refer to https://docs.docker.com/go/daemon-access/
+
+WARNING: Access to the remote API on a privileged Docker daemon is equivalent
+         to root access on the host. Refer to the 'Docker daemon attack surface'
+         documentation for details: https://docs.docker.com/go/attack-surface/
+
+================================================================================
+
+root@bitcamp-jenkins:~# docker --version
+Docker version 23.0.3, build 3e7cbfd
+root@bitcamp-jenkins:~# docker rn hello-world
+docker: 'rn' is not a docker command.
+See 'docker --help'
+root@bitcamp-jenkins:~# docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+2db29710123e: Pull complete
+Digest: sha256:ffb13da98453e0f04d33a6eee5bb8e46ee50d08ebe17735fc0779d0349e889e9
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+root@bitcamp-jenkins:~# docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@bitcamp-jenkins:~# docker container ls -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+565279ea1f57   hello-world   "/hello"   24 seconds ago   Exited (0) 24 seconds ago             bold_lalande
+root@bitcamp-jenkins:~# docker container rm bold_lalande
+bold_lalande
+root@bitcamp-jenkins:~# docker container ls -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@bitcamp-jenkins:~# docker image ls
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+hello-world   latest    feb5d9fea6a5   18 months ago   13.3kB
+root@bitcamp-jenkins:~# docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+b1884b0000f4   bridge    bridge    local
+c0eaefafd3c4   host      host      local
+3980cc2f257e   none      null      local
+root@bitcamp-jenkins:~# docker network create jenkins
+7219d65dee850f84eb2cafbd983e78e354829a5667abbb901b1ca8494ca0b026
+root@bitcamp-jenkins:~# docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+b1884b0000f4   bridge    bridge    local
+c0eaefafd3c4   host      host      local
+7219d65dee85   jenkins   bridge    local
+3980cc2f257e   none      null      local
+root@bitcamp-jenkins:~# docker pull jenkins/jenkins:lts-jdk11
+lts-jdk11: Pulling from jenkins/jenkins
+3e440a704568: Pull complete
+4e7ee60831ad: Pull complete
+897b6f913479: Pull complete
+e1b841305de5: Pull complete
+fbe122125d37: Pull complete
+c2f8d7079cd5: Pull complete
+0670d11b904a: Pull complete
+688bd7a7b8f9: Pull complete
+d81b0ac1dd8f: Pull complete
+aa4d217f8f45: Pull complete
+328c85129d49: Pull complete
+df967cd9dca8: Pull complete
+159cf70711c2: Pull complete
+Digest: sha256:aacbb5797dd210cc048038d9d3e5ab5795ea018fad843ffc1888c547911819ce
+Status: Downloaded newer image for jenkins/jenkins:lts-jdk11
+docker.io/jenkins/jenkins:lts-jdk11
+root@bitcamp-jenkins:~# docker image ls
+REPOSITORY        TAG         IMAGE ID       CREATED         SIZE
+jenkins/jenkins   lts-jdk11   056e9a39e8be   4 days ago      471MB
+hello-world       latest      feb5d9fea6a5   18 months ago   13.3kB
+root@bitcamp-jenkins:~# docker run --privileged -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 --restart=on-failure --name jenkins-jdk11 jenkins/jenkins:lts-jdk11
+80cdb7d1ced028fe3c898cad0f4018d1e2fdeb7854c59d429a0661538ac7413f
+root@bitcamp-jenkins:~# docker container ls
+CONTAINER ID   IMAGE                       COMMAND                  CREATED          STATUS          PORTS
+                                NAMES
+80cdb7d1ced0   jenkins/jenkins:lts-jdk11   "/usr/bin/tini -- /u…"   14 seconds ago   Up 13 seconds   0.0.0.0:8080->8080/tcp, 0.0.0.0:50000->50000/tcp   jenkins-jdk11
+root@bitcamp-jenkins:~# docker volume ls
+DRIVER    VOLUME NAME
+local     jenkins_home
+root@bitcamp-jenkins:~# docker logs jenkins-jdk11
+Running from: /usr/share/jenkins/jenkins.war
+webroot: /var/jenkins_home/war
+2023-04-10 08:55:42.940+0000 [id=1]     INFO    winstone.Logger#logInternal: Beginning extraction from war file
+2023-04-10 08:55:44.156+0000 [id=1]     WARNING o.e.j.s.handler.ContextHandler#setContextPath: Empty contextPath
+2023-04-10 08:55:44.224+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: jetty-10.0.13; built: 2022-12-07T20:13:20.134Z; git: 1c2636ea05c0ca8de1ffd6ca7f3a98ac084c766d; jvm 11.0.18+10
+2023-04-10 08:55:44.599+0000 [id=1]     INFO    o.e.j.w.StandardDescriptorProcessor#visitServlet: NO JSP Support for /,did not find org.eclipse.jetty.jsp.JettyJspServlet
+2023-04-10 08:55:44.699+0000 [id=1]     INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: Session workerName=node0
+2023-04-10 08:55:45.282+0000 [id=1]     INFO    hudson.WebAppMain#contextInitialized: Jenkins home directory: /var/jenkins_home found at: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2023-04-10 08:55:45.476+0000 [id=1]     INFO    o.e.j.s.handler.ContextHandler#doStart: Started w.@4c18621b{Jenkins v2.387.2,/,file:///var/jenkins_home/war/,AVAILABLE}{/var/jenkins_home/war}
+2023-04-10 08:55:45.498+0000 [id=1]     INFO    o.e.j.server.AbstractConnector#doStart: Started ServerConnector@3f390d63{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2023-04-10 08:55:45.528+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: Started Server@66b7550d{STARTING}[10.0.13,sto=0] @3259ms
+2023-04-10 08:55:45.542+0000 [id=23]    INFO    winstone.Logger#logInternal: Winstone Servlet Engine running: controlPort=disabled
+2023-04-10 08:55:45.791+0000 [id=30]    INFO    jenkins.InitReactorRunner$1#onAttained: Started initialization
+2023-04-10 08:55:45.808+0000 [id=30]    INFO    jenkins.InitReactorRunner$1#onAttained: Listed all plugins
+2023-04-10 08:55:46.754+0000 [id=31]    INFO    jenkins.InitReactorRunner$1#onAttained: Prepared all plugins
+2023-04-10 08:55:46.759+0000 [id=31]    INFO    jenkins.InitReactorRunner$1#onAttained: Started all plugins
+2023-04-10 08:55:46.768+0000 [id=29]    INFO    jenkins.InitReactorRunner$1#onAttained: Augmented all extensions
+2023-04-10 08:55:46.984+0000 [id=29]    INFO    jenkins.InitReactorRunner$1#onAttained: System config loaded
+2023-04-10 08:55:46.984+0000 [id=29]    INFO    jenkins.InitReactorRunner$1#onAttained: System config adapted
+2023-04-10 08:55:46.985+0000 [id=29]    INFO    jenkins.InitReactorRunner$1#onAttained: Loaded all jobs
+2023-04-10 08:55:46.986+0000 [id=28]    INFO    jenkins.InitReactorRunner$1#onAttained: Configuration for all jobs updated
+2023-04-10 08:55:47.030+0000 [id=44]    INFO    hudson.util.Retrier#start: Attempt #1 to do the action check updates server
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.codehaus.groovy.vmplugin.v7.Java7$1 (file:/var/jenkins_home/war/WEB-INF/lib/groovy-all-2.4.21.jar) to constructor java.lang.invoke.MethodHandles$Lookup(java.lang.Class,int)
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.vmplugin.v7.Java7$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2023-04-10 08:55:47.611+0000 [id=29]    INFO    jenkins.install.SetupWizard#init:
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+6160644bacbb45af8257430cb8b1332d
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+2023-04-10 08:56:07.636+0000 [id=30]    INFO    jenkins.InitReactorRunner$1#onAttained: Completed initialization
+2023-04-10 08:56:07.651+0000 [id=22]    INFO    hudson.lifecycle.Lifecycle#onReady: Jenkins is fully up and running
+2023-04-10 08:56:08.416+0000 [id=44]    INFO    h.m.DownloadService$Downloadable#load: Obtained the updated data file for hudson.tasks.Maven.MavenInstaller
+2023-04-10 08:56:08.417+0000 [id=44]    INFO    hudson.util.Retrier#start: Performed the action check updates server successfully at the attempt #1
+root@bitcamp-jenkins:~#
