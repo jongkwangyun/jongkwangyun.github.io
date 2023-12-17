@@ -1,32 +1,44 @@
 <template>
   <div>
-    <div class="black-bg" v-if="모달창열렸니">
-      <div class="white-bg">
-        <h4>상세페이지임</h4>
-        <p>상세페이지내용임</p>
-        <button @click="모달창열렸니 = false">닫기</button>
-      </div>
-    </div>
+    <div></div>
+
+    <Modal
+      :원룸들="원룸들"
+      :누른거="누른거"
+      :모달창열렸니="모달창열렸니"
+      @closeModal="모달창열렸니 = false"
+    />
 
     <div class="menu">
       <a v-for="(a, i) in 메뉴들" :key="i">{{ a }}</a>
     </div>
 
-    <div v-for="(e, i) in 원룸들.length" :key="i">
-      <img :src="원룸들[i].image" alt="" class="room-img" />
-      <h4>{{ 원룸들[i].title }}</h4>
-      <p>{{ 원룸들[i].price }} 원</p>
-    </div>
+    <DiscountBanner />
+
+    <Card
+      @openModal="
+        모달창열렸니 = true;
+        누른거 = $event;
+      "
+      :원룸="원룸"
+      v-for="(원룸, i) in 원룸들"
+      :key="i"
+    />
   </div>
 </template>
 
+////////////////////////////// script //////////////////////////////////
 <script>
 import data from "./assets/oneroom.js";
+import DiscountBanner from "./DiscountBanner.vue";
+import Modal from "./Modal.vue";
+import Card from "./Card.vue";
 
 export default {
   name: "App",
   data() {
     return {
+      누른거: 0,
       원룸들: data,
       모달창열렸니: false,
       신고수: [0, 0, 0],
@@ -41,10 +53,15 @@ export default {
     },
   },
 
-  components: {},
+  components: {
+    DiscountBanner: DiscountBanner,
+    Modal,
+    Card,
+  },
 };
 </script>
 
+////////////////////////////// style //////////////////////////////////
 <style>
 .room-img {
   width: 100%;
@@ -87,5 +104,11 @@ div {
   background: white;
   border-radius: 8px;
   padding: 20px;
+}
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 </style>
