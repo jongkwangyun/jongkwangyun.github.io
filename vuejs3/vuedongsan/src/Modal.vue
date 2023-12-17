@@ -14,11 +14,30 @@
 <script>
 export default {
   name: "Modal",
+
   data() {
     return {
       month: 1,
     };
   },
+
+  watch: {
+    month(a) {
+      const isNotNum = new RegExp(/\D/).test(a);
+      if (isNotNum || a < 1 || a > 12) {
+        alert("숫자만 입력하라");
+        this.month = 1;
+      }
+    },
+  },
+
+  beforeUpdate() {
+    if (this.month == 2) {
+      alert("2는 입력 마쇼");
+      this.month = 3;
+    }
+  },
+
   props: {
     원룸들: Array,
     누른거: Number,
