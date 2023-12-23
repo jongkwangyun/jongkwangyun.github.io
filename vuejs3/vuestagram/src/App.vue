@@ -13,7 +13,7 @@
 
     <h4>안녕 {{ $store.state.name }}({{ $store.state.age }})</h4>
     <button @click="$store.commit('이름변경')">이름변경</button>
-    <button @click="$store.commit('나이먹기', 10)">나이먹기</button>
+    <button @click="나이먹기(5)">나이먹기</button>
 
     <Container
       :instaData="instaData"
@@ -22,7 +22,9 @@
       :content="content"
       @update:content="content = $event"
     />
-    <!-- <button @click="more">더보기</button> -->
+
+    <p>{{ $store.state.more }}</p>
+    <button @click="$store.dispatch('getData')">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -37,6 +39,7 @@
 import Container from "./components/Container.vue";
 import posting from "./assets/posting.js";
 import axios from "axios";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "App",
@@ -58,7 +61,16 @@ export default {
   components: {
     Container,
   },
+  computed: {
+    name() {
+      return this.$store.state.name;
+    },
+    ...mapState(["name", "age", "likes"]),
+    ...mapState({ 내이름: "name" }),
+  },
   methods: {
+    ...mapMutations(["setMore", "좋아요", "나이먹기"]),
+
     publish() {
       var 내게시물 = {
         name: "Kim Hyun",
