@@ -33,17 +33,19 @@
         <textarea
           class="write-box"
           @input="$emit('update:content', $event.target.value)"
-        >
-write!</textarea
-        >
+        ></textarea>
       </div>
     </div>
+
+    <!-- mypage -->
+    <div v-if="step == 3"><MyPage /></div>
   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
+import MyPage from "./MyPage.vue";
 
 export default {
   data() {
@@ -82,6 +84,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
   props: {
     instaData: Array,

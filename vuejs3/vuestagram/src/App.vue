@@ -47,7 +47,7 @@ export default {
     return {
       instaData: posting,
       moreCount: 0,
-      step: 0,
+      step: 3,
       imgUrl: "",
       content: "",
       filter: "",

@@ -8,7 +8,8 @@ const store = createStore({
       age: 20,
       likes: 36,
       likeoper: 1,
-      more: {},
+      // more: {},
+      keyword: "",
     };
   },
   mutations: {
