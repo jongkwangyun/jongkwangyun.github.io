@@ -1,0 +1,62 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+<script>
+  const PostDetailApp = {
+    delimiters: ["[[", "]]"],
+
+    data() {
+      return {
+        post: {},
+        prevPost: {},
+        nextPost: {},
+        cateList: [],
+        tagList: [],
+      };
+    },
+
+    created() {
+      console.log("created()...");
+      const postId = location.pathname.split('/')[3];
+      this.fetchPostDetail(postId);
+      this.fetchCateTagList();
+    },
+
+    methods: {
+      fetchPostDetail(postId) {
+        console.log("fetchPostDetail()...", postId);
+
+        axios
+          .get(`/api/post/${postId}/`)
+          .then((res) => {
+            console.log("FETCH POSTDETAIL GET RES", res);
+            this.post = res.data.post;
+            this.prevPost = res.data.prevPost;
+            this.nextPost = res.data.nextPost;
+          })
+          .catch((err) => {
+            console.log("FETCH POSTDETAIL GET ERR.RESPONSE", err.response);
+            alert(`${err.response.status} ${err.response.statusText}`);
+          });
+      },
+
+      fetchCateTagList() {
+        console.log("fetchCateTagList()...");
+
+        axios
+          .get('/api/catetag/')
+          .then((res) => {
+            console.log("FETCH CATE-TAG-LIST GET RES", res);
+            this.cateList = res.data.cateList;
+            this.tagList = res.data.tagList;
+          })
+          .catch((err) => {
+            console.log("FETCH CATE-TAG-LIST GET ERR.RESPONSE", err.response);
+            alert(`${err.response.status} ${err.response.statusText}`);
+          });
+      },
+    },
+  };
+
+  Vue.createApp(PostDetailApp).mount("#page-top");
+</script>
