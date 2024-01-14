@@ -27,7 +27,20 @@
           else pages3 = [this.curPage-1, this.curPage, this.curPage+1];
         };
         return pages3
-      }
+      },
+
+      prevClass() {
+        console.log("nextClass()...");
+        if (this.curPage === 1) return 'page-item disabled';
+        else return 'page-item'
+      },
+
+      nextClass() {
+        console.log("prevClass()...");
+        if (this.curPage === this.pageCnt) return 'page-item disabled';
+        else return 'page-item'
+      },
+      
     },
 
     created() {
@@ -50,7 +63,7 @@
           .get(getUrl)
           .then((res) => {
             console.log("FETCH HPOSTLIST GET RES", res);
-            this.postList = res.data;
+            this.postList = res.data.postList;
             this.pageCnt = res.data.pageCnt;
             this.curPage = res.data.curPage;
           })
@@ -60,7 +73,7 @@
           });
       },
 
-      pageChanges(page) {
+      pageChanged(page) {
         console.log("pageChanged()...", page);
         this.curPage = page;
         this.fetchPostList(this.curPage);
@@ -81,6 +94,11 @@
         this.fetchPostList(this.curPage);
       },
 
+      pageClass(page) {
+        console.log("pageClass()...", page);
+        if (this.curPage === page) return 'page-item my-link active';
+        else return 'page-item my-link'
+      }
     },
   };
 

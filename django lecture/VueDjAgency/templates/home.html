@@ -8,6 +8,9 @@
   .my-post-title {
     height: 60px;
   }
+  .my-link:hover {
+    cursor: pointer;
+  }
 </style>
 {% endblock %} {% block content %}
 <!-- Blog Grid-->
@@ -52,20 +55,16 @@
 
     <!-- My Pagination -->
     <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <div @click="prevPage" class="page-link">Prev</div>
+      <li :class="prevClass">
+        <div @click="prevPage" class="page-link my-link">Prev</div>
       </li>
 
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-      <li v-for="page in pages" class="page-item">
-        <div @click="pageChange(page)" class="page-link" href="#">[[ page ]]</div>
+      <li v-for="page in pages" :class="pageClass(page)">
+        <div @click="pageChanged(page)" class="page-link" href="#">[[ page ]]</div>
       </li>
 
-      <li class="page-item">
-        <div @click="nextPage" class="page-link">Next</div>
+      <li :class="nextClass">
+        <div @click="nextPage" class="page-link my-link">Next</div>
       </li>
     </ul>
   </div>

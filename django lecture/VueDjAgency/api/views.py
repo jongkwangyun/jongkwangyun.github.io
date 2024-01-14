@@ -29,9 +29,15 @@ class ApiPostLV(BaseListView):
 
         pageCnt = context['paginator'].num_pages
         curPage = context['page_obj'].number
-        print(pageCnt, curPage)
+        # print(pageCnt, curPage)
 
-        return JsonResponse(data=postList, safe=False, status=200)
+        jsonData = {
+            'postList': postList,
+            'pageCnt': pageCnt,
+            'curPage': curPage,
+        }
+
+        return JsonResponse(data=jsonData, safe=True, status=200)
 
 
 class ApiPostDV(BaseDetailView):
