@@ -2,6 +2,9 @@
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
 <script>
+  axios.defaults.xsrfCookieName = 'csrftoken';
+  axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
   const PostDetailApp = {
     delimiters: ["[[", "]]"],
 
@@ -12,6 +15,7 @@
         nextPost: {},
         cateList: [],
         tagList: [],
+        commentList: [],
       };
     },
 
@@ -33,6 +37,7 @@
             this.post = res.data.post;
             this.prevPost = res.data.prevPost;
             this.nextPost = res.data.nextPost;
+            this.commentList = res.data.commentList;
           })
           .catch((err) => {
             console.log("FETCH POSTDETAIL GET ERR.RESPONSE", err.response);
@@ -54,6 +59,50 @@
             console.log("FETCH CATE-TAG-LIST GET ERR.RESPONSE", err.response);
             alert(`${err.response.status} ${err.response.statusText}`);
           });
+      },
+    
+      serverPage(category='', tag='') {
+        console.log("serverPage()...", category, tag);
+
+        // 이는 해커나 프로그램 오동작을 디버그하기 위한 방어로직
+        if (category && tag) alert(`serverPage() both args Error: ${category} and ${tag}`);
+        else if (category) location.href = `/?category=${category}#portfolio`;
+        else if (tag) location.href = `/?tag=${tag}#portfolio`;
+        else location.href = '/#portfolio';
+      },
+
+      likeCount(postId) {
+        console.log("likeCount()...", postId);
+        axios.get(`/api/like/${postId}`)
+        .then(res => {
+          console.log("LIKE-COUNT GET RES", res);
+          this.post.like = res.data;
+        })
+        .catch(err => {
+            console.log("LIKE-COUNT GET ERR.RESPONSE", err.response);
+            alert(`${err.response.status} ${err.response.statusText}`);
+        });
+      },
+
+      resetForm() {
+        console.log("resetForm()...");
+        this.$refs.commentForm.reset();
+      },
+
+      submitForm() {
+        console.log("submitForm()...");
+        let formdata = new FormData(document.getElementById('comment-form'));
+        formdata.set('post', this.post.id);
+        axios.post('/api/comment/create/', formdata)
+        .then(res => {
+          console.log("CREATE-COMMENT POST RES", res);
+          this.commentList.push(res.data);
+        })
+        .catch(err => {
+            console.log("CREATE-COMMENT GET ERR.RESPONSE", err.response);
+            alert(`${err.response.status} ${err.response.statusText}`);
+        });
+        this.resetForm();
       },
     },
   };
