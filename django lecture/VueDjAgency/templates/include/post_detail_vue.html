@@ -5,6 +5,8 @@
   axios.defaults.xsrfCookieName = 'csrftoken';
   axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+  const myJson = JSON.parse('{{ myJson|escapejs }}');
+
   const PostDetailApp = {
     delimiters: ["[[", "]]"],
 
@@ -21,9 +23,15 @@
 
     created() {
       console.log("created()...");
-      const postId = location.pathname.split('/')[3];
-      this.fetchPostDetail(postId);
-      this.fetchCateTagList();
+      // const postId = location.pathname.split('/')[3];
+      // this.fetchPostDetail(postId);
+      // this.fetchCateTagList();
+      this.post = myJson.post;
+      this.prevPost = myJson.prevPost;
+      this.nextPost = myJson.nextPost;
+      this.commentList = myJson.commentList;
+      this.cateList = myJson.cateList;
+      this.tagList = myJson.tagList;
     },
 
     methods: {

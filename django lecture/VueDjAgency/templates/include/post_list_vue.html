@@ -2,6 +2,8 @@
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
 <script>
+  const myJson = JSON.parse('{{ myJson|escapejs }}');
+  
   const PostListApp = {
     delimiters: ["[[", "]]"],
 
@@ -48,7 +50,10 @@
       const params = new URL(location).searchParams;
       this.category = params.get('category');
       this.tag = params.get('tag');
-      this.fetchPostList();
+      // this.fetchPostList();
+      this.postList = myJson.postList;
+      this.pageCnt = myJson.pageCnt;
+      this.curPage = myJson.curPage;
     },
 
     methods: {

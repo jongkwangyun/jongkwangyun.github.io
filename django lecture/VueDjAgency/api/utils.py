@@ -31,7 +31,7 @@ def obj_to_post(obj, flag=True):
     else:
         post['update_dt'] = '9999-12-31 00:00:00'
 
-    del post['_state'], post['category_id'], post['create_dt']
+    del post['_state'], post['category_id'], post['create_dt'], post['_prefetched_objects_cache']
     if not flag:
         del post['tags'], post['update_dt'], post['description'], post['content']
 

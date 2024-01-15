@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block title%}home.html{%endblock%} {% block extra-style %}
+{{ block.super }}
 <style>
   .my-img-h300 {
     width: 100%;
@@ -19,8 +20,8 @@
     <div class="text-center">
       <div class="section-heading">
         <span class="h2 text-uppercase">Post List</span>&nbsp;
-        <span v-if="category" class="h6 font-italic">( Category: [[ category ]] )</span>
-        <span v-if="tag" class="h6 font-italic">( Tag: [[ tag ]] )</span>
+        <span v-if="category" class="h6 fst-italic">( Category: [[ category ]] )</span>
+        <span v-if="tag" class="h6 fst-italic">( Tag: [[ tag ]] )</span>
       </div>
       <h3 class="section-subheading text-muted">
         Lorem ipsum dolor sit amet consectetur.
