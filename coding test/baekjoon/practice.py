@@ -1,2 +1,1 @@
-li = [1, 2]
-print(max(li))
+print(str(type('1')) == "<class 'str'>")
