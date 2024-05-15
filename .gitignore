@@ -5,3 +5,6 @@
 build
 
 **/site-packages/
+
+# AI keras 학습에 사용한 파일
+**/datasets/
