@@ -1,1 +1,7 @@
-print(str(type('1')) == "<class 'str'>")
+from collections import deque
+
+queue = deque([1, 2])
+
+x = queue.popleft()
+
+print(x)
