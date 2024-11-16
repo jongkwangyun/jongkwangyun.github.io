@@ -1,7 +1,6 @@
-from collections import deque
+a = '000'
 
-queue = deque([1, 2])
-
-x = queue.popleft()
-
-print(x)
+b = list(a)
+b[1] = '1'
+a = ''.join(b)
+print(a)
