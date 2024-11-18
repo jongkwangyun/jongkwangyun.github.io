@@ -1,6 +1,4 @@
-a = '000'
+a = [(1, 1), (2, 2)]
 
-b = list(a)
-b[1] = '1'
-a = ''.join(b)
-print(a)
+if (1, 1) in a:
+    print('true')
